@@ -11,7 +11,7 @@ export default function Navigation() {
                     <li className="nav-list--element"><a href='/Banner'>Banner</a></li>
                     <li className="nav-list--element nav-list--element-right"><a href='/Booking'>Booking</a></li>
                     <li className="nav-list--element"><a href='/Doctor'>Doctor</a></li>
-                    <li className="nav-list--element"><a href='/User'>User</a></li>
+                    <li className="nav-list--element"><a href='/crDoc'>crDoc</a></li>
                     <li className="nav-list--element"><a href='/Worksheet'>View Worksheet</a></li>
                 </ul>
                 <div className="nav-list--prior"><a href='/Login'>Login</a></div>
