@@ -1,0 +1,38 @@
+.ws {
+
+    margin-top: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+.tbl{
+    padding: 2vmin;
+    background-color: aliceblue;
+    border: 5px;
+}
+
+.trow th{
+    padding: 2vmin;
+    border: 5px;
+    border-color: black;
+}
+.trow td{
+    padding: 2vmin;
+    border: 5px;
+    border-color: black;
+}
+.brt{
+    text-align: center; 
+    padding-top: 5vmin;
+    padding-bottom: 5vmin;
+    font-weight: bold;
+}
+.trow-h{
+    font-weight: bold;
+    padding-right: 10vmin;
+}
+.brt td{
+    padding: 5vmin;
+}

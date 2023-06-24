@@ -1,9 +1,12 @@
-.App {
-  text-align: center;
+* {
+  /* width: 100%; */
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 5vmin;
   pointer-events: none;
 }
 
@@ -15,7 +18,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,7 +35,92 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.nav nav {
+  width: 100%;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.767);
+  align-items: center;
+  text-decoration: none;
+
+}
+
+.nav {
+  display: flex;
+}
+
+
+.nav-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  list-style-type: none;
+  padding: 10px;
+}
+
+.nav-list a {
+  display: flex;
+  padding: 10px 10px;
+  color: azure;
+  align-items: center;
+  text-decoration: none;
+}
+
+.nav-list--element:hover {
+  background-color: rgb(247, 128, 30);
+  padding: 10px 10px;
+  border-radius: 10%;
+}
+
+img:hover {
+  color: unset;
+  padding: 0;
+}
+
+.nav-list--prior a {
+  color: rgb(218, 218, 218);
+  text-align: right;
+  text-decoration: none;
+
+
+}
+
+.nav-list--prior {
+  border-radius: 10%;
+  background-color: orange;
+  margin-right: 5vmin;
+  /* border: 10px; */
+  padding: 10px 15px 10px 15px;
+}
+footer{
+  margin-top: auto;
+  background-color: rgba(255, 221, 0, 0.851);
+  text-align: center;
+  
+  height: 10vmin;
+  width: 100vw;
+}
+body{
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(116, 189, 253);
+}
+
+.App{
+  background-color: rgb(116, 189, 253);
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
 }
