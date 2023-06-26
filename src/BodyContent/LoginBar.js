@@ -100,6 +100,7 @@ export default function LoginBar() {
 
 
             </div>
+
         </form>
 
     );

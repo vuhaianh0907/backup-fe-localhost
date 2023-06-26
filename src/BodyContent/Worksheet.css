@@ -33,26 +33,27 @@
     border: 1px solid #ccc;
     color: black;
     /* Thêm màu chữ đen */
+}
 
-    .trow-h {
-        font-weight: bold;
-        padding: 10px;
-        text-align: center;
-        border: 1px solid #ccc;
-    }
+.trow-h {
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
 
-    .trow td {
-        padding: 10px;
-        text-align: center;
-        border: 1px solid #ccc;
-    }
+.trow td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
 
-    .theader {
-        background-color: #4caf50;
-        color: white;
-    }
+.theader {
+    background-color: #4caf50;
+    color: white;
+}
 
-    .brt {
-        background-color: #e9e9e9;
-        font-weight: bold;
-    }
+.brt {
+    background-color: #e9e9e9;
+    font-weight: bold;
+}

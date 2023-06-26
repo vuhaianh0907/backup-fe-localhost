@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Register.css';
+import { Link } from 'react-router-dom';
 
 export default function Register() {
     const [email, setEmail] = useState('');
@@ -46,7 +47,6 @@ export default function Register() {
     };
 
     return (
-
         <div className='register-container'>
             <form onSubmit={handleSubmit}>
                 <h2>Register</h2>
@@ -111,8 +111,10 @@ export default function Register() {
                 />
                 {errorMessage && <p className='error-message'>{errorMessage}</p>}
                 <button type='submit'>Register</button>
+                <div className='back-to-login'>
+                    <a href="/login" className='register-link'>Back to Login</a>
+                </div>
             </form>
         </div>
-
     );
 }
