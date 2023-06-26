@@ -51,57 +51,56 @@ export default function LoginBar() {
     };
 
     return (
-        <div className='background'>
-            <div className='shape'></div>
-            <div className='shape'></div>
-
-            <form className='login-form' onSubmit={handleSubmit}>
-                <h3>Login Here</h3>
-
-                <div className='form-group'>
-                    <label htmlFor='email'>Email</label>
-                    <input
-                        type='email'
-                        placeholder='Email'
-                        id='email'
-                        value={email}
-                        onChange={handleEmailChange}
-                    />
-                </div>
-
-                <div className='form-group'>
-                    <label htmlFor='password'>Password</label>
-                    <input
-                        type='password'
-                        placeholder='Password'
-                        id='password'
-                        value={password}
-                        onChange={handlePasswordChange}
-                    />
-                </div>
-
-                {errorMessage && <p className='error-message'>{errorMessage}</p>}
-
-                <button type='submit'>Log In</button>
-
-                <div className='login-links'>
-                    <a href="/register">Register</a>
-                    <a href="/forgot-password">Forgot Password</a>
-                </div>
-
-                <div className='social'>
-
-                    <GoogleLogin
-                        clientId='YOUR_GOOGLE_CLIENT_ID'
-                        buttonText='Google'
-                        onSuccess={handleGoogleLoginSuccess}
-                        onFailure={handleGoogleLoginFailure}
-                        cookiePolicy={'single_host_origin'}
-                    />
 
 
-                </div>
-            </form>
-        </div>
+
+        <form className='login-form' onSubmit={handleSubmit}>
+            <h3>Login Here</h3>
+
+            <div className='form-group'>
+                <label htmlFor='email'>Email</label>
+                <input
+                    type='email'
+                    placeholder='Email'
+                    id='email'
+                    value={email}
+                    onChange={handleEmailChange}
+                />
+            </div>
+
+            <div className='form-group'>
+                <label htmlFor='password'>Password</label>
+                <input
+                    type='password'
+                    placeholder='Password'
+                    id='password'
+                    value={password}
+                    onChange={handlePasswordChange}
+                />
+            </div>
+
+            {errorMessage && <p className='error-message'>{errorMessage}</p>}
+
+            <button type='submit'>Log In</button>
+
+            <div className='login-links'>
+                <a href="/register">Register</a>
+                <a href="/forgot-password">Forgot Password</a>
+            </div>
+
+            <div className='social'>
+
+                <GoogleLogin
+                    clientId='YOUR_GOOGLE_CLIENT_ID'
+                    buttonText='Google'
+                    onSuccess={handleGoogleLoginSuccess}
+                    onFailure={handleGoogleLoginFailure}
+                    cookiePolicy={'single_host_origin'}
+                />
+
+
+            </div>
+        </form>
+
     );
 }

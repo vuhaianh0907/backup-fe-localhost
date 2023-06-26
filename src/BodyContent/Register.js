@@ -46,75 +46,73 @@ export default function Register() {
     };
 
     return (
-        <div className='background'>
-            <div className='shape'></div>
-            <div className='shape'></div>
-            <div className='register-container'>
-                <form onSubmit={handleSubmit}>
-                    <h2>Register</h2>
-                    <input
-                        type='email'
-                        name='email'
-                        placeholder='Email'
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                    <input
-                        type='password'
-                        name='password'
-                        placeholder='Password'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                    <input
-                        type='text'
-                        name='fullname'
-                        placeholder='Full Name'
-                        value={fullname}
-                        onChange={(e) => setFullname(e.target.value)}
-                        required
-                    />
-                    <input
-                        type='text'
-                        name='address'
-                        placeholder='Address'
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
-                        required
-                    />
-                    <input
-                        type='text'
-                        name='phone'
-                        placeholder='Phone Number'
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        required
-                    />
-                    <select
-                        name='gender'
-                        value={gender}
-                        onChange={(e) => setGender(e.target.value)}
-                        required
-                    >
-                        <option value='' disabled>Select Gender</option>
-                        <option value='Male'>Male</option>
-                        <option value='Female'>Female</option>
-                        <option value='Other'>Other</option>
-                    </select>
-                    <input
-                        type='password'
-                        name='confirmPassword'
-                        placeholder='Confirm Password'
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        required
-                    />
-                    {errorMessage && <p className='error-message'>{errorMessage}</p>}
-                    <button type='submit'>Register</button>
-                </form>
-            </div>
+
+        <div className='register-container'>
+            <form onSubmit={handleSubmit}>
+                <h2>Register</h2>
+                <input
+                    type='email'
+                    name='email'
+                    placeholder='Email'
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
+                <input
+                    type='password'
+                    name='password'
+                    placeholder='Password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+                <input
+                    type='text'
+                    name='fullname'
+                    placeholder='Full Name'
+                    value={fullname}
+                    onChange={(e) => setFullname(e.target.value)}
+                    required
+                />
+                <input
+                    type='text'
+                    name='address'
+                    placeholder='Address'
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    required
+                />
+                <input
+                    type='text'
+                    name='phone'
+                    placeholder='Phone Number'
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    required
+                />
+                <select
+                    name='gender'
+                    value={gender}
+                    onChange={(e) => setGender(e.target.value)}
+                    required
+                >
+                    <option value='' disabled>Select Gender</option>
+                    <option value='Male'>Male</option>
+                    <option value='Female'>Female</option>
+                    <option value='Other'>Other</option>
+                </select>
+                <input
+                    type='password'
+                    name='confirmPassword'
+                    placeholder='Confirm Password'
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                />
+                {errorMessage && <p className='error-message'>{errorMessage}</p>}
+                <button type='submit'>Register</button>
+            </form>
         </div>
+
     );
 }

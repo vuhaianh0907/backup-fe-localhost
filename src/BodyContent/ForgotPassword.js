@@ -12,17 +12,13 @@ export default function ForgotPassword() {
     return (
         <div className="forgot-password-container">
 
-            <div className='background'>
-                <div className='shape'></div>
-                <div className='shape'></div>
+            <form onSubmit={handleSubmit}>
+                <h2>Forgot Password</h2>
+                <input type="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required /><br />
+                <button type="submit" name="action" value="reset">Reset Password</button>
+            </form>
 
-                <form onSubmit={handleSubmit}>
-                    <h2>Forgot Password</h2>
-                    <input type="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required /><br />
-                    <button type="submit" name="action" value="reset">Reset Password</button>
-                </form>
-
-            </div>
         </div>
+
     );
 }
