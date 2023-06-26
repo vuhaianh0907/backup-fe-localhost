@@ -58,7 +58,7 @@ export default function LoginBar() {
             <h3>Login Here</h3>
 
             <div className='form-group'>
-                <label htmlFor='email'>Email</label>
+                <label htmlFor='email'></label>
                 <input
                     type='email'
                     placeholder='Email'
@@ -69,7 +69,7 @@ export default function LoginBar() {
             </div>
 
             <div className='form-group'>
-                <label htmlFor='password'>Password</label>
+                <label htmlFor='password'></label>
                 <input
                     type='password'
                     placeholder='Password'

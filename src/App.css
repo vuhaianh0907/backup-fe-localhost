@@ -31,15 +31,6 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 .nav nav {
   width: 100%;
@@ -100,15 +91,17 @@ img:hover {
   /* border: 10px; */
   padding: 10px 15px 10px 15px;
 }
-footer{
+
+footer {
   margin-top: auto;
   background-color: rgba(255, 221, 0, 0.851);
   text-align: center;
-  
+
   height: 10vmin;
   width: 100vw;
 }
-body{
+
+body {
   min-height: 100vh;
   width: 100%;
   display: flex;
@@ -116,7 +109,7 @@ body{
   background-color: rgb(116, 189, 253);
 }
 
-.App{
+.App {
   background-color: rgb(116, 189, 253);
   min-height: 100vh;
   width: 100%;
