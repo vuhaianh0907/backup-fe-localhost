@@ -1,16 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import './Register.css';
 
 export default function Register() {
-    const [username, setUsername] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const [confirmPassword, setConfirmPassword] = React.useState('');
-    const [phoneNumber, setPhoneNumber] = React.useState('');
-    const [email, setEmail] = React.useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [fullname, setFullname] = useState('');
+    const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('');
+    const [gender, setGender] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Thực hiện xử lý đăng kí tài khoản với các thông tin đã nhập
+
+        // Tạo đối tượng dữ liệu gửi đi
+        const data = {
+            email: email,
+            password: password,
+            fullname: fullname,
+            address: address,
+            phone: phone,
+            gender: gender,
+            confirmPassword: confirmPassword
+        };
+
+        // Gửi yêu cầu POST đến API
+        axios.post('https://dencelclinic.onrender.com/api/auth/register', data)
+            .then((response) => {
+                // Xử lý phản hồi từ API thành công
+                console.log(response.data);
+                // Thực hiện các hành động khác sau khi đăng ký thành công
+            })
+            .catch((error) => {
+                // Xử lý lỗi từ API
+                if (error.response) {
+                    // API trả về lỗi
+                    setErrorMessage(error.response.data.message);
+                } else {
+                    // Lỗi không thể kết nối đến API
+                    setErrorMessage('An error occurred. Please try again later.');
+                }
+            });
     };
 
     return (
@@ -18,15 +50,14 @@ export default function Register() {
             <div className='shape'></div>
             <div className='shape'></div>
             <div className='register-container'>
-
                 <form onSubmit={handleSubmit}>
                     <h2>Register</h2>
                     <input
-                        type='text'
-                        name='username'
-                        placeholder='Username'
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        type='email'
+                        name='email'
+                        placeholder='Email'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                     />
                     <input
@@ -38,6 +69,41 @@ export default function Register() {
                         required
                     />
                     <input
+                        type='text'
+                        name='fullname'
+                        placeholder='Full Name'
+                        value={fullname}
+                        onChange={(e) => setFullname(e.target.value)}
+                        required
+                    />
+                    <input
+                        type='text'
+                        name='address'
+                        placeholder='Address'
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        required
+                    />
+                    <input
+                        type='text'
+                        name='phone'
+                        placeholder='Phone Number'
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        required
+                    />
+                    <select
+                        name='gender'
+                        value={gender}
+                        onChange={(e) => setGender(e.target.value)}
+                        required
+                    >
+                        <option value='' disabled>Select Gender</option>
+                        <option value='Male'>Male</option>
+                        <option value='Female'>Female</option>
+                        <option value='Other'>Other</option>
+                    </select>
+                    <input
                         type='password'
                         name='confirmPassword'
                         placeholder='Confirm Password'
@@ -45,21 +111,8 @@ export default function Register() {
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required
                     />
-                    <input
-                        type='text'
-                        name='phoneNumber'
-                        placeholder='Phone Number'
-                        value={phoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
-                    />
-                    <input
-                        type='email'
-                        name='email'
-                        placeholder='Email'
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <button type='submit' name='action' value='register'>Register</button>
+                    {errorMessage && <p className='error-message'>{errorMessage}</p>}
+                    <button type='submit'>Register</button>
                 </form>
             </div>
         </div>

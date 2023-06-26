@@ -1,0 +1,29 @@
+.doctor-detail-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.doctor-info {
+    flex: 1;
+    margin-right: 20px;
+    text-align: center;
+}
+
+.schedule {
+    flex: 2;
+}
+
+.doctor-details {
+    flex: 3;
+}
+
+.time-slot {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+button {
+    margin-left: 10px;
+}
