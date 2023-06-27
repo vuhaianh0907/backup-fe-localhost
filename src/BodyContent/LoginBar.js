@@ -8,6 +8,7 @@ export default function LoginBar() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -15,6 +16,10 @@ export default function LoginBar() {
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
+    };
+
+    const handleLogout = () => {
+        setIsLoggedIn(false);
     };
 
     const handleSubmit = (e) => {
@@ -25,10 +30,12 @@ export default function LoginBar() {
             password: password
         };
 
-        axios.post('https://dencelclinic.onrender.com/api/auth/login', data)
+        axios
+            .post('https://dencelclinic.onrender.com/api/auth/login', data)
             .then((response) => {
                 console.log(response.data);
-                // Thực hiện các hành động khác sau khi đăng nhập thành công
+                setIsLoggedIn(true);
+                alert(`Chào mừng ${response.data.fullname}!`); // Hiển thị thông báo chào mừng
             })
             .catch((error) => {
                 if (error.response) {
@@ -40,68 +47,66 @@ export default function LoginBar() {
     };
 
     const handleGoogleLoginSuccess = (response) => {
-        // Xử lý thành công khi đăng nhập bằng tài khoản Google
-        // Gửi thông tin đăng nhập thành công lên server hoặc thực hiện hành động khác
         console.log(response);
     };
 
     const handleGoogleLoginFailure = (error) => {
-        // Xử lý khi đăng nhập bằng tài khoản Google thất bại
         console.log(error);
     };
 
-    return (
-
-
-
-        <form className='login-form' onSubmit={handleSubmit}>
-            <h3>Login Here</h3>
-
-            <div className='form-group'>
-                <label htmlFor='email'></label>
-                <input
-                    type='email'
-                    placeholder='Email'
-                    id='email'
-                    value={email}
-                    onChange={handleEmailChange}
-                />
+    if (isLoggedIn) {
+        return (
+            <div>
+                {/* Thêm nội dung chào mừng */}
+                <div>Xin chào!</div>
             </div>
+        );
+    } else {
+        return (
+            <form className="login-form" onSubmit={handleSubmit}>
+                <h3>Đăng nhập</h3>
 
-            <div className='form-group'>
-                <label htmlFor='password'></label>
-                <input
-                    type='password'
-                    placeholder='Password'
-                    id='password'
-                    value={password}
-                    onChange={handlePasswordChange}
-                />
-            </div>
+                <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        id="email"
+                        value={email}
+                        onChange={handleEmailChange}
+                    />
+                </div>
 
-            {errorMessage && <p className='error-message'>{errorMessage}</p>}
+                <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        id="password"
+                        value={password}
+                        onChange={handlePasswordChange}
+                    />
+                </div>
 
-            <button type='submit'>Log In</button>
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-            <div className='login-links'>
-                <a href="/register">Register</a>
-                <a href="/forgot-password">Forgot Password</a>
-            </div>
+                <button type="submit">Đăng nhập</button>
 
-            <div className='social'>
+                <div className="login-links">
+                    <Link to="/register">Đăng ký tài khoản</Link>
+                    <Link to="/forgot-password">Quên mật khẩu</Link>
+                </div>
 
-                <GoogleLogin
-                    clientId='YOUR_GOOGLE_CLIENT_ID'
-                    buttonText='Google'
-                    onSuccess={handleGoogleLoginSuccess}
-                    onFailure={handleGoogleLoginFailure}
-                    cookiePolicy={'single_host_origin'}
-                />
-
-
-            </div>
-
-        </form>
-
-    );
+                <div className="social">
+                    <GoogleLogin
+                        clientId="YOUR_GOOGLE_CLIENT_ID"
+                        buttonText=" Đăng nhập bằng Google"
+                        onSuccess={handleGoogleLoginSuccess}
+                        onFailure={handleGoogleLoginFailure}
+                        cookiePolicy={'single_host_origin'}
+                    />
+                </div>
+            </form>
+        );
+    }
 }

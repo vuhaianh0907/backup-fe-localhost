@@ -49,7 +49,7 @@ export default function Register() {
     return (
         <div className='register-container'>
             <form onSubmit={handleSubmit}>
-                <h2>Register</h2>
+                <h2>Đăng ký</h2>
                 <input
                     type='email'
                     name='email'
@@ -110,9 +110,9 @@ export default function Register() {
                     required
                 />
                 {errorMessage && <p className='error-message'>{errorMessage}</p>}
-                <button type='submit'>Register</button>
+                <button type='submit'>Đăng ký </button>
                 <div className='back-to-login'>
-                    <a href="/login" className='register-link'>Back to Login</a>
+                    <a href="/login" className='register-link'>Trở về đăng nhập </a>
                 </div>
             </form>
         </div>
