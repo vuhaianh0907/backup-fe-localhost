@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, Routes } from 'react-router-dom';
 import Navigation from './Home/header';
 import Banner from './BodyContent/banner.js';
 import Login from './BodyContent/LoginBar';
@@ -21,22 +21,22 @@ function App() {
   };
 
   return (
-    <Router>
+    
       <div className='App'>
         <Navigation isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
-        <Switch>
-          <Route path='/doctor' exact component={Doctor} />
-          <Route path='/doctor/:id' component={DocDetail} />
+        <Routes>
+          <Route path='/doctor' exact element={<Doctor/>} />
+          <Route path='/doctor/:id' element={<DocDetail/>} />
           <Route path='/Login' component={Login} />
           <Route path='/register' component={Register} />
           <Route path='/forgot-password' component={ForgotPassword} />
           <Route path='/' exact component={Banner} />
           <Route path='/Worksheet' component={Worksheet} />
           <Route path='/crDoc' component={crDoc} />
-        </Switch>
+        </Routes>
         <Footer />
       </div>
-    </Router>
+    
   );
 }
 

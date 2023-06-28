@@ -1,6 +1,7 @@
 import logo from '../assets/images/logo-01-01.png';
 import '../App.css';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Navigation() {
   const isLoggedIn = sessionStorage.getItem('token') !== null;
@@ -19,18 +20,18 @@ export default function Navigation() {
       <nav>
         <ul className="nav-list">
           <li className="nav-list--logo">
-            <a href="/">
+            <Link to={'/'}>
               <img src={logo} className="App-logo" alt="logo" />
-            </a>
+            </Link>
           </li>
           <li className="nav-list--element">
-            <a href="/Banner">Banner</a>
+            <Link to={'/Banner'}>Banner</Link>
           </li>
           <li className="nav-list--element nav-list--element-right">
-            <a href="/Booking">Booking</a>
+            <Link to={'/Booking'}>Booking</Link>
           </li>
           <li className="nav-list--element">
-            <a href="/Doctor">Doctor</a>
+            <Link to={'/doctor'}>Doctor</Link>
           </li>
           <li className="nav-list--element">
             <a href="/crDoc">crDoc</a>
