@@ -34,21 +34,21 @@ export default function Navigation() {
             <Link to={'/doctor'}>Doctor</Link>
           </li>
           <li className="nav-list--element">
-            <a href="/crDoc">crDoc</a>
+            <Link to={'/crDoc'}>crDoc</Link>
           </li>
           <li className="nav-list--element">
-            <a href="/Worksheet">View Worksheet</a>
+            <Link to={'/Worksheet'}>View Worksheet</Link>
           </li>
         </ul>
         {isLoggedIn ? (
           <div className="nav-list--prior">
-            <a href="/Logout" onClick={handleLogout}>
+            <Link to="/Logout" onClick={handleLogout}>
               Logout
-            </a>
+            </Link>
           </div>
         ) : (
           <div className="nav-list--prior">
-            <a href="/Login">Login</a>
+            <Link to={'/Login'}>Login</Link>
           </div>
         )}
       </nav>
