@@ -1,7 +1,7 @@
 import './banner.css';
 import { useHistory } from 'react-router-dom';
 import React from 'react';
-import AppointmentForm from '../customer/Appointment Form/AppointmentForm';
+import AppointmentForm from '../customer/WriteAppointment/AppointmentForm';
 export default function Banner() {
     return (
         <div className="ct"   >
