@@ -1,0 +1,36 @@
+.profile-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 20vmin;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-top: 0;
+  }
+  
+  .profile-details p {
+    margin: 0;
+    padding: 5px 0;
+  }
+  
+  .confirm-button {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .confirm-button:hover {
+    background-color: #0056b3;
+  }
+  

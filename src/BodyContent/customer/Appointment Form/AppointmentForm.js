@@ -5,8 +5,9 @@ export default function AppointmentForm({ doctorName, selectedDate, selectedSlot
         e.preventDefault();
         // Xử lí việc xác nhận đặt khám
     };
-
+    alert('Hello!');
     return (
+        
         <div className="appointment-form-container">
             <h2>Xác nhận đặt khám</h2>
 

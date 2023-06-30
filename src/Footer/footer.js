@@ -6,6 +6,8 @@ export default function Footer(){
         
             <footer>
                 <p>copyright &copy; 2022</p>
+                <p>copyright &copy; 2022</p>
+                <p>copyright &copy; 2022</p>
             </footer>
         
     );
