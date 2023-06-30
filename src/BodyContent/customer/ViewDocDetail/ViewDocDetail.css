@@ -1,0 +1,87 @@
+.container {
+    /* Add any necessary styling for the container */
+    background-color: aliceblue;
+    inherits: false;
+    display: block;
+  }
+  
+  .doctor-profile {
+    text-align: center;
+    /* Add any necessary styling for the doctor profile section */
+    
+    
+  }
+  .line-1{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+  }
+  
+  .profile-picture {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    /* Add any necessary styling for the profile picture */
+  }
+  
+  .doctor-name {
+    /* Add any necessary styling for the doctor name */
+  }
+  
+  .date-selection {
+    margin-top: 20px;
+    /* Add any necessary styling for the date selection */
+  }
+  
+  .selected-date {
+    /* Add any necessary styling for the selected date */
+  }
+  
+  .working-slots {
+    margin-top: 30px;
+    /* Add any necessary styling for the working slots section */
+  }
+  
+  .slots-list {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    /* Add any necessary styling for the slots list */
+  }
+  
+  .slot {
+    width: 60px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    /* Add any necessary styling for the available slots */
+  }
+  
+  .slot.unavailable {
+    background-color: #ccc;
+    /* Add any necessary styling for the unavailable slots */
+  }
+  
+  .doctor-information {
+    margin-top: 30px;
+    margin-left: 30vmin;
+    /* Add any necessary styling for the doctor information section */
+  }
+  
+  .info-item {
+    /* Add any necessary styling for the info items */
+  }
+  
+  .info-item h4 {
+    /* Add any necessary styling for the info item headings */
+  }
+  
+  .info-item p {
+    /* Add any necessary styling for the info item content */
+  }
+  

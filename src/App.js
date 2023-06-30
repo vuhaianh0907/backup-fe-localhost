@@ -14,6 +14,14 @@ import ViewTreatmentProfile from './BodyContent/Doctor/ViewTreatmentProfile/View
 import ViewTreatementList from './BodyContent/Doctor/ViewTreatmentList/ViewTreatementList';
 import CreateTreatementIn from './BodyContent/Doctor/CreateTreatementIn/CreateTreatmentIn';
 import AdminViewDocDetail from './BodyContent/Admin/ViewDocDetail/ViewDocDetail';
+import CreateDoctor from './BodyContent/Admin/CreateDoctor/CreateDoctor';
+import CreateSlot from './BodyContent/Admin/CreateSlot/AdminCreateSlot';
+import DoctorList from './BodyContent/Admin/ViewDoctorList/AdDoctorList';
+import DoctorDetail from './BodyContent/Admin/ViewDocDetail/ViewDocDetail';
+import DoctorUpdate from './BodyContent/Admin/UpdateDoctor/UpdateDoctor';
+import CustomerViewBooking from './BodyContent/customer/CustomerViewBooking/CustomerViewBooking';
+import CustomerViewDoctor from './BodyContent/customer/CustomerViewDoctor/CustomerViewDoctor';
+import ViewDocDetail from './BodyContent/customer/ViewDocDetail/ViewDocDetail';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -39,6 +47,14 @@ function App() {
           <Route path='/' exact element={<Banner/>} />
           <Route path='/Worksheet' element={<Worksheet/>} />
 
+          {/* admin */}
+          <Route path='/admin/createdoctor' element={<CreateDoctor/>} />
+          <Route path='/admin/createslot' element={<CreateSlot/>} />
+          <Route path='/admin/doctorlist' element={<DoctorList/>} />
+          <Route path='/admin/doctordetail' element={<DoctorDetail/>} />
+          <Route path='/admin/doctorupdate' element={<DoctorUpdate/>} />
+
+
 
 
           
@@ -47,6 +63,10 @@ function App() {
           <Route path='/2' element={<ViewTreatementList/>} />
           <Route path='/3' element={<CreateTreatementIn/>} />
           <Route path='/4' element={<AdminViewDocDetail/>} />
+          {/* customer */}
+          <Route path='/5' element={<CustomerViewBooking/>} />
+          <Route path='/6' element={<CustomerViewDoctor/>} />
+          <Route path='/7' element={<ViewDocDetail/>} />
         </Routes>
         <Footer />
       </div>
