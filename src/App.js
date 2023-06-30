@@ -13,6 +13,7 @@ import Worksheet from './BodyContent/Worksheet';
 import ViewTreatmentProfile from './BodyContent/Doctor/ViewTreatmentProfile/ViewTreatmentProfile';
 import ViewTreatementList from './BodyContent/Doctor/ViewTreatmentList/ViewTreatementList';
 import CreateTreatementIn from './BodyContent/Doctor/CreateTreatementIn/CreateTreatmentIn';
+import AdminViewDocDetail from './BodyContent/Admin/ViewDocDetail/ViewDocDetail';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -45,6 +46,7 @@ function App() {
           {/* doc/treatment/detail */}
           <Route path='/2' element={<ViewTreatementList/>} />
           <Route path='/3' element={<CreateTreatementIn/>} />
+          <Route path='/4' element={<AdminViewDocDetail/>} />
         </Routes>
         <Footer />
       </div>
