@@ -16,7 +16,7 @@ import CreateTreatementIn from './BodyContent/Doctor/CreateTreatementIn/CreateTr
 import AdminViewDocDetail from './BodyContent/Admin/ViewDocDetail/ViewDocDetail';
 import CreateDoctor from './BodyContent/Admin/CreateDoctor/CreateDoctor';
 import CreateSlot from './BodyContent/Admin/CreateSlot/AdminCreateSlot';
-import DoctorList from './BodyContent/Admin/ViewDoctorList/AdDoctorList';
+import DoctorList from './BodyContent/Admin/ViewDoctorList/ViewDoctorList';
 import DoctorDetail from './BodyContent/Admin/ViewDocDetail/ViewDocDetail';
 import DoctorUpdate from './BodyContent/Admin/UpdateDoctor/UpdateDoctor';
 import CustomerViewBooking from './BodyContent/customer/CustomerViewBooking/CustomerViewBooking';
@@ -37,51 +37,51 @@ function App() {
   };
 
   return (
-    
-      <div className='App'>
-        <Navigation isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
-        <Routes>
-          <Route path='/doctor' exact element={<Doctor/>} />
-          {/* customer/doctor */}
-          <Route path='/doctor/:id' element={<DocDetail/>} />
-          {/* trang detail bs sẽ xem đc bằng cả guest và cust, id ko nên đc hiện trên đường dẫn*/}
-          
-          <Route path='/Login' element={<Login/>} />
-          <Route path='/register' element={<Register/>} />
-          <Route path='/forgot-password' element={<ForgotPassword/>} />
-          <Route path='/' exact element={<Banner/>} />
-          <Route path='/Worksheet' element={<Worksheet/>} />
 
-          {/* admin */}
-          <Route path='/admin/createdoctor' element={<CreateDoctor/>} />
-          <Route path='/admin/createslot' element={<CreateSlot/>} />
-          <Route path='/admin/doctorlist' element={<DoctorList/>} />
-          <Route path='/admin/doctordetail' element={<DoctorDetail/>} />
-          <Route path='/admin/doctorupdate' element={<DoctorUpdate/>} />
+    <div className='App'>
+      <Navigation isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+      <Routes>
+        <Route path='/doctor' exact element={<Doctor />} />
+        {/* customer/doctor */}
+        <Route path='/doctor/:id' element={<DocDetail />} />
+        {/* trang detail bs sẽ xem đc bằng cả guest và cust, id ko nên đc hiện trên đường dẫn*/}
 
+        <Route path='/Login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/' exact element={<Banner />} />
+        <Route path='/Worksheet' element={<Worksheet />} />
 
-          {/* custormer */}
-          <Route path='/customer/profile' element={<CustomerProfile/>} />
-          <Route path='/customer/profile/edit' element={<CustomerEditProfile/>} />
-          <Route path='/customer/treatmentprofile/treatment' element={<CustomerViewTreatmentIn/>} />
-          <Route path='/customer/treatmentprofile' element={<CustomerViewProfileTreatment/>} />
-          <Route path='/customer/slot/appointment' element={<CustomerWriteAppointment/>} />
+        {/* admin */}
+        <Route path='/admin/createdoctor' element={<CreateDoctor />} />
+        <Route path='/admin/createslot' element={<CreateSlot />} />
+        <Route path='/admin/doctorlist' element={<DoctorList />} />
+        <Route path='/admin/doctordetail' element={<DoctorDetail />} />
+        <Route path='/admin/doctorupdate' element={<DoctorUpdate />} />
 
 
-          
-          <Route path='/1' element={<ViewTreatmentProfile/>} />
-          {/* doc/treatment/detail */}
-          <Route path='/2' element={<ViewTreatementList/>} />
-          <Route path='/3' element={<CreateTreatementIn/>} />
-          <Route path='/4' element={<AdminViewDocDetail/>} />
-          {/* customer */}
-          <Route path='/5' element={<CustomerViewBooking/>} />
-          <Route path='/6' element={<CustomerViewDoctor/>} />
-          <Route path='/7' element={<ViewDocDetail/>} />
-        </Routes>
-        <Footer />
-      </div>
-    
+        {/* custormer */}
+        <Route path='/customer/profile' element={<CustomerProfile />} />
+        <Route path='/customer/profile/edit' element={<CustomerEditProfile />} />
+        <Route path='/customer/treatmentprofile/treatment' element={<CustomerViewTreatmentIn />} />
+        <Route path='/customer/treatmentprofile' element={<CustomerViewProfileTreatment />} />
+        <Route path='/customer/slot/appointment' element={<CustomerWriteAppointment />} />
+
+
+
+        <Route path='/1' element={<ViewTreatmentProfile />} />
+        {/* doc/treatment/detail */}
+        <Route path='/2' element={<ViewTreatementList />} />
+        <Route path='/3' element={<CreateTreatementIn />} />
+        <Route path='/4' element={<AdminViewDocDetail />} />
+        {/* customer */}
+        <Route path='/5' element={<CustomerViewBooking />} />
+        <Route path='/6' element={<CustomerViewDoctor />} />
+        <Route path='/7' element={<ViewDocDetail />} />
+      </Routes>
+      <Footer />
+    </div>
+
   );
 }
 

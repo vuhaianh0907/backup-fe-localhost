@@ -1,160 +1,206 @@
 import React, { useState } from 'react';
+import './CreateDoctor.css';
 
 function AdminCreateDoctor() {
-    const [doctorInfo, setDoctorInfo] = useState({
+    const [personalInfo, setPersonalInfo] = useState({
         fullName: '',
         idCard: '',
         gender: '',
-        dob: '',
-        phoneNumber: '',
+        dateOfBirth: '',
+        phone: '',
         email: '',
         address: '',
-        specialization: '',
-        qualification: '',
-        experience: '',
-        password: '',
-        image: null,
     });
 
-    const handleChange = (event) => {
+    const [professionalInfo, setProfessionalInfo] = useState({
+        qualification: '',
+        experience: '',
+    });
+
+    const [accountInfo, setAccountInfo] = useState({
+        password: '',
+    });
+
+    const handlePersonalChange = (event) => {
         const { name, value } = event.target;
-        setDoctorInfo((prevInfo) => ({
+        setPersonalInfo((prevInfo) => ({
+            ...prevInfo,
+            [name]: value,
+        }));
+    };
+
+    const handleProfessionalChange = (event) => {
+        const { name, value } = event.target;
+        setProfessionalInfo((prevInfo) => ({
+            ...prevInfo,
+            [name]: value,
+        }));
+    };
+
+    const handleAccountChange = (event) => {
+        const { name, value } = event.target;
+        setAccountInfo((prevInfo) => ({
             ...prevInfo,
             [name]: value,
         }));
     };
 
     const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        setDoctorInfo((prevInfo) => ({
-            ...prevInfo,
-            image: file,
-        }));
+        // Xử lý thay đổi hình ảnh
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // TODO: Handle form submission logic
+        // Xử lý gửi form
     };
 
     return (
-        <div>
-            <h2>Hồ sơ bác sĩ</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label>Tên:</label>
-                    <input
-                        type="text"
-                        name="fullName"
-                        value={doctorInfo.fullName}
-                        onChange={handleChange}
-                    />
+        <div className="form1">
+
+            <form onSubmit={handleSubmit} className="form-container">
+                <h2>Hồ sơ bác sĩ</h2>
+                <h3>Thông tin cá nhân</h3>
+
+                <label htmlFor="fullName"></label>
+                <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    value={personalInfo.fullName}
+                    onChange={handlePersonalChange}
+                    placeholder="Nhập tên"
+                />
+
+
+                <label htmlFor="idCard"></label>
+                <input
+                    type="text"
+                    id="idCard"
+                    name="idCard"
+                    value={personalInfo.idCard}
+                    onChange={handlePersonalChange}
+                    placeholder="Nhập CMND/CCCD"
+                />
+
+
+                <label></label>
+                <div className="gender-options">
+                    <label>
+                        <input
+                            type="radio"
+                            name="gender"
+                            value="Nam"
+                            checked={personalInfo.gender === 'Nam'}
+                            onChange={handlePersonalChange}
+                        />{' '}
+                        Nam
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="gender"
+                            value="Nữ"
+                            checked={personalInfo.gender === 'Nữ'}
+                            onChange={handlePersonalChange}
+                        />{' '}
+                        Nữ
+                    </label>
+
                 </div>
-                <div className="form-group">
-                    <label>CMND/CCCD:</label>
-                    <input
-                        type="text"
-                        name="idCard"
-                        value={doctorInfo.idCard}
-                        onChange={handleChange}
-                    />
+
+                <label htmlFor="dateOfBirth"></label>
+                <input
+                    type="date"
+                    id="dateOfBirth"
+                    name="dateOfBirth"
+                    value={personalInfo.dateOfBirth}
+                    onChange={handlePersonalChange}
+                />
+
+
+                <label htmlFor="phone"></label>
+                <input
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    value={personalInfo.phone}
+                    onChange={handlePersonalChange}
+                    placeholder="Nhập số điện thoại"
+                />
+
+
+                <label htmlFor="email"></label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={personalInfo.email}
+                    onChange={handlePersonalChange}
+                    placeholder="Nhập email"
+                />
+
+
+                <label htmlFor="address"></label>
+                <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    value={personalInfo.address}
+                    onChange={handlePersonalChange}
+                    placeholder="Nhập địa chỉ"
+                />
+
+
+                <h3>Thông tin chuyên môn</h3>
+
+                <label htmlFor="qualification"></label>
+                <input
+                    type="text"
+                    id="qualification"
+                    name="qualification"
+                    value={professionalInfo.qualification}
+                    onChange={handleProfessionalChange}
+                    placeholder="Nhập bằng cấp"
+                />
+
+
+                <label htmlFor="experience"></label>
+                <input
+                    type="text"
+                    id="experience"
+                    name="experience"
+                    value={professionalInfo.experience}
+                    onChange={handleProfessionalChange}
+                    placeholder="Nhập kinh nghiệm"
+                />
+
+
+                <h3>Thông tin tài khoản</h3>
+
+                <label htmlFor="password">Mật khẩu:</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={accountInfo.password}
+                    onChange={handleAccountChange}
+                    placeholder="Nhập mật khẩu"
+                />
+
+
+
+                <label htmlFor="avatar">Chọn hình ảnh:</label>
+                <input
+                    type="file"
+                    id="avatar"
+                    name="avatar"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                />
+
+                <div className="action-buttons">
+                    <button type="submit">Xác nhận thông tin</button>
                 </div>
-                <div className="form-group">
-                    <label>Giới tính:</label>
-                    <input
-                        type="radio"
-                        name="gender"
-                        value="Nam"
-                        checked={doctorInfo.gender === 'Nam'}
-                        onChange={handleChange}
-                    />{' '}
-                    Nam
-                    <input
-                        type="radio"
-                        name="gender"
-                        value="Nữ"
-                        checked={doctorInfo.gender === 'Nữ'}
-                        onChange={handleChange}
-                    />{' '}
-                    Nữ
-                </div>
-                <div className="form-group">
-                    <label>Ngày tháng năm sinh:</label>
-                    <input
-                        type="date"
-                        name="dob"
-                        value={doctorInfo.dob}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Số điện thoại:</label>
-                    <input
-                        type="text"
-                        name="phoneNumber"
-                        value={doctorInfo.phoneNumber}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={doctorInfo.email}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Địa chỉ:</label>
-                    <input
-                        type="text"
-                        name="address"
-                        value={doctorInfo.address}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Chuyên ngành:</label>
-                    <input
-                        type="text"
-                        name="specialization"
-                        value={doctorInfo.specialization}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Bằng cấp:</label>
-                    <input
-                        type="text"
-                        name="qualification"
-                        value={doctorInfo.qualification}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Kinh nghiệm làm việc:</label>
-                    <input
-                        type="text"
-                        name="experience"
-                        value={doctorInfo.experience}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Mật khẩu:</label>
-                    <input
-                        type="password"
-                        name="password"
-                        value={doctorInfo.password}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-group">
-                    <label>Hình ảnh:</label>
-                    <input type="file" name="image" onChange={handleImageChange} />
-                </div>
-                <button type="submit">Xác nhận thông tin</button>
             </form>
         </div>
     );
