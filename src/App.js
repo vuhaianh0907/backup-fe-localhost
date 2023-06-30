@@ -18,6 +18,11 @@ import CreateSlot from './BodyContent/Admin/CreateSlot/AdminCreateSlot';
 import DoctorList from './BodyContent/Admin/ViewDoctorList/AdDoctorList';
 import DoctorDetail from './BodyContent/Admin/ViewDocDetail/ViewDocDetail';
 import DoctorUpdate from './BodyContent/Admin/UpdateDoctor/UpdateDoctor';
+import CustomerProfile from './BodyContent/customer/ViewProfile/UserProfile';
+import CustomerEditProfile from './BodyContent/customer/EditProfile/EditProfile';
+import CustomerViewTreatmentIn from './BodyContent/customer/ViewTreatmentIn/TreatmentProcess';
+import CustomerViewProfileTreatment from './BodyContent/customer/ViewProFileTreatment/MedicalRecord';
+import CustomerWriteAppointment from './BodyContent/customer/WriteAppointment/AppointmentForm';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -51,6 +56,12 @@ function App() {
           <Route path='/admin/doctorupdate' element={<DoctorUpdate/>} />
 
 
+          {/* custormer */}
+          <Route path='/customer/profile' element={<CustomerProfile/>} />
+          <Route path='/customer/profile/edit' element={<CustomerEditProfile/>} />
+          <Route path='/customer/treatmentprofile/treatment' element={<CustomerViewTreatmentIn/>} />
+          <Route path='/customer/treatmentprofile' element={<CustomerViewProfileTreatment/>} />
+          <Route path='/customer/slot/appointment' element={<CustomerWriteAppointment/>} />
 
 
           
