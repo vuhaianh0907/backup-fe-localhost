@@ -13,6 +13,11 @@ import Worksheet from './BodyContent/Worksheet';
 import ViewTreatmentProfile from './BodyContent/Doctor/ViewTreatmentProfile/ViewTreatmentProfile';
 import ViewTreatementList from './BodyContent/Doctor/ViewTreatmentList/ViewTreatementList';
 import CreateTreatementIn from './BodyContent/Doctor/CreateTreatementIn/CreateTreatmentIn';
+import CreateDoctor from './BodyContent/Admin/CreateDoctor/CreateDoctor';
+import CreateSlot from './BodyContent/Admin/CreateSlot/AdminCreateSlot';
+import DoctorList from './BodyContent/Admin/ViewDoctorList/AdDoctorList';
+import DoctorDetail from './BodyContent/Admin/ViewDocDetail/ViewDocDetail';
+import DoctorUpdate from './BodyContent/Admin/UpdateDoctor/UpdateDoctor';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -37,6 +42,14 @@ function App() {
           <Route path='/forgot-password' element={<ForgotPassword/>} />
           <Route path='/' exact element={<Banner/>} />
           <Route path='/Worksheet' element={<Worksheet/>} />
+
+          {/* admin */}
+          <Route path='/admin/createdoctor' element={<CreateDoctor/>} />
+          <Route path='/admin/createslot' element={<CreateSlot/>} />
+          <Route path='/admin/doctorlist' element={<DoctorList/>} />
+          <Route path='/admin/doctordetail' element={<DoctorDetail/>} />
+          <Route path='/admin/doctorupdate' element={<DoctorUpdate/>} />
+
 
 
 
