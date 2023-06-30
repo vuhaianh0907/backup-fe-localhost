@@ -19,6 +19,7 @@ import CreateSlot from './BodyContent/Admin/CreateSlot/AdminCreateSlot';
 import DoctorList from './BodyContent/Admin/ViewDoctorList/ViewDoctorList';
 import DoctorDetail from './BodyContent/Admin/ViewDocDetail/ViewDocDetail';
 import DoctorUpdate from './BodyContent/Admin/UpdateDoctor/UpdateDoctor';
+import ChangePass from './BodyContent/Admin/ChangePass/ChangePass';
 import CustomerViewBooking from './BodyContent/customer/CustomerViewBooking/CustomerViewBooking';
 import CustomerViewDoctor from './BodyContent/customer/CustomerViewDoctor/CustomerViewDoctor';
 import ViewDocDetail from './BodyContent/customer/ViewDocDetail/ViewDocDetail';
@@ -27,6 +28,7 @@ import CustomerEditProfile from './BodyContent/customer/EditProfile/EditProfile'
 import CustomerViewTreatmentIn from './BodyContent/customer/ViewTreatmentIn/TreatmentProcess';
 import CustomerViewProfileTreatment from './BodyContent/customer/ViewProFileTreatment/MedicalRecord';
 import CustomerWriteAppointment from './BodyContent/customer/WriteAppointment/AppointmentForm';
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -58,6 +60,7 @@ function App() {
         <Route path='/admin/doctorlist' element={<DoctorList />} />
         <Route path='/admin/doctordetail' element={<DoctorDetail />} />
         <Route path='/admin/doctorupdate' element={<DoctorUpdate />} />
+        <Route path='/admin/changepass' element={<ChangePass />} />
 
 
         {/* custormer */}

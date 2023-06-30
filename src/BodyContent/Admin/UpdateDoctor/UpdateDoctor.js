@@ -157,16 +157,7 @@ function AdminUpdateDoctor() {
                         onChange={handleChange}
                     />
                 </div>
-                {/* Trường nhập liệu: Mật khẩu */}
-                <div className="form-group">
-                    <label>Mật khẩu:</label>
-                    <input
-                        type="password"
-                        name="password"
-                        value={doctorInfo.password}
-                        onChange={handleChange}
-                    />
-                </div>
+
                 {/* Trường nhập liệu: Hình ảnh */}
                 <div className="form-group">
                     <label>Hình ảnh:</label>
