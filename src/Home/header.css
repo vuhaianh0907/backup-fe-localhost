@@ -41,3 +41,7 @@
     border-top: 6px solid black;
     margin-left: 4px;
 }
+
+.avatar img {
+    border-radius: 50%;
+}
