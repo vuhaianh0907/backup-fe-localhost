@@ -87,6 +87,7 @@ const CancellationRequests = () => {
       status: 'Approved',
       date: '2023-07-05',
     },
+
   ];
 
   const pendingRequests = cancellationRequests.filter(

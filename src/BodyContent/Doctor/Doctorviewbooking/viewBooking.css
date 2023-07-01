@@ -1,0 +1,80 @@
+body {
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+}
+
+.booking-container {
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.current-bookings,
+.future-bookings {
+    background-color: #fff;
+    margin-bottom: 16px;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li.booking-item {
+    margin-bottom: 16px;
+    padding: 16px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: #333;
+}
+
+button {
+    margin-right: 8px;
+    cursor: pointer;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+}
+
+button.active {
+    background-color: #0056b3;
+}
+
+.pagination {
+    margin-top: 16px;
+}
+
+.pagination button {
+    margin-right: 8px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.pagination button.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 8px;
+}

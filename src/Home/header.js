@@ -1,10 +1,14 @@
-import logo from '../assets/images/logo-01-01.png';
-import '../App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Modal from 'react-modal';
+import logo from '../assets/images/logo-01-01.png';
+import avatar from '../assets/images/avatar.jpg';
+import './header.css';
 
 export default function Navigation() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const isLoggedIn = sessionStorage.getItem('token') !== null;
+
 
   const handleLogout = () => {
     // Xử lý logout tại đây
@@ -42,9 +46,38 @@ export default function Navigation() {
         </ul>
         {isLoggedIn ? (
           <div className="nav-list--prior">
-            <Link to="/Logout" onClick={handleLogout}>
-              Logout
-            </Link>
+            <div className="avatar" onClick={() => setIsModalOpen(true)}>
+              <div className="avatar" onClick={() => setIsModalOpen(true)}>
+                <img src={avatar} alt="Avatar" style={{ width: '50px', height: '50px' }} />
+              </div>
+
+            </div>
+            <Modal
+              isOpen={isModalOpen}
+              onRequestClose={() => setIsModalOpen(false)}
+              contentLabel="Options Modal"
+              className="options-modal"
+            >
+              <ul className="options-list">
+                <li>
+                  <Link to="/customer/profile">Xem thông tin cá nhân</Link>
+                </li>
+                <li>
+                  <Link to="/customer/profile/edit">Chỉnh sửa thông tin</Link>
+                </li>
+                <li>
+                  <Link to="/customer/treatmentprofile/treatment">Xem hồ sơ bệnh</Link>
+                </li>
+                <li>
+                  <Link to="/admin/changepass">Đổi mật khẩu</Link>
+                </li>
+                <li>
+                  <Link to="/logout" onClick={handleLogout}>
+                    Đăng xuất
+                  </Link>
+                </li>
+              </ul>
+            </Modal>
           </div>
         ) : (
           <div className="nav-list--prior">

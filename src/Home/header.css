@@ -1,0 +1,43 @@
+.options-modal {
+    position: fixed;
+    top: 160px;
+    /* Adjust this value to position the popup vertically */
+    left: 1845px;
+    /* Adjust this value to position the popup horizontally */
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    opacity: 1;
+    /* Set opacity to 1 to remove the blur effect */
+}
+
+
+.options-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.options-list li {
+    margin-bottom: 10px;
+}
+
+.options-list li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.options-list li a:hover {
+    color: #000;
+}
+
+.down-arrow {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid black;
+    margin-left: 4px;
+}

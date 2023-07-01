@@ -18,6 +18,7 @@
 
 .App-header {
   background-color: #282c34;
+  /* Thay đổi giá trị background-color thành màu mong muốn */
   min-height: 10vh;
   display: flex;
   flex-direction: column;
@@ -26,6 +27,7 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
 
 .App-link {
   color: #61dafb;
@@ -116,4 +118,36 @@ body {
   display: flex;
   flex-direction: column;
   overflow-x: auto;
+}
+
+.options-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.options-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.options-list li {
+  margin-bottom: 10px;
+}
+
+.options-list li a {
+  color: #333;
+  text-decoration: none;
+}
+
+.options-list li a:hover {
+  color: #000;
+  font-weight: bold;
 }
