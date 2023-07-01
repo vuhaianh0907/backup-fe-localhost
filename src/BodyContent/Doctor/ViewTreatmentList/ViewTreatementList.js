@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './ViewTreatementList.css'; // Import the CSS file for styling
+import AddProfilePopup from './AddProfilePopup/AddProfilePopup';
 
 function ViewTreatementList() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -26,29 +27,43 @@ function ViewTreatementList() {
     },
     // Add more profiles here
   ]);
+  const [showAddProfilePopup, setShowAddProfilePopup] = useState(false);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const handleAddProfile = () => {
-    // Handle the logic to add a new profile
-    console.log('Add Profile');
+  const handleOpenAddProfilePopup = () => {
+    setShowAddProfilePopup(true);
   };
 
-  const handleViewProfile = (profileId) => {
-    // Handle the logic to view a profile based on its ID
-    console.log('View Profile:', profileId);
+  const handleCloseAddProfilePopup = () => {
+    setShowAddProfilePopup(false);
   };
 
-  const handleInputTreatmentInfo = (profileId) => {
-    // Handle the logic to input treatment info for a profile based on its ID
-    console.log('Input Treatment Info:', profileId);
+  const handleAddProfile = (profileName) => {
+    const newProfile = {
+      id: profiles.length + 1,
+      name: profileName,
+      // Add other properties as needed
+    };
+
+    setProfiles([...profiles, newProfile]);
   };
 
   const filteredProfiles = profiles.filter((profile) =>
     profile.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleViewProfile = (profileId) => {
+    // Placeholder for handling view profile logic
+    console.log('View Profile:', profileId);
+  };
+
+  const handleInputTreatmentInfo = (profileId) => {
+    // Placeholder for handling input treatment info logic
+    console.log('Input Treatment Info:', profileId);
+  };
 
   return (
     <div className="clinic-page">
@@ -56,7 +71,7 @@ function ViewTreatementList() {
       <div className="search-bar">
         <input
           type="text"
-          placeholder="Search patient..."
+          placeholder="Search profile..."
           value={searchTerm}
           onChange={handleSearch}
         />
@@ -65,12 +80,8 @@ function ViewTreatementList() {
         {filteredProfiles.length > 0 ? (
           filteredProfiles.map((profile) => (
             <div className="profile-card" key={profile.id}>
-              <p><strong>Patient Name:</strong> {profile.name}</p>
-              {/* <p><strong>Age:</strong> {profile.age}</p>
-              <p><strong>Gender:</strong> {profile.gender}</p>
-              <p><strong>Doctor:</strong> {profile.doctor}</p> */}
+              <p><strong>Profile Name:</strong> {profile.name}</p>
               <p><strong>Treatment Date:</strong> {profile.treatmentDate}</p>
-              {/* <p><strong>Symptoms:</strong> {profile.symptoms}</p> */}
               <p><strong>Treatment Progress:</strong> {profile.treatmentProgress}</p>
               <div className="profile-buttons">
                 <button onClick={() => handleViewProfile(profile.id)}>View Profile</button>
@@ -82,9 +93,13 @@ function ViewTreatementList() {
           <p>No profiles found.</p>
         )}
       </div>
-      <button className="add-profile-button" onClick={handleAddProfile}>Add Profile</button>
+      <button className="add-profile-button" onClick={handleOpenAddProfilePopup}>Add Profile</button>
+
+      {showAddProfilePopup && (
+        <AddProfilePopup onClose={handleCloseAddProfilePopup} onAddProfile={handleAddProfile} />
+      )}
     </div>
   );
-};
+}
 
 export default ViewTreatementList;
