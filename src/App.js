@@ -13,6 +13,7 @@ import Worksheet from './BodyContent/Worksheet';
 import ViewTreatmentProfile from './BodyContent/Doctor/ViewTreatmentProfile/ViewTreatmentProfile';
 import ViewTreatementList from './BodyContent/Doctor/ViewTreatmentList/ViewTreatementList';
 import CreateTreatementIn from './BodyContent/Doctor/CreateTreatementIn/CreateTreatmentIn';
+import Doctorviewbooking from './BodyContent/Doctor/Doctorviewbooking/viewBooking';
 
 import CreateDoctor from './BodyContent/Admin/CreateDoctor/CreateDoctor';
 import CreateSlot from './BodyContent/Admin/CreateSlot/AdminCreateSlot';
@@ -84,6 +85,7 @@ function App() {
         <Route path='/3' element={<CreateTreatementIn />} />
         <Route path='/doctor/viewprofile' element={<DoctorViewprofile />} />
         <Route path='/doctor/updateProfile' element={<DoctorUpdateprofile />} />
+        <Route path='/Doctorviewbooking' element={<Doctorviewbooking />} />
 
 
         {/* customer */}
