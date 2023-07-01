@@ -9,6 +9,7 @@ export default function LoginBar() {
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [showOptions, setShowOptions] = useState(false);
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -35,6 +36,7 @@ export default function LoginBar() {
             .then((response) => {
                 console.log(response.data);
                 setIsLoggedIn(true);
+                setShowOptions(true);
                 alert(`Chào mừng ${response.data.fullname}!`); // Hiển thị thông báo chào mừng
             })
             .catch((error) => {
@@ -54,60 +56,82 @@ export default function LoginBar() {
         console.log(error);
     };
 
-    if (isLoggedIn) {
-        return (
-            <div>
-                {/* Thêm nội dung chào mừng */}
-                <div>Xin chào!</div>
-            </div>
-        );
-    } else {
-        return (
-            <form className="login-form" onSubmit={handleSubmit}>
-                <h3>Đăng nhập</h3>
-
-                <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        id="email"
-                        value={email}
-                        onChange={handleEmailChange}
-                    />
+    return (
+        <div>
+            {isLoggedIn ? (
+                <div>
+                    <div>Xin chào!</div>
+                    {showOptions && (
+                        <div>
+                            {/* Hiển thị các tùy chọn */}
+                            <ul>
+                                <li>
+                                    <Link to="/profile">Xem thông tin cá nhân</Link>
+                                </li>
+                                <li>
+                                    <Link to="/edit-profile">Chỉnh sửa thông tin</Link>
+                                </li>
+                                <li>
+                                    <Link to="/medical-records">Xem hồ sơ bệnh</Link>
+                                </li>
+                                <li>
+                                    <Link to="/change-password">Đổi mật khẩu</Link>
+                                </li>
+                                <li>
+                                    <Link to="/logout" onClick={handleLogout}>
+                                        Đăng xuất
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
                 </div>
+            ) : (
+                <form className="login-form" onSubmit={handleSubmit}>
+                    <h3>Đăng nhập</h3>
 
-                <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        id="password"
-                        value={password}
-                        onChange={handlePasswordChange}
-                    />
-                </div>
+                    <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            id="email"
+                            value={email}
+                            onChange={handleEmailChange}
+                        />
+                    </div>
 
-                {errorMessage && <p className="error-message">{errorMessage}</p>}
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            id="password"
+                            value={password}
+                            onChange={handlePasswordChange}
+                        />
+                    </div>
 
-                <button type="submit">Đăng nhập</button>
+                    {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-                <div className="login-links">
-                    <Link to="/register">Đăng ký tài khoản</Link>
-                    <Link to="/forgot-password">Quên mật khẩu</Link>
-                </div>
+                    <button type="submit">Đăng nhập</button>
 
-                <div className="social">
-                    <GoogleLogin
-                        clientId="YOUR_GOOGLE_CLIENT_ID"
-                        buttonText=" Đăng nhập bằng Google"
-                        onSuccess={handleGoogleLoginSuccess}
-                        onFailure={handleGoogleLoginFailure}
-                        cookiePolicy={'single_host_origin'}
-                    />
-                </div>
-            </form>
-        );
-    }
+                    <div className="login-links">
+                        <Link to="/register">Đăng ký tài khoản</Link>
+                        <Link to="/forgot-password">Quên mật khẩu</Link>
+                    </div>
+
+                    <div className="social">
+                        <GoogleLogin
+                            clientId="YOUR_GOOGLE_CLIENT_ID"
+                            buttonText=" Đăng nhập bằng Google"
+                            onSuccess={handleGoogleLoginSuccess}
+                            onFailure={handleGoogleLoginFailure}
+                            cookiePolicy={'single_host_origin'}
+                        />
+                    </div>
+                </form>
+            )}
+        </div>
+    );
 }
-

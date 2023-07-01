@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReactModal from 'react-modal';
 import './UpdateDoctor.css';
 
+
 function AdminUpdateDoctor() {
     const [doctorInfo, setDoctorInfo] = useState({
         fullName: 'Nguyễn Văn A',
@@ -53,6 +54,7 @@ function AdminUpdateDoctor() {
             // TODO: Handle cancellation logic, such as resetting the form or redirecting to another page
         }
     };
+
 
     return (
         <div className="form1">

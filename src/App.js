@@ -34,6 +34,8 @@ import CustomerWriteAppointment from './BodyContent/customer/WriteAppointment/Ap
 import DoctorViewprofile from './BodyContent/Doctor/Viewprofile/Viewprofile';
 import DoctorUpdateprofile from './BodyContent/Doctor/UpdateProfile/UpdateProfile';
 
+// import testthu from './BodyContent/Admin/test/test';
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -92,6 +94,7 @@ function App() {
         <Route path='/5' element={<CustomerViewBooking />} />
         <Route path='/6' element={<CustomerViewDoctor />} />
         <Route path='/7' element={<ViewDocDetail />} />
+
       </Routes>
       <Footer />
     </div>
