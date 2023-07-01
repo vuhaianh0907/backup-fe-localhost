@@ -1,0 +1,140 @@
+.page-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.admin-create-slot__container {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    width: 600px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.admin-create-slot__container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.admin-create-slot__search-doctor {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.admin-create-slot__search-doctor input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.admin-create-slot__doctor-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.admin-create-slot__doctor-list li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.admin-create-slot__doctor-list li img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.admin-create-slot__date-input {
+    margin-bottom: 10px;
+}
+
+.admin-create-slot__date-input label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.admin-create-slot__shifts {
+    margin-bottom: 20px;
+}
+
+.admin-create-slot__shift {
+    margin-bottom: 10px;
+}
+
+.admin-create-slot__shift input[type='checkbox'] {
+    margin-right: 10px;
+}
+
+.admin-create-slot__save-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.admin-create-slot__schedule-info {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.admin-create-slot__table-wrapper {
+    overflow-x: auto;
+}
+
+.admin-create-slot__table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-create-slot__table th,
+.admin-create-slot__table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.admin-create-slot__table th {
+    background-color: #f5f5f5;
+}
+
+.admin-create-slot__table td {
+    text-align: center;
+}
+
+.admin-create-slot__shifts {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    /* Thêm thuộc tính justify-content */
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.admin-create-slot__shift {
+    display: flex;
+    align-items: center;
+}
+
+.admin-create-slot__shift input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.admin-create-slot__shift label {
+    margin-bottom: 0;
+}

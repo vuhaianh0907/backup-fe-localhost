@@ -13,13 +13,14 @@ import Worksheet from './BodyContent/Worksheet';
 import ViewTreatmentProfile from './BodyContent/Doctor/ViewTreatmentProfile/ViewTreatmentProfile';
 import ViewTreatementList from './BodyContent/Doctor/ViewTreatmentList/ViewTreatementList';
 import CreateTreatementIn from './BodyContent/Doctor/CreateTreatementIn/CreateTreatmentIn';
-import AdminViewDocDetail from './BodyContent/Admin/ViewDocDetail/ViewDocDetail';
+
 import CreateDoctor from './BodyContent/Admin/CreateDoctor/CreateDoctor';
 import CreateSlot from './BodyContent/Admin/CreateSlot/AdminCreateSlot';
-import DoctorList from './BodyContent/Admin/ViewDoctorList/ViewDoctorList';
-import DoctorDetail from './BodyContent/Admin/ViewDocDetail/ViewDocDetail';
+import DoctorList from './BodyContent/Admin/ViewDoctorList/DoctorList';
+import DoctorDetail from './BodyContent/Admin/ViewDocDetail/DoctorDetail';
 import DoctorUpdate from './BodyContent/Admin/UpdateDoctor/UpdateDoctor';
 import ChangePass from './BodyContent/Admin/ChangePass/ChangePass';
+import Cancellation from './BodyContent/Admin/CancellationRequests/CancellationRequests';
 import CustomerViewBooking from './BodyContent/customer/CustomerViewBooking/CustomerViewBooking';
 import CustomerViewDoctor from './BodyContent/customer/CustomerViewDoctor/CustomerViewDoctor';
 import ViewDocDetail from './BodyContent/customer/ViewDocDetail/ViewDocDetail';
@@ -59,8 +60,9 @@ function App() {
         <Route path='/admin/createslot' element={<CreateSlot />} />
         <Route path='/admin/doctorlist' element={<DoctorList />} />
         <Route path='/admin/doctordetail' element={<DoctorDetail />} />
-        <Route path='/admin/doctorupdate' element={<DoctorUpdate />} />
+        <Route path='/admin/doctor/update' element={<DoctorUpdate />} />
         <Route path='/admin/changepass' element={<ChangePass />} />
+        <Route path='/admin/cancellation' element={<Cancellation />} />
 
 
         {/* custormer */}
@@ -72,11 +74,12 @@ function App() {
 
 
 
+
         <Route path='/1' element={<ViewTreatmentProfile />} />
         {/* doc/treatment/detail */}
         <Route path='/2' element={<ViewTreatementList />} />
         <Route path='/3' element={<CreateTreatementIn />} />
-        <Route path='/4' element={<AdminViewDocDetail />} />
+
         {/* customer */}
         <Route path='/5' element={<CustomerViewBooking />} />
         <Route path='/6' element={<CustomerViewDoctor />} />
