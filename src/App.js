@@ -83,8 +83,8 @@ function App() {
 
         <Route path='/doctor/viewTreatmentProfile' element={<ViewTreatmentProfile />} />
         {/* doc/treatment/detail */}
-        <Route path='/2' element={<ViewTreatementList />} />
-        <Route path='/3' element={<CreateTreatementIn />} />
+        <Route path='/doctor/treatmentlist' element={<ViewTreatementList />} />
+        <Route path='/doctor/writetreatmentin' element={<CreateTreatementIn />} />
         <Route path='/doctor/viewprofile' element={<DoctorViewprofile />} />
         <Route path='/doctor/updateProfile' element={<DoctorUpdateprofile />} />
         <Route path='/Doctorviewbooking' element={<Doctorviewbooking />} />
