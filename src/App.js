@@ -30,6 +30,9 @@ import CustomerViewTreatmentIn from './BodyContent/customer/ViewTreatmentIn/Trea
 import CustomerViewProfileTreatment from './BodyContent/customer/ViewProFileTreatment/MedicalRecord';
 import CustomerWriteAppointment from './BodyContent/customer/WriteAppointment/AppointmentForm';
 
+import DoctorViewprofile from './BodyContent/Doctor/Viewprofile/Viewprofile';
+import DoctorUpdateprofile from './BodyContent/Doctor/UpdateProfile/UpdateProfile';
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -79,6 +82,9 @@ function App() {
         {/* doc/treatment/detail */}
         <Route path='/2' element={<ViewTreatementList />} />
         <Route path='/3' element={<CreateTreatementIn />} />
+        <Route path='/doctor/viewprofile' element={<DoctorViewprofile />} />
+        <Route path='/doctor/updateProfile' element={<DoctorUpdateprofile />} />
+
 
         {/* customer */}
         <Route path='/5' element={<CustomerViewBooking />} />

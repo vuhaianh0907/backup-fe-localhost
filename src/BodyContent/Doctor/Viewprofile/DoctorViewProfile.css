@@ -1,0 +1,68 @@
+.doctor-detail {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-container {
+    margin-right: 20px;
+}
+
+.doctor-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.info-container {
+    flex-grow: 1;
+}
+
+.doctor-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.info-label {
+    font-weight: bold;
+}
+
+.workday-input {
+    margin-top: 5px;
+}
+
+.timeslot-button {
+    margin-right: 5px;
+    margin-top: 5px;
+    padding: 5px 10px;
+    background-color: #eee;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.timeslot-button.selected {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.options-button-container {
+    margin-top: 10px;
+}
+
+.options-button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.options-button-container {
+    margin-top: 10px;
+}
