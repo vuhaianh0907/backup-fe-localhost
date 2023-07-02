@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+// import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link, Routes } from 'react-router-dom';
 import Navigation from './Home/header';
 import Banner from './BodyContent/banner/banner.js';
@@ -14,6 +14,7 @@ import ViewTreatmentProfile from './BodyContent/Doctor/ViewTreatmentProfile/View
 import ViewTreatementList from './BodyContent/Doctor/ViewTreatmentList/ViewTreatementList';
 import CreateTreatementIn from './BodyContent/Doctor/CreateTreatementIn/CreateTreatmentIn';
 import Doctorviewbooking from './BodyContent/Doctor/Doctorviewbooking/viewBooking';
+import DoctorViewPatientProfile from './BodyContent/Doctor/ViewPatientProfile/PatientProfile';
 
 import CreateDoctor from './BodyContent/Admin/CreateDoctor/CreateDoctor';
 import CreateSlot from './BodyContent/Admin/CreateSlot/AdminCreateSlot';
@@ -81,19 +82,21 @@ function App() {
 
 
 
-        <Route path='/1' element={<ViewTreatmentProfile />} />
+        <Route path='/doctor/viewTreatmentProfile' element={<ViewTreatmentProfile />} />
         {/* doc/treatment/detail */}
-        <Route path='/2' element={<ViewTreatementList />} />
-        <Route path='/3' element={<CreateTreatementIn />} />
+        <Route path='/doctor/treatmentlist' element={<ViewTreatementList />} />
+        <Route path='/doctor/writetreatmentin' element={<CreateTreatementIn />} />
         <Route path='/doctor/viewprofile' element={<DoctorViewprofile />} />
         <Route path='/doctor/updateProfile' element={<DoctorUpdateprofile />} />
         <Route path='/Doctorviewbooking' element={<Doctorviewbooking />} />
+        <Route path='/Doctor/viewpatientprofile' element={<DoctorViewPatientProfile />} />
 
 
         {/* customer */}
         <Route path='/5' element={<CustomerViewBooking />} />
         <Route path='/6' element={<CustomerViewDoctor />} />
         <Route path='/7' element={<ViewDocDetail />} />
+        
 
       </Routes>
       <Footer />
