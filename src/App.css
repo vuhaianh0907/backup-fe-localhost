@@ -20,8 +20,8 @@
   background-color: #282c34;
   /* Thay đổi giá trị background-color thành màu mong muốn */
   min-height: 10vh;
-  display: flex;
-  flex-direction: column;
+  /* display: flex; */
+  /* flex-direction: column; */
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
@@ -60,7 +60,7 @@
 }
 
 .nav-list a {
-  display: flex;
+  /* display: flex; */
   padding: 10px 10px;
   color: azure;
   align-items: center;
@@ -98,7 +98,9 @@ footer {
   margin-top: auto;
   background-color: rgba(255, 221, 0, 0.851);
   text-align: center;
-
+  left: 0;
+  bottom: 0;
+  
   height: 10vmin;
   width: 100vw;
 }
@@ -115,8 +117,8 @@ body {
   background-color: rgb(116, 189, 253);
   min-height: 100vh;
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  /* display: flex; */
+  /* flex-direction: column; */
   overflow-x: auto;
 }
 

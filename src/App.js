@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import './App.css';
+import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link, Routes } from 'react-router-dom';
 import Navigation from './Home/header';
 import Banner from './BodyContent/banner/banner.js';
@@ -48,7 +48,7 @@ function App() {
 
   return (
 
-    <div className='App'>
+    <div>
       <Navigation isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
       <Routes>
         <Route path='/doctor' exact element={<Doctor />} />

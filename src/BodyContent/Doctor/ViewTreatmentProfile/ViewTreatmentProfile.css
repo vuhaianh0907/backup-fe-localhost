@@ -15,6 +15,7 @@
 
 .profile-details {
   margin-bottom: 30px;
+  
 }
 
 .profile-details p {
@@ -22,6 +23,7 @@
 }
 .profile-details div {
   flex-shrink: 0;
+  display: block;
   margin-bottom: 10px;
 }
 
@@ -37,6 +39,11 @@
 .symptom {
   /* Styles for each symptom */
   cursor: pointer;
+  margin: 5px;
+}
+
+.symptom-list{
+  flex-shrink: 0;
 }
 
 .treatment-progress h3 {
@@ -105,4 +112,41 @@
 }
 
 /* Rest of the CSS styles */
+
+.pagination {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination li {
+  margin: 0 5px;
+}
+
+.pagination li a {
+  display: inline-block;
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.pagination li a:hover {
+  background-color: #f4f4f4;
+}
+
+.pagination li.active a {
+  background-color: #555;
+  color: #fff;
+  cursor: default;
+}
+
+.pagination li.disabled a {
+  pointer-events: none;
+  opacity: 0.6;
+}
 
