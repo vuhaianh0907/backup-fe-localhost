@@ -14,6 +14,7 @@ import ViewTreatmentProfile from './BodyContent/Doctor/ViewTreatmentProfile/View
 import ViewTreatementList from './BodyContent/Doctor/ViewTreatmentList/ViewTreatementList';
 import CreateTreatementIn from './BodyContent/Doctor/CreateTreatementIn/CreateTreatmentIn';
 import Doctorviewbooking from './BodyContent/Doctor/Doctorviewbooking/viewBooking';
+import DoctorViewPatientProfile from './BodyContent/Doctor/ViewPatientProfile/PatientProfile';
 
 import CreateDoctor from './BodyContent/Admin/CreateDoctor/CreateDoctor';
 import CreateSlot from './BodyContent/Admin/CreateSlot/AdminCreateSlot';
@@ -88,6 +89,7 @@ function App() {
         <Route path='/doctor/viewprofile' element={<DoctorViewprofile />} />
         <Route path='/doctor/updateProfile' element={<DoctorUpdateprofile />} />
         <Route path='/Doctorviewbooking' element={<Doctorviewbooking />} />
+        <Route path='/Doctor/viewpatientprofile' element={<DoctorViewPatientProfile />} />
 
 
         {/* customer */}
