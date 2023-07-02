@@ -42,7 +42,7 @@ export default function LoginBar() {
       password: password
     };
 
-    axios.post('https://dencelclinic.onrender.com/api/auth/login', data)
+    axios.post('http://localhost:3000/api/auth/login', data)
       .then(handleLoginSuccess)
       .catch(handleLoginFailure);
   };
