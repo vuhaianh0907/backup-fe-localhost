@@ -3,12 +3,21 @@ import axios from 'axios';
 import './AdminCreateSlot.css';
 
 function CreateSchedulePage() {
+  const [error, setError] = useState(null);
   const [searchValue, setSearchValue] = useState('');
   const [doctors, setDoctors] = useState([]);
-  const [selectedDoctor, setSelectedDoctor] = useState(null);
+  
+  const [selectedDoctor, setSelectedDoctor] = useState({
+    doctorID: '',
+    startDate: '',
+    endDate: '',
+    hasMorningShift: '' ,
+    hasAfternoonShift: '',
+  });
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [selectedShifts, setSelectedShifts] = useState([]);
+  const [selectedMorningShift, setSelectedMorningShift] = useState(false);
+  const [selectedAfternoonShift, setSelectedAfternoonShift] = useState(false);
   const [isScheduleCreated, setIsScheduleCreated] = useState(false);
   const [scheduleList, setScheduleList] = useState([]);
 
@@ -42,27 +51,43 @@ function CreateSchedulePage() {
   };
 
   const handleSelectShift = (shift) => {
-    const updatedShifts = [...selectedShifts];
-    if (updatedShifts.includes(shift)) {
-      updatedShifts.splice(updatedShifts.indexOf(shift), 1);
-    } else {
-      updatedShifts.push(shift);
+    if (shift === 'Ca sáng') {
+      setSelectedMorningShift(!selectedMorningShift);
+    } else if (shift === 'Ca chiều') {
+      setSelectedAfternoonShift(!selectedAfternoonShift);
     }
-    setSelectedShifts(updatedShifts);
   };
 
   const handleSaveSchedule = () => {
-    if (selectedDoctor && startDate && endDate && selectedShifts.length > 0) {
+    if (selectedDoctor && startDate && endDate && (selectedMorningShift || selectedAfternoonShift)) {
       const newSchedule = {
-        doctor: selectedDoctor,
+        doctorID: selectedDoctor.id,
         startDate: startDate,
         endDate: endDate,
-        shifts: selectedShifts,
+        hasMorningShift: selectedMorningShift,
+        hasAfternoonShift: selectedAfternoonShift,
       };
       setScheduleList([...scheduleList, newSchedule]);
       setIsScheduleCreated(true);
+
+      axios.post('http://localhost:3000/api/slot/create', newSchedule)
+      .then(response => {
+        console.log(response.data);
+        // Xử lý kết quả từ server
+      })
+      .catch(error => {
+        console.error(error);
+        if (error.response && error.response.data && error.response.data.error) {
+          setError(error.response.data.error);
+          console.log("Lỗi không đến từ server");
+        } else {
+          setError('Có lỗi xảy ra khi gửi yêu cầu đến server');
+        }
+      });
+      console.log(newSchedule);
     } else {
       // Hiển thị thông báo lỗi hoặc yêu cầu người dùng nhập đầy đủ thông tin
+      alert("Hết cứu");
     }
   };
 
@@ -94,7 +119,7 @@ function CreateSchedulePage() {
         </div>
 
         {/* Chọn khoảng thời gian */}
-        {selectedDoctor && (
+        {selectedDoctor.id && (
           <div>
             <h3>Chọn khoảng thời gian</h3>
             <div>
@@ -126,7 +151,7 @@ function CreateSchedulePage() {
               <input
                 type="checkbox"
                 id="shift1"
-                checked={selectedShifts.includes('Ca sáng')}
+                checked={selectedMorningShift}
                 onChange={() => handleSelectShift('Ca sáng')}
               />
               <label htmlFor="shift1">Ca sáng</label>
@@ -135,7 +160,7 @@ function CreateSchedulePage() {
               <input
                 type="checkbox"
                 id="shift2"
-                checked={selectedShifts.includes('Ca chiều')}
+                checked={selectedAfternoonShift}
                 onChange={() => handleSelectShift('Ca chiều')}
               />
               <label htmlFor="shift2">Ca chiều</label>
@@ -144,7 +169,7 @@ function CreateSchedulePage() {
         )}
 
         {/* Lưu */}
-        {selectedDoctor && startDate && endDate && selectedShifts.length > 0 && (
+        {selectedDoctor && startDate && endDate && (selectedMorningShift || selectedAfternoonShift) && (
           <div>
             <button onClick={handleSaveSchedule}>Lưu</button>
           </div>
@@ -157,30 +182,32 @@ function CreateSchedulePage() {
             <p>Bác sĩ: {selectedDoctor.fullname}</p>
             <p>Ngày bắt đầu: {startDate}</p>
             <p>Ngày kết thúc: {endDate}</p>
-            <p>Ca làm việc: {selectedShifts.join(', ')}</p>
+            <p>Ca làm việc: {selectedMorningShift && selectedAfternoonShift ? 'Ca sáng, Ca chiều' : selectedMorningShift ? 'Ca sáng' : 'Ca chiều'}</p>
           </div>
         )}
 
         {/* Bảng */}
         <div>
-          <table>
-            <thead>
-              <tr>
-                <th>Bác sĩ</th>
-                <th>Ngày</th>
-                <th>Ca làm việc</th>
-              </tr>
-            </thead>
-            <tbody>
-              {scheduleList.map((schedule, index) => (
-                <tr key={index}>
-                  <td>{schedule.doctor.fullname}</td>
-                  <td>{schedule.startDate} - {schedule.endDate}</td>
-                  <td>{schedule.shifts.join(', ')}</td>
+          {scheduleList && (
+            <table>
+              <thead>
+                <tr>
+                  <th>Bác sĩ</th>
+                  <th>Ngày</th>
+                  <th>Ca làm việc</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {scheduleList.map((schedule,index) => (
+                  <tr key={index}>
+                    <td>{selectedDoctor.fullname}</td>
+                    <td>{schedule.startDate} - {schedule.endDate}</td>
+                    <td>{schedule.hasMorningShift && schedule.hasAfternoonShift ? 'Ca sáng, Ca chiều' : schedule.hasMorningShift ? 'Ca sáng' : 'Ca chiều'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </div>

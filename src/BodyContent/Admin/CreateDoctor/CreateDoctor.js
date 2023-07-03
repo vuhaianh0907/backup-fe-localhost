@@ -83,7 +83,7 @@ function AdminCreateDoctor() {
         // Gửi dữ liệu đến server hoặc xử lý theo yêu cầu của bạn
         axios.post('http://localhost:3000/api/admin/createdoctor', formData)
         .then(response => {
-          console.log(response.data);
+          alert(response.data);
           // Xử lý kết quả từ server
         })
         .catch(error => {
