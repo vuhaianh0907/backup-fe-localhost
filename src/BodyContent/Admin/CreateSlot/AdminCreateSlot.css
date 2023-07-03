@@ -138,3 +138,29 @@
 .admin-create-slot__shift label {
     margin-bottom: 0;
 }
+.admin-create-slot__autosuggest-container {
+    position: relative;
+  }
+  
+  .admin-create-slot__suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+  }
+  
+  .admin-create-slot__suggestions li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .admin-create-slot__suggestions li:hover {
+    background-color: #f0f0f0;
+  }
+  

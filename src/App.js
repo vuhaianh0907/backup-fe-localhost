@@ -67,7 +67,7 @@ function App() {
         <Route path='/admin/createdoctor' element={<CreateDoctor />} />
         <Route path='/admin/createslot' element={<CreateSlot />} />
         <Route path='/admin/doctorlist' element={<DoctorList />} />
-        <Route path='/admin/doctordetail' element={<DoctorDetail />} />
+        <Route path='/admin/doctordetail/:doctorId' element={<DoctorDetail />} />
         <Route path='/admin/doctor/update' element={<DoctorUpdate />} />
         <Route path='/admin/changepass' element={<ChangePass />} />
         <Route path='/admin/cancellation' element={<Cancellation />} />

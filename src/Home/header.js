@@ -29,20 +29,12 @@ export default function Navigation() {
             </Link>
           </li>
           <li className="nav-list--element">
-            <Link to="/Banner">Banner</Link>
-          </li>
-          <li className="nav-list--element nav-list--element-right">
-            <Link to="/Booking">Booking</Link>
+            <Link to="/admin/doctorlist">List Doctor</Link>
           </li>
           <li className="nav-list--element">
-            <Link to="/doctor">Doctor</Link>
+            <Link to="/admin/createslot">Create Slot</Link>
           </li>
-          <li className="nav-list--element">
-            <Link to="/crDoc">crDoc</Link>
-          </li>
-          <li className="nav-list--element">
-            <Link to="/Worksheet">View Worksheet</Link>
-          </li>
+          
         </ul>
         <div className="nav-list--prior">
           {isLoggedIn ? (
