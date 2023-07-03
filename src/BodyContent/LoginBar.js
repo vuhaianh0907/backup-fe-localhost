@@ -72,6 +72,9 @@ export default function LoginBar() {
                                     <Link to="/edit-profile">Chỉnh sửa thông tin</Link>
                                 </li>
                                 <li>
+                                    <Link to="/admin/createdoctor">Tạo Bác Xĩ</Link>
+                                </li>
+                                <li>
                                     <Link to="/medical-records">Xem hồ sơ bệnh</Link>
                                 </li>
                                 <li>
