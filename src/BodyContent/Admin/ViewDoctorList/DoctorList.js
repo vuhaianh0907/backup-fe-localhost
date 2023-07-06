@@ -9,7 +9,7 @@ const DoctorList = () => {
   useEffect(() => {
     // Gọi API để lấy danh sách bác sĩ
     axios
-      .get('http://localhost:3000/api/admin/getAllDoctor')
+      .get('http://localhost:3000/api/account/doctor/index')
       .then((response) => {
         setDoctors(response.data.doctors); // Cập nhật danh sách bác sĩ
       })

@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import ReactModal from 'react-modal';
 import './UpdateDoctor.css';
 
 
 function AdminUpdateDoctor() {
+
+
     const [doctorInfo, setDoctorInfo] = useState({
         fullName: 'Nguyễn Văn A',
         idCard: '123456789',
@@ -18,6 +21,21 @@ function AdminUpdateDoctor() {
         password: '',
         image: null,
     });
+
+    // kết nối api update doctorInfo của Admin
+    useEffect(() => {
+        axios
+        .get(`http://localhost:3000/api/admin/getDoctor?`)
+        .then((response) => {
+          setDoctorInfo(response.data.doctor); // Cập nhật thông tin chi tiết của bác sĩ
+        })
+        .catch((error) => {
+          console.error(error);
+          // Xử lý lỗi nếu có
+        });
+    }, []);
+
+    
 
     const [showConfirmation, setShowConfirmation] = useState(false);
 

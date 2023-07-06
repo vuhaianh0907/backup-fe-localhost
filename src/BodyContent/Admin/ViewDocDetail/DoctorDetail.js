@@ -7,19 +7,78 @@ const DoctorDetail = () => {
   const { doctorId } = useParams(); // Truy cập vào doctorId từ URL parameter
 
   const [doctorInfo, setDoctorInfo] = useState(null);
+  // const [scheduleInfo, setScheduleInfo] = useState({
+  //   id: '',
+  //   time: '',
+  //   date: '',
+  //   doctorID: '',
+  //   createdAt: '',
+  //   updatedAt: '',
+  // });
+
+  const [scheduleInfo, setScheduleInfo] = useState(null);
+
+
 
   useEffect(() => {
     // Gửi yêu cầu GET tới API để lấy thông tin chi tiết của bác sĩ
     axios
-      .get(`http://localhost:3000/api/admin/getDoctor?doctorId=${doctorId}`)
+      .get(`http://localhost:3000/api/account/doctor/details/${doctorId}`)
       .then((response) => {
         setDoctorInfo(response.data.doctor); // Cập nhật thông tin chi tiết của bác sĩ
+
       })
       .catch((error) => {
         console.error(error);
         // Xử lý lỗi nếu có
       });
   }, [doctorId]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const requestBody = {
+  //         email: 'abcdbc@gmail.com',
+  //       };
+
+  //       const config = {
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //       };
+
+  //       const response = await axios.get('http://localhost:3000/api/account/doctor/details/${doctorId}');
+  //       setDoctorInfo(response.data);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
+
+  useEffect(() => {
+    // Gửi yêu cầu GET tới API để lấy thông tin chi tiết của bác sĩ
+    axios
+      .get(`http://localhost:3000/api/slot/schedule/${doctorId}`)
+      .then((response) => {
+        setScheduleInfo(response.data); // Update scheduleInfo with the response data
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [doctorId]);
+
+  useEffect(() => {
+    if (doctorInfo) {
+      console.log('Doctor Info:', doctorInfo);
+    }
+    if (scheduleInfo) {
+      console.log('Schedule Info:', scheduleInfo);
+    }
+  }, [doctorInfo, scheduleInfo]);
+
 
   const handleEditInfo = () => {
     // Thực hiện các thao tác cần thiết khi click vào nút chỉnh sửa
@@ -81,6 +140,22 @@ const DoctorDetail = () => {
             }}
             className="workday-input"
           />
+          
+
+        </div>
+        <div>
+          {scheduleInfo && (
+  <>
+    <h3>Lịch đã tạo</h3>
+    {scheduleInfo.map((schedule) => (
+      <div key={schedule.id}>
+        <div>{schedule.date}</div>
+        <div>{schedule.time}</div>
+        <div>{schedule.status}</div>
+      </div>
+    ))}
+  </>
+)}
         </div>
         <div className="edit-button-container">
           <button className="edit-button" onClick={handleEditInfo}>
