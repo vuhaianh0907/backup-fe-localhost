@@ -1,54 +1,98 @@
-import React from 'react';
-import { FaFileAlt, FaCalendarAlt } from 'react-icons/fa';
-import './MedicalRecord.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams,Link } from 'react-router-dom';
 
-const MedicalRecord = () => {
-  const recordName = 'Hồ sơ bệnh số 123';
-  const createDate = '15 Tháng 6, 2023';
-  const lastUpdate = '20 Tháng 6, 2023';
-  const symptoms = [
-    { name: 'Triệu chứng 1', date: '1 Tháng 7, 2023' },
-    { name: 'Triệu chứng 2', date: '5 Tháng 7, 2023' },
-    { name: 'Triệu chứng 3', date: '10 Tháng 7, 2023' }
-  ];
-  const treatmentSessions = [
-    { name: 'Buổi điều trị 1', date: '2 Tháng 7, 2023' },
-    { name: 'Buổi điều trị 2', date: '6 Tháng 7, 2023' },
-    { name: 'Buổi điều trị 3', date: '12 Tháng 7, 2023' }
-  ];
+
+
+function ViewTreatmentProfile() {
+  const { id } = useParams(); // Get the ID from the URL
+
+  const [treatmentProfile, setTreatmentProfile] = useState(null);
+  const [doctor, setDoctor] = useState(null);
+  const [customer, setCustomer] = useState(null);
+  const [treatmentIns, setTreatmentIns] = useState([]);
+
+  useEffect(() => {
+    const fetchTreatmentProfile = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/treatment_profile/details?id=${id}`); // Replace with your API endpoint
+        const profileData = response.data.treatmentProfile;
+        setTreatmentProfile(profileData);
+
+        // Fetch doctor information
+        const doctorResponse = await axios.get(`http://localhost:3000/api/account/doctor/details?id=${profileData.doctorID}`);
+        const doctorData = doctorResponse.data.doctor;
+        setDoctor(doctorData);
+
+        // Fetch customer information
+        const customerResponse = await axios.get(`http://localhost:3000/api/account/customer/details?id=${profileData.customerID}`);
+        const customerData = customerResponse.data.customer;
+        setCustomer(customerData);
+
+        // Fetch treatment_ins based on TreatmentProfile.id
+        const treatmentInsResponse = await axios.get(`http://localhost:3000/api/treatmentin/getAllByTreatmentProfile?id=${profileData.id}`);
+        const treatmentInsData = treatmentInsResponse.data.treatmentIns;
+        setTreatmentIns(treatmentInsData);
+      } catch (error) {
+        console.error('Error fetching treatment profile:', error);
+      }
+    };
+
+    fetchTreatmentProfile();
+  }, [id]);
+
+ 
+
+  if (!treatmentProfile || !doctor || !customer) {
+    return <p>Loading...</p>;
+  }
 
   return (
-    <div className="medical-record">
-      <h2 className="medical-record__title">Xem hồ sơ bệnh</h2>
-      <div className="medical-record__info">
-        <p className="medical-record__info-item"><FaFileAlt /> Tên hồ sơ: {recordName}</p>
-        <p className="medical-record__info-item"><FaCalendarAlt /> Ngày tạo hồ sơ: {createDate}</p>
-        <p className="medical-record__info-item"><FaCalendarAlt /> Cập nhật gần nhất: {lastUpdate}</p>
+    <div className="profile-container">
+      <h2>{treatmentProfile.description}</h2>
+      <div className="profile-details">
+        <p>
+          <strong>Ngày tạo:</strong> {treatmentProfile.createdAt}
+        </p>
+        <p>
+          <strong>ID:</strong> {treatmentProfile.id}
+        </p>
+        <p>
+          <strong>Doctor:</strong> {doctor.fullname}
+        </p>
+        <p>
+          <strong>Customer:</strong> {customer.fullname}
+        </p>
       </div>
-      <div className="medical-record__section">
-        <h3 className="medical-record__subheading">Triệu chứng trong quá trình điều trị:</h3>
-        <ul className="medical-record__symptoms">
-          {symptoms.map((symptom, index) => (
-            <li key={index} className="medical-record__symptom">
-              <span className="medical-record__symptom-name">{symptom.name}</span>
-              <span className="medical-record__symptom-date">{symptom.date}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="medical-record__section">
-        <h3 className="medical-record__subheading">Các buổi điều trị:</h3>
-        <ul className="medical-record__treatments">
-          {treatmentSessions.map((session, index) => (
-            <li key={index} className="medical-record__treatment">
-              <span className="medical-record__treatment-name">{session.name}</span>
-              <span className="medical-record__treatment-date">{session.date}</span>
-            </li>
-          ))}
-        </ul>
+      
+
+      <div className="treatment-ins">
+        <h3>Treatment Ins</h3>
+        {treatmentIns.length > 0 ? (
+          <ul>
+            {treatmentIns.map((treatmentIn) => (
+              <li key={treatmentIn.id}>
+                <p>
+                  <strong>Date:</strong> {treatmentIn.createdAt}
+                </p>
+                <p>
+                  <strong>Process:</strong> {treatmentIn.process}
+                </p>
+                <p>
+                  <strong>Result:</strong> {treatmentIn.result}
+                </p>
+                <p>
+                  <strong>Note:</strong> {treatmentIn.note}
+                </p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No treatment ins available.</p>
+        )}
       </div>
     </div>
   );
-};
+}
 
-export default MedicalRecord;
+export default ViewTreatmentProfile;

@@ -1,46 +1,126 @@
-import React, { useState } from 'react';
-import './AppointmentForm.css';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import Modal from 'react-modal';
 
-const AppointmentForm = () => {
+const SlotAppointment = () => {
+  const { id } = useParams();
+  const [slot, setSlot] = useState(null);
+  const [doctor, setDoctor] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [isConfirmed, setIsConfirmed] = useState(false);
   const [reason, setReason] = useState('');
-  const doctorName = 'Dr. Emily Nguyen';
-  const appointmentTime = '09:00 AM';
-  const appointmentDate = '2023-06-30';
-  const avatarUrl = 'https://via.placeholder.com/150'; // Thay bằng URL ảnh ngẫu nhiên từ internet
+  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const storedUserString = sessionStorage.getItem("token");
+  const user = JSON.parse(storedUserString);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Thực hiện xử lý submit form
-    console.log('Đã submit form');
-    console.log('Lí do khám:', reason);
+  useEffect(() => {
+    const fetchSlot = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/slot/details?id=${id}`);
+        setSlot(response.data.slot);
+        setLoading(false);
+      } catch (error) {
+        setError('Failed to fetch slot');
+        setLoading(false);
+      }
+    };
+
+    if (loading) {
+      fetchSlot();
+    }
+  }, [id, loading]);
+
+  useEffect(() => {
+    const fetchDoctor = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/account/doctor/details?id=${slot.doctorID}`);
+        setDoctor(response.data.doctor);
+      } catch (error) {
+        setError('Failed to fetch doctor');
+      }
+    };
+
+    if (slot && slot.doctorID) {
+      fetchDoctor();
+    }
+  }, [slot]);
+
+  const handleConfirmation = async () => {
+    try {
+      // Xây dựng dữ liệu
+      const appointmentData = {
+        status: 'confirmed',
+        doctorID: doctor.id,
+        customerID: user.id,
+        slotID: slot.id,
+        reason: reason,
+      };
+
+      // Gửi yêu cầu POST đến API
+      const response = await axios.post(`http://localhost:3000/api/appointment/create?customerId=${id}`, appointmentData);
+
+      // Kiểm tra phản hồi từ API
+      if (response.status === 200) {
+        setIsConfirmed(true);
+        setIsConfirmationModalOpen(false);
+        setIsSuccessModalOpen(true);
+        window.location.href = "/";
+      } else {
+        setError('Failed to confirm appointment');
+      }
+    } catch (error) {
+      setError('Failed to confirm appointment');
+    }
+  };
+
+  const handleReasonChange = (event) => {
+    setReason(event.target.value);
+  };
+
+  const handleCloseSuccessModal = () => {
+    setIsSuccessModalOpen(false);
   };
 
   return (
-    <div className="appointment-form">
-      <h2 className="appointment-form__title">Đặt phiếu khám bệnh</h2>
-      <div className="doctor-info">
-        <img src={avatarUrl} alt="Doctor Avatar" className="doctor-avatar" />
-        <div className="doctor-details">
-          <p className="doctor-name">{doctorName}</p>
-          <p className="appointment-time">Thời gian: {appointmentTime}</p>
-          <p className="appointment-date">Ngày khám: {appointmentDate}</p>
-        </div>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="reason">Lí do khám:</label>
-          <textarea
-            id="reason"
-            value={reason}
-            onChange={(event) => setReason(event.target.value)}
-            className="reason-input"
-            required
-          ></textarea>
-        </div>
-        <button type="submit" className="submit-button">Đặt phiếu khám</button>
-      </form>
+    <div>
+      {!loading && slot && doctor ? (
+        <>
+          <p>Ngày khám: {slot.date}</p>
+          <p>Thời gian: {slot.time}</p>
+          <p>Bác Sĩ: {doctor.fullname}</p>
+          <img src={doctor.avatar} alt="Doctor Avatar" />
+
+          {!isConfirmed && (
+            <>
+              <div>
+                <label htmlFor="reason">Lí do:</label>
+                <input type="text" id="reason" value={reason} onChange={handleReasonChange} />
+              </div>
+              <button onClick={() => setIsConfirmationModalOpen(true)}>Xác nhận</button>
+            </>
+          )}
+
+          <Modal isOpen={isConfirmationModalOpen}>
+            <p>Xác nhận cuộc hẹn?</p>
+            <button onClick={handleConfirmation}>Xác nhận</button>
+            <button onClick={() => setIsConfirmationModalOpen(false)}>Đóng</button>
+          </Modal>
+
+          <Modal isOpen={isSuccessModalOpen}>
+            <p>Đã xác nhận</p>
+            <button onClick={handleCloseSuccessModal}>Đóng</button>
+          </Modal>
+        </>
+      ) : error ? (
+        <p>{error}</p>
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };
 
-export default AppointmentForm;
+export default SlotAppointment;

@@ -1,61 +1,109 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import './CreateTreatmentIn.css';
 
 function CreateTreatmentIn() {
-  // Khởi tạo state cho các trường nhập liệu
-  const [treatmentProgress, setTreatmentProgress] = useState(['']);
-  const [results, setResults] = useState(['']);
-  const [advice, setAdvice] = useState(['']);
+  const { id } = useParams(); // Get the ID from the URL
 
-  // Hàm xử lý thêm ô nhập liệu
-  const handleAddInputBox = (field) => {
-    if (field === 'treatmentProgress') {
-      setTreatmentProgress((prevProgress) => [...prevProgress, '']);
-    } else if (field === 'results') {
-      setResults((prevResults) => [...prevResults, '']);
-    } else if (field === 'advice') {
-      setAdvice((prevAdvice) => [...prevAdvice, '']);
+  const [treatmentProfile, setTreatmentProfile] = useState(null);
+  const [customer, setCustomer] = useState(null);
+  const [treatmentIn, setTreatmentIn] = useState({
+    procress: '',
+    result: '',
+    note: '',
+  });
+  const [showConfirmationComplete, setShowConfirmationComplete] = useState(false);
+  const [showConfirmationReappoint, setShowConfirmationReappoint] = useState(false);
+  const storedUserString = sessionStorage.getItem("token");
+  const user = JSON.parse(storedUserString);
+  const storedSlot = sessionStorage.getItem("SlotID");
+  const idslot = JSON.parse(storedSlot);
+
+  useEffect(() => {
+    const fetchTreatmentProfile = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/treatment_profile/details?id=${id}`); // Replace with your API endpoint
+        const profileData = response.data.treatmentProfile;
+        setTreatmentProfile(profileData);
+        const customerResponse = await axios.get(`http://localhost:3000/api/account/customer/details?id=${profileData.customerID}`);
+        const customerData = customerResponse.data.customer;
+        setCustomer(customerData);
+      } catch (error) {
+        console.error('Error fetching treatment profile:', error);
+      }
+    };
+
+    fetchTreatmentProfile();
+  }, [id]);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setTreatmentIn((prevTreatmentIn) => ({
+      ...prevTreatmentIn,
+      [name]: value,
+    }));
+  };
+
+  const handleComplete = () => {
+    if (treatmentIn.procress && treatmentIn.result && treatmentIn.note) {
+      setShowConfirmationComplete(true);
+    } else {
+      alert('Please fill in all fields before completing the treatment.');
     }
   };
 
-  // Hàm xử lý khi nhấn nút Complete
-  const handleComplete = () => {
-    console.log('Treatment Complete');
-    // Thực hiện các tác vụ khi nhấn nút Complete
+  const handleConfirmationCompleteConfirm = async () => {
+    try {
+      // Xây dựng đối tượng dữ liệu treatmentIn từ trạng thái hiện tại của component
+      const treatmentInData = {
+        idTreatmentProfile : treatmentProfile.id,
+        doctorID: user.id,
+        process: treatmentIn.procress,
+        result: treatmentIn.result,
+        note: treatmentIn.note,
+        // Các trường dữ liệu khác
+      };
+  
+      // Gửi yêu cầu POST đến API createTreatmentIn
+      await axios.post('http://localhost:3000/api/treatmentin/create', treatmentInData);
+      await axios.post(`http://localhost:3000/api/appointment/update?id=${idslot}`, { status: 'Done' });
+      sessionStorage.removeItem('SlotID');
+  
+      // Chuyển hướng trang về trang chủ
+      window.location.href = '/';
+    } catch (error) {
+      console.error('Error confirming treatment:', error);
+    }
+  };
+  
+
+  const handleConfirmationCompleteClose = () => {
+    setShowConfirmationComplete(false);
   };
 
-  // Hàm xử lý khi nhấn nút Re-appoint
   const handleReappoint = () => {
+    if (treatmentIn.procress && treatmentIn.result && treatmentIn.note) {
+      setShowConfirmationReappoint(true);
+    } else {
+      alert('Please fill in all fields before reappointing the treatment.');
+    }
+  };
+
+  const handleConfirmationReappointConfirm = () => {
     console.log('Re-appoint Treatment');
-    // Thực hiện các tác vụ khi nhấn nút Re-appoint
+    console.log('Treatment In:', treatmentIn);
+    // Perform reappoint treatment logic here
+    setShowConfirmationReappoint(false);
   };
 
-  // Hàm xử lý thay đổi giá trị của treatmentProgress
-  const handleProgressChange = (index, value) => {
-    setTreatmentProgress((prevProgress) => {
-      const updatedProgress = [...prevProgress];
-      updatedProgress[index] = value;
-      return updatedProgress;
-    });
+  const handleConfirmationReappointClose = () => {
+    setShowConfirmationReappoint(false);
   };
 
-  // Hàm xử lý thay đổi giá trị của results
-  const handleResultChange = (index, value) => {
-    setResults((prevResults) => {
-      const updatedResults = [...prevResults];
-      updatedResults[index] = value;
-      return updatedResults;
-    });
-  };
-
-  // Hàm xử lý thay đổi giá trị của advice
-  const handleAdviceChange = (index, value) => {
-    setAdvice((prevAdvice) => {
-      const updatedAdvice = [...prevAdvice];
-      updatedAdvice[index] = value;
-      return updatedAdvice;
-    });
-  };
+  if (!treatmentProfile) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="profile-page">
@@ -64,82 +112,56 @@ function CreateTreatmentIn() {
       <div className="profile-details">
         <div>
           <label>Name:</label>
-          <input type="text" value="John Doe" readOnly />
-        </div>
-        <div>
-          <label>CMND/CCCD</label>
-          <input type="text" value="123456" readOnly />
+          <input type="text" value={customer ? customer.fullname : ''} readOnly />
         </div>
         <div>
           <label>Gender:</label>
-          <input type="radio" name="gender" value="Male" checked />
-          <label for="male">Nam</label>
-          <input type="radio" name="gender" value="Female" />
-          <label for="female">Nữ</label>
-        </div>
-        <h3>Thông tin điều trị</h3>
+          <input type="text" value={customer ? customer.gender : ''} readOnly />
+          </div>
         <div>
-          <label>Ngày khám bệnh </label>
-          <input type="text" value="2023-06-28" readOnly />
+          <label>Ngày khám:</label>
+          <input type="text" value={new Date()} readOnly />
         </div>
+        {/* Display other customer information */}
       </div>
       {/* Hiển thị form nhập liệu */}
       <div className="input-form">
         <h3>Hồ sơ bệnh</h3>
         <div className="treatment-profile">
-          <input type="text" value="Trám răng" readOnly />
+          <input type="text" value={treatmentProfile.description} readOnly />
         </div>
         <div className="input-boxes">
-          {/* Hiển thị ô nhập liệu cho treatmentProgress */}
-          {treatmentProgress.map((progress, index) => (
-            <div className="input-box" key={index}>
-              <label>Quá trình điều trị:</label>
-              <input
-                type="text"
-                value={progress}
-                onChange={(e) => handleProgressChange(index, e.target.value)}
-                placeholder="Bệnh nhân bị ngố, ánh mắt thất thần, đôi bàn tay run rẩy"
-              />
-              {/* Nút thêm ô nhập liệu cho treatmentProgress */}
-              {index === treatmentProgress.length - 1 && (
-                <button onClick={() => handleAddInputBox('treatmentProgress')}>
-                  Thêm thông tin
-                </button>
-              )}
-            </div>
-          ))}
-          {/* Hiển thị ô nhập liệu cho results */}
-          {results.map((result, index) => (
-            <div className="input-box" key={index}>
-              <label>Kết quả:</label>
-              <input
-                type="text"
-                value={result}
-                onChange={(e) => handleResultChange(index, e.target.value)}
-                placeholder="Bệnh nhân bị ngố, ánh mắt thất thần, đôi bàn tay run rẩy"
-              />
-              {/* Nút thêm ô nhập liệu cho results */}
-              {index === results.length - 1 && (
-                <button onClick={() => handleAddInputBox('results')}>Thêm thông tin</button>
-              )}
-            </div>
-          ))}
-          {/* Hiển thị ô nhập liệu cho advice */}
-          {advice.map((adviceText, index) => (
-            <div className="input-box" key={index}>
-              <label>Lời khuyên:</label>
-              <input
-                type="text"
-                value={adviceText}
-                onChange={(e) => handleAdviceChange(index, e.target.value)}
-                placeholder="Cần giữ gìn sức khỏe răng miệng đánh răng trước và sau khi ăn "
-              />
-              {/* Nút thêm ô nhập liệu cho advice */}
-              {index === advice.length - 1 && (
-                <button onClick={() => handleAddInputBox('advice')}>Thêm thông tin</button>
-              )}
-            </div>
-          ))}
+          {/* Hiển thị ô nhập liệu cho treatmentIn */}
+          <div className="input-box">
+            <label>Quá trình điều trị:</label>
+            <input
+              type="text"
+              name="procress"
+              value={treatmentIn.process}
+              onChange={handleInputChange}
+              placeholder="Bệnh nhân bị ngố, ánh mắt thất thần, đôi bàn tay run rẩy"
+            />
+          </div>
+          <div className="input-box">
+            <label>Kết quả:</label>
+            <input
+              type="text"
+              name="result"
+              value={treatmentIn.result}
+              onChange={handleInputChange}
+              placeholder="Bệnh nhân bị ngố, ánh mắt thất thần, đôi bàn tay run rẩy"
+            />
+          </div>
+          <div className="input-box">
+            <label>Lời khuyên:</label>
+            <input
+              type="text"
+              name="note"
+              value={treatmentIn.note}
+              onChange={handleInputChange}
+              placeholder="Cần giữ gìn sức khỏe răng miệng đánh răng trước và sau khi ăn "
+            />
+          </div>
         </div>
       </div>
       {/* Hiển thị các nút hoàn thành và tái khám */}
@@ -151,6 +173,43 @@ function CreateTreatmentIn() {
           Đặt tái khám
         </button>
       </div>
+
+      {/* Xác nhận hoàn thành */}
+      {showConfirmationComplete && (
+        <div className="confirmation-modal">
+          <div className="confirmation-modal-content">
+            <h3>Xác nhận</h3>
+            <p>Bạn có chắc chắn muốn hoàn thành quá trình trị liệu?</p>
+            <div className="confirmation-modal-buttons">
+              <button className="confirm-button" onClick={handleConfirmationCompleteConfirm}>
+                Xác nhận
+              </button>
+              <button className="cancel-button" onClick={handleConfirmationCompleteClose}>
+                Đóng
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Xác nhận tái khám */}
+      {showConfirmationReappoint && (
+        <div className="confirmation-modal">
+          <div className="confirmation-modal-content">
+            <h3>Xác nhận</h3>
+            <p>Bạn có chắc chắn muốn đặt lại cuộc hẹn tái khám?</p>
+            <div className="confirmation-modal-buttons">
+              <button className="confirm-button" onClick={handleConfirmationReappointConfirm}>
+                Xác nhận
+              </button>
+              <button className="cancel-button" onClick={handleConfirmationReappointClose}>
+               
+                Đóng
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -32,6 +32,8 @@ import CustomerEditProfile from './BodyContent/customer/EditProfile/EditProfile'
 import CustomerViewTreatmentIn from './BodyContent/customer/ViewTreatmentIn/TreatmentProcess';
 import CustomerViewProfileTreatment from './BodyContent/customer/ViewProFileTreatment/MedicalRecord';
 import CustomerWriteAppointment from './BodyContent/customer/WriteAppointment/AppointmentForm';
+import CustormerViewBookingDetail from './BodyContent/customer/ViewBookingDetail/ViewBookingDetail';
+import CustormerViewTreatmentProfileList from './BodyContent/customer/treatmentprofilelist/treatmentprofilelist';
 
 import DoctorViewprofile from './BodyContent/Doctor/Viewprofile/Viewprofile';
 import DoctorUpdateprofile from './BodyContent/Doctor/UpdateProfile/UpdateProfile';
@@ -68,36 +70,40 @@ function App() {
         <Route path='/admin/createslot' element={<CreateSlot />} />
         <Route path='/admin/doctorlist' element={<DoctorList />} />
         <Route path='/admin/doctordetail/:doctorId' element={<DoctorDetail />} />
-        <Route path='/admin/doctor/update' element={<DoctorUpdate />} />
+        <Route path='/admin/doctor/update/:doctorId' element={<DoctorUpdate />} />
         <Route path='/admin/changepass' element={<ChangePass />} />
         <Route path='/admin/cancellation' element={<Cancellation />} />
 
 
         {/* custormer */}
-        <Route path='/customer/profile' element={<CustomerProfile />} />
-        <Route path='/customer/profile/edit' element={<CustomerEditProfile />} />
+        <Route path='/customer/profile/:id' element={<CustomerProfile />} />
+        <Route path='/customer/profile/edit/:id' element={<CustomerEditProfile />} />
         <Route path='/customer/treatmentprofile/treatment' element={<CustomerViewTreatmentIn />} />
-        <Route path='/customer/treatmentprofile' element={<CustomerViewProfileTreatment />} />
-        <Route path='/customer/slot/appointment' element={<CustomerWriteAppointment />} />
+        <Route path='/customer/treatmentprofile/:id' element={<CustomerViewProfileTreatment />} />
+        <Route path='/customer/treatmentprofilelist/:id' element={<CustormerViewTreatmentProfileList />} />
+        <Route path='/customer/slot/appointment/:id' element={<CustomerWriteAppointment />} />
+        <Route path='/customer/booking/:id' element={<CustomerViewBooking />} />
+        <Route path='/customer/booking/detail/:id' element={<CustormerViewBookingDetail />} />
+        <Route path='/customer/listdoctor' element={<CustomerViewDoctor />} />
+        <Route path='/customer/doctordetail/:id' element={<ViewDocDetail />} />
 
 
 
 
-        <Route path='/doctor/viewTreatmentProfile' element={<ViewTreatmentProfile />} />
+        <Route path='/doctor/viewTreatmentProfile/:id' element={<ViewTreatmentProfile />} />
         {/* doc/treatment/detail */}
         <Route path='/doctor/treatmentlist' element={<ViewTreatementList />} />
-        <Route path='/doctor/writetreatmentin' element={<CreateTreatementIn />} />
-        <Route path='/doctor/viewprofile' element={<DoctorViewprofile />} />
-        <Route path='/doctor/updateProfile' element={<DoctorUpdateprofile />} />
-        <Route path='/Doctorviewbooking' element={<Doctorviewbooking />} />
-        <Route path='/Doctor/viewpatientprofile' element={<DoctorViewPatientProfile />} />
+        <Route path='/doctor/writetreatmentin/:id' element={<CreateTreatementIn />} />
+        <Route path='/doctor/profile/:id' element={<DoctorViewprofile />} />
+        <Route path='/doctor/updateprofile/:id' element={<DoctorUpdateprofile />} />
+        <Route path='/Doctorviewbooking/:id' element={<Doctorviewbooking />} />
+        <Route path='/Doctor/viewpatientprofile/:id' element={<DoctorViewPatientProfile />} />
         <Route path='/Doctor/doctorbook' element={<DoctorTimeSlotPages />} />
+    
 
 
         {/* customer */}
-        <Route path='/5' element={<CustomerViewBooking />} />
-        <Route path='/6' element={<CustomerViewDoctor />} />
-        <Route path='/7' element={<ViewDocDetail />} />
+        
         
 
       </Routes>

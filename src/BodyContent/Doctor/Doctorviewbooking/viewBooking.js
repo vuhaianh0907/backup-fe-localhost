@@ -1,211 +1,78 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import axios from 'axios';
 import './viewBooking.css';
 
 const ViewBooking = () => {
-  const [selectedBooking, setSelectedBooking] = useState(null);
-  const [currentPageToday, setCurrentPageToday] = useState(1); // Trang hiện tại cho lịch khám hôm nay
-  const [currentPageFuture, setCurrentPageFuture] = useState(1); // Trang hiện tại cho lịch khám tương lai
-  const bookingsPerPage = 3; // Số phiếu khám hiển thị trên mỗi trang
+  const { id } = useParams();
+  const [appointments, setAppointments] = useState([]);
+  const [todayAppointments, setTodayAppointments] = useState([]);
+  const [futureAppointments, setFutureAppointments] = useState([]);
+  const [currentPageToday, setCurrentPageToday] = useState(1);
+  const [currentPageFuture, setCurrentPageFuture] = useState(1);
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const appointmentsPerPage = 3;
+  const dateNow = new Date().toISOString();
 
-  const currentDate = new Date().toLocaleDateString('vi-VN', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
-  });
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/appointment/appointmentdoctor?doctorID=${id}`);
+        const appointmentsData = response.data.appointments;
 
-  const bookingList = [
-    {
-      id: 1,
-      patientName: 'Nguyễn Văn A',
-      reason: 'Đau bụng',
-      date: currentDate,
-      time: '08:00',
-      status: 'Đang chờ',
-    },
-    {
-      id: 2,
-      patientName: 'Trần Thị B',
-      reason: 'Sốt cao',
-      date: currentDate,
-      time: '09:30',
-      status: 'Đang chờ',
-    },
-    {
-      id: 3,
-      patientName: 'Lê Văn C',
-      reason: 'Đau họng',
-      date: currentDate,
-      time: '11:15',
-      status: 'Đã hủy',
-    },
-    {
-      id: 4,
-      patientName: 'Phạm Thị D',
-      reason: 'Mất ngủ',
-      date: currentDate,
-      time: '14:00',
-      status: 'Đang chờ',
-    },
-    {
-      id: 5,
-      patientName: 'Nguyễn Thanh E',
-      reason: 'Đau lưng',
-      date: currentDate,
-      time: '15:45',
-      status: 'Đang chờ',
-    },
-    {
-      id: 6,
-      patientName: 'Trần Văn F',
-      reason: 'Sổ mũi',
-      date: '02/07/2023',
-      time: '10:30',
-      status: 'Đang chờ',
-    },
-    {
-      id: 7,
-      patientName: 'Lê Thị G',
-      reason: 'Đau răng',
-      date: '02/07/2023',
-      time: '12:45',
-      status: 'Đang chờ',
-    },
-    {
-      id: 8,
-      patientName: 'Nguyễn Văn H',
-      reason: 'Sưng nước mắt',
-      date: '02/07/2023',
-      time: '16:30',
-      status: 'Đang chờ',
-    },
-    {
-      id: 9,
-      patientName: 'Phạm Thị I',
-      reason: 'Đau khớp',
-      date: '02/07/2023',
-      time: '17:45',
-      status: 'Đang chờ',
-    },
-    {
-      id: 10,
-      patientName: 'Trần Văn J',
-      reason: 'Buồn nôn',
-      date: '02/07/2023',
-      time: '18:30',
-      status: 'Đang chờ',
-    },
-    {
-      id: 11,
-      patientName: 'Hoàng Thị K',
-      reason: 'Mệt mỏi',
-      date: '03/07/2023',
-      time: '09:00',
-      status: 'Đang chờ',
-    },
-    {
-      id: 12,
-      patientName: 'Vũ Văn L',
-      reason: 'Chảy máu chân',
-      date: '03/07/2023',
-      time: '11:30',
-      status: 'Đang chờ',
-    },
-    {
-      id: 13,
-      patientName: 'Nguyễn Thị M',
-      reason: 'Đau đầu',
-      date: '03/07/2023',
-      time: '13:45',
-      status: 'Đang chờ',
-    },
-    {
-      id: 14,
-      patientName: 'Trần Văn N',
-      reason: 'Sổ mũi',
-      date: '03/07/2023',
-      time: '16:15',
-      status: 'Đang chờ',
-    },
-    {
-      id: 15,
-      patientName: 'Lê Thị O',
-      reason: 'Mất ngủ',
-      date: '03/07/2023',
-      time: '18:30',
-      status: 'Đang chờ',
-    },
-    {
-      id: 16,
-      patientName: 'Nguyễn Văn P',
-      reason: 'Đau cổ',
-      date: '04/07/2023',
-      time: '10:30',
-      status: 'Đang chờ',
-    },
-    {
-      id: 17,
-      patientName: 'Trần Thị Q',
-      reason: 'Đau bụng',
-      date: '04/07/2023',
-      time: '12:45',
-      status: 'Đang chờ',
-    },
-    {
-      id: 18,
-      patientName: 'Lê Văn R',
-      reason: 'Đau răng',
-      date: '04/07/2023',
-      time: '15:00',
-      status: 'Đang chờ',
-    },
-    {
-      id: 19,
-      patientName: 'Phạm Thị S',
-      reason: 'Sưng mắt',
-      date: '04/07/2023',
-      time: '17:15',
-      status: 'Đang chờ',
-    },
-    {
-      id: 20,
-      patientName: 'Nguyễn Thanh T',
-      reason: 'Đau lưng',
-      date: '04/07/2023',
-      time: '19:30',
-      status: 'Đang chờ',
-    },
-  ];
-  
+        // Lấy thông tin chi tiết của customer và slot cho từng appointment
+        const appointmentsWithDetails = await Promise.all(
+          appointmentsData.map(async (appointment) => {
+            const customerId = appointment.customerID;
+            const slotId = appointment.slotID;
 
-  // Tính toán thông tin phân trang cho lịch khám hôm nay
-  const indexOfLastBookingToday = currentPageToday * bookingsPerPage;
-  const indexOfFirstBookingToday = indexOfLastBookingToday - bookingsPerPage;
-  const todayBookings = bookingList.filter((booking) => booking.date === currentDate);
-  const totalTodayPages = Math.ceil(todayBookings.length / bookingsPerPage);
-  const displayedTodayBookings = todayBookings.slice(
-    indexOfFirstBookingToday,
-    indexOfLastBookingToday
-  );
+            // Lấy thông tin customer
+            const customerResponse = await axios.get(`http://localhost:3000/api/account/customer/details?id=${customerId}`);
+            const customerData = customerResponse.data.customer;
 
-  // Tính toán thông tin phân trang cho lịch khám tương lai
-  const indexOfLastBookingFuture = currentPageFuture * bookingsPerPage;
-  const indexOfFirstBookingFuture = indexOfLastBookingFuture - bookingsPerPage;
-  const futureBookings = bookingList.filter((booking) => booking.date > currentDate);
-  const totalFuturePages = Math.ceil(futureBookings.length / bookingsPerPage);
-  const displayedFutureBookings = futureBookings.slice(
-    indexOfFirstBookingFuture,
-    indexOfLastBookingFuture
-  );
+            // Lấy thông tin slot
+            const slotResponse = await axios.get(`http://localhost:3000/api/slot/details?id=${slotId}`);
+            const slotData = slotResponse.data.slot;
 
-  const handleViewBooking = (booking) => {
-    setSelectedBooking(booking);
+            // Kết hợp thông tin appointment, customer và slot thành một object mới
+            return {
+              ...appointment,
+              customer: customerData,
+              slot: slotData,
+            };
+          })
+        );
+
+        setAppointments(appointmentsWithDetails);
+      } catch (error) {
+        console.error('Error fetching appointments:', error);
+      }
+    };
+
+    fetchAppointments();
+  }, [id]);
+
+  useEffect(() => {
+    const currentDate = new Date().toISOString().split('T')[0]; // Lấy ngày hiện tại
+
+    const todayAppointmentsData = appointments.filter((appointment) => appointment.slot.date === currentDate);
+    const futureAppointmentsData = appointments.filter((appointment) => appointment.slot.date > currentDate);
+
+    setTodayAppointments(todayAppointmentsData);
+    setFutureAppointments(futureAppointmentsData);
+  }, [appointments]);
+
+  const handleViewAppointment = (appointment) => {
+    setSelectedAppointment(appointment);
   };
 
   const handleCloseProfile = () => {
-    setSelectedBooking(null);
+    setSelectedAppointment(null);
   };
 
   const handleTodayPageChange = (pageNumber) => {
+    console.log(pageNumber);
     setCurrentPageToday(pageNumber);
   };
 
@@ -213,21 +80,142 @@ const ViewBooking = () => {
     setCurrentPageFuture(pageNumber);
   };
 
-  const renderBookingList = (bookings) => {
+  const handleCancelAppointment = async (appointmentId) => {
+    setSelectedAppointment(appointments.find((appointment) => appointment.id === appointmentId));
+    setShowConfirmation(true);
+  };
+
+  const handleRequestCancellation = async (appointmentId) => {
+    setSelectedAppointment(appointments.find((appointment) => appointment.id === appointmentId));
+    setShowConfirmation(true);
+  };
+
+  const handleConfirmCancelAppointment = async () => {
+    try {
+      // Gửi yêu cầu hủy lịch hẹn
+      await axios.post(`http://localhost:3000/api/appointment/update?id=${selectedAppointment.id}`, { status: 'Doctor Cancelled' });
+      // Cập nhật lại danh sách lịch hẹn
+      const updatedAppointments = appointments.map((appointment) => {
+        if (appointment.id === selectedAppointment.id) {
+          return {
+            ...appointment,
+            status: 'Doctor Cancelled',
+          };
+        }
+        return appointment;
+      });
+      setAppointments(updatedAppointments);
+      setSelectedAppointment(null);
+      setShowConfirmation(false);
+    } catch (error) {
+      console.error('Error cancelling appointment:', error);
+    }
+  };
+
+  const handleConfirmRequestCancellation = async () => {
+    try {
+      // Gửi yêu cầu hủy lịch hẹn
+      await axios.post(`http://localhost:3000/api/appointment/update?id=${selectedAppointment.id}`, { status: 'Cancellation Requested' });
+      // Cập nhật lại danh sách lịch hẹn
+      const updatedAppointments = appointments.map((appointment) => {
+        if (appointment.id === selectedAppointment.id) {
+          return {
+            ...appointment,
+            status: 'Cancellation Requested',
+          };
+        }
+        return appointment;
+      });
+      setAppointments(updatedAppointments);
+      setSelectedAppointment(null);
+      setShowConfirmation(false);
+    } catch (error) {
+      console.error('Error requesting cancellation:', error);
+    }
+  };
+  const StoreIDSlot = (slotID) => {
+    const data = JSON.stringify(slotID);
+    sessionStorage.setItem('SlotID', data);
+  };
+
+  const handleCancelConfirmation = () => {
+    setSelectedAppointment(null);
+    setShowConfirmation(false);
+  };
+  
+
+
+  const renderAppointmentListFuture = (appointments) => {
+    const startIndex = (currentPageFuture - 1) * appointmentsPerPage;
+    const endIndex = currentPageFuture * appointmentsPerPage;
+    const currentAppointments = appointments.slice(startIndex, endIndex);
+    console.log(appointments);
     return (
       <>
-        {bookings.map((booking) => (
-          <li className="booking-item" key={booking.id}>
-            <button className="booking-button" onClick={() => handleViewBooking(booking)}>
+
+        {currentAppointments.map((appointment) => (
+          <li className="appointment-item" key={appointment.id}>
+            <button className="appointment-button" onClick={() => handleViewAppointment(appointment)}>
               Xem phiếu khám
             </button>
-            <span className="booking-info">Họ tên: {booking.patientName}</span>
-            <span className="booking-info">Lí do đến khám: {booking.reason}</span>
-            <span className="booking-info">Ngày khám: {booking.date}</span>
-            <span className="booking-info">Giờ khám: {booking.time}</span>
-            <span className="booking-info">Trạng thái: {booking.status}</span>
-            {booking.status === 'Đang chờ' && (
-              <button className="cancel-button">Yêu cầu hủy</button>
+            <span className="appointment-info">Họ tên: {appointment.customer.fullname}</span>
+            <span className="appointment-info">Lí do đến khám: {appointment.reason}</span>
+            <span className="appointment-info">Ngày khám: {appointment.slot.date}</span>
+            <span className="appointment-info">Giờ khám: {appointment.slot.time}</span>
+            <span className="appointment-info">Trạng thái: {appointment.status}</span>
+            {appointment.status === 'confirmed' && (
+              <>
+                {appointment.slot.date === new Date().toISOString().split('T')[0] ? (
+                  <button className="cancel-button" onClick={() => handleRequestCancellation(appointment.id)}>
+                    Yêu cầu hủy
+                  </button>
+                ) : (
+                  <button className="cancel-button" onClick={() => handleCancelAppointment(appointment.id)}>
+                    Hủy
+                  </button>
+                )}
+              </>
+            )}
+          </li>
+        ))}
+      </>
+    );
+  };
+  const renderAppointmentListToday = (appointments) => {
+    const startIndex = (currentPageToday - 1) * appointmentsPerPage;
+    const endIndex = currentPageToday * appointmentsPerPage;
+    const currentAppointments = appointments.slice(startIndex, endIndex);
+    console.log(appointments);
+    return (
+      <>
+
+        {currentAppointments.map((appointment) => (
+          <li className="appointment-item" key={appointment.id}>
+            <button className="appointment-button" onClick={() => handleViewAppointment(appointment)}>
+              Xem phiếu khám
+            </button>
+            <span className="appointment-info">Họ tên: {appointment.customer.fullname}</span>
+            <span className="appointment-info">Lí do đến khám: {appointment.reason}</span>
+            <span className="appointment-info">Ngày khám: {appointment.slot.date}</span>
+            <span className="appointment-info">Giờ khám: {appointment.slot.time}</span>
+            <span className="appointment-info">Trạng thái: {appointment.status}</span>
+            {appointment.status === 'confirmed' && (
+              <>
+                {appointment.slot.date === new Date().toISOString().split('T')[0] ? (
+                  <div>
+                    <button className="cancel-button" onClick={() => handleRequestCancellation(appointment.id)}>
+                      Yêu cầu hủy
+                    </button>
+
+                  </div>
+
+
+                ) : (
+                  <button className="cancel-button" onClick={() => handleCancelAppointment(appointment.id)}>
+                    Hủy
+                  </button>
+                )}
+              </>
             )}
           </li>
         ))}
@@ -256,42 +244,103 @@ const ViewBooking = () => {
     );
   };
 
+  // Calculate total pages for today's appointments and future appointments
+  const totalTodayPages = Math.ceil(todayAppointments.length / appointmentsPerPage);
+  const totalFuturePages = Math.ceil(futureAppointments.length / appointmentsPerPage);
+
   return (
     <div className="view-booking-container">
-      <h2 className="booking-heading">Lịch khám hôm nay</h2>
-      {displayedTodayBookings.length > 0 ? (
-        <>
-          <ul className="booking-list">{renderBookingList(displayedTodayBookings)}</ul>
-          {totalTodayPages > 1 && renderPagination(totalTodayPages, currentPageToday, handleTodayPageChange)}
-        </>
-      ) : (
-        <p className="no-booking-message">Không có lịch khám hôm nay.</p>
-      )}
+      <h2 className="view-booking-heading">Danh sách lịch hẹn</h2>
+      <div className="appointments-section">
+        <h3 className="appointments-heading">Hôm nay {dateNow}</h3>
+        {todayAppointments.length > 0 ? (
+          <>
+            <ul className="appointments-list">{renderAppointmentListToday(todayAppointments)}</ul>
+            {renderPagination(totalTodayPages, currentPageToday, handleTodayPageChange)}
+          </>
+        ) : (
+          <p className="no-appointments-message">Không có lịch hẹn nào hôm nay.</p>
+        )}
+      </div>
+      <div className="appointments-section">
+        <h3 className="appointments-heading">Tương lai</h3>
+        {futureAppointments.length > 0 ? (
+          <>
+            <ul className="appointments-list">{renderAppointmentListFuture(futureAppointments)}</ul>
+            {renderPagination(totalFuturePages, currentPageFuture, handleFuturePageChange)}
+          </>
+        ) : (
+          <p className="no-appointments-message">Không có lịch hẹn trong tương lai.</p>
+        )}
+      </div>
+      {selectedAppointment && (
+        <div className="appointment-profile">
+          <div className="profile-info">
+            <span className="profile-label">Họ tên:</span>
+            <span className="profile-value">{selectedAppointment.customer.name}</span>
+          </div>
+          <div className="profile-info">
+            <span className="profile-label">Ngày sinh:</span>
+            <span className="profile-value">{selectedAppointment.customer.dateOfBirth}</span>
+          </div>
+          <div className="profile-info">
+            <span className="profile-label">Giới tính:</span>
+            <span className="profile-value">{selectedAppointment.customer.gender}</span>
+          </div>
+          <div className="profile-info">
+            <span className="profile-label">Lí do đến khám:</span>
+            <span className="profile-value">{selectedAppointment.reason}</span>
+          </div>
+          <div className="profile-info">
+            <span className="profile-label">Ngày khám:</span>
+            <span className="profile-value">{selectedAppointment.slot.date}</span>
+          </div>
+          <div className="profile-info">
+            <span className="profile-label">Giờ khám:</span>
+            <span className="profile-value">{selectedAppointment.slot.time}</span>
+          </div>
+          <div className="profile-info">
+            <span className="profile-label">Trạng thái:</span>
+            <span className="profile-value">{selectedAppointment.status}</span>
+          </div>
+          {selectedAppointment.status === 'confirmed' && (
+            <>
+              {selectedAppointment.slot.date === new Date().toISOString().split('T')[0] ? (
+                <div>
+                  <button className="cancel-button">
+                    <Link to={`/Doctor/viewpatientprofile/${selectedAppointment.customer.id}`} className="view-profile-link" onClick={StoreIDSlot(selectedAppointment.id)}>
+                      Xem hồ sơ
+                    </Link>
+                  </button>
 
-      <h2 className="booking-heading">Lịch khám tương lai</h2>
-      {displayedFutureBookings.length > 0 ? (
-        <>
-          <ul className="booking-list">{renderBookingList(displayedFutureBookings)}</ul>
-          {totalFuturePages > 1 && renderPagination(totalFuturePages, currentPageFuture, handleFuturePageChange)}
-        </>
-      ) : (
-        <p className="no-booking-message">Không có lịch khám tương lai.</p>
-      )}
+                  <button className="cancel-button" onClick={handleConfirmRequestCancellation}>
+                    Yêu cầu hủy
+                  </button>
+                </div>
 
-      {selectedBooking && (
-        <div className="selected-booking">
+              ) : (
+                <button className="cancel-button" onClick={handleConfirmCancelAppointment}>
+                  Hủy
+                </button>
+              )}
+            </>
+          )}
           <button className="close-button" onClick={handleCloseProfile}>
             Đóng
           </button>
-          <h2 className="selected-booking-heading">Phiếu khám đang được xem:</h2>
-          <span className="booking-info">Họ tên: {selectedBooking.patientName}</span>
-          <span className="booking-info">Lí do đến khám: {selectedBooking.reason}</span>
-          <span className="booking-info">Ngày khám: {selectedBooking.date}</span>
-          <span className="booking-info">Giờ khám: {selectedBooking.time}</span>
-          <span className="booking-info">Trạng thái: {selectedBooking.status}</span>
-          {currentDate === selectedBooking.date && (
-            <button className="view-profile-button">Xem hồ sơ</button>
-          )}
+        </div>
+      )}
+      {showConfirmation && (
+        <div className="confirmation-dialog">
+          <p className="confirmation-message">Bạn có chắc chắn muốn hủy lịch hẹn này?</p>
+          <div className="confirmation-buttons">
+            <button className="confirmation-button" onClick={handleConfirmCancelAppointment}>
+              Xác nhận
+            </button>
+            <button className="confirmation-button" onClick={handleCancelConfirmation}>
+              Hủy
+            </button>
+          </div>
         </div>
       )}
     </div>

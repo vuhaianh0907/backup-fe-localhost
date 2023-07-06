@@ -1,40 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './EditProfile.css';
-
-const user = {
-  fullname: 'John Doe',
-  email: 'johndoe@example.com',
-  address: '123 Street, City',
-  phone: '1234567890',
-  gender: 'Male',
-  createdAt: '2022-01-01',
-  updatedAt: '2022-02-01',
-  role: 'customer',
-  balance: 1000,
-};
+import axios from 'axios';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 
 const EditProfile = () => {
-  const [fullname, setFullname] = useState(user.fullname);
-  const [email, setEmail] = useState(user.email);
-  const [address, setAddress] = useState(user.address);
-  const [phone, setPhone] = useState(user.phone);
-  const [gender, setGender] = useState(user.gender);
-  const [showConfirmation, setShowConfirmation] = useState(false);
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [fullname, setFullname] = useState('');
+  const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
+  const [phone, setPhone] = useState('');
+  const [gender, setGender] = useState('');
 
-  const handleFormSubmit = (e) => {
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`);
+        const userData = response.data.customer;
+        setUser(userData);
+        setFullname(userData.fullname);
+        setEmail(userData.email);
+        setAddress(userData.address);
+        setPhone(userData.phone);
+        setGender(userData.gender);
+      } catch (error) {
+        console.log('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, [id]);
+
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    setShowConfirmation(true);
+    try {
+      const updatedUser = {
+        ...user,
+        fullname,
+        email,
+        address,
+        phone,
+        gender,
+      };
+      await axios.post(`http://localhost:3000/api/account/customer/update?id=${id}`, updatedUser);
+      console.log('User information updated');
+      navigate(`/customer/profile/${id}`);
+    } catch (error) {
+      console.log('Error updating user information:', error);
+    }
   };
 
-  const handleConfirmationClose = () => {
-    setShowConfirmation(false);
-  };
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
-  const handleConfirmationSave = () => {
-    // Xử lý lưu thông tin
-    console.log('Thông tin đã được lưu');
-    setShowConfirmation(false);
-  };
+  const isSaveDisabled = gender === '';
 
   return (
     <div className="edit-profile">
@@ -88,51 +109,13 @@ const EditProfile = () => {
             value={gender}
             onChange={(e) => setGender(e.target.value)}
           >
-            <option value="">Chọn giới tính</option>
+            <option value="order">Chọn giới tính</option>
             <option value="male">Nam</option>
             <option value="female">Nữ</option>
           </select>
         </div>
-        <button type="submit" className="edit-profile__button">Lưu thông tin</button>
+        <button type="submit" className="edit-profile__button" disabled={isSaveDisabled}>Lưu thông tin</button>
       </form>
-
-      {showConfirmation && (
-        <div className="edit-profile__confirmation">
-          <h3 className="edit-profile__confirmation-title">Xác nhận lưu thông tin</h3>
-          <table className="edit-profile__confirmation-table">
-            <tbody>
-              <tr>
-                <td>Họ và tên:</td>
-                <td>{fullname}</td>
-              </tr>
-              <tr>
-                <td>Email:</td>
-                <td>{email}</td>
-              </tr>
-              <tr>
-                <td>Địa chỉ:</td>
-                <td>{address}</td>
-              </tr>
-              <tr>
-                <td>Điện thoại:</td>
-                <td>{phone}</td>
-              </tr>
-              <tr>
-                <td>Giới tính:</td>
-                <td>{gender}</td>
-              </tr>
-            </tbody>
-          </table>
-          <div className="edit-profile__confirmation-buttons">
-            <button className="edit-profile__confirmation-button edit-profile__confirmation-button--save" onClick={handleConfirmationSave}>
-              Xác nhận
-            </button>
-            <button className="edit-profile__confirmation-button edit-profile__confirmation-button--cancel" onClick={handleConfirmationClose}>
-              Hủy
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

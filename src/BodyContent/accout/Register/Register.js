@@ -28,7 +28,7 @@ export default function Register() {
         };
 
         // Gửi yêu cầu POST đến API
-        axios.post('https://dencelclinic.onrender.com/api/auth/register', data)
+        axios.post('http://localhost:3000/api/auth/register', data)
             .then((response) => {
                 // Xử lý phản hồi từ API thành công
                 console.log(response.data);

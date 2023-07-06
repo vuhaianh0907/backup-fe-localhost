@@ -1,74 +1,110 @@
 import React, { useState } from 'react';
 import './CustomerViewDoctor.css';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+
+const timeOptions = [
+  { label: '8h - 9h' },
+  { label: '9h - 10h' },
+  { label: '10h - 11h' },
+  { label: '13h - 14h' },
+  { label: '15h - 16h' }
+];
 
 function CustomerViewDoctor() {
-  const [doctors, setDoctors] = useState([
-    {
-      id: 1,
-      name: 'Bác sĩ A',
-      generalInfo: 'Thông tin chung về bác sĩ A',
-      location: 'Địa chỉ A',
-    },
-    {
-      id: 2,
-      name: 'Bác sĩ B',
-      generalInfo: 'Thông tin chung về bác sĩ B',
-      location: 'Địa chỉ B',
-    },
-    {
-      id: 3,
-      name: 'Bác sĩ C',
-      generalInfo: 'Thông tin chung về bác sĩ C',
-      location: 'Địa chỉ C',
-    },
-  ]);
-
+  const [doctors, setDoctors] = useState([]);
+  const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
+  const [isConfirmationEnabled, setIsConfirmationEnabled] = useState(false);
 
-  const filteredDoctors = doctors.filter((doctor) => {
-    if (!selectedTime) {
-      return true;
-    }
-    // Update the condition based on your actual data
-    return selectedTime === 'morning' ? doctor.id % 2 === 0 : doctor.id % 2 !== 0;
-  });
+  const handleDateChange = (e) => {
+    const selectedDate = e.target.value;
+    const date = new Date(selectedDate);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
 
-  const handleTimeChange = (time) => {
+    setSelectedDate(selectedDate);
+    setIsConfirmationEnabled(formattedDate !== '' && selectedTime !== '');
+  };
+
+  const handleTimeSelection = (time) => {
     setSelectedTime(time);
+    setIsConfirmationEnabled(selectedDate !== '' && time !== '');
+  };
+
+  const handleConfirmation = () => {
+    if (isConfirmationEnabled) {
+      // Send POST request to the API
+      axios
+        .post('http://localhost:3000/api/slot/getDoctorByTime', {
+          selectedDate,
+          selectedTime,
+        })
+        .then((response) => {
+          // Handle the response from the API
+          setDoctors(response.data.doctors);
+        })
+        .catch((error) => {
+          // Handle any error that occurs during the request
+          console.error('API Error:', error);
+        });
+    }
   };
 
   return (
     <div className="customer-view-doctor">
       <div className="time-selection">
         <h2>Chọn thời gian trong ngày</h2>
-        <div className="time-options">
-          <button
-            className={`time-option ${selectedTime === 'morning' ? 'active' : ''}`}
-            onClick={() => handleTimeChange('morning')}
-          >
-            Buổi sáng
-          </button>
-          <button
-            className={`time-option ${selectedTime === 'afternoon' ? 'active' : ''}`}
-            onClick={() => handleTimeChange('afternoon')}
-          >
-            Buổi chiều
-          </button>
+        <div className="date-input">
+          <label htmlFor="date">Ngày:</label>
+          <input
+            type="date"
+            id="date"
+            value={selectedDate}
+            onChange={handleDateChange}
+          />
         </div>
+        <div className="time-options">
+          {timeOptions.map((option) => (
+            <button
+              key={option.label}
+              className={`time-option${selectedTime === option.label ? ' active' : ''}`}
+              onClick={() => handleTimeSelection(option.label)}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+        <button
+          className="confirmation-button"
+          disabled={!isConfirmationEnabled}
+          onClick={handleConfirmation}
+        >
+          Xác nhận
+        </button>
       </div>
+
       <div className="doctor-list">
-        <h2>Danh sách bác sĩ</h2>
-        {filteredDoctors.length > 0 ? (
-          filteredDoctors.map((doctor) => (
-            <div className="doctor-item" key={doctor.id}>
-              <h3>{doctor.name}</h3>
-              <p>{doctor.generalInfo}</p>
-              <p>Địa chỉ: {doctor.location}</p>
-            </div>
-          ))
-        ) : (
-          <p>Không có bác sĩ phù hợp.</p>
-        )}
+        <h3>Danh sách bác sĩ:</h3>
+        <ul>
+          {doctors.map((doctor) => (
+            <li key={doctor.id}>
+              <div className="doctor-info">
+                <div className="doctor-item__avatar">
+                  <img src={doctor.avatar} alt="Doctor Avatar" />
+                </div>
+                <div className="doctor-name">{doctor.fullname}</div>
+                <div className="doctor-action">
+                  <Link to={`/customer/doctordetail/${doctor.id}`} className="doctor-link">
+                    Chọn bác sĩ
+                  </Link>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

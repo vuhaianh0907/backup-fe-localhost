@@ -1,87 +1,120 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import './ViewDocDetail.css';
+import axios from 'axios';
 
 export default function ViewDocDetail() {
-    // Dummy data for the doctor's profile
-    const profile = {
-        profilePicture: 'path_to_image',
-        name: 'Nguyễn Văn Bác Sĩ',
-        currentDate: '2023-06-28',
-        workingSlots: [
-            { time: '08:00', available: true },
-            { time: '09:00', available: false },
-            { time: '10:00', available: true },
-            { time: '11:00', available: true },
-            { time: '13:00', available: false },
-            { time: '14:00', available: true },
-            { time: '15:00', available: false },
-            { time: '16:00', available: true },
-        ],
-        information: {
-            certificates: 'Certificate 1, Certificate 2',
-            training: 'Training 1, Training 2',
-            experiences: 'Experience 1, Experience 2',
-            specialization: 'Răng hàm mặt',
-        },
-    };
+  const { id } = useParams();
+  const [doctor, setDoctor] = useState(null);
+  const [slots, setSlots] = useState([]);
+  const [selectedDate, setSelectedDate] = useState('');
 
-    const [selectedDate, setSelectedDate] = useState(profile.currentDate);
+  useEffect(() => {
+    // Send GET request to fetch doctor details
+    axios
+      .get(`http://localhost:3000/api/account/doctor/details?id=${id}`)
+      .then((response) => {
+        // Handle the response from the API
+        setDoctor(response.data.doctor);
+      })
+      .catch((error) => {
+        // Handle any error that occurs during the request
+        console.error('API Error:', error);
+      });
 
-    const handleDateChange = (event) => {
-        setSelectedDate(event.target.value);
-    };
+    // Send GET request to fetch slots for the doctor
+    axios
+      .get(`http://localhost:3000/api/slot/getSlotbyDoctor?doctorId=${id}`)
+      .then((response) => {
+        // Handle the response from the API
+        const filteredSlots = response.data.slots.filter((slot) => slot.status === 'available');
+        setSlots(filteredSlots);
+      })
+      .catch((error) => {
+        // Handle any error that occurs during the request
+        console.error('API Error:', error);
+      });
+  }, [id]);
 
-    return (
-        <div className="container">
-            <div className='line-1'>
-                <div className="doctor-profile">
-                    <img src={profile.profilePicture} alt="Doctor Profile" className="profile-picture" />
-                    <h2 className="doctor-name">{profile.name}</h2>
-                    <div className="date-selection">
-                        <label htmlFor="date">Chọn ngày:</label>
-                        <input type="date" id="date" value={selectedDate} onChange={handleDateChange} />
-                    </div>
-                    <h3 className="selected-date">Ngày: {selectedDate}</h3>
-                </div>
+  useEffect(() => {
+    // Set default value for selectedDate as tomorrow
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const formattedDate = tomorrow.toISOString().split('T')[0];
+    setSelectedDate(formattedDate);
+  }, []);
 
-                <div className="working-slots">
-                    <div className="date-selection">
-                        <label htmlFor="date">Chọn ngày:</label>
-                        <input type="date" id="date" value={selectedDate} onChange={handleDateChange} />
-                    </div>
-                    <h3 className="selected-date">Ngày: {selectedDate}</h3>
-                    <h3>Khung giờ làm việc</h3>
-                    <ul className="slots-list">
-                        {profile.workingSlots.map((slot, index) => (
-                            <li key={index} className={`slot ${slot.available ? '' : 'unavailable'}`}>
-                                {slot.time}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+  const handleDateChange = (event) => {
+    const selectedDateValue = event.target.value;
+    const currentDate = new Date().toISOString().split('T')[0];
+
+    if (selectedDateValue >= currentDate) {
+      setSelectedDate(selectedDateValue);
+    } else {
+      console.log("Không thể chọn lịch quá khứ");
+    }
+  };
+
+  const handleSlotClick = (slotId) => {
+    // Xử lý khi người dùng nhấp vào lịch hẹn
+    console.log("Selected slot:", slotId);
+  };
+
+  const filteredSlots = selectedDate
+    ? slots.filter((slot) => slot.date === selectedDate)
+    : slots;
+
+  return (
+    <div className="container">
+      {doctor ? (
+        <div className="doctor-profile">
+          <img src={doctor.avatar} alt="Doctor Profile" className="profile-picture" />
+          <h2 className="doctor-name">{doctor.fullname}</h2>
+          <div className="doctor-information">
+            <h3>Thông tin bác sĩ</h3>
+            <div className="info-item">
+              <h4>Chứng chỉ:</h4>
+              <p>{doctor.qualification}</p>
             </div>
-
-
-            <br />
-            <div className="doctor-information">
-                <h3>Thông tin bác sĩ</h3>
-                <div className="info-item">
-                    <h4>Chứng chỉ:</h4>
-                    <p>{profile.information.certificates}</p>
-                </div>
-                <div className="info-item">
-                    <h4>Đào tạo:</h4>
-                    <p>{profile.information.training}</p>
-                </div>
-                <div className="info-item">
-                    <h4>Kinh nghiệm:</h4>
-                    <p>{profile.information.experiences}</p>
-                </div>
-                <div className="info-item">
-                    <h4>Chuyên ngành:</h4>
-                    <p>{profile.information.specialization}</p>
-                </div>
+            <div className="info-item">
+              <h4>Kinh nghiệm:</h4>
+              <p>{doctor.experience}</p>
             </div>
+          </div>
         </div>
-    );
+      ) : (
+        <p>Loading...</p>
+      )}
+
+      <div className="filter-container">
+        <label htmlFor="selectedDate">Chọn ngày:</label>
+        <input
+          type="date"
+          id="selectedDate"
+          value={selectedDate}
+          onChange={handleDateChange}
+          min={new Date().toISOString().split('T')[0]}
+        />
+      </div>
+
+      <div className="slots-container">
+        <h3>Các lịch hẹn của bác sĩ</h3>
+        {filteredSlots.length > 0 ? (
+          <ul className="slots-list">
+            {filteredSlots.map((slot) => (
+              <li key={slot.id}>
+                <Link to={`/customer/slot/appointment/${slot.id}`}>
+                  <button className="slot-button" onClick={() => handleSlotClick(slot.id)}>
+                    {slot.time}
+                  </button>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Không có lịch hẹn khả dụng</p>
+        )}
+      </div>
+    </div>
+  );
 }

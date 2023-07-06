@@ -8,6 +8,9 @@ import './header.css';
 export default function Navigation() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isLoggedIn = sessionStorage.getItem('token') !== null;
+  const storedUserString = sessionStorage.getItem("token");
+  const user = JSON.parse(storedUserString);
+
 
   const handleLogout = () => {
     sessionStorage.removeItem('token');
@@ -20,6 +23,7 @@ export default function Navigation() {
   };
 
   return (
+
     <div className="nav">
       <nav>
         <ul className="nav-list">
@@ -28,13 +32,38 @@ export default function Navigation() {
               <img src={logo} className="App-logo" alt="logo" />
             </Link>
           </li>
-          <li className="nav-list--element">
-            <Link to="/admin/doctorlist">List Doctor</Link>
-          </li>
-          <li className="nav-list--element">
-            <Link to="/admin/createslot">Create Slot</Link>
-          </li>
-          
+          {user && user.role === 'doctor' && (
+            <>
+              <li className="nav-list--element">
+                <Link to={`/Doctorviewbooking/${user.id}`}>Appointment</Link>
+              </li>
+              
+            </>
+          )}
+          {user && user.role === 'admin' && (
+            <>
+              <li className="nav-list--element">
+                <Link to="/admin/doctorlist">List Doctor</Link>
+              </li>
+              <li className="nav-list--element">
+                <Link to="/admin/createslot">Create Slot</Link>
+              </li>
+            </>
+          )}
+          {user && user.role === 'customer' && (
+            <>
+              <li className="nav-list--element">
+                <Link to="/customer/listdoctor">List Doctor</Link>
+              </li>
+              <li className="nav-list--element">
+                <Link to={`/customer/booking/${user.id}`}>List Appointment</Link>
+              </li>
+              <li className="nav-list--element">
+                <Link to={`/customer/treatmentprofilelist/${user.id}`}>Treatment Profile List</Link>
+              </li>
+            </>
+          )}
+
         </ul>
         <div className="nav-list--prior">
           {isLoggedIn ? (
@@ -42,7 +71,15 @@ export default function Navigation() {
               <img src={avatar} alt="Avatar" style={{ width: '50px', height: '50px' }} />
             </div>
           ) : (
-            <Link to="/Login">Login</Link>
+            <ul>
+              <li>
+                <Link to="/Login">Login</Link>
+              </li>
+              <li>
+              <Link to="/Register">Register</Link>
+              </li>
+            </ul>
+            
           )}
         </div>
       </nav>
@@ -54,16 +91,30 @@ export default function Navigation() {
         className="options-modal"
       >
         <ul className="options-list">
-          <li>
-            <Link to="/customer/profile" onClick={handleOptionClick}>
-              Xem thông tin cá nhân
-            </Link>
-          </li>
-          <li>
-            <Link to="/admin/createdoctor" onClick={handleOptionClick}>
-              Tạo Bác Sĩ
-            </Link>
-          </li>
+          {user && user.role === 'doctor' && (
+            <li>
+              <Link to={`/doctor/profile/${user.id}`} onClick={handleOptionClick}>
+                Xem thông tin cá nhân
+              </Link>
+
+            </li>
+          )}
+          {user && user.role === 'customer' && (
+            <li>
+              <Link to={`/customer/profile/${user.id}`} onClick={handleOptionClick}>
+                Xem thông tin cá nhân
+              </Link>
+
+            </li>
+          )}
+
+          {user && user.role === 'admin' && (
+            <li className="nav-list--element">
+              <Link to="/admin/createdoctor" onClick={handleOptionClick}>
+                Tạo Bác Sĩ
+              </Link>
+            </li>
+          )}
           <li>
             <Link to="/customer/profile/edit" onClick={handleOptionClick}>
               Chỉnh sửa thông tin
@@ -81,9 +132,9 @@ export default function Navigation() {
           </li>
           <li>
             <Link to="/logout" onClick={() => {
-                handleLogout();
-                handleOptionClick();
-              }}
+              handleLogout();
+              handleOptionClick();
+            }}
             >
               Đăng xuất
             </Link>

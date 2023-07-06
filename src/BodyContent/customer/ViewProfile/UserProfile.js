@@ -1,23 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './UserProfile.css';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { FaEnvelope, FaMapMarkerAlt, FaPhone, FaGenderless, FaCalendarAlt, FaUser, FaMoneyBillAlt } from 'react-icons/fa';
-
-const user = {
-  fullname: 'John Doe',
-  email: 'johndoe@example.com',
-  address: '123 Street, City',
-  phone: '1234567890',
-  gender: 'Male',
-  createdAt: '2022-01-01',
-  updatedAt: '2022-02-01',
-  role: 'customer',
-  balance: 1000,
-};
+import axios from 'axios';
 
 const UserProfile = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`);
+        const userData = response.data.customer;
+        setUser(userData);
+      } catch (error) {
+        console.log('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, [id]);
+
   const handleEditProfile = () => {
-    // Xử lý sự kiện chỉnh sửa thông tin
-    console.log('Chỉnh sửa thông tin');
+    navigate(`/customer/profile/edit/${id}`);
   };
 
   const handleViewAppointments = () => {
@@ -29,6 +36,10 @@ const UserProfile = () => {
     // Xử lý sự kiện xem danh sách hồ sơ bệnh
     console.log('Xem danh sách hồ sơ bệnh');
   };
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="user-profile">

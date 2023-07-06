@@ -19,7 +19,10 @@ export default function LoginBar() {
 
   const handleLoginSuccess = (response) => {
     // Lưu trữ token vào session storage
-    sessionStorage.setItem('token', response.data.token);
+    
+    const userString = JSON.stringify(response.data.token);
+   sessionStorage.setItem("token", userString);
+    
     // Thực hiện các hành động khác sau khi đăng nhập thành công
     // Chuyển hướng đến trang đăng nhập
     window.location.href = '/';
