@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
+import './App.scss';
 import { BrowserRouter as Router, Switch, Route, Link, Routes } from 'react-router-dom';
 import Navigation from './Home/header';
 import Banner from './BodyContent/banner/banner.js';
@@ -98,7 +98,7 @@ function App() {
         <Route path='/5' element={<CustomerViewBooking />} />
         <Route path='/6' element={<CustomerViewDoctor />} />
         <Route path='/7' element={<ViewDocDetail />} />
-        
+
 
       </Routes>
       <Footer />

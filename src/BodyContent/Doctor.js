@@ -1,4 +1,4 @@
-import './Doctor.css';
+import './Doctor.scss';
 import React from 'react'
 import { data } from "../shared/ListOfDoctors"
 import { useState } from 'react'
@@ -7,7 +7,7 @@ export default function Doctor() {
   const [player, setPlayer] = useState([])
   return (
 
-    <div className='container'>
+    <div id="doctor" className='container'>
       {data.map((data) => (
         <div className='column'>
           <div className='card'>
