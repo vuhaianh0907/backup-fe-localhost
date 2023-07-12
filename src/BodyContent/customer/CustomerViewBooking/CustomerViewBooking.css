@@ -1,12 +1,13 @@
-.customer-view-booking {
+#CustomerViewBooking {
+  .customer-view-booking {
     width: 75%;
     margin: 0 auto;
   }
-  
+
   .booking-list {
     margin-top: 20px;
   }
-  
+
   .booking-form {
     background-color: aliceblue;
     display: flex;
@@ -16,23 +17,24 @@
     padding: 10px;
     margin-bottom: 10px;
   }
-  
+
   .booking-details {
     flex-grow: 1;
   }
-  
+
   .label {
     font-weight: bold;
   }
-  
+
   .dropdown-menu {
     flex-basis: 200px;
   }
-  
+
   select {
     width: 100%;
     padding: 5px;
   }
-  
+
   /* Add more clinic-related styles as needed */
-  
+
+}

@@ -1,7 +1,14 @@
-/* .nav {
-    background-color: #f8f8f8;
-    padding: 20px;
-  }
+.nav-list--logo img {
+  width: 40px;
+  height: 40px;
+}
+
+.nav {
+  background-color: #0a0a0a;
+
+}
+
+/* 
   
   nav {
     display: flex;
@@ -16,10 +23,7 @@
     padding: 0;
   }
   
-  .nav-list--logo img {
-    width: 40px;
-    height: 40px;
-  }
+ 
   
   .nav-list--element {
     margin-left: 10px;

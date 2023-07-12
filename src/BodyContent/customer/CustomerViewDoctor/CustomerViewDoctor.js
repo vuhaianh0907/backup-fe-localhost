@@ -38,7 +38,7 @@ function CustomerViewDoctor() {
   };
 
   return (
-    <div className="customer-view-doctor">
+    <div id='CustomerViewDoctor' className="customer-view-doctor">
       <div className="time-selection">
         <h2>Chọn thời gian trong ngày</h2>
         <div className="time-options">

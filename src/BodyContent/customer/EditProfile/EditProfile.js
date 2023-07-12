@@ -37,92 +37,104 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="edit-profile">
-      <h2 className="edit-profile__title">Chỉnh sửa thông tin</h2>
-      <form className="edit-profile__form" onSubmit={handleFormSubmit}>
-        <div className="edit-profile__form-group">
-          <label htmlFor="fullname" className="edit-profile__label">Họ và tên</label>
+    <div className="container">
+      <h2>Chỉnh sửa thông tin</h2>
+      <form onSubmit={handleFormSubmit}>
+        <div className='mb-3'>
+          <label htmlFor="fullname" className="form-label">Họ và tên</label>
           <input
             type="text"
             id="fullname"
-            className="edit-profile__input"
+            className="form-control"
             value={fullname}
             onChange={(e) => setFullname(e.target.value)}
           />
         </div>
-        <div className="edit-profile__form-group">
-          <label htmlFor="email" className="edit-profile__label">Email</label>
+        <div className='mb-3'>
+          <label htmlFor="email" className="form-label">Email</label>
           <input
             type="email"
             id="email"
-            className="edit-profile__input"
+            className="form-control"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="edit-profile__form-group">
-          <label htmlFor="address" className="edit-profile__label">Địa chỉ</label>
+        <div className='mb-3'>
+          <label htmlFor="address" className="form-label">Địa chỉ</label>
           <input
             type="text"
             id="address"
-            className="edit-profile__input"
+            className="form-control"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
         </div>
-        <div className="edit-profile__form-group">
-          <label htmlFor="phone" className="edit-profile__label">Điện thoại</label>
+        <div className='mb-3'>
+          <label htmlFor="phone" className="form-label">Điện thoại</label>
           <input
             type="text"
             id="phone"
-            className="edit-profile__input"
+            className="form-control"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
           />
         </div>
-        <div className="edit-profile__form-group">
-          <label htmlFor="gender" className="edit-profile__label">Giới tính</label>
-          <select
-            id="gender"
-            className="edit-profile__select"
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
-          >
-            <option value="">Chọn giới tính</option>
-            <option value="male">Nam</option>
-            <option value="female">Nữ</option>
-          </select>
+        <div className='mb-3'>
+          <label htmlFor="gender">Giới tính</label>
+          <div className='form-check form-check-inline'>
+            <input
+              type="radio"
+              name='gender'
+              id="male"
+              className="form-check-input"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+            />
+            <label class="form-check-label" for="male">
+              Nam
+            </label>
+          </div>
+          <div className='form-check form-check-inline mb-3'>
+            <input
+              type="radio"
+              name='gender'
+              id="female"
+              className="form-check-input"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+            />
+            <label class="form-check-label" for="female">
+              Nữ
+            </label>
+          </div>
         </div>
         <button type="submit" className="edit-profile__button">Lưu thông tin</button>
       </form>
 
       {showConfirmation && (
-        <div className="edit-profile__confirmation">
-          <h3 className="edit-profile__confirmation-title">Xác nhận lưu thông tin</h3>
-          <table className="edit-profile__confirmation-table">
-            <tbody>
-              <tr>
-                <td>Họ và tên:</td>
-                <td>{fullname}</td>
-              </tr>
-              <tr>
-                <td>Email:</td>
-                <td>{email}</td>
-              </tr>
-              <tr>
-                <td>Địa chỉ:</td>
-                <td>{address}</td>
-              </tr>
-              <tr>
-                <td>Điện thoại:</td>
-                <td>{phone}</td>
-              </tr>
-              <tr>
-                <td>Giới tính:</td>
-                <td>{gender}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div className='mt-4'>
+          <h3>Xác nhận lưu thông tin</h3>
+          <div>
+            <span>Họ và tên: </span>
+            <span>{fullname}</span>
+          </div>
+          <div>
+            <div>Email:</div>
+            <div>{email}</div>
+          </div>
+          <div>
+            <div>Địa chỉ:</div>
+            <div>{address}</div>
+          </div>
+          <div>
+            <div>Điện thoại:</div>
+            <div>{phone}</div>
+          </div>
+          <div>
+            <div>Giới tính:</div>
+            <div>{gender}</div>
+          </div>
           <div className="edit-profile__confirmation-buttons">
             <button className="edit-profile__confirmation-button edit-profile__confirmation-button--save" onClick={handleConfirmationSave}>
               Xác nhận

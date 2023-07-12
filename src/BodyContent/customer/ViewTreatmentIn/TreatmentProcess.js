@@ -12,7 +12,7 @@ const TreatmentProcess = () => {
   const notesContent = 'Nội dung ghi chú từ cơ sở dữ liệu';
 
   return (
-    <div className="treatment-process">
+    <div id='TreatmentProcess' className="treatment-process">
       <h2 className="treatment-process__title">Xem quy trình điều trị</h2>
       <div className="treatment-process__info">
         <p className="treatment-process__info-item"><FaUser /> Bệnh Nhân: {patientName}</p>

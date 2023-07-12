@@ -18,7 +18,7 @@ const MedicalRecord = () => {
   ];
 
   return (
-    <div className="medical-record">
+    <div id='MedicalRecord' className="medical-record">
       <h2 className="medical-record__title">Xem hồ sơ bệnh</h2>
       <div className="medical-record__info">
         <p className="medical-record__info-item"><FaFileAlt /> Tên hồ sơ: {recordName}</p>

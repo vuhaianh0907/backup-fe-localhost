@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import logo from '../assets/images/logo-01-01.png';
 import avatar from '../assets/images/avatar.jpg';
-// import './header.css';
+import './header.css';
 
 export default function Navigation() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -93,7 +93,13 @@ export default function Navigation() {
     // </div>
     <>
       <nav class="navbar navbar-expand-lg bg-body-tertiary">
+
         <div class="container-fluid">
+          <a className="nav-list--logo">
+            <Link to="/">
+              <img src={logo} className="App-logo" alt="logo" />
+            </Link>
+          </a>
           <a class="navbar-brand" href="#">Navbar</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -104,7 +110,10 @@ export default function Navigation() {
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <Link class="nav-link" to="/admin/doctorlist">List Doctor</Link>
+              </li>
+              <li class="nav-item">
+                <Link class="nav-link" to="/admin/createslot">Create Slot</Link>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

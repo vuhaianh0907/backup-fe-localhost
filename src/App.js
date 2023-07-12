@@ -81,8 +81,6 @@ function App() {
         <Route path='/customer/slot/appointment' element={<CustomerWriteAppointment />} />
 
 
-
-
         <Route path='/doctor/viewTreatmentProfile' element={<ViewTreatmentProfile />} />
         {/* doc/treatment/detail */}
         <Route path='/doctor/treatmentlist' element={<ViewTreatementList />} />

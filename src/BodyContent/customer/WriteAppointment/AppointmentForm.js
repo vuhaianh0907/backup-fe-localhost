@@ -16,7 +16,7 @@ const AppointmentForm = () => {
   };
 
   return (
-    <div className="appointment-form">
+    <div id='AppointmentForm ' className="appointment-form">
       <h2 className="appointment-form__title">Đặt phiếu khám bệnh</h2>
       <div className="doctor-info">
         <img src={avatarUrl} alt="Doctor Avatar" className="doctor-avatar" />

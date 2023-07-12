@@ -32,7 +32,7 @@ export default function ViewDocDetail() {
     };
 
     return (
-        <div className="container">
+        <div id='ViewDocDetail' className="container">
             <div className='line-1'>
                 <div className="doctor-profile">
                     <img src={profile.profilePicture} alt="Doctor Profile" className="profile-picture" />

@@ -13,7 +13,7 @@ function ViewBookingDetail({ booking, onClose }) {
   };
 
   return (
-    <div className="booking-popup-overlay">
+    <div id='ViewBookingDetail' className="booking-popup-overlay">
       <div className="booking-popup">
         <h2 className="popup-heading">Chi tiết đặt lịch</h2>
         <div className="booking-details">

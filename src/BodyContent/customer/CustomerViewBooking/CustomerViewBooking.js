@@ -34,7 +34,7 @@ function CustomerViewBooking() {
   };
 
   return (
-    <div className="customer-view-booking">
+    <div id='CustomerViewBooking' className="customer-view-booking">
       <h2>Danh sách đặt lịch</h2>
       <div className="booking-list">
         {bookings.map((booking) => (

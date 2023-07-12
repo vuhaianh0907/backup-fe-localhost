@@ -47,7 +47,7 @@ export default function Register() {
     };
 
     return (
-        <div className='register-container'>
+        <div id="Register" className='register-container'>
             <form onSubmit={handleSubmit}>
                 <h2>Đăng ký</h2>
                 <input

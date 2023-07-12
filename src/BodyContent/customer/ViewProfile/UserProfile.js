@@ -31,7 +31,7 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="user-profile">
+    <div id='UserProfile' className="user-profile">
       <div className="user-profile__avatar">
         <img src="https://source.unsplash.com/random/200x200" alt="Avatar" className="avatar-image" />
       </div>

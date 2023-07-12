@@ -1,22 +1,23 @@
-.appointment-form {
+#AppointmentForm {
+  .appointment-form {
     max-width: 500px;
     margin: 0 auto;
     padding: 20px;
     background-color: #f5f5f5;
     border-radius: 8px;
   }
-  
+
   .appointment-form__title {
     text-align: center;
     margin-bottom: 20px;
   }
-  
+
   .doctor-info {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
   }
-  
+
   .doctor-avatar {
     width: 80px;
     height: 80px;
@@ -24,32 +25,32 @@
     object-fit: cover;
     margin-right: 20px;
   }
-  
+
   .doctor-details {
     flex-grow: 1;
   }
-  
+
   .doctor-name {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 8px;
   }
-  
+
   .appointment-time,
   .appointment-date {
     margin-bottom: 4px;
   }
-  
+
   .form-group {
     margin-bottom: 20px;
   }
-  
+
   label {
     display: block;
     font-weight: bold;
     margin-bottom: 4px;
   }
-  
+
   .reason-input {
     width: 100%;
     height: 100px;
@@ -57,7 +58,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
   }
-  
+
   .submit-button {
     display: block;
     width: 100%;
@@ -69,8 +70,9 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  
+
   .submit-button:hover {
     background-color: #0056b3;
   }
-  
+
+}

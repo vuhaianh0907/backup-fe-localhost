@@ -1,80 +1,82 @@
-.login-form {
-    margin-top: 200px;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 400px;
-}
+#loginBar {
+    .login-form {
+        margin-top: 200px;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 400px;
+    }
 
-.login-form h3 {
-    margin-bottom: 20px;
-}
+    .login-form h3 {
+        margin-bottom: 20px;
+    }
 
-.login-form .form-group {
-    margin-bottom: 15px;
-}
+    .login-form .form-group {
+        margin-bottom: 15px;
+    }
 
-.login-form label {
-    display: block;
-    margin-bottom: 5px;
-}
+    .login-form label {
+        display: block;
+        margin-bottom: 5px;
+    }
 
-.login-form input[type="email"],
-.login-form input[type="password"] {
-    width: 300px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-}
+    .login-form input[type="email"],
+    .login-form input[type="password"] {
+        width: 300px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
 
-.login-form .error-message {
-    color: red;
-    margin-top: 10px;
-}
+    .login-form .error-message {
+        color: red;
+        margin-top: 10px;
+    }
 
-.login-form button[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #0069d9;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+    .login-form button[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #0069d9;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
 
-.login-links {
-    margin-top: 15px;
-}
+    .login-links {
+        margin-top: 15px;
+    }
 
-.login-links a {
-    margin-right: 10px;
-    text-decoration: none;
-    color: #666;
-}
+    .login-links a {
+        margin-right: 10px;
+        text-decoration: none;
+        color: #666;
+    }
 
-.social {
-    margin-top: 15px;
-}
+    .social {
+        margin-top: 15px;
+    }
 
-.social .google-login-button {
-    /* Các phần CSS khác */
-}
+    .social .google-login-button {
+        /* Các phần CSS khác */
+    }
 
-.logged-in-message {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-}
+    .logged-in-message {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+    }
 
-.logged-in-message .message {
-    margin-right: 10px;
-}
+    .logged-in-message .message {
+        margin-right: 10px;
+    }
 
-.logged-in-message .logout-button {
-    background-color: #dc3545;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    .logged-in-message .logout-button {
+        background-color: #dc3545;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
 }

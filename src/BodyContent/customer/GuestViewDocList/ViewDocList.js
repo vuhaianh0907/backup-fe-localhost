@@ -32,7 +32,7 @@ export default function GuestViewDocList() {
   });
 
   return (
-    <div className="container">
+    <div id='ViewDocList' className="container">
       <h1>Danh sách Bác sĩ</h1>
       <p>Mô tả ngắn gọn về danh sách bác sĩ để khách truy cập hiểu được mục tiêu của trang.</p>
 

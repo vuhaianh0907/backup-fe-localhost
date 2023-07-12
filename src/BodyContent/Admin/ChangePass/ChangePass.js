@@ -49,7 +49,7 @@ function ChangePass() {
     };
 
     return (
-        <div className="change-pass">
+        <div id='changePass' className="change-pass">
 
             {errorMessage && <p className="error-message">{errorMessage}</p>}
 
