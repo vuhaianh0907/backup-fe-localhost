@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import './CreateTreatmentIn.css';
 
 function CreateTreatmentIn() {
@@ -90,11 +90,31 @@ function CreateTreatmentIn() {
     }
   };
 
-  const handleConfirmationReappointConfirm = () => {
-    console.log('Re-appoint Treatment');
-    console.log('Treatment In:', treatmentIn);
+  const handleConfirmationReappointConfirm = async () => {
+    try {
+      // Xây dựng đối tượng dữ liệu treatmentIn từ trạng thái hiện tại của component
+      const treatmentInData = {
+        idTreatmentProfile : treatmentProfile.id,
+        doctorID: user.id,
+        process: treatmentIn.procress,
+        result: treatmentIn.result,
+        note: treatmentIn.note,
+        // Các trường dữ liệu khác
+      };
+  
+      // Gửi yêu cầu POST đến API createTreatmentIn
+      await axios.post('http://localhost:3000/api/treatmentin/create', treatmentInData);
+      await axios.post(`http://localhost:3000/api/appointment/update?id=${idslot}`, { status: 'Done' });
+      sessionStorage.removeItem('SlotID');
+  
+      // Chuyển hướng trang về trang chủ
+      window.location.href = `/Doctor/rebook/${customer.id}`;
+    } catch (error) {
+      console.error('Error confirming treatment:', error);
+    }
     // Perform reappoint treatment logic here
     setShowConfirmationReappoint(false);
+    
   };
 
   const handleConfirmationReappointClose = () => {
@@ -170,7 +190,10 @@ function CreateTreatmentIn() {
           Xong
         </button>
         <button className="reappoint-button" onClick={handleReappoint}>
-          Đặt tái khám
+        
+               Đặt tái khám
+        
+          
         </button>
       </div>
 

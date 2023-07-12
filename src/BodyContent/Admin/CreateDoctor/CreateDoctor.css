@@ -98,3 +98,14 @@ h3 {
 .form-container .custom-file-upload:hover {
     background-color: #eee;
 }
+.image-preview {
+    width: 200px; /* Đặt kích thước rộng */
+    height: auto; /* Giữ tỷ lệ khung hình */
+  }
+  
+  .image-preview img {
+    max-width: 100%; /* Đảm bảo ảnh không vượt quá kích thước của phần tử cha */
+    max-height: 200px; /* Đặt chiều cao tối đa */
+    object-fit: contain; /* Hiển thị toàn bộ ảnh trong khung hình */
+  }
+  

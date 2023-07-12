@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import './AdminCreateSlot.css';
 
 function CreateSchedulePage() {
@@ -11,11 +15,17 @@ function CreateSchedulePage() {
   const [selectedShifts, setSelectedShifts] = useState([]);
   const [isScheduleCreated, setIsScheduleCreated] = useState(false);
   const [scheduleList, setScheduleList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const doctorsPerPage = 5;
+  const totalPages = Math.ceil(doctors.length / doctorsPerPage);
+  const navigate = useNavigate();
 
   const fetchDoctorsByName = async () => {
     try {
       const response = await axios.get(`http://localhost:3000/api/admin/getAllDoctorByName?name=${searchValue}`);
       setDoctors(response.data.doctors);
+      setCurrentPage(1);
     } catch (error) {
       console.error('Error fetching doctors by name:', error);
     }
@@ -59,31 +69,40 @@ function CreateSchedulePage() {
         endDate: endDate,
         shifts: selectedShifts,
       };
-      
-  
-      axios.post('http://localhost:3000/api/slot/create', newSchedule)
-        .then(response => {
-          // Xử lý thành công khi gửi dữ liệu lịch làm việc
-          console.log(response.data);
+
+      setIsLoading(true);
+
+      axios
+        .post('http://localhost:3000/api/slot/create', newSchedule)
+        .then((response) => {
           setScheduleList([...scheduleList, newSchedule]);
           setIsScheduleCreated(true);
+          toast.success('Lưu thành công!');
+          navigate('/');
         })
-        .catch(error => {
-          // Xử lý khi gặp lỗi trong quá trình gửi dữ liệu
+        .catch((error) => {
           console.error('Error creating schedule:', error);
+          toast.error('Lưu thất bại!');
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
-        console.log(newSchedule);   
     } else {
-      // Hiển thị thông báo lỗi hoặc yêu cầu người dùng nhập đầy đủ thông tin
+      toast.error('Vui lòng nhập đầy đủ thông tin.');
     }
   };
+
+  const indexOfLastDoctor = currentPage * doctorsPerPage;
+  const indexOfFirstDoctor = indexOfLastDoctor - doctorsPerPage;
+  const currentDoctors = doctors.slice(indexOfFirstDoctor, indexOfLastDoctor);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="page-container">
       <div className="admin-create-slot__container">
         <h2>Tạo Lịch Làm Việc</h2>
 
-        {/* Tìm kiếm bác sĩ */}
         <div>
           <h3>Tìm kiếm bác sĩ</h3>
           <div className="admin-create-slot__search-doctor">
@@ -96,16 +115,32 @@ function CreateSchedulePage() {
             <button onClick={handleSearchDoctor}>Tìm kiếm</button>
           </div>
           <ul className="admin-create-slot__doctor-list">
-            {doctors.map((doctor) => (
-              <li key={doctor.id} onClick={() => handleSelectDoctor(doctor)}>
+            {currentDoctors.map((doctor) => (
+              <li
+                key={doctor.id}
+                onClick={() => handleSelectDoctor(doctor)}
+                className={selectedDoctor === doctor ? 'selected-doctor' : ''}
+              >
                 <img src={doctor.avatar} alt={doctor.fullname} />
-                <p>{doctor.fullname}</p>
+                <p className={selectedDoctor === doctor ? 'selected-doctor-name' : ''}>{doctor.fullname}</p>
+              </li>
+            ))}
+          </ul>
+
+          <ul className="admin-create-slot__pagination">
+            {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
+              <li key={pageNumber}>
+                <button
+                  onClick={() => paginate(pageNumber)}
+                  className={currentPage === pageNumber ? 'active' : ''}
+                >
+                  <span className="pagination-number">{pageNumber}</span>
+                </button>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Chọn khoảng thời gian */}
         {selectedDoctor && (
           <div>
             <h3>Chọn khoảng thời gian</h3>
@@ -130,7 +165,6 @@ function CreateSchedulePage() {
           </div>
         )}
 
-        {/* Chọn ca làm việc */}
         {selectedDoctor && startDate && endDate && (
           <div>
             <h3>Chọn ca làm việc</h3>
@@ -155,25 +189,24 @@ function CreateSchedulePage() {
           </div>
         )}
 
-        {/* Lưu */}
         {selectedDoctor && startDate && endDate && selectedShifts.length > 0 && (
           <div>
-            <button onClick={handleSaveSchedule}>Lưu</button>
+            <button onClick={handleSaveSchedule} disabled={isLoading}>
+              {isLoading ? 'Đang lưu...' : 'Lưu'}
+            </button>
           </div>
         )}
 
-        {/* Hiển thị lịch đã tạo */}
         {isScheduleCreated && (
           <div>
             <h3>Lịch đã tạo</h3>
             <p>Bác sĩ: {selectedDoctor.fullname}</p>
             <p>Ngày bắt đầu: {startDate}</p>
-            <p>Ngày kết thúc: {endDate}</p>
+            <p>Ngàykết thúc: {endDate}</p>
             <p>Ca làm việc: {selectedShifts.join(', ')}</p>
           </div>
         )}
 
-        {/* Bảng */}
         <div>
           <table>
             <thead>
@@ -195,6 +228,7 @@ function CreateSchedulePage() {
           </table>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

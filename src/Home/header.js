@@ -126,7 +126,7 @@ export default function Navigation() {
             </Link>
           </li>
           <li>
-            <Link to="/admin/changepass" onClick={handleOptionClick}>
+            <Link to="/changepass" onClick={handleOptionClick}>
               Đổi mật khẩu
             </Link>
           </li>

@@ -13,7 +13,7 @@ const DoctorDetail = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const doctorPromise = axios.get(`http://localhost:3000/api/admin/getDoctor?doctorId=${doctorId}`);
+        const doctorPromise = axios.get(`http://localhost:3000/api/account/doctor/details?id=${doctorId}`);
         const slotsPromise = axios.get(`http://localhost:3000/api/slot/getSlotbyDoctor?doctorId=${doctorId}`);
 
         const [doctorResponse, slotsResponse] = await Promise.all([doctorPromise, slotsPromise]);

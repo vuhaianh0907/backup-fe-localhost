@@ -16,13 +16,13 @@ import CreateTreatementIn from './BodyContent/Doctor/CreateTreatementIn/CreateTr
 import Doctorviewbooking from './BodyContent/Doctor/Doctorviewbooking/viewBooking';
 import DoctorViewPatientProfile from './BodyContent/Doctor/ViewPatientProfile/PatientProfile';
 import DoctorTimeSlotPages from './BodyContent/Doctor/TimeSlotsPage/TimeSlotsPage';
-
+import DoctorRebook from './BodyContent/Doctor/RebookAppointment/RebookAppointment';
 import CreateDoctor from './BodyContent/Admin/CreateDoctor/CreateDoctor';
 import CreateSlot from './BodyContent/Admin/CreateSlot/AdminCreateSlot';
 import DoctorList from './BodyContent/Admin/ViewDoctorList/DoctorList';
 import DoctorDetail from './BodyContent/Admin/ViewDocDetail/DoctorDetail';
 import DoctorUpdate from './BodyContent/Admin/UpdateDoctor/UpdateDoctor';
-import ChangePass from './BodyContent/Admin/ChangePass/ChangePass';
+import ChangePass from './BodyContent/accout/ChangePass/ChangePass';
 import Cancellation from './BodyContent/Admin/CancellationRequests/CancellationRequests';
 import CustomerViewBooking from './BodyContent/customer/CustomerViewBooking/CustomerViewBooking';
 import CustomerViewDoctor from './BodyContent/customer/CustomerViewDoctor/CustomerViewDoctor';
@@ -64,6 +64,7 @@ function App() {
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/' exact element={<Banner />} />
         <Route path='/Worksheet' element={<Worksheet />} />
+        <Route path='/changepass' element={<ChangePass />} />
 
         {/* admin */}
         <Route path='/admin/createdoctor' element={<CreateDoctor />} />
@@ -71,7 +72,7 @@ function App() {
         <Route path='/admin/doctorlist' element={<DoctorList />} />
         <Route path='/admin/doctordetail/:doctorId' element={<DoctorDetail />} />
         <Route path='/admin/doctor/update/:doctorId' element={<DoctorUpdate />} />
-        <Route path='/admin/changepass' element={<ChangePass />} />
+        
         <Route path='/admin/cancellation' element={<Cancellation />} />
 
 
@@ -99,6 +100,7 @@ function App() {
         <Route path='/Doctorviewbooking/:id' element={<Doctorviewbooking />} />
         <Route path='/Doctor/viewpatientprofile/:id' element={<DoctorViewPatientProfile />} />
         <Route path='/Doctor/doctorbook' element={<DoctorTimeSlotPages />} />
+        <Route path='/Doctor/rebook/:id' element={<DoctorRebook />} />
     
 
 
