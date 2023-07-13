@@ -8,6 +8,7 @@ const timeOptions = [
   { label: '9h - 10h' },
   { label: '10h - 11h' },
   { label: '13h - 14h' },
+  { label: '14h - 15h' },
   { label: '15h - 16h' }
 ];
 
@@ -16,6 +17,8 @@ function CustomerViewDoctor() {
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
   const [isConfirmationEnabled, setIsConfirmationEnabled] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(3);
 
   const handleDateChange = (e) => {
     const selectedDate = e.target.value;
@@ -53,6 +56,10 @@ function CustomerViewDoctor() {
     }
   };
 
+  const startIndex = (currentPage - 1) * perPage;
+  const endIndex = startIndex + perPage;
+  const totalPages = Math.ceil(doctors.length / perPage);
+
   return (
     <div className="customer-view-doctor">
       <div className="time-selection">
@@ -86,26 +93,47 @@ function CustomerViewDoctor() {
         </button>
       </div>
 
-      <div className="doctor-list">
-        <h3>Danh sách bác sĩ:</h3>
-        <ul>
-          {doctors.map((doctor) => (
-            <li key={doctor.id}>
-              <div className="doctor-info">
-                <div className="doctor-item__avatar">
-                  <img src={doctor.avatar} alt="Doctor Avatar" />
+      {doctors.length > 0 && (
+        <div className="doctor-list">
+          <h3>Danh sách bác sĩ:</h3>
+          <ul>
+            {doctors.slice(startIndex, endIndex).map((doctor) => (
+              <li key={doctor.id}>
+                <div className="doctor-info">
+                  <div className="doctor-item__avatar">
+                    <img src={doctor.avatar} alt="Doctor Avatar" />
+                  </div>
+                  <div className="doctor-name">{doctor.fullname}</div>
+                  <div className="doctor-action">
+                    <Link to={`/customer/doctordetail/${doctor.id}`} className="doctor-link">
+                      Chọn bác sĩ
+                    </Link>
+                  </div>
                 </div>
-                <div className="doctor-name">{doctor.fullname}</div>
-                <div className="doctor-action">
-                  <Link to={`/customer/doctordetail/${doctor.id}`} className="doctor-link">
-                    Chọn bác sĩ
-                  </Link>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+              </li>
+            ))}
+          </ul>
+
+          {/* Pagination */}
+          <div className="pagination">
+            <button id='paging-btn'
+              onClick={() => setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))}
+              disabled={currentPage === 1}
+            >
+              {'<'}
+            </button>
+            <button id='paging-btn'>
+              <span>{currentPage}</span>
+            </button>
+            <button id='paging-btn'
+              onClick={() => setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))}
+              disabled={currentPage === totalPages}
+            >
+              {'>'}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
