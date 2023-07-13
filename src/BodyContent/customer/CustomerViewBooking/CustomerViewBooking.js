@@ -9,6 +9,8 @@ function CustomerViewBooking() {
   const [appointments, setAppointments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(1);
 
   useEffect(() => {
     axios
@@ -58,6 +60,10 @@ function CustomerViewBooking() {
     setSelectedAppointment(null);
   };
 
+  const startIndex = (currentPage - 1) * perPage;
+  const endIndex = startIndex + perPage;
+  const totalPages = Math.ceil(appointments.length / perPage);
+
   return (
     <div className="customer-view-booking">
       <h2>Danh sách đặt lịch</h2>
@@ -65,7 +71,7 @@ function CustomerViewBooking() {
         <div>Loading...</div>
       ) : (
         <div className="booking-list">
-          {appointments.map((appointment) => (
+          {appointments.slice(startIndex, endIndex).map((appointment) => (
             <div className="booking-form" key={appointment.id}>
               <div className="booking-info">
                 <span className="label">Ngày điều trị:</span>
@@ -90,6 +96,23 @@ function CustomerViewBooking() {
               </div>
             </div>
           ))}
+        </div>
+      )}
+      {totalPages > 1 && (
+        <div className="pagination">
+          <button id='paging-btn'
+            onClick={() => setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            {'<'}
+          </button>
+          <span id='paging-btn'>{currentPage}</span>
+          <button id='paging-btn'
+            onClick={() => setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))}
+            disabled={currentPage === totalPages}
+          >
+            {'>'}
+          </button>
         </div>
       )}
       {selectedAppointment && (

@@ -7,6 +7,14 @@ function TreatmentProfilePage() {
   const { id } = useParams();
   const [treatmentProfiles, setTreatmentProfiles] = useState([]);
 
+  
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(1);
+
+  const startIndex = (currentPage - 1) * perPage;
+  const endIndex = startIndex + perPage;
+  const totalPages = Math.ceil(treatmentProfiles.length / perPage);
+
   useEffect(() => {
     const fetchTreatmentProfiles = async () => {
       try {
@@ -24,7 +32,7 @@ function TreatmentProfilePage() {
   return (
     <div className="treatment-profile-page">
       <h2>Treatment Profiles</h2>
-      {treatmentProfiles.map((profile) => (
+      {treatmentProfiles.slice(startIndex, endIndex).map((profile) => (
         <div key={profile.id} className="profile-card">
           <h3>{profile.description}</h3>
           <p>Ngày tạo hồ sơ: {profile.createdAt}</p>
@@ -34,6 +42,23 @@ function TreatmentProfilePage() {
           {/* Render other profile details */}
         </div>
       ))}
+      {totalPages > 1 && (
+        <div className="pagination">
+          <button id='paging-btn'
+            onClick={() => setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            {'<'}
+          </button>
+          <span id='paging-btn'>{currentPage}</span>
+          <button id='paging-btn'
+            onClick={() => setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))}
+            disabled={currentPage === totalPages}
+          >
+            {'>'}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
