@@ -13,6 +13,7 @@ const SlotAppointment = () => {
   const [reason, setReason] = useState('');
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
   const storedUserString = sessionStorage.getItem("token");
   const user = JSON.parse(storedUserString);
 
@@ -64,10 +65,10 @@ const SlotAppointment = () => {
 
       // Kiểm tra phản hồi từ API
       if (response.status === 200) {
+        setSuccessMessage(response.data.message);
         setIsConfirmed(true);
         setIsConfirmationModalOpen(false);
         setIsSuccessModalOpen(true);
-        window.location.href = "/";
       } else {
         setError('Failed to confirm appointment');
       }
@@ -82,6 +83,8 @@ const SlotAppointment = () => {
 
   const handleCloseSuccessModal = () => {
     setIsSuccessModalOpen(false);
+    setReason('');
+    setError('');
   };
 
   return (
@@ -110,7 +113,7 @@ const SlotAppointment = () => {
           </Modal>
 
           <Modal isOpen={isSuccessModalOpen}>
-            <p>Đã xác nhận</p>
+            <p>{successMessage}</p>
             <button onClick={handleCloseSuccessModal}>Đóng</button>
           </Modal>
         </>

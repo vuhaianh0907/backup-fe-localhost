@@ -22,7 +22,10 @@ import CreateSlot from './BodyContent/Admin/CreateSlot/AdminCreateSlot';
 import DoctorList from './BodyContent/Admin/ViewDoctorList/DoctorList';
 import DoctorDetail from './BodyContent/Admin/ViewDocDetail/DoctorDetail';
 import DoctorUpdate from './BodyContent/Admin/UpdateDoctor/UpdateDoctor';
+import Transaction from './BodyContent/Admin/Transaction/Transaction';
 import ChangePass from './BodyContent/accout/ChangePass/ChangePass';
+import AddAmountPage from './BodyContent/Admin/AddAmountPage/AddAmountPage';
+import AmountPage from './BodyContent/Admin/UpdateAmountPage/UpdateAmountPage';
 import Cancellation from './BodyContent/Admin/CancellationRequests/CancellationRequests';
 import CustomerViewBooking from './BodyContent/customer/CustomerViewBooking/CustomerViewBooking';
 import CustomerViewDoctor from './BodyContent/customer/CustomerViewDoctor/CustomerViewDoctor';
@@ -34,6 +37,7 @@ import CustomerViewProfileTreatment from './BodyContent/customer/ViewProFileTrea
 import CustomerWriteAppointment from './BodyContent/customer/WriteAppointment/AppointmentForm';
 import CustormerViewBookingDetail from './BodyContent/customer/ViewBookingDetail/ViewBookingDetail';
 import CustormerViewTreatmentProfileList from './BodyContent/customer/treatmentprofilelist/treatmentprofilelist';
+import CustormerWallet from './BodyContent/customer/TopUpWallet/TopUpWallet';
 
 import DoctorViewprofile from './BodyContent/Doctor/Viewprofile/Viewprofile';
 import DoctorUpdateprofile from './BodyContent/Doctor/UpdateProfile/UpdateProfile';
@@ -74,6 +78,9 @@ function App() {
         <Route path='/admin/doctor/update/:doctorId' element={<DoctorUpdate />} />
         
         <Route path='/admin/cancellation' element={<Cancellation />} />
+        <Route path='/admin/transaction' element={<Transaction />} />
+        <Route path='/admin/addamount' element={<AddAmountPage />} />
+        <Route path='/admin/amount' element={<AmountPage />} />
 
 
         {/* custormer */}
@@ -87,6 +94,7 @@ function App() {
         <Route path='/customer/booking/detail/:id' element={<CustormerViewBookingDetail />} />
         <Route path='/customer/listdoctor' element={<CustomerViewDoctor />} />
         <Route path='/customer/doctordetail/:id' element={<ViewDocDetail />} />
+        <Route path='/customer/topupwallet/:id' element={<CustormerWallet />} />
 
 
 
