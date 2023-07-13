@@ -48,6 +48,15 @@ export default function Navigation() {
               <li className="nav-list--element">
                 <Link to="/admin/createslot">Create Slot</Link>
               </li>
+              <li className="nav-list--element">
+                <Link to="/admin/transaction">Transaction</Link>
+              </li>
+              <li className="nav-list--element">
+                <Link to="/admin/addamount">Add amount </Link>
+              </li>
+              <li className="nav-list--element">
+                <Link to="/admin/amount">Update price bill </Link>
+              </li>
             </>
           )}
           {user && user.role === 'customer' && (
@@ -60,6 +69,9 @@ export default function Navigation() {
               </li>
               <li className="nav-list--element">
                 <Link to={`/customer/treatmentprofilelist/${user.id}`}>Treatment Profile List</Link>
+              </li>
+              <li className="nav-list--element">
+                <Link to={`/customer/topupwallet/${user.id}`}>Momo</Link>
               </li>
             </>
           )}

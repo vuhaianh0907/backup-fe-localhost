@@ -93,7 +93,7 @@ const ViewBooking = () => {
   const handleConfirmCancelAppointment = async () => {
     try {
       // Gửi yêu cầu hủy lịch hẹn
-      await axios.post(`http://localhost:3000/api/appointment/update?id=${selectedAppointment.id}`, { status: 'Doctor Cancelled' });
+      await axios.post(`http://localhost:3000/api/appointment/updatedoctor?id=${selectedAppointment.id}`, { status: 'Doctor Cancelled' });
       // Cập nhật lại danh sách lịch hẹn
       const updatedAppointments = appointments.map((appointment) => {
         if (appointment.id === selectedAppointment.id) {

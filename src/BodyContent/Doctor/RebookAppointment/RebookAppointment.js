@@ -11,6 +11,7 @@ function ResetAppointmentPage() {
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedSlot, setSelectedSlot] = useState(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [confirmationMessage, setConfirmationMessage] = useState('');
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
 
@@ -76,7 +77,6 @@ function ResetAppointmentPage() {
   const handleConfirmationConfirm = async () => {
     try {
       // Create the appointment object
-      
       const appointmentData = {
         status: 'confirmed',
         doctorID: user.id,
@@ -86,12 +86,17 @@ function ResetAppointmentPage() {
       };
 
       // Send the POST request to create the appointment
-      await axios.post(`http://localhost:3000/api/appointment/create?customerId=${id}`, appointmentData);
+      const response = await axios.post(`http://localhost:3000/api/appointment/create?customerId=${id}`, appointmentData);
 
-      // Navigate back to "/"
-      window.location.href = '/';
+      // Check the response from the API
+      if (response.status === 200) {
+        setConfirmationMessage(response.data.message);
+      } else {
+        setConfirmationMessage('Failed to confirm appointment');
+      }
     } catch (error) {
       console.error('Error creating appointment:', error);
+      setConfirmationMessage('Failed to confirm appointment');
     }
   };
 
@@ -158,6 +163,13 @@ function ResetAppointmentPage() {
               </button>
             </div>
           </div>
+        </div>
+      )}
+
+      {confirmationMessage && (
+        <div className="confirmation-message">
+          <p>{confirmationMessage}</p>
+          <Link to="/">Quay lại Trang chủ</Link>
         </div>
       )}
     </div>
