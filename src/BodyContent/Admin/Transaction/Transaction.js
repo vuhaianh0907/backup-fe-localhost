@@ -4,6 +4,8 @@ import './Transaction.css'; // Import CSS file
 
 const TransactionList = () => {
   const [transactions, setTransactions] = useState([]);
+  const [currentPage,setCurrentPage] = useEffect(1);
+  const perPage = useState(5);
 
   useEffect(() => {
     fetchTransactions(); // Gọi hàm fetchTransactions để lấy dữ liệu giao dịch từ API
