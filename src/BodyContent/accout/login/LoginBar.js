@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import GoogleLogin from 'react-google-login';
-import './LoginBar.css';
+import './LoginBar.scss';
 
 export default function LoginBar() {
   const [email, setEmail] = useState('');
@@ -18,13 +17,8 @@ export default function LoginBar() {
   };
 
   const handleLoginSuccess = (response) => {
-    // Lưu trữ token vào session storage
-    
     const userString = JSON.stringify(response.data.token);
-   sessionStorage.setItem("token", userString);
-    
-    // Thực hiện các hành động khác sau khi đăng nhập thành công
-    // Chuyển hướng đến trang đăng nhập
+    sessionStorage.setItem('token', userString);
     window.location.href = '/';
     console.log('Logged in successfully');
   };
@@ -42,69 +36,80 @@ export default function LoginBar() {
 
     const data = {
       email: email,
-      password: password
+      password: password,
     };
 
-    axios.post('http://localhost:3000/api/auth/login', data)
+    axios
+      .post('http://localhost:3000/api/auth/login', data)
       .then(handleLoginSuccess)
       .catch(handleLoginFailure);
   };
 
   const handleGoogleLoginSuccess = (response) => {
-    // Xử lý thành công khi đăng nhập bằng tài khoản Google
-    // Gửi thông tin đăng nhập thành công lên server hoặc thực hiện hành động khác
     console.log(response);
   };
 
   const handleGoogleLoginFailure = (error) => {
-    // Xử lý khi đăng nhập bằng tài khoản Google thất bại
     console.log(error);
   };
 
   return (
-    <form className='login-form' onSubmit={handleSubmit}>
-      <h3>Login Here</h3>
+    <div id="loginBar" className="container py-5 h-100">
+      <div className="row d-flex justify-content-center align-items-center h-100">
+        <div className="col-18 ">
+          <div className="card shadow-2-strong" style={{ borderRadius: '1rem' }}>
+            <div className="card-body p-5 text-center">
+              <h3>Login Here</h3>
 
-      <div className='form-group'>
-        <label htmlFor='email'></label>
-        <input
-          type='email'
-          placeholder='Email'
-          id='email'
-          value={email}
-          onChange={handleEmailChange}
-        />
+              <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={handleEmailChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="password">Password</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    placeholder="Enter password"
+                    value={password}
+                    onChange={handlePasswordChange}
+                  />
+                </div>
+
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+                <button type="submit" className="btn btn-primary btn-block">Log In</button>
+              </form>
+
+              <div className="login-links">
+                <a href="/register">Register</a>
+                <a href="/forgot-password">Forgot Password</a>
+              </div>
+
+              <div className="social">
+                <GoogleLogin
+                  clientId="YOUR_GOOGLE_CLIENT_ID"
+                  buttonText="Google"
+                  onSuccess={handleGoogleLoginSuccess}
+                  onFailure={handleGoogleLoginFailure}
+                  cookiePolicy={'single_host_origin'}
+                  className="btn btn-primary btn-block"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div className='form-group'>
-        <label htmlFor='password'></label>
-        <input
-          type='password'
-          placeholder='Password'
-          id='password'
-          value={password}
-          onChange={handlePasswordChange}
-        />
-      </div>
-
-      {errorMessage && <p className='error-message'>{errorMessage}</p>}
-
-      <button type='submit'>Log In</button>
-
-      <div className='login-links'>
-        <a href='/register'>Register</a>
-        <a href='/forgot-password'>Forgot Password</a>
-      </div>
-
-      <div className='social'>
-        <GoogleLogin
-          clientId='YOUR_GOOGLE_CLIENT_ID'
-          buttonText='Google'
-          onSuccess={handleGoogleLoginSuccess}
-          onFailure={handleGoogleLoginFailure}
-          cookiePolicy={'single_host_origin'}
-        />
-      </div>
-    </form>
+    </div>
   );
 }

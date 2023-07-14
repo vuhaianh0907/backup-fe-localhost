@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './AddAmountPage.css';
+import './AddAmountPage.scss';
 
 function AddAmountPage() {
   const [customerId, setCustomerId] = useState('');
@@ -72,19 +72,19 @@ function AddAmountPage() {
       <div className="input-fields">
         <div className="form-group">
           <label htmlFor="customerId">ID khách hàng:</label>
-          <input type="text" id="customerId" value={customerId} onChange={handleCustomerIdChange} />
+          <input type="text" className="form-control" id="customerId" value={customerId} onChange={handleCustomerIdChange} />
         </div>
         <div className="form-group">
           <label htmlFor="amount">Số tiền:</label>
-          <input type="number" id="amount" value={amount} onChange={handleAmountChange} />
+          <input type="number" className="form-control" id="amount" value={amount} onChange={handleAmountChange} />
         </div>
       </div>
 
       <div className="action-buttons">
-        <button className="add-button" onClick={() => handleConfirmation('add')}>
+        <button className="btn btn-primary" onClick={() => handleConfirmation('add')}>
           Cộng tiền
         </button>
-        <button className="subtract-button" onClick={() => handleConfirmation('subtract')}>
+        <button className="btn btn-primary" onClick={() => handleConfirmation('subtract')}>
           Trừ tiền
         </button>
       </div>
@@ -94,10 +94,10 @@ function AddAmountPage() {
           <div className="confirmation-content">
             <p>Bạn có chắc chắn muốn {selectedAction === 'add' ? 'cộng' : 'trừ'} tiền cho khách hàng?</p>
             <div className="confirmation-buttons">
-              <button className="confirm-button" onClick={handleSubmit}>
+              <button className="btn btn-primary" onClick={handleSubmit}>
                 Xác nhận
               </button>
-              <button className="cancel-button" onClick={handleConfirmationClose}>
+              <button className="btn btn-secondary" onClick={handleConfirmationClose}>
                 Hủy
               </button>
             </div>
