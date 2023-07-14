@@ -54,6 +54,12 @@ export default function Navigation() {
                       Create Slot
                     </Link>
                   </li>
+                  <li className="nav-item">
+                    <Link className="nav-link text-light" to={`/customer/topupwallet/${user.id}`}>
+                      Momo
+                    </Link>
+                  </li>
+                  
                 </>
               )}
             </ul>
