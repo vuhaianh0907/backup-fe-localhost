@@ -3,14 +3,13 @@ import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import logo from '../assets/images/logo-01-01.png';
 import avatar from '../assets/images/avatar.jpg';
-import './header.css';
+import './header.scss';
 
 export default function Navigation() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isLoggedIn = sessionStorage.getItem('token') !== null;
   const storedUserString = sessionStorage.getItem("token");
   const user = JSON.parse(storedUserString);
-
 
   const handleLogout = () => {
     sessionStorage.removeItem('token');
@@ -23,136 +22,107 @@ export default function Navigation() {
   };
 
   return (
+    <>
+      <nav id="header" className="navbar navbar-expand-lg bg-dark">
+        <div className="container-fluid">
+          <Link className="navbar-brand" to="/">
+            <img src={logo} className="App-logo" alt="logo" />
+          </Link>
 
-    <div className="nav">
-      <nav>
-        <ul className="nav-list">
-          <li className="nav-list--logo">
-            <Link to="/">
-              <img src={logo} className="App-logo" alt="logo" />
-            </Link>
-          </li>
-          {user && user.role === 'doctor' && (
-            <>
-              <li className="nav-list--element">
-                <Link to={`/Doctorviewbooking/${user.id}`}>Appointment</Link>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <Link className="nav-link text-light" to="/admin/doctorlist">List Doctor</Link>
               </li>
-              
-            </>
-          )}
-          {user && user.role === 'admin' && (
-            <>
-              <li className="nav-list--element">
-                <Link to="/admin/doctorlist">List Doctor</Link>
+              <li className="nav-item">
+                <Link className="nav-link text-light" to="/admin/createslot">Create Slot</Link>
               </li>
-              <li className="nav-list--element">
-                <Link to="/admin/createslot">Create Slot</Link>
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul className="dropdown-menu">
+                  <li><a className="dropdown-item" href="#">Action</a></li>
+                  <li><a className="dropdown-item" href="#">Another action</a></li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li><a className="dropdown-item" href="#">Something else here</a></li>
+                </ul>
               </li>
-              <li className="nav-list--element">
-                <Link to="/admin/transaction">Transaction</Link>
-              </li>
-              <li className="nav-list--element">
-                <Link to="/admin/addamount">Add amount </Link>
-              </li>
-              <li className="nav-list--element">
-                <Link to="/admin/amount">Update price bill </Link>
-              </li>
-            </>
-          )}
-          {user && user.role === 'customer' && (
-            <>
-              <li className="nav-list--element">
-                <Link to="/customer/listdoctor">List Doctor</Link>
-              </li>
-              <li className="nav-list--element">
-                <Link to={`/customer/booking/${user.id}`}>List Appointment</Link>
-              </li>
-              <li className="nav-list--element">
-                <Link to={`/customer/treatmentprofilelist/${user.id}`}>Treatment Profile List</Link>
-              </li>
-              <li className="nav-list--element">
-                <Link to={`/customer/topupwallet/${user.id}`}>Momo</Link>
-              </li>
-            </>
-          )}
-
-        </ul>
-        <div className="nav-list--prior">
-          {isLoggedIn ? (
-            <div className="avatar" onClick={() => setIsModalOpen(true)}>
-              <img src={avatar} alt="Avatar" style={{ width: '50px', height: '50px' }} />
-            </div>
-          ) : (
-            <ul>
-              <li>
-                <Link to="/Login">Login</Link>
-              </li>
-              <li>
-              <Link to="/Register">Register</Link>
+              <li className="nav-item">
+                {isLoggedIn && (
+                  <a className="nav-link disabled">Disabled</a>
+                )}
               </li>
             </ul>
-            
-          )}
+            <div>
+              {isLoggedIn ? (
+                <div className="nav-item dropdown">
+                  <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40" height="40" className="rounded-circle" alt="Avatar" />
+                  </a>
+                  <ul className="dropdown-menu dropdown-menu-end">
+                    {user && user.role === 'doctor' && (
+                      <li>
+                        <Link to={`/doctor/profile/${user.id}`} onClick={handleOptionClick} className="dropdown-item">
+                          Xem thông tin cá nhân
+                        </Link>
+                      </li>
+                    )}
+                    {user && user.role === 'customer' && (
+                      <li>
+                        <Link to={`/customer/profile/${user.id}`} onClick={handleOptionClick} className="dropdown-item">
+                          Xem thông tin cá nhân
+                        </Link>
+                      </li>
+                    )}
+                    {user && user.role === 'admin' && (
+                      <li>
+                        <Link to="/admin/createdoctor" onClick={handleOptionClick} className="dropdown-item">
+                          Tạo Bác Sĩ
+                        </Link>
+                      </li>
+                    )}
+                    <li>
+                      <Link to="/customer/profile/edit" onClick={handleOptionClick} className="dropdown-item">
+                        Chỉnh sửa thông tin
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/customer/treatmentprofile/treatment" onClick={handleOptionClick} className="dropdown-item">
+                        Xem hồ sơ bệnh
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/changepass" onClick={handleOptionClick} className="dropdown-item">
+                        Đổi mật khẩu
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/logout"
+                        onClick={() => {
+                          handleLogout();
+                          handleOptionClick();
+                        }}
+                        className="dropdown-item"
+                      >
+                        Đăng xuất
+                      </Link>
+                    </li>
+                  </ul>
+
+                </div>
+              ) : (
+                <Link className="btn btn-primary" to="/Login">Login</Link>
+              )}
+            </div>
+          </div>
         </div>
       </nav>
-
-      <Modal
-        isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
-        contentLabel="Options Modal"
-        className="options-modal"
-      >
-        <ul className="options-list">
-          {user && user.role === 'doctor' && (
-            <li>
-              <Link to={`/doctor/profile/${user.id}`} onClick={handleOptionClick}>
-                Xem thông tin cá nhân
-              </Link>
-
-            </li>
-          )}
-          {user && user.role === 'customer' && (
-            <li>
-              <Link to={`/customer/profile/${user.id}`} onClick={handleOptionClick}>
-                Xem thông tin cá nhân
-              </Link>
-
-            </li>
-          )}
-
-          {user && user.role === 'admin' && (
-            <li className="nav-list--element">
-              <Link to="/admin/createdoctor" onClick={handleOptionClick}>
-                Tạo Bác Sĩ
-              </Link>
-            </li>
-          )}
-          <li>
-            <Link to="/customer/profile/edit" onClick={handleOptionClick}>
-              Chỉnh sửa thông tin
-            </Link>
-          </li>
-          <li>
-            <Link to="/customer/treatmentprofile/treatment" onClick={handleOptionClick}>
-              Xem hồ sơ bệnh
-            </Link>
-          </li>
-          <li>
-            <Link to="/changepass" onClick={handleOptionClick}>
-              Đổi mật khẩu
-            </Link>
-          </li>
-          <li>
-            <Link to="/logout" onClick={() => {
-              handleLogout();
-              handleOptionClick();
-            }}
-            >
-              Đăng xuất
-            </Link>
-          </li>
-        </ul>
-      </Modal>
-    </div>
+     
+    </>
   );
 }

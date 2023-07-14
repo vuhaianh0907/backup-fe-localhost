@@ -1,5 +1,5 @@
 import React from 'react';
-import './ForgotPassword.css';
+import './ForgotPassword.scss';
 
 export default function ForgotPassword() {
     const [email, setEmail] = React.useState('');
@@ -10,7 +10,7 @@ export default function ForgotPassword() {
     };
 
     return (
-        <div className="forgot-password-container">
+        <div id="ForgotPassword" className="forgot-password-container">
 
             <form onSubmit={handleSubmit}>
                 <h2>Forgot Password</h2>

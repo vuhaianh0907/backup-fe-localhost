@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './ChangePass.css';
+import './ChangePass.scss';
 import { useNavigate } from 'react-router-dom';
-
-
 
 function ChangePass() {
   const [password, setPassword] = useState('');
@@ -13,7 +11,6 @@ function ChangePass() {
   const navigate = useNavigate();
   const storedUserString = sessionStorage.getItem("token");
   const user = JSON.parse(storedUserString);
-  
 
   const handleChangePassword = (event) => {
     setPassword(event.target.value);
@@ -61,26 +58,20 @@ function ChangePass() {
       setNewPassword('');
       setConfirmPassword('');
       setErrorMessage('');
-      
-      if (response.status === 200){
+
+      if (response.status === 200) {
         navigate('/');
-      }
-      else {
+      } else {
         setErrorMessage(response.data.error);
-      return;
+        return;
       }
-      
-        
-      
-      
     } catch (error) {
       // Xử lý lỗi từ API (nếu cần)
-      
     }
   };
 
   return (
-    <div className="change-pass">
+    <div id="ChangePass" className="change-pass">
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <form onSubmit={handleSubmit}>
         <h2>Thay đổi mật khẩu</h2>
@@ -91,6 +82,7 @@ function ChangePass() {
             id="currentPassword"
             value={password}
             onChange={handleChangePassword}
+            className="form-control"
           />
         </div>
         <div className="form-group">
@@ -100,6 +92,7 @@ function ChangePass() {
             id="newPassword"
             value={newPassword}
             onChange={handleChangeNewPassword}
+            className="form-control"
           />
         </div>
         <div className="form-group">
@@ -109,9 +102,10 @@ function ChangePass() {
             id="confirmPassword"
             value={confirmPassword}
             onChange={handleChangeConfirmPassword}
+            className="form-control"
           />
         </div>
-        <button type="submit">Thay đổi mật khẩu</button>
+        <button type="submit" className="btn btn-primary">Thay đổi mật khẩu</button>
       </form>
     </div>
   );
