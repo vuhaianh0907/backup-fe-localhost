@@ -59,28 +59,28 @@ export default function LoginBar() {
         <div className="col-18 ">
           <div className="card shadow-2-strong" style={{ borderRadius: '1rem' }}>
             <div className="card-body p-5 text-center">
-              <h3>Login Here</h3>
+              <h2>Đăng nhập</h2>
 
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email"></label>
                   <input
                     type="email"
                     className="form-control"
                     id="email"
-                    placeholder="Enter email"
+                    placeholder="Nhập email"
                     value={email}
                     onChange={handleEmailChange}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="password">Password</label>
+                  <label htmlFor="password"></label>
                   <input
                     type="password"
                     className="form-control"
                     id="password"
-                    placeholder="Enter password"
+                    placeholder="Nhập Mật khẩu"
                     value={password}
                     onChange={handlePasswordChange}
                   />
@@ -88,12 +88,12 @@ export default function LoginBar() {
 
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-                <button type="submit" className="btn btn-primary btn-block">Log In</button>
+                <button type="submit" className="btn btn-primary btn-block">Đăng Nhập</button>
               </form>
 
               <div className="login-links">
-                <a href="/register">Register</a>
-                <a href="/forgot-password">Forgot Password</a>
+                <a href="/register">Đăng ký</a>
+                <a href="/forgot-password">Quên mật khẩu</a>
               </div>
 
               <div className="social">

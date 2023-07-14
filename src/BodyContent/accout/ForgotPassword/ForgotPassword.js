@@ -13,11 +13,11 @@ export default function ForgotPassword() {
         <div id="ForgotPassword" className="forgot-password-container">
 
             <form onSubmit={handleSubmit}>
-                <h2>Forgot Password</h2>
+                <h2>Quên mật khẩu</h2>
                 <input type="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required /><br />
-                <button type="submit" name="action" value="reset">Reset Password</button>
+                <button type="submit" name="action" value="reset">Đặt lại mật khẩu</button>
                 <div className='back-to-login'>
-                    <a href="/login" className='register-link'>Back to Login</a>
+                    <a href="/login" className='register-link'>Quay lại đăng nhập</a>
                 </div>
             </form>
 
