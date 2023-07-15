@@ -1,0 +1,42 @@
+#TreatmentProcess {
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: auto;
+  }
+  
+  .center-box {
+    width: 80%;
+    max-width: 500px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    
+    /* Add color styles */
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+  }
+  
+  .treatment-process__form {
+    width: 250%;
+    padding: 2rem;
+    margin: 0;
+    
+    /* Add form color styles */
+    background-color: #f9f9f9;
+    border-radius: 4px;
+  }
+  
+  .treatment-process__details {
+    width: 250%;
+    padding: 2rem;
+    margin: 0;
+    
+    /* Add details color styles */
+    background-color: #f6f6f6;
+    border-radius: 4px;
+  }
+}
