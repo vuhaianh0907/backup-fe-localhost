@@ -1,25 +1,26 @@
-.doctor-list {
+#DoctorList {
+  .doctor-list {
     padding: 20px;
   }
-  
+
   .doctor-list__title {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
   }
-  
+
   .doctor-list__items {
     list-style: none;
     padding: 0;
     margin: 0;
   }
-  
+
   .doctor-item {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
   }
-  
+
   .doctor-item__avatar img {
     width: 80px;
     height: 80px;
@@ -27,29 +28,40 @@
     object-fit: cover;
     margin-right: 20px;
   }
-  
+
   .doctor-item__details {
     flex-grow: 1;
   }
-  
+
   .doctor-item__name {
     font-weight: bold;
     margin-bottom: 5px;
   }
-  
+
   .doctor-item__specialization {
     font-size: 14px;
     color: #555;
   }
-  
-  .view-details-button {
-    padding: 5px 10px;
-    border: none;
-    background-color: #3498db;
-    color: #fff;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
+
+  .view-details-link {
+    margin-left: 10px;
   }
-  
+
+  .status-button {
+    margin-left: 10px;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    color: #fff;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+  }
+
+  .confirm-button {
+    margin-right: 10px;
+  }
+}

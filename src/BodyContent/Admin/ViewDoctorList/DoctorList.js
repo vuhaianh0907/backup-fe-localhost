@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Modal from 'react-modal';
-import './DoctorList.css';
+import './DoctorList.scss';
 
 const DoctorList = () => {
   const [doctors, setDoctors] = useState([]);
@@ -36,24 +35,24 @@ const DoctorList = () => {
   };
 
   const handleStatusChange = (doctor) => {
-    setSelectedDoctor(doctor);
+    const updatedStatus = doctor.status === 'active' ? 'not active' : 'active';
+    const updatedDoctor = { ...doctor, status: updatedStatus };
+    setSelectedDoctor(updatedDoctor);
     setIsConfirmationModalOpen(true);
   };
 
   const handleConfirmationConfirm = async () => {
     try {
       await axios.post(`http://localhost:3000/api/account/doctor/status?id=${selectedDoctor.id}`);
-      
-      // Cập nhật trạng thái trong danh sách bác sĩ
+
       const updatedDoctors = doctors.map((doctor) =>
-        doctor.id === selectedDoctor.id ? { ...doctor, status: selectedDoctor.status === 'active' ? 'not active' : 'active' } : doctor
+        doctor.id === selectedDoctor.id ? selectedDoctor : doctor
       );
       setDoctors(updatedDoctors);
     } catch (error) {
       console.error('Error updating doctor status:', error);
     }
 
-    // Đóng modal xác nhận
     setIsConfirmationModalOpen(false);
   };
 
@@ -61,8 +60,16 @@ const DoctorList = () => {
     setIsConfirmationModalOpen(false);
   };
 
+  useEffect(() => {
+    if (isConfirmationModalOpen) {
+      document.body.classList.add('modal-open');
+    } else {
+      document.body.classList.remove('modal-open');
+    }
+  }, [isConfirmationModalOpen]);
+
   return (
-    <div className="doctor-list">
+    <div id="DoctorList" className="doctor-list">
       <h2 className="doctor-list__title">Danh sách bác sĩ</h2>
       {isLoading ? (
         <p>Loading...</p>
@@ -78,10 +85,13 @@ const DoctorList = () => {
                   <p className="doctor-item__name">{doctor.fullname}</p>
                   <p className="doctor-item__specialization">{doctor.qualification}</p>
                 </div>
-                <button className="status-button" onClick={() => handleStatusChange(doctor)}>
+                <button
+                  className={`status-button btn ${doctor.status === 'active' ? 'btn-success' : 'btn-danger'}`}
+                  onClick={() => handleStatusChange(doctor)}
+                >
                   {doctor.status === 'active' ? 'Active' : 'Not Active'}
                 </button>
-                <Link to={`/admin/doctordetail/${doctor.id}`} className="view-details-link">
+                <Link to={`/admin/doctordetail/${doctor.id}`} className="view-details-link btn btn-primary">
                   Xem thông tin
                 </Link>
               </li>
@@ -92,7 +102,7 @@ const DoctorList = () => {
               (pageNumber) => (
                 <button
                   key={pageNumber}
-                  className={`pagination-button ${pageNumber === currentPage ? 'active' : ''}`}
+                  className={`pagination-button btn ${pageNumber === currentPage ? 'active' : ''}`}
                   onClick={() => paginate(pageNumber)}
                 >
                   {pageNumber}
@@ -103,21 +113,50 @@ const DoctorList = () => {
         </>
       )}
 
-      {/* Modal xác nhận */}
-      <Modal isOpen={isConfirmationModalOpen}>
-        <div className="confirmation-modal">
-          <h3>Xác nhận</h3>
-          <p>Bạn có chắc chắn muốn thay đổi trạng thái của bác sĩ?</p>
-          <div className="confirmation-modal-buttons">
-            <button className="confirm-button" onClick={handleConfirmationConfirm}>
-              Xác nhận
-            </button>
-            <button className="cancel-button" onClick={handleConfirmationCancel}>
-              Hủy
-            </button>
+      {isConfirmationModalOpen && (
+        <div className="modal-backdrop fade show"></div>
+      )}
+
+      <div
+        id="confirmation-modal"
+        className={`modal fade ${isConfirmationModalOpen ? 'show' : ''}`}
+        tabIndex="-1"
+        role="dialog"
+        style={{ display: isConfirmationModalOpen ? 'block' : 'none' }}
+      >
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h3 className="modal-title">Xác nhận</h3>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-label="Close"
+                onClick={handleConfirmationCancel}
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <p>Bạn có chắc chắn muốn thay đổi trạng thái của bác sĩ?</p>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-danger" onClick={handleConfirmationConfirm}>
+                Xác nhận
+              </button>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-dismiss="modal"
+                onClick={handleConfirmationCancel}
+              >
+                Hủy
+              </button>
+            </div>
           </div>
         </div>
-      </Modal>
+      </div>
     </div>
   );
 };
