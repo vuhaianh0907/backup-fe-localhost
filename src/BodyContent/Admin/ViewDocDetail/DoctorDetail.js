@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
-import './DoctorDetail.css';
+import './DoctorDetail.scss';
 
 const DoctorDetail = () => {
   const { doctorId } = useParams(); // Truy cập vào doctorId từ URL parameter
@@ -62,7 +62,7 @@ const DoctorDetail = () => {
   }
 
   return (
-    <div className="doctor-detail">
+    <div id="DoctorDetail" className="doctor-detail">
       <div className="avatar-container">
         <img src={doctorInfo.avatar} alt="Doctor Avatar" className="doctor-avatar" />
       </div>

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
 import { useParams, Link } from 'react-router-dom';
-import './UpdateDoctor.css';
 import axios from 'axios';
+
+import 'bootstrap/dist/css/bootstrap.css'; // Import Bootstrap CSS
+import './UpdateDoctor.scss'; // Custom styles
 
 function AdminUpdateDoctor() {
   const [doctorInfo, setDoctorInfo] = useState({
@@ -74,91 +76,135 @@ function AdminUpdateDoctor() {
   };
 
   return (
-    <div className="form1">
+    <div id="UpdateDoctor" className="container">
       {isLoading ? (
         <p>Loading...</p>
       ) : (
         <form onSubmit={handleSubmit} className="form-container">
           <h2>Cập nhật thông tin bác sĩ</h2>
           <div className="form-group">
-            <label>Họ tên:</label>
-            <input type="text" name="fullname" value={doctorInfo.fullname} onChange={handleChange} />
-          </div>
-          <div className="form-group">
-            <label>CMND/CCCD:</label>
-            <input type="text" name="idCard" value={doctorInfo.idCard} onChange={handleChange} />
-          </div>
-          <div className="gender-options">
-            <label>Giới tính:</label>
-            <input
-              type="radio"
-              name="gender"
-              value="Nam"
-              checked={doctorInfo.gender === 'Nam'}
-              onChange={handleChange}
-            />{' '}
-            Nam
-            <input
-              type="radio"
-              name="gender"
-              value="Nữ"
-              checked={doctorInfo.gender === 'Nữ'}
-              onChange={handleChange}
-            />{' '}
-            Nữ
-          </div>
-          <div className="form-group">
-            <label>Ngày tháng năm sinh:</label>
-            <input type="date" name="dateOfBirth" value={doctorInfo.dateOfBirth} onChange={handleChange} />
-          </div>
-          <div className="form-group">
-            <label>Số điện thoại:</label>
+            <label htmlFor="fullname">Họ tên:</label>
             <input
               type="text"
+              className="form-control"
+              id="fullname"
+              name="fullname"
+              value={doctorInfo.fullname}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="idCard">CMND/CCCD:</label>
+            <input
+              type="text"
+              className="form-control"
+              id="idCard"
+              name="idCard"
+              value={doctorInfo.idCard}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label>Giới tính:</label>
+            <div className="gender-options">
+              <label>
+                <input
+                  type="radio"
+                  className="form-check-input"
+                  id="genderMale"
+                  name="gender"
+                  value="Nam"
+                  checked={doctorInfo.gender === 'Nam'}
+                  onChange={handleChange}
+                />
+                <span>Nam</span>
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  className="form-check-input"
+                  id="genderFemale"
+                  name="gender"
+                  value="Nữ"
+                  checked={doctorInfo.gender === 'Nữ'}
+                  onChange={handleChange}
+                />
+                <span>Nữ</span>
+              </label>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="dateOfBirth">Ngày tháng năm sinh:</label>
+            <input
+              type="date"
+              className="form-control"
+              id="dateOfBirth"
+              name="dateOfBirth"
+              value={doctorInfo.dateOfBirth}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="phone">Số điện thoại:</label>
+            <input
+              type="text"
+              className="form-control"
+              id="phone"
               name="phone"
               value={doctorInfo.phone}
               onChange={handleChange}
             />
           </div>
           <div className="form-group">
-            <label>Email:</label>
+            <label htmlFor="email">Email:</label>
             <input
               type="email"
+              className="form-control"
+              id="email"
               name="email"
               value={doctorInfo.email}
               onChange={handleChange}
             />
           </div>
           <div className="form-group">
-            <label>Địa chỉ:</label>
+            <label htmlFor="address">Địa chỉ:</label>
             <input
               type="text"
+              className="form-control"
+              id="address"
               name="address"
               value={doctorInfo.address}
               onChange={handleChange}
             />
           </div>
           <div className="form-group">
-            <label>Bằng cấp:</label>
+            <label htmlFor="qualification">Bằng cấp:</label>
             <input
               type="text"
+              className="form-control"
+              id="qualification"
               name="qualification"
               value={doctorInfo.qualification}
               onChange={handleChange}
             />
           </div>
           <div className="form-group">
-            <label>Kinh nghiệm làm việc:</label>
+            <label htmlFor="experience">Kinh nghiệm làm việc:</label>
             <input
               type="text"
+              className="form-control"
+              id="experience"
               name="experience"
               value={doctorInfo.experience}
               onChange={handleChange}
             />
           </div>
           <div className="form-group">
-            <button type="submit">Cập nhật</button>
-            <button type="button" onClick={handleCancel}>
+            <button type="submit" className="btn btn-success">
+              Cập nhật
+            </button>
+            <button type="button" className="btn btn-danger" onClick={handleCancel}>
               Hủy bỏ
             </button>
           </div>
@@ -170,8 +216,12 @@ function AdminUpdateDoctor() {
           <div className="confirmation-content">
             <h3>Xác nhận</h3>
             <p>Bạn có chắc chắn muốn cập nhật/hủy bỏ?</p>
-            <button onClick={() => handleConfirmation(true)}>Cập nhật</button>
-            <button onClick={() => handleConfirmation(false)}>Hủy bỏ</button>
+            <button className="btn btn-success" onClick={() => handleConfirmation(true)}>
+              Cập nhật
+            </button>
+            <button className="btn btn-danger" onClick={() => handleConfirmation(false)}>
+              Hủy bỏ
+            </button>
           </div>
         </div>
       )}
