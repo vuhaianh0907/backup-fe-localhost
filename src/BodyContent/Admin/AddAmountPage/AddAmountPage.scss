@@ -1,80 +1,130 @@
-.add-amount-page {
-  text-align: center;
-  padding: 20px;
-  
-  h2 {
-    margin-bottom: 20px;
-  }
-  
-  .error-message {
-    color: red;
-    margin-bottom: 10px;
-  }
-  
-  .success-message {
-    color: green;
-    margin-bottom: 10px;
-  }
-  
-  .input-fields {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-    
-    .form-group {
+
+  .add-amount-page {
+    text-align: center;
+    padding: 20px;
+
+    h2 {
+      margin-bottom: 20px;
+      color: #007bff; /* Màu chữ cho tiêu đề */
+    }
+
+    .error-message {
+      color: red;
       margin-bottom: 10px;
-      
-      label {
-        display: block;
-        font-weight: bold;
-      }
-      
-      input {
-        width: 300px;
-        margin: 0 auto; /* căn giữa input */
+    }
+
+    .success-message {
+      color: green;
+      margin-bottom: 10px;
+    }
+
+    .input-fields {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+
+      .form-group {
+        margin-bottom: 20px; /* Tăng khoảng cách giữa các trường nhập liệu */
+
+        label {
+          display: block;
+          font-weight: bold;
+        }
+
+        input {
+          width: 300px;
+          margin: 0 auto;
+          padding: 10px; /* Tăng padding cho input */
+          font-size: 16px; /* Tăng kích thước font cho input */
+          border: 1px solid #ccc; /* Tạo khung viền cho input */
+          border-radius: 5px; /* Bo tròn góc cho input */
+          transition: border-color 0.3s ease; /* Hiệu ứng chuyển đổi màu khi hover */
+        }
+
+        input:focus {
+          outline: none; /* Loại bỏ đường viền khi input được chọn */
+          border-color: #007bff; /* Đổi màu viền khi input được chọn */
+        }
       }
     }
-  }
-  
-  .action-buttons {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-    
-    button {
-      margin: 0 10px;
-    }
-  }
-  
-  .confirmation-popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    .confirmation-content {
-      background-color: white;
-      padding: 20px;
-      
-      p {
-        margin-bottom: 20px;
+
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+
+      button {
+        margin: 0 10px;
+        padding: 10px 20px; /* Tăng kích thước các nút */
+        font-size: 16px; /* Tăng kích thước font chữ cho các nút */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
       }
-      
-      .confirmation-buttons {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        
-        button {
-          margin: 0 10px;
+
+      button:hover {
+        opacity: 0.8;
+      }
+
+      .btn-primary {
+        background-color: #007bff; /* Màu nền cho nút "Cộng tiền" */
+        color: #fff;
+      }
+
+      .btn-secondary {
+        background-color: #ccc; /* Màu nền cho nút "Trừ tiền" */
+        color: #333;
+      }
+    }
+
+    .confirmation-popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .confirmation-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px; /* Bo tròn góc cho popup */
+
+        p {
+          margin-bottom: 20px;
+        }
+
+        .confirmation-buttons {
+          display: flex;
+          justify-content: center;
+          margin-top: 20px;
+
+          button {
+            margin: 0 10px;
+            padding: 10px 20px; /* Tăng kích thước các nút xác nhận và hủy */
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+          }
+
+          .btn-primary {
+            background-color: #007bff; /* Màu nền cho nút "Xác nhận" */
+            color: #fff;
+          }
+
+          .btn-secondary {
+            background-color: #ccc; /* Màu nền cho nút "Hủy" */
+            color: #333;
+          }
         }
       }
     }
   }
-}
+

@@ -1,113 +1,115 @@
-#CreateDoctor{
-    .form1 {
-        width: 1322px;
-        height: 1405px;
-        flex-shrink: 0;
-        margin: 0 auto;
-        padding: 20px;
-        box-sizing: border-box;
-        font-family: Arial, sans-serif;
-        border-radius: 40px 0px 0px 0px;
-        background: #FFF;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    
+#CreateDoctor {
     .form-container {
-        width: 908px;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+      width: 908px;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      border-radius: 40px 0 0 0;
+      background: #f8f8f8; /* Set a light background color */
+      border: 1px solid #ccc; /* Add a border for a subtle visual separation */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    
+  
     h2 {
-        text-align: center;
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 30px;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      color: #333; /* Dark text color */
     }
-    
+  
     h3 {
-        font-size: 18px;
-        font-weight: bold;
-        margin-bottom: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333; /* Dark text color */
     }
-    
-    .form-container label {
-        display: block;
-        font-size: 16px;
-        font-weight: bold;
-        margin-bottom: 5px;
+  
+    label {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #333; /* Dark text color */
     }
-    
-    .form-container input[type="text"],
-    .form-container input[type="email"],
-    .form-container input[type="date"],
-    .form-container input[type="password"] {
-        width: 908px;
-        height: 62px;
-        flex-shrink: 0;
-        border: 1px solid #000;
-        background: #FFF;
-        padding: 8px;
-        font-size: 16px;
+  
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    input[type="password"] {
+      width: 100%;
+      height: 62px;
+      border: 1px solid #ccc; /* Add a border to form fields */
+      background: #fff;
+      padding: 8px;
+      font-size: 16px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      box-sizing: border-box; /* Fix the input width calculation */
     }
-    
-    .form-container .gender-options {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        /* Căng lề trái */
-        margin-top: 5px;
+  
+    .gender-options {
+      display: flex;
+      align-items: center;
+      margin-top: 5px;
     }
-    
-    .form-container .gender-options label {
-        margin-right: 10px;
-        font-size: 16px;
+  
+    .gender-options label {
+      margin-right: 20px;
+      font-size: 16px;
+      color: #333; /* Dark text color */
     }
-    
-    .form-container .action-buttons {
-        text-align: center;
-        margin-top: 30px;
+  
+    .action-buttons {
+      text-align: center;
+      margin-top: 30px;
     }
-    
-    .form-container button[type="submit"] {
-        padding: 10px 20px;
-        font-size: 18px;
-        font-weight: bold;
-    
-    
-        border: none;
-        cursor: pointer;
+  
+    button[type="submit"] {
+      padding: 10px 20px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      background-color: #007bff; /* Blue color for the button */
+      color: #fff; /* Text color for the button */
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
     }
-    
+  
+    button[type="submit"]:hover {
+      background-color: #0056b3; /* Darker blue color on hover */
+    }
+  
     /* Custom styling for file input */
-    .form-container input[type="file"] {
-        display: none;
+    input[type="file"] {
+      display: none;
     }
-    
-    .form-container .custom-file-upload {
-        border: 1px solid #ffffff;
-        display: inline-block;
-    
-        cursor: pointer;
+  
+    .custom-file-upload {
+      border: 1px solid #ffffff;
+      display: inline-block;
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
     }
-    
-    .form-container .custom-file-upload:hover {
-        background-color: #eee;
+  
+    .custom-file-upload:hover {
+      background-color: #eee;
     }
+  
     .image-preview {
-        width: 200px; /* Đặt kích thước rộng */
-        height: auto; /* Giữ tỷ lệ khung hình */
-      }
-      
-      .image-preview img {
-        max-width: 100%; /* Đảm bảo ảnh không vượt quá kích thước của phần tử cha */
-        max-height: 200px; /* Đặt chiều cao tối đa */
-        object-fit: contain; /* Hiển thị toàn bộ ảnh trong khung hình */
-      }
-      
-}
+      width: 200px;
+      height: auto;
+      border-radius: 5px; /* Add a border-radius to the image */
+    }
+  
+    .image-preview img {
+      max-width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+    }
+  }
+  

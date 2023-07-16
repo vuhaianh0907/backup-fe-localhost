@@ -63,7 +63,7 @@ function AddAmountPage() {
   };
 
   return (
-    <div className="add-amount-page">
+    <div  className="add-amount-page">
       <h2>Cộng/Trừ tiền cho khách hàng</h2>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
