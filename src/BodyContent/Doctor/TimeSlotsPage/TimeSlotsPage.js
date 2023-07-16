@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './TimeSlotsPage.css';
+import './TimeSlotsPage.scss';
 
 const TimeSlotsPage = () => {
   const [selectedSlot, setSelectedSlot] = useState('');
@@ -52,7 +52,7 @@ const TimeSlotsPage = () => {
   };
 
   return (
-    <div className="time-slots-page">
+    <div  className="time-slots-page">
       <h2 className="title">Chọn ngày</h2>
       <div className="date-picker">
         <input
@@ -75,18 +75,19 @@ const TimeSlotsPage = () => {
               <p>Ngày khám: {selectedDate}</p>
               <p>Giờ khám: {selectedSlot}</p>
             </div>
-            <div className="reason-input">
+            <div className="form-group">
               <label htmlFor="reason">Lí do khám:</label>
               <input
                 type="text"
                 id="reason"
                 value={reason}
                 onChange={handleReasonChange}
+                className="form-control"
               />
             </div>
             <div className="popup-buttons">
-              <button className="confirm-button" onClick={handlePopupClose}>Xác nhận</button>
-              <button className="close-button" onClick={handlePopupClose}>Đóng</button>
+              <button className="btn btn-primary" onClick={handlePopupClose}>Xác nhận</button>
+              <button className="btn btn-secondary" onClick={handlePopupClose}>Đóng</button>
             </div>
           </div>
         </div>
