@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaUser, FaCalendarAlt } from 'react-icons/fa';
-import './TreatmentProcess.css';
+import './TreatmentProcess.scss';
 
 const TreatmentProcess = () => {
   const patientName = 'Đỗ Quang Lực';
@@ -12,26 +12,46 @@ const TreatmentProcess = () => {
   const notesContent = 'Nội dung ghi chú từ cơ sở dữ liệu';
 
   return (
-    <div className="treatment-process">
-      <h2 className="treatment-process__title">Xem quy trình điều trị</h2>
-      <div className="treatment-process__info">
-        <p className="treatment-process__info-item"><FaUser /> Bệnh Nhân: {patientName}</p>
-        <p className="treatment-process__info-item"><FaCalendarAlt /> Ngày khám: {appointmentDate}</p>
-        <p className="treatment-process__info-item"><FaUser /> Bác sĩ điều trị: {treatingDoctor}</p>
-        <p className="treatment-process__info-item"><FaUser /> Dịch vụ: {service}</p>
-      </div>
-      <div className="treatment-process__details">
-        <div className="treatment-process__section">
-          <h3 className="treatment-process__subheading">Quy trình điều trị:</h3>
-          <p className="treatment-process__text">{treatmentProcessContent}</p>
-        </div>
-        <div className="treatment-process__section">
-          <h3 className="treatment-process__subheading">Kết quả điều trị:</h3>
-          <p className="treatment-process__text">{treatmentResultContent}</p>
-        </div>
-        <div className="treatment-process__section">
-          <h3 className="treatment-process__subheading">Ghi chú:</h3>
-          <p className="treatment-process__text">{notesContent}</p>
+    <div className="container">
+      <div className="center-box">
+        <div id="TreatmentProcess" className="treatment-process">
+          <h2 className="treatment-process__title">Xem quy trình điều trị</h2>
+          <form className="treatment-process__form">
+            <div className="form-group">
+              <FaUser />
+              <label htmlFor="patientName">Bệnh Nhân:</label>
+              <p id="patientName" className="form-control">{patientName}</p>
+            </div>
+            <div className="form-group">
+              <FaCalendarAlt />
+              <label htmlFor="appointmentDate">Ngày khám:</label>
+              <p id="appointmentDate" className="form-control">{appointmentDate}</p>
+            </div>
+            <div className="form-group">
+              <FaUser />
+              <label htmlFor="treatingDoctor">Bác sĩ điều trị:</label>
+              <p id="treatingDoctor" className="form-control">{treatingDoctor}</p>
+            </div>
+            <div className="form-group">
+              <FaUser />
+              <label htmlFor="service">Dịch vụ:</label>
+              <p id="service" className="form-control">{service}</p>
+            </div>
+          </form>
+          <div className="treatment-process__details">
+            <div className="treatment-process__section">
+              <h3 className="treatment-process__subheading">Quy trình điều trị:</h3>
+              <p className="treatment-process__text">{treatmentProcessContent}</p>
+            </div>
+            <div className="treatment-process__section">
+              <h3 className="treatment-process__subheading">Kết quả điều trị:</h3>
+              <p className="treatment-process__text">{treatmentResultContent}</p>
+            </div>
+            <div className="treatment-process__section">
+              <h3 className="treatment-process__subheading">Ghi chú:</h3>
+              <p className="treatment-process__text">{notesContent}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

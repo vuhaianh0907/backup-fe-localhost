@@ -44,22 +44,68 @@ export default function Navigation() {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               {isLoggedIn && (
                 <>
-                  <li className="nav-item">
-                    <Link className="nav-link text-light" to="/admin/doctorlist">
-                      List Doctor
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link text-light" to="/admin/createslot">
-                      Create Slot
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link text-light" to={`/customer/topupwallet/${user.id}`}>
-                      Momo
-                    </Link>
-                  </li>
-                  
+                  {user && user.role === 'admin' && (
+                    <>
+                      <li className="nav-item">
+                        <Link className="nav-link text-light" to="/admin/doctorlist">
+                          List Doctor
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link className="nav-link text-light" to="/admin/createslot">
+                          Create Slot
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link className="nav-link text-light" to="/admin/transaction">
+                          Transaction
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link className="nav-link text-light" to="/admin/addamount">
+                          Add amount
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link className="nav-link text-light" to="/admin/amount">
+                          Update price bill
+                        </Link>
+                      </li>
+                    </>
+                  )}
+
+                  {user && user.role === 'doctor' && (
+                    <li className="nav-item">
+                      <Link className="nav-link text-light" to={`/Doctorviewbooking/${user.id}`}>
+                        Appointment
+                      </Link>
+                    </li>
+                  )}
+
+                  {user && user.role === 'customer' && (
+                    <>
+                      <li className="nav-item">
+                        <Link className="nav-link text-light" to="/customer/listdoctor">
+                          List Doctor
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link className="nav-link text-light" to={`/customer/booking/${user.id}`}>
+                          List Appointment
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link className="nav-link text-light" to={`/customer/treatmentprofilelist/${user.id}`}>
+                          Treatment Profile List
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link className="nav-link text-light" to={`/customer/topupwallet/${user.id}`}>
+                          Momo
+                        </Link>
+                      </li>
+                    </>
+                  )}
                 </>
               )}
             </ul>
