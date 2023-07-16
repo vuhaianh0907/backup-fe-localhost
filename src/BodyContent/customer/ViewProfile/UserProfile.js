@@ -63,12 +63,7 @@ const UserProfile = () => {
       </div>
       <button className="edit-profile-button" onClick={handleEditProfile}>Chỉnh sửa thông tin</button>
       <div className="user-profile__actions">
-        <button className="user-profile__action-button" onClick={handleViewAppointments}>
-          Xem danh sách phiếu khám
-        </button>
-        <button className="user-profile__action-button" onClick={handleViewMedicalRecords}>
-          Xem danh sách hồ sơ bệnh
-        </button>
+
       </div>
     </div>
   );

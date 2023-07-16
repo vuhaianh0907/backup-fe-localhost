@@ -1,0 +1,38 @@
+#ChangePass{
+    .change-pass {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        
+      
+        form {
+            max-width: 400px;
+            width: 100%;
+            margin-left: auto;    // Căng lề trái
+            margin-right: auto;   // Căng lề phải
+      
+          .form-group {
+            margin-bottom: 1.5rem;
+          }
+      
+          label {
+            display: block;
+            margin-bottom: 0.5rem;
+          }
+      
+          input {
+            width: 100%;
+          }
+      
+          .error-message {
+            color: red;
+            margin-bottom: 1rem;
+          }
+      
+          button[type='submit'] {
+            width: 100%;
+          }
+        }
+      }
+}
