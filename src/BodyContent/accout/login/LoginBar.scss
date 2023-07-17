@@ -1,6 +1,9 @@
 #LoginBar {
   .card {
-    border-radius: 10rem;
+    border-radius: 1rem;
+    margin-left: 100%;
+    margin-top: 10%;
+    
   }
 
   .card-body {
@@ -16,7 +19,6 @@
     form {
       .form-group {
         margin-bottom: 1.5rem;
-        //...
 
         label {
           display: block;
@@ -24,7 +26,7 @@
         }
 
         input {
-          width: 100%;
+          width: 300px;
           padding: 1rem;
           border: 1px solid #ccc;
           border-radius: 4px;
@@ -38,28 +40,14 @@
       }
 
       button[type='submit'] {
-        display: block;
         width: 100%;
-        padding: 10px;
-        background-color: #007bff;
-        color: #fff;
+        padding: 1rem;
+        background-color: #007bff; /* Màu sắc cho nút Đăng Nhập */
+        color: white;
         border: none;
         border-radius: 4px;
         cursor: pointer;
-        margin-bottom: 10px;
-    }
-    
-    button[type='submit']:hover {
-        background-color: #0069d9;
-    }
-    
-    button[type='submit']:focus {
-        outline: none;
-    }
-    
-    button[type='submit']:active {
-        transform: translateY(1px);
-    }
+      }
     }
 
     .login-links {
@@ -75,8 +63,7 @@
     .social {
       margin-top: 1.5rem;
 
-      .google-login-button {
-        // Các phần CSS khác
+      .btn-google-login {
         background-color: #dd4b39; /* Màu sắc cho nút Đăng nhập bằng Google */
         color: white;
         border: none;
@@ -87,5 +74,4 @@
       }
     }
   }
-  
 }

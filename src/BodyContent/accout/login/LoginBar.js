@@ -54,15 +54,16 @@ export default function LoginBar() {
   };
 
   return (
-    <div id="LoginBar" className="container py-5 h-100">
+    <div id="LoginBar" className="container">
       <div className="row d-flex justify-content-center align-items-center h-100">
-        <div className="col-18 ">
-          <div className="card shadow-2-strong" style={{ borderRadius: '1rem' }}>
-            <div className="card-body text-center">
-              <h2>Đăng nhập</h2>
+        <div className=" ">
+          <div >
+            
+              
 
-              <form onSubmit={handleSubmit}>
+              <form className="card shadow-2-strong" style={{ borderRadius: '1rem' }} onSubmit={handleSubmit}>
                 <div className="form-group">
+                <h2>Đăng nhập</h2>
                   <label htmlFor="email"></label>
                   <input
                     type="email"
@@ -89,13 +90,10 @@ export default function LoginBar() {
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
 
                 <button type="submit" className="btn btn-primary btn-block">Đăng Nhập</button>
-              </form>
-
-              <div className="login-links">
+                <div className="login-links">
                 <a href="/register">Đăng ký</a>
                 <a href="/forgot-password">Quên mật khẩu</a>
               </div>
-
               <div className="social">
                 <GoogleLogin
                   clientId="YOUR_GOOGLE_CLIENT_ID"
@@ -106,7 +104,12 @@ export default function LoginBar() {
                   className="btn btn-primary btn-block"
                 />
               </div>
-            </div>
+              </form>
+
+             
+
+              
+            
           </div>
         </div>
       </div>
