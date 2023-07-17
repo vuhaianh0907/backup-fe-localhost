@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import './ViewDocDetail.css';
+import './ViewDocDetail.scss';
 import axios from 'axios';
 
 export default function ViewDocDetail() {
@@ -65,7 +65,7 @@ export default function ViewDocDetail() {
     : slots;
 
   return (
-    <div className="container">
+    <div id="ViewDocDetail" className="container">
       {doctor ? (
         <div className="doctor-profile">
           <img src={doctor.avatar} alt="Doctor Profile" className="profile-picture" />
@@ -99,21 +99,19 @@ export default function ViewDocDetail() {
 
       <div className="slots-container">
         <h3>Các lịch hẹn của bác sĩ</h3>
-        {filteredSlots.length > 0 ? (
-          <ul className="slots-list">
-            {filteredSlots.map((slot) => (
-              <li key={slot.id}>
-                <Link to={`/customer/slot/appointment/${slot.id}`}>
-                  <button className="slot-button" onClick={() => handleSlotClick(slot.id)}>
-                    {slot.time}
-                  </button>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>Không có lịch hẹn khả dụng</p>
-        )}
+        <div className="slots-list">
+          {filteredSlots.length > 0 ? (
+            filteredSlots.map((slot) => (
+              <Link to={`/customer/slot/appointment/${slot.id}`} key={slot.id}>
+                <button className="slot-button" onClick={() => handleSlotClick(slot.id)}>
+                  {slot.time}
+                </button>
+              </Link>
+            ))
+          ) : (
+            <p>Không có lịch hẹn khả dụng</p>
+          )}
+        </div>
       </div>
     </div>
   );

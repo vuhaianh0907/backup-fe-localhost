@@ -1,0 +1,139 @@
+/* CustomerViewDoctor.scss */
+
+#CustomerViewDoctor {
+  max-width: 75%;
+  margin: 0 auto;
+  padding: 20px;
+
+  .time-selection {
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .date-input {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      label {
+        margin-right: 10px;
+      }
+    }
+
+    .time-options {
+      display: flex;
+      gap: 10px;
+      margin-left: 10px;
+    }
+
+    .time-option {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      background-color: #f2f2f2;
+      color: #333;
+      font-size: 14px;
+      cursor: pointer;
+
+      &.active {
+        background-color: #4caf50;
+        color: #fff;
+      }
+    }
+
+    .confirmation-button {
+      padding: 12px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 20px;
+
+      &:disabled {
+        background-color: #d2d2d2;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .doctor-list {
+    margin-top: 20px;
+
+    ul.doctor-list__container {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .doctor-info {
+      background-color: #f2f2f2;
+      padding: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+
+      .doctor-item__avatar {
+        margin-right: 10px;
+        img {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+        }
+      }
+
+      .doctor-name {
+        font-weight: bold;
+      }
+
+      .doctor-action {
+        margin-left: auto;
+        a {
+          background-color: #007bff;
+          color: #fff;
+          padding: 8px 16px;
+          border: none;
+          border-radius: 4px;
+          font-size: 14px;
+          text-decoration: none;
+
+          &:hover {
+            background-color: #0056b3;
+          }
+        }
+      }
+    }
+
+    h3 {
+      margin: 0;
+    }
+
+    p {
+      margin: 5px 0;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .pagination {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button {
+      background-color: transparent;
+      font-weight: bold;
+      color: #333;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      padding: 0 10px;
+      display: flex;
+      align-items: center;
+    }
+  }
+  
+}
