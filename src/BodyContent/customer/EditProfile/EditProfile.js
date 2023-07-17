@@ -60,7 +60,7 @@ const EditProfile = () => {
   return (
  
      
-      <form id="EditProfile" className="card " style={{ borderRadius: '1rem' }} onSubmit={handleFormSubmit}>
+      <form  className="card " style={{ borderRadius: '1rem' }} onSubmit={handleFormSubmit}>
       <h2 className="edit-profile__title">Chỉnh sửa thông tin</h2>
         <div className="edit-profile__form-group">
           <label htmlFor="fullname" className="edit-profile__label">Họ và tên</label>
