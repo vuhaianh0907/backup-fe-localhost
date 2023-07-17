@@ -1,3 +1,6 @@
+/* Register.scss */
+
+/* CSS cho phần form đăng ký */
 #register {
   .container-small {
     max-width: 800px;
@@ -5,14 +8,13 @@
   }
 
   .custom-input {
-    width: 100%; /* Tăng chiều ngang của các ô nhập liệu lên 100% */
-    font-size: 18px; /* Thay đổi kích thước chữ tùy chỉnh tại đây */
-    padding: 12px 20px; /* Thay đổi giá trị padding theo ý muốn */
+    width: 100%;
+    font-size: 18px;
+    padding: 12px 20px;
   }
 
-  /* Ghi đè kích thước chữ cho các label trong form */
   label {
-    font-size: 14px; /* Thay đổi kích thước chữ tùy chỉnh tại đây */
+    font-size: 14px;
   }
 
   button[type='submit'] {
@@ -36,4 +38,27 @@
   button[type='submit']:active {
     transform: translateY(1px);
   }
+}
+
+/* CSS cho thông báo lỗi */
+#error-message {
+  background-color: #f44336;
+  color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+}
+
+#error-message p {
+  margin: 0;
+}
+
+#error-message .close-button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
 }

@@ -1,3 +1,4 @@
+// ChangePass.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import './ChangePass.scss';
@@ -9,7 +10,7 @@ function ChangePass() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
-  const storedUserString = sessionStorage.getItem("token");
+  const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
 
   const handleChangePassword = (event) => {
@@ -38,10 +39,16 @@ function ChangePass() {
       return;
     }
 
+    if (newPassword.length < 8) {
+      setErrorMessage('Mật khẩu mới phải ít nhất 8 kí tự');
+      return;
+    }
+
     if (newPassword !== confirmPassword) {
       setErrorMessage('Mật khẩu mới và xác nhận mật khẩu không khớp');
       return;
     }
+
     const email = user.email;
     try {
       const response = await axios.post('http://localhost:3000/api/auth/changepass', {
@@ -71,7 +78,7 @@ function ChangePass() {
   };
 
   return (
-    <div id="ChangePass" className="change-pass">
+    <div className="change-pass" id="ChangePass">
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <form onSubmit={handleSubmit}>
         <h2>Thay đổi mật khẩu</h2>
@@ -105,7 +112,9 @@ function ChangePass() {
             className="form-control"
           />
         </div>
-        <button type="submit" className="btn btn-primary">Thay đổi mật khẩu</button>
+        <button type="submit" className="btn btn-primary">
+          Thay đổi mật khẩu
+        </button>
       </form>
     </div>
   );
