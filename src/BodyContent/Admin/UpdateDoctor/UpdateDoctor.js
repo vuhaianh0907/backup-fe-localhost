@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 
 import 'bootstrap/dist/css/bootstrap.css'; // Import Bootstrap CSS
-import './UpdateDoctor.scss'; // Custom styles
+// import './UpdateDoctor.scss'; // Custom styles
 
 function AdminUpdateDoctor() {
   const [doctorInfo, setDoctorInfo] = useState({

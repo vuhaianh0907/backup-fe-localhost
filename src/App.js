@@ -41,6 +41,7 @@ import CustormerWallet from './BodyContent/customer/TopUpWallet/TopUpWallet';
 
 import DoctorViewprofile from './BodyContent/Doctor/Viewprofile/Viewprofile';
 import DoctorUpdateprofile from './BodyContent/Doctor/UpdateProfile/UpdateProfile';
+import ResetPassword from './BodyContent/accout/ForgotPassword/ResetPassword';
 
 // import testthu from './BodyContent/Admin/test/test';
 
@@ -66,6 +67,7 @@ function App() {
         <Route path='/Login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/reset-password' element={<ResetPassword/>}/>
         <Route path='/' exact element={<Banner />} />
         <Route path='/Worksheet' element={<Worksheet />} />
         <Route path='/changepass' element={<ChangePass />} />
