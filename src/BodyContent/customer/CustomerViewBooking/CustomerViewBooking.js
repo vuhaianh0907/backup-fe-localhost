@@ -1,7 +1,9 @@
+
+
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
-import './CustomerViewBooking.css';
+import './CustomerViewBooking.scss';
 import ViewBookingDetail from '../ViewBookingDetail/ViewBookingDetail';
 
 function CustomerViewBooking() {
@@ -65,7 +67,7 @@ function CustomerViewBooking() {
   const totalPages = Math.ceil(appointments.length / perPage);
 
   return (
-    <div className="customer-view-booking">
+    <div id="CustomerViewBooking" className="customer-view-booking">
       <h2>Danh sách đặt lịch</h2>
       {isLoading ? (
         <div>Loading...</div>

@@ -1,3 +1,4 @@
+// Register.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -12,6 +13,7 @@ export default function Register() {
   const [gender, setGender] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -49,13 +51,29 @@ export default function Register() {
   const handleRegisterFailure = (error) => {
     if (error.response) {
       setErrorMessage(error.response.data.message);
+      setShowErrorPopup(true);
     } else {
       setErrorMessage('Đã xảy ra lỗi. Vui lòng thử lại sau.');
+      setShowErrorPopup(true);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Kiểm tra mật khẩu phải ít nhất 8 kí tự
+    if (password.length < 8) {
+      setErrorMessage('Mật khẩu phải ít nhất 8 kí tự');
+      setShowErrorPopup(true);
+      return;
+    }
+
+    // Kiểm tra mật khẩu và xác nhận mật khẩu phải giống nhau
+    if (password !== confirmPassword) {
+      setErrorMessage('Mật khẩu và xác nhận mật khẩu không khớp');
+      setShowErrorPopup(true);
+      return;
+    }
 
     const data = {
       email: email,
@@ -74,10 +92,10 @@ export default function Register() {
   };
 
   return (
-    <div id="register" className="container py-5 h-100">
+    <div id="register" className="container">
       <div className="row d-flex justify-content-center align-items-center h-100">
         <div className="col-12">
-          <div className="card shadow-2-strong" style={{ borderRadius: '1rem' }}>
+          <div className="card shadow-2-strong rounded">
             <div className="card-body p-5 text-center">
               <h3>Đăng ký tài khoản</h3>
 
@@ -103,6 +121,17 @@ export default function Register() {
                     placeholder="Nhập mật khẩu"
                     value={password}
                     onChange={handlePasswordChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="confirmPassword">Xác nhận mật khẩu</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="confirmPassword"
+                    placeholder="Xác nhận mật khẩu"
+                    value={confirmPassword}
+                    onChange={handleConfirmPasswordChange}
                   />
                 </div>
 
@@ -187,26 +216,25 @@ export default function Register() {
                   </div>
                 </div>
 
-                <div className="form-group">
-                  <label htmlFor="confirmPassword">Xác nhận mật khẩu</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="confirmPassword"
-                    placeholder="Xác nhận mật khẩu"
-                    value={confirmPassword}
-                    onChange={handleConfirmPasswordChange}
-                  />
+
+
+                {/* Trường hợp hiển thị thông báo lỗi */}
+                {errorMessage && (
+                  <div id="error-message" className="error-message">
+                    <p>{errorMessage}</p>
+                    <button className="close-button" onClick={() => setErrorMessage('')}>Đóng</button>
+                  </div>
+                )}
+
+
+                <div className="text-center">
+                  <button type="submit" className="btn btn-primary">
+                    Đăng ký
+                  </button>
                 </div>
-
-                {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-                <button type="submit" className="btn btn-primary btn-block">
-                  Đăng ký
-                </button>
               </form>
 
-              <div className="login-links">
+              <div className="login-links mt-3">
                 <Link to="/login">Đăng nhập</Link>
                 <Link to="/forgot-password">Quên mật khẩu</Link>
               </div>

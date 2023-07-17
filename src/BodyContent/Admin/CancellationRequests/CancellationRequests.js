@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './CancellationRequests.css';
+import './CancellationRequests.scss';
 
 const CancellationRequests = () => {
   const [currentPendingPage, setCurrentPendingPage] = useState(1);
@@ -109,7 +109,7 @@ const CancellationRequests = () => {
     const currentRequests = pendingRequests.slice(startIndex, endIndex);
 
     return currentRequests.map((request) => (
-      <div className="request" key={request.id}>
+      <div id="CancellationRequests" className="request" key={request.id}>
         <div className="request-info">
           <p className="request-patient">{request.patientName}</p>
           <p className="request-doctor">{request.doctorName}</p>

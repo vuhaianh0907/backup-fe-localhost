@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './CreateDoctor.css';
+import './CreateDoctor.scss';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -122,7 +122,7 @@ function AdminCreateDoctor() {
   };
 
   return (
-    <div className="form1">
+    <div id="CreateDoctor" className="form1">
       <form onSubmit={handleSubmit} className="form-container">
         <h2>Hồ sơ bác sĩ</h2>
         <h3>Thông tin cá nhân</h3>

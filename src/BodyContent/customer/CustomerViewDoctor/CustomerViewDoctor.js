@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './CustomerViewDoctor.css';
+import React, { useState, useEffect } from 'react';
+import './CustomerViewDoctor.scss';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ const timeOptions = [
   { label: '10h - 11h' },
   { label: '13h - 14h' },
   { label: '14h - 15h' },
-  { label: '15h - 16h' }
+  { label: '15h - 16h' },
 ];
 
 function CustomerViewDoctor() {
@@ -20,21 +20,24 @@ function CustomerViewDoctor() {
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(3);
 
+  useEffect(() => {
+    // Set selectedDate to today's date by default
+    const today = new Date();
+    const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(
+      today.getDate()
+    ).padStart(2, '0')}`;
+    setSelectedDate(formattedDate);
+  }, []);
+
   const handleDateChange = (e) => {
     const selectedDate = e.target.value;
-    const date = new Date(selectedDate);
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const formattedDate = `${year}-${month}-${day}`;
-
     setSelectedDate(selectedDate);
-    setIsConfirmationEnabled(formattedDate !== '' && selectedTime !== '');
+    setIsConfirmationEnabled(selectedTime !== '');
   };
 
   const handleTimeSelection = (time) => {
     setSelectedTime(time);
-    setIsConfirmationEnabled(selectedDate !== '' && time !== '');
+    setIsConfirmationEnabled(selectedDate !== '');
   };
 
   const handleConfirmation = () => {
@@ -61,17 +64,12 @@ function CustomerViewDoctor() {
   const totalPages = Math.ceil(doctors.length / perPage);
 
   return (
-    <div className="customer-view-doctor">
+    <div id="CustomerViewDoctor" className="customer-view-doctor">
       <div className="time-selection">
         <h2>Chọn thời gian trong ngày</h2>
         <div className="date-input">
           <label htmlFor="date">Ngày:</label>
-          <input
-            type="date"
-            id="date"
-            value={selectedDate}
-            onChange={handleDateChange}
-          />
+          <input type="date" id="date" value={selectedDate} onChange={handleDateChange} />
         </div>
         <div className="time-options">
           {timeOptions.map((option) => (
@@ -93,12 +91,13 @@ function CustomerViewDoctor() {
         </button>
       </div>
 
+
       {doctors.length > 0 && (
         <div className="doctor-list">
           <h3>Danh sách bác sĩ:</h3>
-          <ul>
+          <ul className="doctor-list__container">
             {doctors.slice(startIndex, endIndex).map((doctor) => (
-              <li key={doctor.id}>
+              <li key={doctor.id} className="doctor-item">
                 <div className="doctor-info">
                   <div className="doctor-item__avatar">
                     <img src={doctor.avatar} alt="Doctor Avatar" />
@@ -116,16 +115,18 @@ function CustomerViewDoctor() {
 
           {/* Pagination */}
           <div className="pagination">
-            <button id='paging-btn'
+            <button
+              id="paging-btn"
               onClick={() => setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))}
               disabled={currentPage === 1}
             >
               {'<'}
             </button>
-            <button id='paging-btn'>
+            <button id="paging-btn">
               <span>{currentPage}</span>
             </button>
-            <button id='paging-btn'
+            <button
+              id="paging-btn"
               onClick={() => setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))}
               disabled={currentPage === totalPages}
             >

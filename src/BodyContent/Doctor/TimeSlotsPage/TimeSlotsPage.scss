@@ -1,0 +1,132 @@
+/* TimeSlotsPage.css */
+
+  .time-slots-page {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .date-picker {
+    margin-bottom: 20px;
+  }
+  
+  .date {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .time-slots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .slot {
+    padding: 10px 20px;
+    background-color: #0074d9; /* Xanh dương */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff; /* Màu chữ trắng */
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+  }
+  
+  .slot.selected {
+    background-color: #0056b3; /* Xanh dương nhạt */
+  }
+  
+  .popup {
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 300px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  
+  .popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 100%; /* Thiết lập chiều rộng của .popup-content bằng 100% */
+  }
+  
+  
+  .popup h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #0074d9; /* Xanh dương */
+  }
+  
+  .patient-info p {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .popup-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .confirm-button,
+  .close-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .confirm-button {
+    background-color: #0074d9; /* Xanh dương */
+    color: #fff;
+  }
+  
+  .confirm-button:hover {
+    background-color: #0056b3; /* Xanh dương nhạt */
+  }
+  
+  .close-button {
+    background-color: #ccc;
+    color: #000;
+  }
+  
+  .close-button:hover {
+    background-color: #bbb;
+  }
+

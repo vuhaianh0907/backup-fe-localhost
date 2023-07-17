@@ -1,7 +1,9 @@
+// AppointmentForm.js
+
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import Modal from 'react-modal';
+import './AppointmentForm.scss';
 
 const SlotAppointment = () => {
   const { id } = useParams();
@@ -11,7 +13,7 @@ const SlotAppointment = () => {
   const [error, setError] = useState('');
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [reason, setReason] = useState('');
-  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const storedUserString = sessionStorage.getItem("token");
@@ -49,7 +51,7 @@ const SlotAppointment = () => {
     }
   }, [slot]);
 
-  const handleConfirmation = async () => {
+  const handleConfirmAppointment = async () => {
     try {
       // Xây dựng dữ liệu
       const appointmentData = {
@@ -67,7 +69,7 @@ const SlotAppointment = () => {
       if (response.status === 200) {
         setSuccessMessage(response.data.message);
         setIsConfirmed(true);
-        setIsConfirmationModalOpen(false);
+        setShowConfirmationModal(false);
         setIsSuccessModalOpen(true);
       } else {
         setError('Failed to confirm appointment');
@@ -88,34 +90,76 @@ const SlotAppointment = () => {
   };
 
   return (
-    <div>
+    <div id="AppointmentForm">
       {!loading && slot && doctor ? (
         <>
-          <p>Ngày khám: {slot.date}</p>
-          <p>Thời gian: {slot.time}</p>
-          <p>Bác Sĩ: {doctor.fullname}</p>
           <img src={doctor.avatar} alt="Doctor Avatar" />
+          <p className="doctor-name">Bác Sĩ: {doctor.fullname}</p>
+          <p className="appointment-date">Ngày khám: {slot.date}</p>
+          <p className="appointment-time">Thời gian: {slot.time}</p>
 
           {!isConfirmed && (
             <>
-              <div>
+              <div className="form-group">
                 <label htmlFor="reason">Lí do:</label>
-                <input type="text" id="reason" value={reason} onChange={handleReasonChange} />
+                <input type="text" id="reason" className="form-control" value={reason} onChange={handleReasonChange} />
               </div>
-              <button onClick={() => setIsConfirmationModalOpen(true)}>Xác nhận</button>
+              <button className="btn btn-primary confirm-button" onClick={() => setShowConfirmationModal(true)}>
+                Xác nhận
+              </button>
+
+              {/* Pop-up xác nhận */}
+              {showConfirmationModal && (
+                <div className="modal-backdrop">
+                  <div className="modal">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h5 className="modal-title">Xác nhận cuộc hẹn?</h5>
+                        <button type="button" className="close" onClick={() => setShowConfirmationModal(false)}>
+                          <span>&times;</span>
+                        </button>
+                      </div>
+                      <div className="modal-body">
+                        <p>Bạn có chắc chắn muốn xác nhận cuộc hẹn này?</p>
+                      </div>
+                      <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" onClick={() => setShowConfirmationModal(false)}>
+                          Đóng
+                        </button>
+                        <button type="button" className="btn btn-primary" onClick={handleConfirmAppointment}>
+                          Xác nhận
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </>
           )}
 
-          <Modal isOpen={isConfirmationModalOpen}>
-            <p>Xác nhận cuộc hẹn?</p>
-            <button onClick={handleConfirmation}>Xác nhận</button>
-            <button onClick={() => setIsConfirmationModalOpen(false)}>Đóng</button>
-          </Modal>
-
-          <Modal isOpen={isSuccessModalOpen}>
-            <p>{successMessage}</p>
-            <button onClick={handleCloseSuccessModal}>Đóng</button>
-          </Modal>
+          {/* Pop-up xác nhận thành công */}
+          {isSuccessModalOpen && (
+            <div className="modal-backdrop">
+              <div className="modal">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h5 className="modal-title">Thành công</h5>
+                    <button type="button" className="close" onClick={handleCloseSuccessModal}>
+                      <span>&times;</span>
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    <p>{successMessage}</p>
+                  </div>
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-primary" onClick={handleCloseSuccessModal}>
+                      Đóng
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </>
       ) : error ? (
         <p>{error}</p>

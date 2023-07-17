@@ -1,72 +1,64 @@
+/* Register.scss */
+
+/* CSS cho phần form đăng ký */
 #register {
-   
-    .container {
-        
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  
-      .card {
-        border-radius: 1rem;
-        width: 400px;
-  
-        .card-body {
-          h3 {
-            margin-bottom: 20px;
-          }
-  
-          .form-group {
-            margin-bottom: 15px;
-  
-            label {
-              display: block;
-              margin-bottom: 5px;
-            }
-  
-            input[type='email'],
-            input[type='password'],
-            input[type='text'],
-            select {
-              width: 100%;
-              padding: 10px;
-              border: 1px solid #ccc;
-              border-radius: 4px;
-              font-size: 16px;
-            }
-  
-            .form-check {
-              margin-bottom: 10px;
-  
-              .form-check-input {
-                margin-right: 5px;
-              }
-  
-              .form-check-label {
-                margin-bottom: 0;
-              }
-            }
-          }
-  
-          .error-message {
-            color: red;
-            margin-top: 10px;
-          }
-  
-          .btn-block {
-            margin-top: 20px;
-          }
-  
-          .login-links {
-            margin-top: 20px;
-  
-            a {
-              margin-right: 10px;
-            }
-          }
-        }
-      }
-    }
-    
+  .container-small {
+    max-width: 800px;
+    margin: 0 auto;
   }
-  
+
+  .custom-input {
+    width: 100%;
+    font-size: 18px;
+    padding: 12px 20px;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  button[type='submit'] {
+    display: block;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+
+  button[type='submit']:hover {
+    background-color: #0069d9;
+  }
+
+  button[type='submit']:focus {
+    outline: none;
+  }
+
+  button[type='submit']:active {
+    transform: translateY(1px);
+  }
+}
+
+/* CSS cho thông báo lỗi */
+#error-message {
+  background-color: #f44336;
+  color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+}
+
+#error-message p {
+  margin: 0;
+}
+
+#error-message .close-button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+}
