@@ -15,8 +15,9 @@ const TreatmentProcess = () => {
     <div className="container">
       <div className="center-box">
         <div id="TreatmentProcess" className="treatment-process">
-          <h2 className="treatment-process__title">Xem quy trình điều trị</h2>
+          
           <form className="treatment-process__form">
+          <h2 className="treatment-process__title">Xem quy trình điều trị</h2>
             <div className="form-group">
               <FaUser />
               <label htmlFor="patientName">Bệnh Nhân:</label>
@@ -37,8 +38,7 @@ const TreatmentProcess = () => {
               <label htmlFor="service">Dịch vụ:</label>
               <p id="service" className="form-control">{service}</p>
             </div>
-          </form>
-          <div className="treatment-process__details">
+            <div className="treatment-process__details">
             <div className="treatment-process__section">
               <h3 className="treatment-process__subheading">Quy trình điều trị:</h3>
               <p className="treatment-process__text">{treatmentProcessContent}</p>
@@ -52,6 +52,8 @@ const TreatmentProcess = () => {
               <p className="treatment-process__text">{notesContent}</p>
             </div>
           </div>
+          </form>
+          
         </div>
       </div>
     </div>

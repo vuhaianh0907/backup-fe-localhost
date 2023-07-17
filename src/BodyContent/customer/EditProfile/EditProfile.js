@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './EditProfile.css';
+import './EditProfile.scss';
 import axios from 'axios';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 
@@ -58,9 +58,10 @@ const EditProfile = () => {
   const isSaveDisabled = gender === '';
 
   return (
-    <div className="edit-profile">
+ 
+     
+      <form id="EditProfile" className="card " style={{ borderRadius: '1rem' }} onSubmit={handleFormSubmit}>
       <h2 className="edit-profile__title">Chỉnh sửa thông tin</h2>
-      <form className="edit-profile__form" onSubmit={handleFormSubmit}>
         <div className="edit-profile__form-group">
           <label htmlFor="fullname" className="edit-profile__label">Họ và tên</label>
           <input
@@ -116,7 +117,7 @@ const EditProfile = () => {
         </div>
         <button type="submit" className="edit-profile__button" disabled={isSaveDisabled}>Lưu thông tin</button>
       </form>
-    </div>
+
   );
 };
 

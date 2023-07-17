@@ -76,7 +76,7 @@ function ViewBookingDetail() {
   };
 
   return (
-    <div id="ViewBookingDetail" className="view-booking-detail">
+    <div  className="view-booking-detail">
       {isLoading ? (
         <div>Loading...</div>
       ) : (

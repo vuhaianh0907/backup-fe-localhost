@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ForgotPassword.scss';
 import axios from 'axios';
 
@@ -13,7 +13,7 @@ export default function ForgotPassword() {
     return (
         <div id="ForgotPassword" className="forgot-password-container">
 
-            <form onSubmit={handleSubmit}>
+            <form className="card shadow-2-strong" style={{ borderRadius: '1rem' }} onSubmit={handleSubmit}>
                 <h2>Quên mật khẩu</h2>
                 <input type="email" name="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required /><br />
                 <button type="submit" name="action" value="reset">Đặt lại mật khẩu</button>
