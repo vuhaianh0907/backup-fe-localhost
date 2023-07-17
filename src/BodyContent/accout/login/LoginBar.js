@@ -54,11 +54,11 @@ export default function LoginBar() {
   };
 
   return (
-    <div id="loginBar" className="container py-5 h-100">
+    <div id="LoginBar" className="container py-5 h-100">
       <div className="row d-flex justify-content-center align-items-center h-100">
         <div className="col-18 ">
           <div className="card shadow-2-strong" style={{ borderRadius: '1rem' }}>
-            <div className="card-body p-5 text-center">
+            <div className="card-body text-center">
               <h2>Đăng nhập</h2>
 
               <form onSubmit={handleSubmit}>

@@ -74,10 +74,10 @@ export default function Register() {
   };
 
   return (
-    <div id="register" className="container py-5 h-100">
+    <div id="register" className="container">
       <div className="row d-flex justify-content-center align-items-center h-100">
         <div className="col-12">
-          <div className="card shadow-2-strong" style={{ borderRadius: '1rem' }}>
+          <div className="card shadow-2-strong rounded">
             <div className="card-body p-5 text-center">
               <h3>Đăng ký tài khoản</h3>
 
@@ -201,12 +201,14 @@ export default function Register() {
 
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-                <button type="submit" className="btn btn-primary btn-block">
-                  Đăng ký
-                </button>
+                <div className="text-center">
+                  <button type="submit" className="btn btn-primary">
+                    Đăng ký
+                  </button>
+                </div>
               </form>
 
-              <div className="login-links">
+              <div className="login-links mt-3">
                 <Link to="/login">Đăng nhập</Link>
                 <Link to="/forgot-password">Quên mật khẩu</Link>
               </div>
