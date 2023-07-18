@@ -1,43 +1,56 @@
-/* CustomerViewBooking.scss */
+// CustomerViewBooking.scss
 
-#CustomerViewBooking {
-  width: 75%;
-  margin: 0 auto;
+.customer-view-booking {
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
 
-  .booking-list {
-    margin-top: 20px;
+  .booking-list-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
-    .booking-form {
-      background-color: aliceblue;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border: 1px solid #ccc;
-      padding: 10px;
+  .booking-form {
+    flex: 0 0 calc(33.33% - 20px);
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+    min-width: 300px;
+    background-color: #fff;
+
+    .booking-info {
       margin-bottom: 10px;
-
-      .booking-info {
-        flex-grow: 1;
-      }
 
       .label {
         font-weight: bold;
+        margin-right: 10px;
       }
 
-      .booking-actions {
-        .view-details-button {
-          padding: 8px 16px;
-          background-color: #007bff; /* Màu xanh dương tươi sáng của Bootstrap */
-          color: #fff;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-          text-decoration: none;
-          transition: background-color 0.3s ease;
+      span {
+        color: #333;
+      }
+    }
 
-          &:hover {
-            background-color: #0056b3; /* Tăng độ sáng của màu khi hover */
-          }
+    .booking-actions {
+      display: flex;
+      justify-content: space-between;
+
+      .view-details-button {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        background-color: #4caf50;
+        color: #fff;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #45a049;
         }
       }
     }
@@ -46,21 +59,22 @@
   .pagination {
     margin-top: 20px;
     display: flex;
-    justify-content: center;
     align-items: center;
 
-    #paging-btn {
-      padding: 8px 16px;
-      background-color: #007bff; /* Màu xanh dương tươi sáng của Bootstrap */
-      color: #fff;
+    .paging-btn {
+      padding: 5px 10px;
       border: none;
       border-radius: 4px;
+      font-size: 14px;
       cursor: pointer;
-      text-decoration: none;
+      background-color: #f0f0f0;
+      color: #333;
+      margin: 0 5px;
+      display: inline-block;
       transition: background-color 0.3s ease;
 
       &:hover {
-        background-color: #0056b3; /* Tăng độ sáng của màu khi hover */
+        background-color: #ccc;
       }
 
       &:disabled {
@@ -70,8 +84,9 @@
     }
 
     span {
-      margin: 0 10px;
+      font-size: 16px;
       font-weight: bold;
+      margin: 0 5px;
     }
   }
 }

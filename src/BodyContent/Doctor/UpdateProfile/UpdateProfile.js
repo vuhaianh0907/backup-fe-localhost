@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
+import './UpdateProfile.scss';
+
 function DoctorUpdateProfile() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -52,7 +54,7 @@ function DoctorUpdateProfile() {
   };
 
   return (
-    <div className="form1">
+    <div className="update-profile-container">
       <form onSubmit={handleSubmit} className="form-container">
         <h2>Cập nhật thông tin cá nhân</h2>
         <div className="form-group">
@@ -81,7 +83,7 @@ function DoctorUpdateProfile() {
             name="gender"
             value={doctorInfo.gender}
             onChange={handleChange}
-            className="form-input"
+            className="form-input select-input"
           >
             <option value="Nam">Nam</option>
             <option value="Nữ">Nữ</option>
@@ -150,7 +152,9 @@ function DoctorUpdateProfile() {
         <button type="submit" className="submit-button">
           Cập nhật
         </button>
-        <Link to={`/doctor/profile/${id}`}>Hủy</Link>
+        <Link to={`/doctor/profile/${id}`} className="cancel-button">
+          Hủy
+        </Link>
       </form>
     </div>
   );

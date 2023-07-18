@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
@@ -68,11 +66,11 @@ function CustomerViewBooking() {
 
   return (
     <div id="CustomerViewBooking" className="customer-view-booking">
-      <h2>Danh sách đặt lịch</h2>
-      {isLoading ? (
-        <div>Loading...</div>
+    <h2>Danh sách đặt lịch</h2>
+    {isLoading ? (
+      <div>Loading...</div>
       ) : (
-        <div className="booking-list">
+        <div className="booking-list-container">
           {appointments.slice(startIndex, endIndex).map((appointment) => (
             <div className="booking-form" key={appointment.id}>
               <div className="booking-info">
@@ -102,14 +100,14 @@ function CustomerViewBooking() {
       )}
       {totalPages > 1 && (
         <div className="pagination">
-          <button id='paging-btn'
+          <button className="paging-btn"
             onClick={() => setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))}
             disabled={currentPage === 1}
           >
             {'<'}
           </button>
-          <span id='paging-btn'>{currentPage}</span>
-          <button id='paging-btn'
+          <span className="paging-btn">{currentPage}</span>
+          <button className="paging-btn"
             onClick={() => setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))}
             disabled={currentPage === totalPages}
           >

@@ -1,0 +1,76 @@
+
+  /* EditProfile.scss */
+
+/* CSS cho phần form chỉnh sửa thông tin */
+#EditProfile {
+  display: flex;
+  justify-content: center; /* Căn nội dung theo chiều ngang giữa màn hình */
+  align-items: center; /* Căn nội dung theo chiều dọc giữa màn hình */
+
+  .edit-profile {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .edit-profile__title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .edit-profile__form {
+    margin-bottom: 20px;
+  }
+
+  .edit-profile__form-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column; /* Để các thẻ <label> và <input> xuất hiện dưới nhau */
+  }
+
+  .edit-profile__label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .edit-profile__input,
+  .edit-profile__select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .edit-profile__button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .edit-profile__button:hover {
+    background-color: #0056b3;
+  }
+
+  /* Căn lề trái cho các thẻ <label> */
+  .edit-profile__label {
+    text-align: left;
+  }
+}
+.card{
+
+ 
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+

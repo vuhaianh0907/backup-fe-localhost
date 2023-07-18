@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import './ViewBookingDetail.css';
+import './ViewBookingDetail.scss';
 
 function ViewBookingDetail() {
   const { id } = useParams();
@@ -76,7 +76,7 @@ function ViewBookingDetail() {
   };
 
   return (
-    <div className="view-booking-detail">
+    <div id="ViewBookingDetail" className="view-booking-detail">
       {isLoading ? (
         <div>Loading...</div>
       ) : (

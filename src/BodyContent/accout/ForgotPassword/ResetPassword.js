@@ -12,6 +12,7 @@ export default function ResetPassword() {
     // Lấy token từ URL khi component được render
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
+    console.log(token);
 
     // Kiểm tra xem token có tồn tại không
     if (!token) {
@@ -39,16 +40,21 @@ export default function ResetPassword() {
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/changepass', { token, password });
+      const response = await axios.post('http://localhost:3000/api/auth/resetpassword', {
+         token, 
+         password 
+        });
 
       if (response.status === 200) {
         setSuccessMessage('Đặt lại mật khẩu thành công.');
-      } else {
+      } else if(response.status === 400) {
+        setErrorMessage('Token hết hạn.');
+      } else{
         setErrorMessage('Đặt lại mật khẩu thất bại.');
       }
     } catch (error) {
       console.error('Error resetting password:', error);
-      setErrorMessage('Đặt lại mật khẩu thất bại.');
+      setErrorMessage('Đặt lại mật khẩu Vào Exception.');
     }
   };
 
