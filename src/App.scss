@@ -2,6 +2,19 @@
 
 @import '/src/assets/scss/customBootstrap.scss';
 
+.app-root {
+    .app-sidebar {
+        width: 280px;
+        float: left;
+    }
+
+    main {
+        &.main-small {
+            margin-left: 280px;
+        }
+    }
+}
+
 // * {
 //   /* width: 100%; */
 //   padding: 0;

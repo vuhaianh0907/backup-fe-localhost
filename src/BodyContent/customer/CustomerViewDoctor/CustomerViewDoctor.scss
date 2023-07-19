@@ -1,9 +1,14 @@
 /* CustomerViewDoctor.scss */
-
+body{
+  background-color: #5f5edd;
+  height: 100vh;
+}
 #CustomerViewDoctor {
   max-width: 75%;
   margin: 0 auto;
   padding: 20px;
+ 
+ 
 
   .time-selection {
     margin-bottom: 50px;
@@ -134,6 +139,14 @@
       display: flex;
       align-items: center;
     }
+  }
+  .customer-view-doctor1 {
+    flex: 0 0 200px; /* Đặt Sidebar chiếm 200px (hoặc chiều rộng mong muốn) */
+    display: flex;
+  }
+  .customer-view-doctor {
+
+    display: flex;
   }
   
 }

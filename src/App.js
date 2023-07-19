@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './App.scss';
 import { BrowserRouter as Router, Switch, Route, Link, Routes } from 'react-router-dom';
 import Navigation from './Home/header';
+import Sidebar from './Home/Sidebar/Sidebar';
+
 import Banner from './BodyContent/banner/banner.js';
 import Login from './BodyContent/accout/login/LoginBar';
 import Doctor from './BodyContent/Doctor';
@@ -47,7 +49,12 @@ import ResetPassword from './BodyContent/accout/ForgotPassword/ResetPassword';
 
 
 function App() {
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const [isDisplayHeader, setIsDisplayHeader] = useState(true);
 
   const handleLogout = () => {
     setIsLoggedIn(false);
@@ -56,70 +63,76 @@ function App() {
 
   return (
 
-    <div>
-      <Navigation isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
-      <Routes>
-        <Route path='/doctor' exact element={<Doctor />} />
-        {/* customer/doctor */}
-        <Route path='/doctor/:id' element={<DocDetail />} />
-        {/* trang detail bs sẽ xem đc bằng cả guest và cust, id ko nên đc hiện trên đường dẫn*/}
+    <div className='app-root'>
+      {
+        (user && (user.role === 'admin' || user.role === 'doctor')) ?
+          <div className='app-sidebar'>
+            <Sidebar />
+          </div> :
+          <Navigation isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
+      }
+      <main className={(user && (user.role === 'admin' || user.role === 'doctor')) ? 'main-small' : ''}>
+        <Routes>
 
-        <Route path='/Login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/forgot-password' element={<ForgotPassword />} />
-        <Route path='/reset-password' element={<ResetPassword/>}/>
-        <Route path='/' exact element={<Banner />} />
-        <Route path='/Worksheet' element={<Worksheet />} />
-        <Route path='/changepass' element={<ChangePass />} />
+          {/* trang detail bs sẽ xem đc bằng cả guest và cust, id ko nên đc hiện trên đường dẫn*/}
 
-        {/* admin */}
-        <Route path='/admin/createdoctor' element={<CreateDoctor />} />
-        <Route path='/admin/createslot' element={<CreateSlot />} />
-        <Route path='/admin/doctorlist' element={<DoctorList />} />
-        <Route path='/admin/doctordetail/:doctorId' element={<DoctorDetail />} />
-        <Route path='/admin/doctor/update/:doctorId' element={<DoctorUpdate />} />
-        
-        <Route path='/admin/cancellation' element={<Cancellation />} />
-        <Route path='/admin/transaction' element={<Transaction />} />
-        <Route path='/admin/addamount' element={<AddAmountPage />} />
-        <Route path='/admin/amount' element={<AmountPage />} />
+          <Route path='/Login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/forgot-password' element={<ForgotPassword />} />
+          <Route path='/reset-password' element={<ResetPassword />} />
+          <Route path='/' exact element={<Banner />} />
+          <Route path='/Worksheet' element={<Worksheet />} />
+          <Route path='/changepass' element={<ChangePass />} />
 
+          {/* admin */}
+          <Route path='/admin/createdoctor' element={<CreateDoctor />} />
+          <Route path='/admin/createslot' element={<CreateSlot />} />
+          <Route path='/admin/doctorlist' element={<DoctorList />} />
+          <Route path='/admin/doctordetail/:doctorId' element={<DoctorDetail />} />
+          <Route path='/admin/doctor/update/:doctorId' element={<DoctorUpdate />} />
 
-        {/* custormer */}
-        <Route path='/customer/profile/:id' element={<CustomerProfile />} />
-        <Route path='/customer/profile/edit/:id' element={<CustomerEditProfile />} />
-        <Route path='/customer/treatmentprofile/treatment' element={<CustomerViewTreatmentIn />} />
-        <Route path='/customer/treatmentprofile/:id' element={<CustomerViewProfileTreatment />} />
-        <Route path='/customer/treatmentprofilelist/:id' element={<CustormerViewTreatmentProfileList />} />
-        <Route path='/customer/slot/appointment/:id' element={<CustomerWriteAppointment />} />
-        <Route path='/customer/booking/:id' element={<CustomerViewBooking />} />
-        <Route path='/customer/booking/detail/:id' element={<CustormerViewBookingDetail />} />
-        <Route path='/customer/listdoctor' element={<CustomerViewDoctor />} />
-        <Route path='/customer/doctordetail/:id' element={<ViewDocDetail />} />
-        <Route path='/customer/topupwallet/:id' element={<CustormerWallet />} />
+          <Route path='/admin/cancellation' element={<Cancellation />} />
+          <Route path='/admin/transaction' element={<Transaction />} />
+          <Route path='/admin/addamount' element={<AddAmountPage />} />
+          <Route path='/admin/amount' element={<AmountPage />} />
 
 
+          {/* custormer */}
+          <Route path='/customer/profile/:id' element={<CustomerProfile />} />
+          <Route path='/customer/profile/edit/:id' element={<CustomerEditProfile />} />
+          <Route path='/customer/treatmentprofile/treatment' element={<CustomerViewTreatmentIn />} />
+          <Route path='/customer/treatmentprofile/:id' element={<CustomerViewProfileTreatment />} />
+          <Route path='/customer/treatmentprofilelist/:id' element={<CustormerViewTreatmentProfileList />} />
+          <Route path='/customer/slot/appointment/:id' element={<CustomerWriteAppointment />} />
+          <Route path='/customer/booking/:id' element={<CustomerViewBooking />} />
+          <Route path='/customer/booking/detail/:id' element={<CustormerViewBookingDetail />} />
+          <Route path='/customer/listdoctor' element={<CustomerViewDoctor />} />
+          <Route path='/customer/doctordetail/:id' element={<ViewDocDetail />} />
+          <Route path='/customer/topupwallet/:id' element={<CustormerWallet />} />
 
 
-        <Route path='/doctor/viewTreatmentProfile/:id' element={<ViewTreatmentProfile />} />
-        {/* doc/treatment/detail */}
-        <Route path='/doctor/treatmentlist' element={<ViewTreatementList />} />
-        <Route path='/doctor/writetreatmentin/:id' element={<CreateTreatementIn />} />
-        <Route path='/doctor/profile/:id' element={<DoctorViewprofile />} />
-        <Route path='/doctor/updateprofile/:id' element={<DoctorUpdateprofile />} />
-        <Route path='/Doctorviewbooking/:id' element={<Doctorviewbooking />} />
-        <Route path='/Doctor/viewpatientprofile/:id' element={<DoctorViewPatientProfile />} />
-        <Route path='/Doctor/doctorbook' element={<DoctorTimeSlotPages />} />
-        <Route path='/Doctor/rebook/:id' element={<DoctorRebook />} />
-    
 
 
-        {/* customer */}
-        
-        
+          <Route path='/doctor/viewTreatmentProfile/:id' element={<ViewTreatmentProfile />} />
+          {/* doc/treatment/detail */}
+          <Route path='/doctor/treatmentlist' element={<ViewTreatementList />} />
+          <Route path='/doctor/writetreatmentin/:id' element={<CreateTreatementIn />} />
+          <Route path='/doctor/profile/:id' element={<DoctorViewprofile />} />
+          <Route path='/doctor/updateprofile/:id' element={<DoctorUpdateprofile />} />
+          <Route path='/Doctorviewbooking/:id' element={<Doctorviewbooking />} />
+          <Route path='/Doctor/viewpatientprofile/:id' element={<DoctorViewPatientProfile />} />
+          <Route path='/Doctor/doctorbook' element={<DoctorTimeSlotPages />} />
+          <Route path='/Doctor/rebook/:id' element={<DoctorRebook />} />
 
-      </Routes>
-      <Footer />
+
+
+          {/* customer */}
+
+
+
+        </Routes>
+        <Footer />
+      </main>
     </div>
 
   );

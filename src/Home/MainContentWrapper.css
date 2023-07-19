@@ -1,0 +1,11 @@
+.mcw {
+  margin-left: 200px; /* Chiều rộng của thanh sidebar */
+  padding-top: 50px; /* Để tránh đè lên thanh navbar */
+  position: relative;
+  min-height: 30vh; /* Sử dụng 100vh để nội dung chính chiếm hết chiều cao của trang */
+}
+
+/* Adjust margin-left when the sidebar is hidden */
+.msb.msb-closed ~ .mcw {
+  margin-left: 60px; /* Width when the sidebar is hidden */
+}

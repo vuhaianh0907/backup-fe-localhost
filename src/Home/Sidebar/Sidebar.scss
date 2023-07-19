@@ -1,0 +1,167 @@
+// /* Sidebar.css */
+
+// .msb {
+//   width: 200px;
+//   background-color: rgba(61, 68, 75, 0.9);
+//   left: 0;
+//   top: 0;
+//   min-height: 100%;
+//   overflow-y: auto;
+//   white-space: nowrap;
+//   height: 100%;
+//   z-index: 1;
+//   border-right: 1px solid #ddd;
+//   transition: width 0.3s ease;
+//   transition: width 0.3s ease;
+//   // position: sticky;
+// }
+
+
+// .msb.msb-closed {
+//   width: 60px;
+//   position: fixed;
+//   left: 0;
+//   margin-top: 65px
+//   ;
+// }
+
+// .msb .navbar {
+//   border: none;
+//   margin-left: 0;
+//   background-color: inherit;
+// }
+
+// .msb .navbar-header {
+//   width: 100%;
+//   border-bottom: 1px solid #e7e7e7;
+//   margin-bottom: 20px;
+//   background: #fff;
+// }
+
+// .msb .navbar-nav li {
+//   display: block;
+//   width: 100%;
+// }
+
+// .msb .navbar-nav li a {
+//   padding: 15px;
+//   color: #ffffff;
+// }
+
+// .msb .navbar-nav li a .ic {
+//   font-size: 16px;
+//   margin-right: 5px;
+//   font-weight: 300;
+//   display: inline-block;
+// }
+
+// .msb .navbar-nav .panel {
+//   border: 0 none;
+//   box-shadow: none;
+//   margin: 0;
+//   background: inherit;
+// }
+
+// .msb .navbar-nav .panel li {
+//   display: block;
+// }
+
+// .msb .navbar-nav .panel li a {
+//   padding: 10px 25px;
+// }
+
+// .msb .navbar-nav .panel li a .caret {
+//   float: right;
+// }
+
+// .msb .navbar-nav .panel .panel-body {
+//   padding: 0;
+// }
+
+// .msb .navbar-nav .panel .panel-body ul {
+//   padding: 0;
+// }
+
+// .msb .navbar-nav .panel .panel-body ul li a {
+//   padding-left: 50px;
+// }
+
+// /* Sidebar toggle button */
+// .msb .toggle-button {
+//   text-align: center;
+//   padding-top: 5px;
+// }
+
+// .msb .toggle-button a {
+//   padding: 20px 0;
+// }
+
+// /* Hide sidebar content when closed */
+// .msb.msb-closed .navbar-header,
+// .msb.msb-closed .side-menu-container {
+//   display: none;
+// }
+// .mcw {
+//   margin-left: 200px;
+//   padding-top: 50px;
+//   position: relative;
+//   min-height: 100vh;
+// }
+
+// .banner {
+//   /* Đặt chiều cao của banner, ví dụ: */
+//   height: 300px;
+//   background-color: #e5e5e5;
+//   /* Các style khác cho banner */
+// }
+// .toggle-button {
+//   text-align: center;
+//   padding-top: 5px;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 60px; /* Chiều rộng của nút */
+//   height: 50px; /* Chiều cao của nút */
+//   background-color: rgba(245, 247, 249, 0.9); /* Màu nền trong suốt */
+//   transition: width 0.3s ease; /* Hiệu ứng khi thay đổi width */
+// }
+
+// .toggle-button a {
+//   display: block;
+//   padding: 15px 0;
+// }
+
+// /* Hiển thị biểu tượng FontAwesome trong nút */
+// .toggle-button a svg {
+//   font-size: 20px;
+//   color: #5f5f5f;
+// }
+
+// /* Styling khi nút được thu nhỏ */
+// .msb.msb-closed .toggle-button {
+//   width: 60px; /* Chiều rộng của nút khi thanh sidebar thu nhỏ */
+// }
+
+// /* Styling khi nút được hover (tùy chọn) */
+// .toggle-button:hover {
+//   background-color: rgba(245, 247, 249, 1); /* Màu nền không trong suốt */
+//   cursor: pointer;
+// }
+
+#sidebar {
+  width: 280px;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  overflow-y: auto;
+  white-space: nowrap;
+  z-index: 1;
+  transition: width 0.3s ease;
+  position: fixed;
+
+  .logo {
+    img {
+      width: 100px;
+    }
+  }
+}

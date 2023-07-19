@@ -1,0 +1,45 @@
+/* dichvu.css */
+
+/* Phần tiêu đề */
+#dich-vu {
+    text-align: right;
+    color: #333;
+  }
+  
+  #dich-vu h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Mô tả dịch vụ */
+  #dich-vu p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  /* Các hình ảnh dịch vụ */
+  .banner-grid-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .banner-grid-wrapper .col {
+    width: 48%;
+    margin-bottom: 20px;
+  }
+  
+  .banner-grid-wrapper .col img {
+    width: 100%;
+    height: auto;
+  }
+  
+  /* Hiển thị 2 cột cho thiết bị di động */
+  @media screen and (max-width: 767px) {
+    .banner-grid-wrapper .col {
+      width: 100%;
+    }
+  }
+  
+
+  

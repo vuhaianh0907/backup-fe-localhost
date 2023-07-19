@@ -7,7 +7,6 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding-left: 40px;
     /* Khoảng cách lề trái */
     height: 100vh;
 }
