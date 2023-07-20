@@ -16,7 +16,7 @@ function CustomerViewDoctor() {
   const [doctors, setDoctors] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
-  const [isConfirmationEnabled, setIsConfirmationEnabled] = useState(false);
+  const [isFirstLoad, setIsFirstLoad] = useState(true); // Add the isFirstLoad state
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(3);
 
@@ -29,20 +29,9 @@ function CustomerViewDoctor() {
     setSelectedDate(formattedDate);
   }, []);
 
-  const handleDateChange = (e) => {
-    const selectedDate = e.target.value;
-    setSelectedDate(selectedDate);
-    setIsConfirmationEnabled(selectedTime !== '');
-  };
-
-  const handleTimeSelection = (time) => {
-    setSelectedTime(time);
-    setIsConfirmationEnabled(selectedDate !== '');
-  };
-
-  const handleConfirmation = () => {
-    if (isConfirmationEnabled) {
-      // Send POST request to the API
+  useEffect(() => {
+    // Fetch doctors when the selectedDate or selectedTime changes
+    if (selectedDate && selectedTime) {
       axios
         .post('http://localhost:3000/api/slot/getDoctorByTime', {
           selectedDate,
@@ -57,6 +46,23 @@ function CustomerViewDoctor() {
           console.error('API Error:', error);
         });
     }
+  }, [selectedDate, selectedTime]);
+
+  useEffect(() => {
+    // Auto-select the first time slot on initial load
+    if (isFirstLoad && timeOptions.length > 0) {
+      setSelectedTime(timeOptions[0].label);
+      setIsFirstLoad(false);
+    }
+  }, [isFirstLoad, timeOptions]);
+
+  const handleDateChange = (e) => {
+    const selectedDate = e.target.value;
+    setSelectedDate(selectedDate);
+  };
+
+  const handleTimeSelection = (time) => {
+    setSelectedTime(time);
   };
 
   const startIndex = (currentPage - 1) * perPage;
@@ -65,76 +71,70 @@ function CustomerViewDoctor() {
 
   return (
     <div id="CustomerViewDoctor" className="customer-view-doctor">
-      <div className="time-selection">
-        <h2>Chọn thời gian trong ngày</h2>
-        <div className="date-input">
-          <label htmlFor="date">Ngày:</label>
-          <input type="date" id="date" value={selectedDate} onChange={handleDateChange} />
-        </div>
-        <div className="time-options">
-          {timeOptions.map((option) => (
-            <button
-              key={option.label}
-              className={`time-option${selectedTime === option.label ? ' active' : ''}`}
-              onClick={() => handleTimeSelection(option.label)}
-            >
-              {option.label}
-            </button>
-          ))}
-        </div>
-        <button
-          className="confirmation-button"
-          disabled={!isConfirmationEnabled}
-          onClick={handleConfirmation}
-        >
-          Xác nhận
-        </button>
-      </div>
-
-
-      {doctors.length > 0 && (
-        <div className="doctor-list">
-          <h3>Danh sách bác sĩ:</h3>
-          <ul className="doctor-list__container">
-            {doctors.slice(startIndex, endIndex).map((doctor) => (
-              <li key={doctor.id} className="doctor-item">
-                <div className="doctor-info">
-                  <div className="doctor-item__avatar">
-                    <img src={doctor.avatar} alt="Doctor Avatar" />
-                  </div>
-                  <div className="doctor-name">{doctor.fullname}</div>
-                  <div className="doctor-action">
-                    <Link to={`/customer/doctordetail/${doctor.id}`} className="doctor-link">
-                      Chọn bác sĩ
-                    </Link>
-                  </div>
-                </div>
-              </li>
+      <div className="customer-view-doctor2">
+        <div className="time-selection">
+          <h2>Chọn thời gian trong ngày</h2>
+          <div className="date-input">
+            <label htmlFor="date">Ngày:</label>
+            <input type="date" id="date" value={selectedDate} onChange={handleDateChange} />
+          </div>
+          <div className="time-options">
+            {timeOptions.map((option) => (
+              <button
+                key={option.label}
+                className={`time-option${selectedTime === option.label ? ' active' : ''}`}
+                onClick={() => handleTimeSelection(option.label)}
+              >
+                {option.label}
+              </button>
             ))}
-          </ul>
-
-          {/* Pagination */}
-          <div className="pagination">
-            <button
-              id="paging-btn"
-              onClick={() => setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))}
-              disabled={currentPage === 1}
-            >
-              {'<'}
-            </button>
-            <button id="paging-btn">
-              <span>{currentPage}</span>
-            </button>
-            <button
-              id="paging-btn"
-              onClick={() => setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))}
-              disabled={currentPage === totalPages}
-            >
-              {'>'}
-            </button>
           </div>
         </div>
-      )}
+
+        {doctors.length > 0 && (
+          <div className="doctor-list">
+            <h3>Danh sách bác sĩ:</h3>
+            <ul className="doctor-list__container">
+              {doctors.slice(startIndex, endIndex).map((doctor) => (
+                <li key={doctor.id} className="doctor-item">
+                  <div className="doctor-info">
+                    <div className="doctor-item__avatar">
+                      <img src={doctor.avatar} alt="Doctor Avatar" />
+                    </div>
+                    <div className="doctor-name">{doctor.fullname}</div>
+                    <div className="doctor-action">
+                      <Link to={`/customer/doctordetail/${doctor.id}`} className="doctor-link">
+                        Chọn bác sĩ
+                      </Link>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            {/* Pagination */}
+            <div className="pagination">
+              <button
+                id="paging-btn"
+                onClick={() => setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))}
+                disabled={currentPage === 1}
+              >
+                {'<'}
+              </button>
+              <button id="paging-btn">
+                <span>{currentPage}</span>
+              </button>
+              <button
+                id="paging-btn"
+                onClick={() => setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))}
+                disabled={currentPage === totalPages}
+              >
+                {'>'}
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

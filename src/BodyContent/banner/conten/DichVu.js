@@ -18,12 +18,12 @@ export default function DichVu() {
             <div className="col medium-4 small-12 large-4">
               <div className="col-inner"></div>
             </div>
-            <div className="col medium-8 small-12 large-8">
-              <div className="col-inner dark">
-                <h2 id="dich-vu" style={{ textAlign: 'right' }}>
+            <div className=" small-12 large-8">
+              <div className="textdichvu col-inner dark">
+                <h2 style={{ textAlign: 'center' }}>
                   ĐA DẠNG DỊCH VỤ NHA KHOA<br />TỰ TIN CHĂM SÓC NỤ CƯỜI CỦA BẠN
                 </h2>
-                <p style={{ textAlign: 'right' }}>
+                <p style={{ textAlign: 'center' }}>
                   <span style={{ fontSize: '95%' }}>Đội ngũ y bác sỹ và chăm sóc</span>
                   <br />
                   <span style={{ fontSize: '95%' }}>có tay nghề cao của chúng tôi luôn cố gắng</span>
@@ -39,13 +39,13 @@ export default function DichVu() {
           </div>
 
           {/* Nội dung của các hình ảnh dịch vụ */}
-          <div className="banner-grid-wrapper">
-            <div id="banner-grid-2062583998" className="banner-grid row row-grid row-collapse" data-packery-options="">
-              <div className="col grid-col large-4 grid-col-1-3">
+          <div className="banner-grid-wrapper ">
+            <div id="banner-grid-2062583998" className="banner-grid row row-grid row-collapse " data-packery-options="">
+              <div className="col grid-col large-6 grid-col-1-2">
                 <div className="col-inner">
                   <div className="img has-hover x md-x lg-x y md-y lg-y" id="image_704785085">
                     <a className="" href="#" target="_blank" rel="noopener noreferrer">
-                      <div className="img-inner image-zoom image-cover dark" style={{ paddingTop: '56.25%' }}>
+                      <div className="img-inner image-zoom image-cover dark" >
                         <img
                           width="258"
                           height="151"
@@ -58,7 +58,7 @@ export default function DichVu() {
                   </div>
                 </div>
               </div>
-              <div className="col grid-col large-4 grid-col-1-3">
+              <div className="col grid-col large-6 grid-col-1-2">
                 <div className="col-inner">
                   <div className="img has-hover x md-x lg-x y md-y lg-y" id="image_130688349">
                     <a className="" href="#" target="_blank" rel="noopener noreferrer">
@@ -92,25 +92,7 @@ export default function DichVu() {
                   </div>
                 </div>
               </div>
-              <div className="col grid-col large-8 grid-col-1-3">
-                <div className="col-inner">
-                  <div className="img has-hover x md-x lg-x y md-y lg-y" id="image_21352450">
-                    <a className="" href="#" target="_blank" rel="noopener noreferrer">
-                      <div className="img-inner image-zoom dark">
-                        <img
-                          width="516"
-                          height="151"
-                          src={Dinhky}
-                          className="attachment-original size-original"
-                          alt=""
-                          srcSet={`${Dinhky} 516w, ${Dinhky} 300x88.jpg 300w`}
-                          sizes="(max-width: 516px) 100vw, 516px"
-                        />
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
+              
               <div className="col grid-col large-4 grid-col-1-3">
                 <div className="col-inner">
                   <div className="img has-hover x md-x lg-x y md-y lg-y" id="image_1530919891">
@@ -128,6 +110,7 @@ export default function DichVu() {
                   </div>
                 </div>
               </div>
+              
             </div>
           </div>
         </div>

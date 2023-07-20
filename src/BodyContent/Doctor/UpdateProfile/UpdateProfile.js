@@ -54,7 +54,7 @@ function DoctorUpdateProfile() {
   };
 
   return (
-    <div className="update-profile-container">
+    <div id="UpdateProfile" className="update-profile-container">
       <form onSubmit={handleSubmit} className="form-container">
         <h2>Cập nhật thông tin cá nhân</h2>
         <div className="form-group">

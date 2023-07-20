@@ -65,54 +65,60 @@ export default function ViewDocDetail() {
     : slots;
 
   return (
-    <div id="ViewDocDetail" className="container">
-      {doctor ? (
-        <div className="doctor-profile">
-          <img src={doctor.avatar} alt="Doctor Profile" className="profile-picture" />
-          <h2 className="doctor-name">{doctor.fullname}</h2>
-          <div className="doctor-information">
-            <h3>Thông tin bác sĩ</h3>
-            <div className="info-item">
-              <h4>Chứng chỉ:</h4>
-              <p>{doctor.qualification}</p>
-            </div>
-            <div className="info-item">
-              <h4>Kinh nghiệm:</h4>
-              <p>{doctor.experience}</p>
+    <div id="ViewDocDetail">
+      <div id="ViewDocDetail" className="viewdocdt">
+      <div className="viewdocdt2">
+        {doctor ? (
+
+          <div className="doctor-profile">
+            <img src={doctor.avatar} alt="Doctor Profile" className="profile-picture" />
+            <h2 className="doctor-name">{doctor.fullname}</h2>
+            <div className="doctor-information">
+              <h3>Thông tin bác sĩ</h3>
+              <div className="info-item">
+                <h4>Chứng chỉ:</h4>
+                <p>{doctor.qualification}</p>
+              </div>
+              <div className="info-item">
+                <h4>Kinh nghiệm:</h4>
+                <p>{doctor.experience}</p>
+              </div>
             </div>
           </div>
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
 
-      <div className="filter-container">
-        <label htmlFor="selectedDate">Chọn ngày:</label>
-        <input
-          type="date"
-          id="selectedDate"
-          value={selectedDate}
-          onChange={handleDateChange}
-          min={new Date().toISOString().split('T')[0]}
-        />
-      </div>
+        ) : (
+          <p>Loading...</p>
+        )}
 
-      <div className="slots-container">
-        <h3>Các lịch hẹn của bác sĩ</h3>
-        <div className="slots-list">
-          {filteredSlots.length > 0 ? (
-            filteredSlots.map((slot) => (
-              <Link to={`/customer/slot/appointment/${slot.id}`} key={slot.id}>
-                <button className="slot-button" onClick={() => handleSlotClick(slot.id)}>
-                  {slot.time}
-                </button>
-              </Link>
-            ))
-          ) : (
-            <p>Không có lịch hẹn khả dụng</p>
-          )}
+        <div className="filter-container">
+          <label htmlFor="selectedDate">Chọn ngày:</label>
+          <input
+            type="date"
+            id="selectedDate"
+            value={selectedDate}
+            onChange={handleDateChange}
+            min={new Date().toISOString().split('T')[0]}
+          />
+        </div>
+
+        <div className="slots-container">
+          <h3>Các lịch hẹn của bác sĩ</h3>
+          <div className="slots-list">
+            {filteredSlots.length > 0 ? (
+              filteredSlots.map((slot) => (
+                <Link to={`/customer/slot/appointment/${slot.id}`} key={slot.id}>
+                  <button className="slot-button" onClick={() => handleSlotClick(slot.id)}>
+                    {slot.time}
+                  </button>
+                </Link>
+              ))
+            ) : (
+              <p>Không có lịch hẹn khả dụng</p>
+            )}
+          </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

@@ -87,7 +87,7 @@ export default function Register() {
   };
 
   return (
-    <div className="register-container">
+    <div id="Register" className="register-container">
         <form className="card shadow-2-strong" style={{ borderRadius: '1rem' }} onSubmit={handleSubmit}>
           <h3 className="register-heading">Đăng ký tài khoản</h3>
 

@@ -93,17 +93,25 @@ const SlotAppointment = () => {
     <div id="AppointmentForm">
       {!loading && slot && doctor ? (
         <>
-          <img src={doctor.avatar} alt="Doctor Avatar" />
-          <p className="doctor-name">Bác Sĩ: {doctor.fullname}</p>
-          <p className="appointment-date">Ngày khám: {slot.date}</p>
-          <p className="appointment-time">Thời gian: {slot.time}</p>
+          <div className='TTkham-container'>
+            <div className='TTkham'>
+              <img src={doctor.avatar} alt="Doctor Avatar" />
+            </div>
+            <div className='TTkham2'>
+              <p className="doctor-name">Bác Sĩ: {doctor.fullname}</p>
+              <p className="appointment-date">Ngày khám: {slot.date}</p>
+              <p className="appointment-time">Thời gian: {slot.time}</p>
+            </div>
+          </div>
+
 
           {!isConfirmed && (
             <>
               <div className="form-group">
                 <label htmlFor="reason">Lí do:</label>
-                <input type="text" id="reason" className="form-control" value={reason} onChange={handleReasonChange} />
+                <input type="text" id="reason" for="exampleFormControlTextarea1"  class="form-label" value={reason} onChange={handleReasonChange} />
               </div>
+              
               <button className="btn btn-primary confirm-button" onClick={() => setShowConfirmationModal(true)}>
                 Xác nhận
               </button>

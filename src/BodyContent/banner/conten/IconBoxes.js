@@ -1,4 +1,5 @@
 import React from 'react';
+import './IconBoxes.css';
 
 const IconBoxes = () => {
   return (
@@ -7,41 +8,15 @@ const IconBoxes = () => {
         {/* Add your background content for the section here */}
       </div>
 
-      <div className="section-content relative">
+      <div className="section-content relative py-5">
         <div className="row row-small" id="row-707491931">
           <div className="col medium-3 small-6 large-3">
             <div className="col-inner">
               <div className="icon-box featured-box icon-box-center text-center">
                 <div className="icon-box-img" style={{ width: '80px' }}>
-                  <div className="icon">
-                    <div className="icon-inner">
-                      <img
-                        width="80"
-                        height="80"
-                        src="http://nhakhoa.maugiaodien.com/wp-content/uploads/2019/02/icon-SA1.png"
-                        className="attachment-medium size-medium"
-                        alt=""
-                      />
-                    </div>
-                  </div>
+
                 </div>
                 <div className="icon-box-text last-reset">
-                  <h3 style={{ textAlign: 'center' }}>
-                    <span style={{ color: '#000000', fontSize: '90%' }}>ĐẶT LỊCH DỄ DÀNG</span>
-                  </h3>
-                  <p style={{ textAlign: 'center' }}>
-                    <span style={{ fontSize: '95%', color: '#000000' }}>
-                      Bạn có thể đặt lịch thăm khám dễ dàng chỉ với chiếc smartphone
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col medium-3 small-6 large-3">
-            <div className="col-inner">
-              <div className="icon-box featured-box icon-box-center text-center">
-                <div className="icon-box-img" style={{ width: '80px' }}>
                   <div className="icon">
                     <div className="icon-inner">
                       <img
@@ -53,8 +28,6 @@ const IconBoxes = () => {
                       />
                     </div>
                   </div>
-                </div>
-                <div className="icon-box-text last-reset">
                   <h3 style={{ textAlign: 'center' }}>
                     <span style={{ color: '#000000', fontSize: '90%' }}>BÁC SỸ LÀNH NGHỀ</span>
                   </h3>
@@ -71,6 +44,9 @@ const IconBoxes = () => {
             <div className="col-inner">
               <div className="icon-box featured-box icon-box-center text-center">
                 <div className="icon-box-img" style={{ width: '80px' }}>
+
+                </div>
+                <div className="icon-box-text last-reset">
                   <div className="icon">
                     <div className="icon-inner">
                       <img
@@ -82,8 +58,6 @@ const IconBoxes = () => {
                       />
                     </div>
                   </div>
-                </div>
-                <div className="icon-box-text last-reset">
                   <h3 style={{ textAlign: 'center' }}>
                     <span style={{ color: '#000000', fontSize: '90%' }}>VỊ TRÍ THUẬN LỢI</span>
                   </h3>
@@ -100,6 +74,9 @@ const IconBoxes = () => {
             <div className="col-inner">
               <div className="icon-box featured-box icon-box-center text-center">
                 <div className="icon-box-img" style={{ width: '80px' }}>
+
+                </div>
+                <div className="icon-box-text last-reset">
                   <div className="icon">
                     <div className="icon-inner">
                       <img
@@ -111,8 +88,6 @@ const IconBoxes = () => {
                       />
                     </div>
                   </div>
-                </div>
-                <div className="icon-box-text last-reset">
                   <h3 style={{ textAlign: 'center' }}>
                     <span style={{ color: '#000000', fontSize: '90%' }}>HOÀN TOÀN CHỦ ĐỘNG</span>
                   </h3>

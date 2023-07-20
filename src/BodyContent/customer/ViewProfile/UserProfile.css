@@ -6,6 +6,9 @@
   align-items: center;
   padding: 20px;
   font-family: 'Roboto', sans-serif;
+  background-color: #f0f0f0; /* Màu nền */
+  background-image: linear-gradient(45deg, #e1e1e1 25%, transparent 25%), linear-gradient(-45deg, #e1e1e1 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #e1e1e1 75%), linear-gradient(-45deg, transparent 75%, #e1e1e1 75%);
+  background-size: 20px 20px;
 }
 
 .avatar-image {
@@ -19,6 +22,7 @@
   margin-top: 20px;
   font-size: 24px;
   font-weight: 500;
+  color: #333; /* Màu chữ */
 }
 
 .user-profile__column {
@@ -29,6 +33,7 @@
 
 .user-profile__column p {
   margin-bottom: 5px;
+  color: #444; /* Màu chữ */
 }
 
 .edit-profile-button {

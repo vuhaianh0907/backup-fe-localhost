@@ -12,12 +12,12 @@ const TreatmentProcess = () => {
   const notesContent = 'Nội dung ghi chú từ cơ sở dữ liệu';
 
   return (
-    <div className="container">
+    <div >
       <div className="center-box">
         <div id="TreatmentProcess" className="treatment-process">
-          
+
           <form className="treatment-process__form">
-          <h2 className="treatment-process__title">Xem quy trình điều trị</h2>
+            <h2 className="treatment-process__title">Xem quy trình điều trị</h2>
             <div className="form-group">
               <FaUser />
               <label htmlFor="patientName">Bệnh Nhân:</label>
@@ -39,21 +39,21 @@ const TreatmentProcess = () => {
               <p id="service" className="form-control">{service}</p>
             </div>
             <div className="treatment-process__details">
-            <div className="treatment-process__section">
-              <h3 className="treatment-process__subheading">Quy trình điều trị:</h3>
-              <p className="treatment-process__text">{treatmentProcessContent}</p>
+              <div className="treatment-process__section">
+                <h3 className="treatment-process__subheading">Quy trình điều trị:</h3>
+                <p className="treatment-process__text">{treatmentProcessContent}</p>
+              </div>
+              <div className="treatment-process__section">
+                <h3 className="treatment-process__subheading">Kết quả điều trị:</h3>
+                <p className="treatment-process__text">{treatmentResultContent}</p>
+              </div>
+              <div className="treatment-process__section">
+                <h3 className="treatment-process__subheading">Ghi chú:</h3>
+                <p className="treatment-process__text">{notesContent}</p>
+              </div>
             </div>
-            <div className="treatment-process__section">
-              <h3 className="treatment-process__subheading">Kết quả điều trị:</h3>
-              <p className="treatment-process__text">{treatmentResultContent}</p>
-            </div>
-            <div className="treatment-process__section">
-              <h3 className="treatment-process__subheading">Ghi chú:</h3>
-              <p className="treatment-process__text">{notesContent}</p>
-            </div>
-          </div>
           </form>
-          
+
         </div>
       </div>
     </div>

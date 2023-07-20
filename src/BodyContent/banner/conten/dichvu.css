@@ -1,45 +1,92 @@
-/* dichvu.css */
-
 /* Phần tiêu đề */
 #dich-vu {
-    text-align: right;
-    color: #333;
-  }
-  
-  #dich-vu h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  /* Mô tả dịch vụ */
-  #dich-vu p {
-    font-size: 14px;
-    line-height: 1.6;
-  }
-  
-  /* Các hình ảnh dịch vụ */
-  .banner-grid-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
-  .banner-grid-wrapper .col {
-    width: 48%;
-    margin-bottom: 20px;
-  }
-  
-  .banner-grid-wrapper .col img {
-    width: 100%;
-    height: auto;
-  }
-  
-  /* Hiển thị 2 cột cho thiết bị di động */
-  @media screen and (max-width: 767px) {
-    .banner-grid-wrapper .col {
-      width: 100%;
-    }
-  }
-  
+  text-align: right;
+  color: #333;
+}
 
-  
+#dich-vu h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Mô tả dịch vụ */
+#dich-vu p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Các hình ảnh dịch vụ */
+.banner-grid-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.banner-grid-wrapper .col {
+  width: 48%;
+  margin-bottom: 20px;
+  margin-left: 60px;
+}
+
+.banner-grid-wrapper .col img {
+  width: 100%;
+  height: auto;
+}
+
+/* Hiển thị 2 cột cho thiết bị di động */
+@media screen and (max-width: 767px) {
+  .banner-grid-wrapper .col {
+    width: 100%;
+  }
+}
+/* Phần tiêu đề và mô tả dịch vụ */
+#row-643724412 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#dich-vu {
+  text-align: right;
+  color: #333;
+}
+
+#dich-vu h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+#dich-vu p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Hiển thị nội dung trong 2 cột trên thiết bị lớn và 1 cột trên thiết bị nhỏ */
+@media screen and (max-width: 767px) {
+  #row-643724412 {
+    flex-direction: column;
+  }
+
+  .col.medium-4 {
+    width: 100%;
+  }
+}
+
+/* Hiển thị phần tiêu đề và mô tả ở giữa trên các thiết bị nhỏ */
+@media screen and (max-width: 575px) {
+  #dich-vu {
+    text-align: center;
+  }
+}
+
+/* Hiển thị nội dung dọc cột trái khi cột phải bị ẩn */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .col.large-8 {
+    display: flex;
+    align-items: center;
+  }
+}
+.textdichvu{
+  color: aliceblue;
+}

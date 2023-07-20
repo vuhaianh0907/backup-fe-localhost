@@ -22,8 +22,8 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div id="ForgotPassword" className="forgot-password-container">
-      <form onSubmit={handleSubmit}>
+    <div id="ForgotPassword" >
+      <form className="card shadow-2-strong" style={{ borderRadius: '1rem' }} onSubmit={handleSubmit}>
         <h2>Quên mật khẩu</h2>
         <input
           type="email"

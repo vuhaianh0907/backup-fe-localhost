@@ -58,23 +58,22 @@ const EditProfile = () => {
   const isSaveDisabled = gender === '';
 
   return (
- 
-     
-      <form  className="card " style={{ borderRadius: '1rem' }} onSubmit={handleFormSubmit}>
-      <h2 className="edit-profile__title">Chỉnh sửa thông tin</h2>
-        <div className="edit-profile__form-group">
-          <label htmlFor="fullname" className="edit-profile__label">Họ và tên</label>
-          <input
-            type="text"
-            id="fullname"
-            className="edit-profile__input"
-            value={fullname}
-            onChange={(e) => setFullname(e.target.value)}
-          />
+
+    <div id="EditProfile" className='editprofile mb-3'>
+      
+      <form  class="form-container" style={{ borderRadius: '1rem' }} onSubmit={handleFormSubmit}>
+        <h2 className="edit-profile__title">Chỉnh sửa thông tin</h2>
+
+        <div id="UpdateProfile" className="update-profile-container" />
+        <div class="mb-3">
+          <label for="disabledTextInput" class="form-label">Họ và tên</label>
+          <input type="text" id="fullname" className="edit-profile__input" placeholder="Disabled input" value={fullname} onChange={(e) => setFullname(e.target.value)} />
+
         </div>
-        <div className="edit-profile__form-group">
+
+        <div class="mb-3">
           <label htmlFor="email" className="edit-profile__label">Email</label>
-          <input
+          <input class="mb-3"
             type="email"
             id="email"
             className="edit-profile__input"
@@ -82,9 +81,9 @@ const EditProfile = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="edit-profile__form-group">
+        <div class="mb-3">
           <label htmlFor="address" className="edit-profile__label">Địa chỉ</label>
-          <input
+          <input class="mb-3"
             type="text"
             id="address"
             className="edit-profile__input"
@@ -92,9 +91,9 @@ const EditProfile = () => {
             onChange={(e) => setAddress(e.target.value)}
           />
         </div>
-        <div className="edit-profile__form-group">
+        <div class="mb-3">
           <label htmlFor="phone" className="edit-profile__label">Điện thoại</label>
-          <input
+          <input class="mb-3"
             type="text"
             id="phone"
             className="edit-profile__input"
@@ -102,9 +101,9 @@ const EditProfile = () => {
             onChange={(e) => setPhone(e.target.value)}
           />
         </div>
-        <div className="edit-profile__form-group">
+        <div class="mb-3">
           <label htmlFor="gender" className="edit-profile__label">Giới tính</label>
-          <select
+          <select class="mb-3"
             id="gender"
             className="edit-profile__select"
             value={gender}
@@ -117,8 +116,10 @@ const EditProfile = () => {
         </div>
         <button type="submit" className="edit-profile__button" disabled={isSaveDisabled}>Lưu thông tin</button>
       </form>
-
-  );
+      </div>
+      );
+   
 };
+
 
 export default EditProfile;

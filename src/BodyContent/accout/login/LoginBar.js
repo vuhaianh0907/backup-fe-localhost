@@ -54,7 +54,7 @@ export default function LoginBar() {
   };
 
   return (
-    <div id="LoginBar" className="container">
+    <div id="LoginBar">
       <div className="row d-flex justify-content-center align-items-center h-100">
         <div className=" ">
           <div >

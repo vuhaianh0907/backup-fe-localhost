@@ -1,78 +1,80 @@
 #LoginBar {
   .card {
     border-radius: 1rem;
-    margin-left: 100%;
-    margin-top: 10%;
-    
-  }
-
-  .card-body {
-    padding: 10rem !important;
-    text-align: center;
-
-    h2 {
-      margin-bottom: 2rem;
-      font-size: 2.5rem; /* Đặt kích thước cho thẻ h2 */
-      color: #007bff; /* Màu sắc cho thẻ h2 */
-    }
-
-    form {
-      .form-group {
-        margin-bottom: 1.5rem;
-
-        label {
-          display: block;
-          margin-bottom: 0.5rem;
-        }
-
-        input {
-          width: 300px;
-          padding: 1rem;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          font-size: 1rem;
-        }
-      }
-
-      .error-message {
-        color: red;
-        margin-top: 1rem;
-      }
-
-      button[type='submit'] {
-        width: 100%;
-        padding: 1rem;
-        background-color: #007bff; /* Màu sắc cho nút Đăng Nhập */
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-    }
-
-    .login-links {
-      margin-top: 1.5rem;
-
-      a {
-        margin-right: 1rem;
-        text-decoration: none;
-        color: #666; /* Màu sắc cho các liên kết */
-      }
-    }
-
-    .social {
-      margin-top: 1.5rem;
-
-      .btn-google-login {
-        background-color: #dd4b39; /* Màu sắc cho nút Đăng nhập bằng Google */
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        padding: 1rem;
-        width: 100%;
-        margin-top: 20px;
-      }
-    }
+    margin: 30px;
+    margin-left: 35%;
+    width:30% ;
+    display:flex ;
+    padding: 60px;
   }
 }
+//   .card-body {
+//     padding: 10rem !important;
+//     text-align: center;
+
+//     h2 {
+//       margin-bottom: 2rem;
+//       font-size: 2.5rem; /* Đặt kích thước cho thẻ h2 */
+//       color: #007bff; /* Màu sắc cho thẻ h2 */
+//     }
+
+//     form {
+//       .form-group {
+//         margin-bottom: 1.5rem;
+
+//         label {
+//           display: block;
+//           margin-bottom: 0.5rem;
+//         }
+
+//         input {
+//           width: 300px;
+//           padding: 1rem;
+//           border: 1px solid #ccc;
+//           border-radius: 4px;
+//           font-size: 1rem;
+//         }
+//       }
+
+//       .error-message {
+//         color: red;
+//         margin-top: 1rem;
+//       }
+
+//       button[type='submit'] {
+//         width: 100%;
+//         padding: 1rem;
+//         background-color: #007bff; /* Màu sắc cho nút Đăng Nhập */
+//         color: white;
+//         border: none;
+//         border-radius: 4px;
+//         cursor: pointer;
+//       }
+//     }
+
+//     .login-links {
+//       margin-top: 1.5rem;
+
+//       a {
+//         margin-right: 1rem;
+//         text-decoration: none;
+//         color: #666; /* Màu sắc cho các liên kết */
+//       }
+//     }
+
+//     .social {
+//       margin-top: 1.5rem;
+
+//       .btn-google-login {
+//         background-color: #dd4b39; /* Màu sắc cho nút Đăng nhập bằng Google */
+//         color: white;
+//         border: none;
+//         border-radius: 4px;
+//         cursor: pointer;
+//         padding: 1rem;
+//         width: 100%;
+//         margin-top: 20px;
+//       }
+//     }
+//   }
+// }

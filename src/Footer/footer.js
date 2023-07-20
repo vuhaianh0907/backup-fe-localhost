@@ -8,10 +8,11 @@ const Footer = () => {
     <footer className="footer">
       <section className="footer-content">
         <div className="footer-column">
-          <h3>Company name</h3>
+          <h3>Tên Công ty</h3>
           <p>
-            Here you can use rows and columns to organize your footer content. Lorem ipsum
-            dolor sit amet, consectetur adipisicing elit.
+            Chúng tôi là một phòng khám nha khoa uy tín, chuyên cung cấp dịch vụ chăm sóc răng miệng
+            với đội ngũ chuyên gia giàu kinh nghiệm. Chúng tôi cam kết mang đến cho bạn một nụ cười
+            tự tin và răng miệng khỏe mạnh.
           </p>
           <div className="social-icons">
             <a href="/" className="social-icon"><FaFacebookF /></a>
@@ -23,29 +24,29 @@ const Footer = () => {
           </div>
         </div>
         <div className="footer-column">
-          <h3>Products</h3>
-          <p><a href="/" className="text-reset">Angular</a></p>
-          <p><a href="/" className="text-reset">React</a></p>
-          <p><a href="/" className="text-reset">Vue</a></p>
-          <p><a href="/" className="text-reset">Laravel</a></p>
+          <h3>Sản phẩm</h3>
+          <p><a href="/" className="text-reset">Trồng răng Implant</a></p>
+          <p><a href="/" className="text-reset">Niềng răng</a></p>
+          <p><a href="/" className="text-reset">Tẩy trắng răng</a></p>
+          <p><a href="/" className="text-reset">Chữa bệnh nướu</a></p>
         </div>
         <div className="footer-column">
-          <h3>Useful links</h3>
-          <p><a href="/" className="text-reset">Pricing</a></p>
-          <p><a href="/" className="text-reset">Settings</a></p>
-          <p><a href="/" className="text-reset">Orders</a></p>
-          <p><a href="/" className="text-reset">Help</a></p>
+          <h3>Liên kết hữu ích</h3>
+          <p><a href="/" className="text-reset">Bảng giá dịch vụ</a></p>
+          <p><a href="/" className="text-reset">Cài đặt</a></p>
+          <p><a href="/" className="text-reset">Đặt hẹn khám</a></p>
+          <p><a href="/" className="text-reset">Trợ giúp</a></p>
         </div>
         <div className="footer-column">
-          <h3>Contact</h3>
-          <p><i className="fas fa-home me-3"></i> Bình Định</p>
-          <p><i className="fas fa-envelope me-3"></i> lucdq@gmail.com</p>
-          <p><i className="fas fa-phone me-3"></i> + 01 234 567 88</p>
-          <p><i className="fas fa-print me-3"></i> + 01 234 567 89</p>
+          <h3>Liên hệ</h3>
+          <p><i className="fas fa-home me-3"></i> Địa chỉ: Hà Nội</p>
+          <p><i className="fas fa-envelope me-3"></i> Email: cotienrangfpt@gmail.com</p>
+          <p><i className="fas fa-phone me-3"></i> Điện thoại: + 01 234 567 88</p>
+          <p><i className="fas fa-print me-3"></i> Fax: + 01 234 567 89</p>
         </div>
       </section>
       <div className="footer-bottom">
-        <p>© {new Date().getFullYear()} Company. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Phòng Khám Nha Khoa. Bản quyền thuộc về chúng tôi.</p>
       </div>
     </footer>
   );

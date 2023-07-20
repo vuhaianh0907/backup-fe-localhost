@@ -16,7 +16,7 @@ function ViewBookingDetail() {
       .then((response) => {
         // Handle the response from the API
         const appointmentData = response.data.appointment;
-        
+
         // Send GET requests to fetch slot and doctor details
         const slotPromise = axios.get(`http://localhost:3000/api/slot/details?id=${appointmentData.slotID}`);
         const doctorPromise = axios.get(`http://localhost:3000/api/account/doctor/details?id=${appointmentData.doctorID}`);
@@ -76,59 +76,64 @@ function ViewBookingDetail() {
   };
 
   return (
-    <div id="ViewBookingDetail" className="view-booking-detail">
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        <div>
-          <h2>Chi tiết đặt lịch</h2>
-          <div className="detail-info">
-            <span className="label">Ngày điều trị:</span>
-            <span>{appointment ? appointment.slot.date : 'Unknown'}</span>
-          </div>
-          <div className="detail-info">
-            <span className="label">Trạng thái:</span>
-            <span>{appointment ? appointment.status : 'Unknown'}</span>
-          </div>
-          <div className="detail-info">
-            <span className="label">Bác sĩ:</span>
-            <span>{appointment ? appointment.doctor.fullname : 'Unknown'}</span>
-          </div>
-          <div className="detail-info">
-            <span className="label">Slot:</span>
-            <span>{appointment ? appointment.slot.time : 'Unknown'}</span>
-          </div>
-          <div className="detail-info">
-            <span className="label">Lí do:</span>
-            <span>{appointment ? appointment.reason : 'Unknown'}</span>
-          </div>
+    <div id="ViewBookingDetail">
+      <div className="view-booking-detail">
 
-           {/* Nút hủy appointment chỉ hiển thị khi trạng thái là "Confirmed" */}
-           {appointment.status !== 'Cancelled' && appointment.status !== 'Doctor Cancelled' &&(
-            <button className="cancel-appointment-button" onClick={handleCancelAppointment}>
-              Hủy đặt lịch
-            </button>
-          )}
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          <div>
+            <h2>Chi tiết đặt lịch</h2>
+            <div className="detail-info">
+              <span className="label">Ngày điều trị: </span>
+              <span>{appointment ? appointment.slot.date : 'Unknown'}</span>
+            </div>
+            <div className="detail-info">
+              <span className="label">Trạng thái: </span>
+              <span>{appointment ? appointment.status : 'Unknown'}</span>
+            </div>
+            <div className="detail-info">
+              <span className="label">Bác sĩ: </span>
+              <span>{appointment ? appointment.doctor.fullname : 'Unknown'}</span>
+            </div>
+            <div className="detail-info">
+              <span className="label">Slot: </span>
+              <span>{appointment ? appointment.slot.time : 'Unknown'}</span>
+            </div>
+            <div className="detail-info">
+              <span className="label">Lí do: </span>
+              <span>{appointment ? appointment.reason : 'Unknown'}</span>
+            </div>
+            <div className='nuthuylich'>
+              {/* Nút hủy appointment chỉ hiển thị khi trạng thái là "Confirmed" */}
+              {appointment.status !== 'Cancelled' && appointment.status !== 'Doctor Cancelled' && (
+               
+                <button  type="button" class="btn btn-danger" onClick={handleCancelAppointment}>
+                  Hủy đặt lịch
+                </button>
+              )}
+            </div>
 
-          {/* Pop-up xác nhận hủy */}
-          {showCancelModal && (
-            <div className="cancel-modal">
-              <div className="cancel-modal-content">
-                <h3>Xác nhận hủy appointment</h3>
-                <p>Bạn có chắc chắn muốn hủy appointment này?</p>
-                <div className="cancel-modal-buttons">
-                  <button className="cancel-button" onClick={handleCloseModal}>
-                    Đóng
-                  </button>
-                  <button className="confirm-button" onClick={handleConfirmCancelAppointment}>
-                    Hủy appointment
-                  </button>
+            {/* Pop-up xác nhận hủy */}
+            {showCancelModal && (
+              <div className="cancel-modal">
+                <div className="cancel-modal-content">
+                  <h3>Xác nhận hủy appointment</h3>
+                  <p>Bạn có chắc chắn muốn hủy appointment này?</p>
+                  <div className="cancel-modal-buttons">
+                    <button className="cancel-button" onClick={handleCloseModal}>
+                      Đóng
+                    </button>
+                    <button className="confirm-button" onClick={handleConfirmCancelAppointment}>
+                      Hủy appointment
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
-        </div>
-      )}
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

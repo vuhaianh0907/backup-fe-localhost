@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faGauge, faHouse, faUserDoctor } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCalendarCheck, faCalendarPlus, faGauge, faHouse, faMoneyBill, faMoneyBillTransfer, faUserDoctor } from '@fortawesome/free-solid-svg-icons';
 import './Sidebar.scss';
 
 import logo from '../../assets/images/logo-01-01.png';
@@ -23,63 +23,7 @@ const Sidebar = () => {
   };
 
   return (
-    // <nav className={`msb ${isSidebarOpen ? '' : 'msb-closed'}`}>
-    //   <div >
-    //     <a href="#" onClick={toggleSidebar}>
-    //       <FontAwesomeIcon icon={faBars} />
-    //     </a>
-    //   </div>
-    //   <div className="navbar-header">
-    //     <div className="brand-wrapper">
-    //       <div className="brand-name-wrapper">
-    //         <a className="navbar-brand" href="#">
-    //           Menu
-    //         </a>
-    //       </div>
-    //     </div>
-    //   </div>
-    //   <div className="side-menu-container">
-    //     <ul className="nav navbar-nav">
-    //       <li><a href="/customer/listdoctor"><i className="fa fa-dashboard"></i> List Doctor </a></li>
-    //       <li className="active"><a href="#"><i className="fa fa-puzzle-piece"></i> Components</a></li>
-    //       <li><a href="#"><i className="fa fa-heart"></i> Extras</a></li>
-    //       <li className="panel panel-default" id="dropdown">
-    //         <a data-toggle="collapse" href="#dropdown-lvl1">
-    //           <i className="fa fa-diamond"></i> Apps
-    //           <span className="caret"></span>
-    //         </a>
-    //         <div id="dropdown-lvl1" className="panel-collapse collapse">
-    //           <div className="panel-body">
-    //             <ul className="nav navbar-nav">
-    //               <li><a href="#">Mail</a></li>
-    //               <li><a href="#">Calendar</a></li>
-    //               <li><a href="#">Ecommerce</a></li>
-    //               <li><a href="#">User</a></li>
-    //               <li><a href="#">Social</a></li>
-    //               <li className="panel panel-default" id="dropdown">
-    //                 <a data-toggle="collapse" href="#dropdown-lvl2">
-    //                   <i className="glyphicon glyphicon-off"></i> Sub Level
-    //                   <span className="caret"></span>
-    //                 </a>
-    //                 <div id="dropdown-lvl2" className="panel-collapse collapse">
-    //                   <div className="panel-body">
-    //                     <ul className="nav navbar-nav">
-    //                       <li><a href="#">Link</a></li>
-    //                       <li><a href="#">Link</a></li>
-    //                       <li><a href="#">Link</a></li>
-    //                     </ul>
-    //                   </div>
-    //                 </div>
-    //               </li>
-    //             </ul>
-    //           </div>
-    //         </div>
-    //       </li>
-    //       <li><a href="#"><span className="glyphicon glyphicon-signal"></span> Link</a></li>
-    //     </ul>
-    //   </div>
 
-    // </nav>
     <div id='sidebar' className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark">
       <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
         <Link className="logo" to="/">
@@ -89,51 +33,100 @@ const Sidebar = () => {
       </a>
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
+      <li className="nav-item">
+              <Link to="/" className="nav-link active" aria-current="page">
+                <FontAwesomeIcon icon={faHouse} className='mr-2' />
+                <span className='ml-2'>Home</span>
+              </Link>
+
+            </li>
 
         {(user && user.role === 'admin') &&
-          <li className="nav-item">
-            <Link to="/" className="nav-link active" aria-current="page">
-              <FontAwesomeIcon icon={faHouse} className='mr-2' />
-              <span className='ml-2'>Home</span>
-            </Link>
-          </li>}
+          <>
+            
+            <li>
+              <Link to="/admin/doctorlist" className="nav-link" aria-current="page">
+                <FontAwesomeIcon icon={faUserDoctor} className='mr-2' />
+                <span className='ml-2'>List Doctor</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/admin/createslot" className="nav-link" aria-current="page">
+                <FontAwesomeIcon icon={faCalendarPlus} className='mr-2' />
+                <span className='ml-2'>Create Slot</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/admin/transaction" className="nav-link" aria-current="page">
+                <FontAwesomeIcon icon={faGauge} className='mr-2' />
+                <span className='ml-2'>Transaction</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/admin/addamount" className="nav-link" aria-current="page">
+                <FontAwesomeIcon icon={faMoneyBillTransfer} className='mr-2' />
+                <span className='ml-2'>Add amount</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/admin/amount" className="nav-link" aria-current="page">
+                <FontAwesomeIcon icon={faMoneyBill} className='mr-2' />
+                <span className='ml-2'>Update price bill</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/admin/createdoctor" className="nav-link" aria-current="page">
+                <FontAwesomeIcon icon={faMoneyBill} className='mr-2' />
+                <span className='ml-2'>Tạo Bác Sĩ</span>
+              </Link>
+            </li>
+
+          </>
+
+        }
 
         {(user && user.role === 'doctor') &&
-          <li className="nav-item">
-            <Link to="/abc" className="nav-link active" aria-current="page">
-              <FontAwesomeIcon icon={faHouse} className='mr-2' />
-              <span className='ml-2'>hohohoho</span>
-            </Link>
-          </li>}
+          <>
 
-        <li>
+            <li>
+              <Link to={`/Doctorviewbooking/${user.id}`} className="nav-link" aria-current="page">
+                <FontAwesomeIcon icon={faCalendarCheck} className='mr-2' />
+                <span className='ml-2'>Appointment</span>
+              </Link>
+            </li>
+
+          </>
+        }
+
+
+        {/* <li>
           <Link to="/" className="nav-link" aria-current="page">
             <FontAwesomeIcon icon={faGauge} className='mr-2' />
             <span className='ml-2'>Dashboard</span>
           </Link>
-        </li>
-        <li>
+        </li> */}
+        {/* <li>
           <Link to="/" className="nav-link" aria-current="page">
             <FontAwesomeIcon icon={faUserDoctor} className='mr-2' />
             <span className='ml-2'>Doctor List</span>
           </Link>
-        </li>
-        <li>
+        </li> */}
+        {/* <li>
           <Link to="/" className="nav-link" aria-current="page">
             <FontAwesomeIcon icon={faUserDoctor} className='mr-2' />
             <span className='ml-2'>Appointment List</span>
           </Link>
-        </li>
+        </li> */}
         <li>
           <a href="#" className="nav-link text-white">
             {/* <svg className="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg> */}
-            Treatment Profile List
+            dùng chung
           </a>
         </li>
         <li>
           <a href="#" className="nav-link text-white">
             {/* <svg className="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg> */}
-            Momo
+            dùng chung
           </a>
         </li>
       </ul>
@@ -147,8 +140,27 @@ const Sidebar = () => {
           <li><a className="dropdown-item" href="#">New project...</a></li>
           <li><a className="dropdown-item" href="#">Settings</a></li>
           <li><a className="dropdown-item" href="#">Profile</a></li>
-          <li><hr className="dropdown-divider" /></li>
           <li>
+                      <Link
+                        to="/customer/profile/edit"
+                      
+                        className="dropdown-item"
+                      >
+                        Chỉnh sửa thông tin
+                      </Link>
+                    </li>
+          
+          <li>
+                      <Link
+                        to="/changepass"
+                        className="dropdown-item"
+                      >
+                        Đổi mật khẩu
+                      </Link>
+                    </li>
+          <li>
+          <li><hr className="dropdown-divider" /></li>
+         
             <Link
               to="/logout"
               onClick={() => {

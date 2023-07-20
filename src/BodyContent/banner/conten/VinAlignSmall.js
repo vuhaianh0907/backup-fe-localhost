@@ -25,7 +25,11 @@ const VinAlignSmall = () => {
                 <span style={{ color: '#000000', fontSize: '90%' }}>
                   Với thế mạnh về niềng răng không mắc cài bằng khay trong suốt, được thực hiện bởi các bác sĩ chuyên khoa chỉnh nha nhiều năm kinh nghiệm và đội ngũ chuyên viên kỹ thuật phần mềm chuyên nghiệp. Chúng tôi mang đến cho bạn một trải nghiệm hoàn toàn khác biệt về niềng răng với những ưu điểm nổi bật như: tính thẩm mỹ, không đau, vệ sinh dễ dàng, có thể tự tháo lắp, ăn uống bình thường và đặc biệt là thấy trước được kết quả trước khi niềng răng.
                 </span>
+                
               </p>
+             
+            </div>
+            <div className="py-5">
               <p>
                 <img
                   className="aligncenter wp-image-428 size-full"
@@ -37,7 +41,7 @@ const VinAlignSmall = () => {
                   sizes="(max-width: 844px) 100vw, 844px"
                 />
               </p>
-            </div>
+              </div>
           </div>
         </div>
       </div>
