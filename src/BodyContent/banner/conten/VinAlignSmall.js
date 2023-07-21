@@ -31,7 +31,7 @@ const VinAlignSmall = () => {
               </p>
               <div className="anhbanner2 py-5">
               
-              <p className='py-5 '>
+              {/* <p className='py-5 '>
                 <img
                   className="aligncenter2"
                   src="http://nhakhoa.maugiaodien.com/wp-content/uploads/2019/02/234.jpg"
@@ -41,7 +41,7 @@ const VinAlignSmall = () => {
                   srcSet="http://nhakhoa.maugiaodien.com/wp-content/uploads/2019/02/234.jpg 844w, http://nhakhoa.maugiaodien.com/wp-content/uploads/2019/02/234-300x213.jpg 300w, http://nhakhoa.maugiaodien.com/wp-content/uploads/2019/02/234-768x546.jpg 768w"
                   sizes="(max-width: 844px) 100vw, 844px"
                 />
-              </p>
+              </p> */}
               <p>
                 <img
                   className="aligncenter"
