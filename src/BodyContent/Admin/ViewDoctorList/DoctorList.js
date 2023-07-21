@@ -70,12 +70,13 @@ const DoctorList = () => {
 
   return (
     <div id="DoctorList" className="doctor-list">
-      <h2 className="doctor-list__title">Danh sách bác sĩ</h2>
+      
       {isLoading ? (
         <p>Loading...</p>
       ) : (
         <>
           <ul className="doctor-list__items">
+          <h2 className="doctor-list__title">Danh sách bác sĩ</h2>
             {currentDoctors.map((doctor) => (
               <li key={doctor.id} className="doctor-item">
                 <div className="doctor-item__avatar">

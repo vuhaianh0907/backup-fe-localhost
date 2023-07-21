@@ -36,17 +36,19 @@ const UpdateAmountPage = () => {
 
   return (
     <div className="update-amount-page">
-      <h2>Update Amount</h2>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="amount-container">
-          <p className="amount-label">Current Amount:</p>
-          <p className="amount-value">{amount}</p>
-          <input type="number" value={amount} onChange={handleAmountChange} />
-          <button className="confirm-button" onClick={handleConfirm}>Confirm</button>
-        </div>
-      )}
+      <div className="update-amount-page2">
+        <h2>Update Amount</h2>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className="amount-container">
+            <p className="amount-label">Current Amount:</p>
+            <p className="amount-value">{amount}</p>
+            <input className="amount-value" type="number" value={amount} onChange={handleAmountChange} />
+            <button className="confirm-button" onClick={handleConfirm}>Confirm</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

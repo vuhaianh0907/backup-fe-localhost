@@ -3,10 +3,12 @@
 .top-up-wallet {
     text-align: center;
     margin-top: 50px;
+    color: aliceblue;
   }
+
   
-  .user-info-heading {
-    color: #333;
+  .user-info-heading{
+    color: aliceblue;
   }
   
   .user-info {
@@ -25,4 +27,14 @@
   .top-up-button:hover {
     background-color: #45a049;
   }
-  
+  .momodiv{
+    padding: 60px;
+    text-align: center;
+  }
+  .luuy{
+    background-color: aliceblue;
+    color: black;
+    padding: 60px;
+    width: 600px;
+    
+  }

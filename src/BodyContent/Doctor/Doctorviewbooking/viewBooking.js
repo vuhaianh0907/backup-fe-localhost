@@ -151,6 +151,7 @@ const ViewBooking = () => {
     const currentAppointments = appointments.slice(startIndex, endIndex);
     console.log(appointments);
     return (
+      <div>
       <>
 
         {currentAppointments.map((appointment) => (
@@ -179,6 +180,7 @@ const ViewBooking = () => {
           </li>
         ))}
       </>
+      </div>
     );
   };
   const renderAppointmentListToday = (appointments) => {

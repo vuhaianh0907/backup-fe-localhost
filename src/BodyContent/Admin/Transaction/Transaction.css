@@ -1,5 +1,8 @@
 .transaction-list {
     margin: 20px;
+    background-color: #ddd;
+    height: 800px;
+    padding: 40px;
   }
   
   h1 {

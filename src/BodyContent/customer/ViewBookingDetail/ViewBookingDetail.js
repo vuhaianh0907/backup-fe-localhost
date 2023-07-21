@@ -125,7 +125,7 @@ function ViewBookingDetail() {
                       Đóng
                     </button>
                     <button className="confirm-button" onClick={handleConfirmCancelAppointment}>
-                      Hủy appointment
+                      Xác nhận hủy lịch
                     </button>
                   </div>
                 </div>

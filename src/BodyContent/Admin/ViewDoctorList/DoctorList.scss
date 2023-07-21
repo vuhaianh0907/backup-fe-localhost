@@ -1,14 +1,22 @@
 #DoctorList {
+
   .doctor-list {
-    padding: 20px;
+    padding: 60px;
+    background-color: #fff;
   }
 
   .doctor-list__title {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 10px;
+    padding: 60px;
   }
-
+//   .doctor-item__specialization{
+//     color: #f7f7f7;
+//   }
+// .doctor-item{
+//   color: #f7f7f7;
+// }
   .doctor-list__items {
     list-style: none;
     padding: 0;
@@ -18,7 +26,8 @@
   .doctor-item {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    padding: 40px;
+
   }
 
   .doctor-item__avatar img {
@@ -63,5 +72,14 @@
 
   .confirm-button {
     margin-right: 10px;
+  }
+  .doctor-item{
+    background-color: #fff;
+  }
+  .doctor-list__title{
+    color: #161616;
+  }
+  .doctor-list__items{
+    background-color: #fff;
   }
 }

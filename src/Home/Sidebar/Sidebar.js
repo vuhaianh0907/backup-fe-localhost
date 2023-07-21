@@ -120,13 +120,13 @@ const Sidebar = () => {
         <li>
           <a href="#" className="nav-link text-white">
             {/* <svg className="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg> */}
-            dùng chung
+         
           </a>
         </li>
         <li>
           <a href="#" className="nav-link text-white">
             {/* <svg className="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg> */}
-            dùng chung
+            
           </a>
         </li>
       </ul>

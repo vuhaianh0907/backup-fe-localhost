@@ -5,7 +5,7 @@ import './Transaction.css';
 const TransactionList = () => {
   const [transactions, setTransactions] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const perPage = 5;
+  const perPage = 15;
 
   const fetchTransactions = async () => {
     try {

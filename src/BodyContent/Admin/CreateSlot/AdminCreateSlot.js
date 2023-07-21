@@ -112,7 +112,7 @@ function CreateSchedulePage() {
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
             />
-            <button onClick={handleSearchDoctor}>Tìm kiếm</button>
+            <button onClick={handleSearchDoctor} type="button" class="btn btn-primary">Tìm kiếm</button>
           </div>
           <ul className="admin-create-slot__doctor-list">
             {currentDoctors.map((doctor) => (
@@ -145,7 +145,7 @@ function CreateSchedulePage() {
           <div>
             <h3>Chọn khoảng thời gian</h3>
             <div>
-              <label htmlFor="startDate">Ngày bắt đầu:</label>
+              <label htmlFor="startDate">Ngày bắt đầu: </label>
               <input
                 type="date"
                 id="startDate"
@@ -154,7 +154,7 @@ function CreateSchedulePage() {
               />
             </div>
             <div>
-              <label htmlFor="endDate">Ngày kết thúc:</label>
+              <label htmlFor="endDate">Ngày kết thúc: </label>
               <input
                 type="date"
                 id="endDate"
@@ -191,7 +191,7 @@ function CreateSchedulePage() {
 
         {selectedDoctor && startDate && endDate && selectedShifts.length > 0 && (
           <div>
-            <button onClick={handleSaveSchedule} disabled={isLoading}>
+            <button onClick={handleSaveSchedule} disabled={isLoading} type="button" class="btn btn-success">
               {isLoading ? 'Đang lưu...' : 'Lưu'}
             </button>
           </div>
