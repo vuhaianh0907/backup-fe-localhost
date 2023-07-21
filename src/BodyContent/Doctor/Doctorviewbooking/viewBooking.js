@@ -277,12 +277,9 @@ const ViewBooking = () => {
         <div className="appointment-profile">
           <div className="profile-info">
             <span className="profile-label">Họ tên:</span>
-            <span className="profile-value">{selectedAppointment.customer.name}</span>
+            <span className="profile-value">{selectedAppointment.customer.fullname}</span>
           </div>
-          <div className="profile-info">
-            <span className="profile-label">Ngày sinh:</span>
-            <span className="profile-value">{selectedAppointment.customer.dateOfBirth}</span>
-          </div>
+          
           <div className="profile-info">
             <span className="profile-label">Giới tính:</span>
             <span className="profile-value">{selectedAppointment.customer.gender}</span>

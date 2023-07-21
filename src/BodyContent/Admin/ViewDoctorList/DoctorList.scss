@@ -1,36 +1,52 @@
 #DoctorList {
   .doctor-list {
-    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 30px;
+    background-color: rgb(186, 223, 255);
+    
   }
 
   .doctor-list__title {
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin: 10px;
   }
 
   .doctor-list__items {
     list-style: none;
     padding: 0;
     margin: 0;
+    // width: 70vw;
+    display: flex;
+    justify-content: center;
+    
   }
 
   .doctor-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+    width: 200px;
+    margin: 27px;
+    padding: 15px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 2rem 3rem rgba(69, 76, 136, 0.25);
   }
 
   .doctor-item__avatar img {
+    align-items: center;
     width: 80px;
     height: 80px;
     border-radius: 50%;
     object-fit: cover;
-    margin-right: 20px;
+    margin-bottom: 20px;
+    background-image: url("http://farm9.staticflickr.com/8075/8449869813_1e62a60f01_b.jpg");
   }
 
   .doctor-item__details {
-    flex-grow: 1;
+    // flex-grow: 1;
+    
+    
   }
 
   .doctor-item__name {
@@ -44,24 +60,47 @@
   }
 
   .view-details-link {
-    margin-left: 10px;
+    // margin-left: 10px;
+    background-color: inherit;
+    color: rgb(73, 140, 255);
+    padding: 0;
+    padding: 4px;
   }
 
   .status-button {
-    margin-left: 10px;
+    margin-bottom: 10px;
   }
 
   .btn-success {
-    background-color: #28a745;
-    color: #fff;
+    color: #28a745;
+    background-color: inherit;
+    font-size: 12px;
+    padding: 0;
+    padding: 2px;
   }
 
   .btn-danger {
-    background-color: #dc3545;
-    color: #fff;
+    background-color: inherit;
+    color: #dc3545;
+    font-size: 12px;
+    padding: 0;
+    padding: 2px;
   }
 
   .confirm-button {
-    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+  .btn-confirm{
+    background-color: #dc3545;
+    color: #fff;
+  }
+  .close{
+    text-decoration: none;
+    border: 0;
+    background-color: inherit;
+    font-weight: 300;
+    font-size: 30px;
   }
 }
+
+

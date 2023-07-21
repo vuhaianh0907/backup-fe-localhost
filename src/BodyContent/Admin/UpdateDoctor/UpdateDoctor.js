@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 
 import 'bootstrap/dist/css/bootstrap.css'; // Import Bootstrap CSS
-// import './UpdateDoctor.scss'; // Custom styles
+import './UpdateDoctor.scss'; // Custom styles
 
 function AdminUpdateDoctor() {
   const [doctorInfo, setDoctorInfo] = useState({
@@ -107,7 +107,7 @@ function AdminUpdateDoctor() {
           <div className="form-group">
             <label>Giới tính:</label>
             <div className="gender-options">
-              <label>
+              
                 <input
                   type="radio"
                   className="form-check-input"
@@ -117,9 +117,9 @@ function AdminUpdateDoctor() {
                   checked={doctorInfo.gender === 'Nam'}
                   onChange={handleChange}
                 />
-                <span>Nam</span>
-              </label>
-              <label>
+                <span>  Nam</span>
+              <br/>
+              
                 <input
                   type="radio"
                   className="form-check-input"
@@ -129,8 +129,8 @@ function AdminUpdateDoctor() {
                   checked={doctorInfo.gender === 'Nữ'}
                   onChange={handleChange}
                 />
-                <span>Nữ</span>
-              </label>
+                <span>  Nữ</span>
+              
             </div>
           </div>
 
@@ -164,7 +164,7 @@ function AdminUpdateDoctor() {
               id="email"
               name="email"
               value={doctorInfo.email}
-              onChange={handleChange}
+              readOnly
             />
           </div>
           <div className="form-group">

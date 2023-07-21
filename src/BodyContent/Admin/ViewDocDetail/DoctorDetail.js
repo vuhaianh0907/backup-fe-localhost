@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
-// import './DoctorDetail.scss';
+import './DoctorDetail.scss';
 
 const DoctorDetail = () => {
   const { doctorId } = useParams(); // Truy cập vào doctorId từ URL parameter
@@ -61,27 +61,29 @@ const DoctorDetail = () => {
     return <div>Loading...</div>;
   }
 
+console.log(slots);
+
   return (
     <div id="DoctorDetail" className="doctor-detail">
       <div className="avatar-container">
-        <img src={doctorInfo.avatar} alt="Doctor Avatar" className="doctor-avatar" />
+        <img src={doctorInfo.avatar} className="doctor-avatar" />
       </div>
       <div className="info-container">
         <div className="doctor-name">{doctorInfo.fullname}</div>
         <div className="doctor-info">
-          <span className="info-label">ID Card:</span>
+          <span className="info-label">ID Bác Sĩ:</span>
           <span>{doctorInfo.idCard}</span>
         </div>
         <div className="doctor-info">
-          <span className="info-label">Gender:</span>
+          <span className="info-label">Giới Tính:</span>
           <span>{doctorInfo.gender}</span>
         </div>
         <div className="doctor-info">
-          <span className="info-label">Date of Birth:</span>
+          <span className="info-label">Ngày Sinh:</span>
           <span>{doctorInfo.dateOfBirth}</span>
         </div>
         <div className="doctor-info">
-          <span className="info-label">Phone Number:</span>
+          <span className="info-label">Số điện thoại:</span>
           <span>{doctorInfo.phone}</span>
         </div>
         <div className="doctor-info">
@@ -89,15 +91,15 @@ const DoctorDetail = () => {
           <span>{doctorInfo.email}</span>
         </div>
         <div className="doctor-info">
-          <span className="info-label">Address:</span>
+          <span className="info-label">Địa Chỉ:</span>
           <span>{doctorInfo.address}</span>
         </div>
         <div className="doctor-info">
-          <span className="info-label">qualification:</span>
+          <span className="info-label">Bằng Cấp:</span>
           <span>{doctorInfo.qualification}</span>
         </div>
         <div className="doctor-info">
-          <span className="info-label">Experience:</span>
+          <span className="info-label">Kinh Nghiệm:</span>
           <span>{doctorInfo.experience}</span>
         </div>
         

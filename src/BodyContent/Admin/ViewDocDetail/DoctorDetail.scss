@@ -11,16 +11,21 @@
 .avatar-container {
   flex: 0 0 30%;
   text-align: center;
+  
 }
 
 .doctor-avatar {
   width: 150px;
   height: 150px;
   border-radius: 50%;
+  align-items: center;
+    object-fit: cover;
+    margin-bottom: 20px;
+    background-image: url("http://farm9.staticflickr.com/8075/8449869813_1e62a60f01_b.jpg");
 }
 
 .info-container {
-  flex: 0 0 70%;
+  flex: 0 0 60%;
   padding: 20px;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -65,7 +70,7 @@
   font-weight: bold;
 }
 
-.timeslot-button {
+.slot-button {
   margin-right: 10px;
   padding: 5px 10px;
   border: 1px solid #ccc;

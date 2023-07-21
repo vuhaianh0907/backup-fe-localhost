@@ -4,12 +4,9 @@ import { BrowserRouter as Router, Switch, Route, Link, Routes } from 'react-rout
 import Navigation from './Home/header';
 import Banner from './BodyContent/banner/banner.js';
 import Login from './BodyContent/accout/login/LoginBar';
-import Doctor from './BodyContent/Doctor';
 import Register from './BodyContent/accout/Register/Register';
 import ForgotPassword from './BodyContent/accout/ForgotPassword/ForgotPassword';
 import Footer from './Footer/footer';
-import DocDetail from './BodyContent/DocDetail';
-import Worksheet from './BodyContent/Worksheet';
 import ViewTreatmentProfile from './BodyContent/Doctor/ViewTreatmentProfile/ViewTreatmentProfile';
 import ViewTreatementList from './BodyContent/Doctor/ViewTreatmentList/ViewTreatementList';
 import CreateTreatementIn from './BodyContent/Doctor/CreateTreatementIn/CreateTreatmentIn';
@@ -42,6 +39,7 @@ import CustormerWallet from './BodyContent/customer/TopUpWallet/TopUpWallet';
 import DoctorViewprofile from './BodyContent/Doctor/Viewprofile/Viewprofile';
 import DoctorUpdateprofile from './BodyContent/Doctor/UpdateProfile/UpdateProfile';
 import ResetPassword from './BodyContent/accout/ForgotPassword/ResetPassword';
+import ViewTransaction from './BodyContent/customer/TopUpWallet/ViewTransaction';
 
 // import testthu from './BodyContent/Admin/test/test';
 
@@ -59,17 +57,12 @@ function App() {
     <div>
       <Navigation isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
       <Routes>
-        <Route path='/doctor' exact element={<Doctor />} />
-        {/* customer/doctor */}
-        <Route path='/doctor/:id' element={<DocDetail />} />
-        {/* trang detail bs sẽ xem đc bằng cả guest và cust, id ko nên đc hiện trên đường dẫn*/}
 
         <Route path='/Login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/reset-password' element={<ResetPassword/>}/>
         <Route path='/' exact element={<Banner />} />
-        <Route path='/Worksheet' element={<Worksheet />} />
         <Route path='/changepass' element={<ChangePass />} />
 
         {/* admin */}
@@ -97,7 +90,7 @@ function App() {
         <Route path='/customer/listdoctor' element={<CustomerViewDoctor />} />
         <Route path='/customer/doctordetail/:id' element={<ViewDocDetail />} />
         <Route path='/customer/topupwallet/:id' element={<CustormerWallet />} />
-
+        <Route path='/customer/transaction/:id' element={<ViewTransaction/>}/>
 
 
 

@@ -6,7 +6,7 @@ import './DoctorList.scss';
 const DoctorList = () => {
   const [doctors, setDoctors] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [doctorsPerPage] = useState(5);
+  const perPage = 5;
   const [isLoading, setIsLoading] = useState(true);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
@@ -26,13 +26,19 @@ const DoctorList = () => {
       });
   }, []);
 
-  const indexOfLastDoctor = currentPage * doctorsPerPage;
-  const indexOfFirstDoctor = indexOfLastDoctor - doctorsPerPage;
-  const currentDoctors = doctors.slice(indexOfFirstDoctor, indexOfLastDoctor);
+  const lastIndex = currentPage * perPage;
+  const firstIndex = lastIndex - perPage;
+  const currentDoctors = doctors.slice(firstIndex, lastIndex);
 
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  const nextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
   };
+
+  const prevPage = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
+  };
+
+ 
 
   const handleStatusChange = (doctor) => {
     const updatedStatus = doctor.status === 'active' ? 'not active' : 'active';
@@ -79,7 +85,7 @@ const DoctorList = () => {
             {currentDoctors.map((doctor) => (
               <li key={doctor.id} className="doctor-item">
                 <div className="doctor-item__avatar">
-                  <img src={doctor.avatar} alt="Doctor Avatar" />
+                  <img src={doctor.avatar}/>
                 </div>
                 <div className="doctor-item__details">
                   <p className="doctor-item__name">{doctor.fullname}</p>
@@ -90,7 +96,7 @@ const DoctorList = () => {
                   onClick={() => handleStatusChange(doctor)}
                 >
                   {doctor.status === 'active' ? 'Active' : 'Not Active'}
-                </button>
+                </button><br/>
                 <Link to={`/admin/doctordetail/${doctor.id}`} className="view-details-link btn btn-primary">
                   Xem thông tin
                 </Link>
@@ -98,18 +104,21 @@ const DoctorList = () => {
             ))}
           </ul>
           <div className="pagination">
-            {Array.from({ length: Math.ceil(doctors.length / doctorsPerPage) }, (_, index) => index + 1).map(
-              (pageNumber) => (
-                <button
-                  key={pageNumber}
-                  className={`pagination-button btn ${pageNumber === currentPage ? 'active' : ''}`}
-                  onClick={() => paginate(pageNumber)}
-                >
-                  {pageNumber}
-                </button>
-              )
-            )}
-          </div>
+        {currentPage > 1 && (
+          <button id='thist-paging' onClick={prevPage}>{'<'}</button>
+        )}
+        {currentDoctors.length > 0 && (
+          <button id='thist-paging'>
+            <span>
+            {currentPage}
+          </span>
+          </button>
+          
+        )}
+        {currentDoctors.length === perPage && (
+          <button id='thist-paging' onClick={nextPage}>{'>'}</button>
+        )}
+      </div>
         </>
       )}
 
@@ -135,19 +144,19 @@ const DoctorList = () => {
                 aria-label="Close"
                 onClick={handleConfirmationCancel}
               >
-                <span aria-hidden="true">&times;</span>
+                <div className='close'>&times;</div>
               </button>
             </div>
             <div className="modal-body">
               <p>Bạn có chắc chắn muốn thay đổi trạng thái của bác sĩ?</p>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-danger" onClick={handleConfirmationConfirm}>
+              <button type="button" className="btn btn-confirm" onClick={handleConfirmationConfirm}>
                 Xác nhận
               </button>
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-cancel"
                 data-dismiss="modal"
                 onClick={handleConfirmationCancel}
               >
