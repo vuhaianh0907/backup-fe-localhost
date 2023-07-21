@@ -206,27 +206,29 @@ function CreateSchedulePage() {
             <p>Ca làm việc: {selectedShifts.join(', ')}</p>
           </div>
         )}
-
+      {scheduleList.length>0 &&(
         <div>
-          <table>
-            <thead>
-              <tr>
-                <th>Bác sĩ</th>
-                <th>Ngày</th>
-                <th>Ca làm việc</th>
+        <table>
+          <thead>
+            <tr>
+              <th>Bác sĩ</th>
+              <th>Ngày</th>
+              <th>Ca làm việc</th>
+            </tr>
+          </thead>
+          <tbody>
+            {scheduleList.map((schedule, index) => (
+              <tr key={index}>
+                <td>{schedule.doctor.fullname}</td>
+                <td>{schedule.startDate} - {schedule.endDate}</td>
+                <td>{schedule.shifts.join(', ')}</td>
               </tr>
-            </thead>
-            <tbody>
-              {scheduleList.map((schedule, index) => (
-                <tr key={index}>
-                  <td>{schedule.doctor.fullname}</td>
-                  <td>{schedule.startDate} - {schedule.endDate}</td>
-                  <td>{schedule.shifts.join(', ')}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      )}
+        
       </div>
       <ToastContainer />
     </div>

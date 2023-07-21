@@ -6,12 +6,9 @@ import Sidebar from './Home/Sidebar/Sidebar';
 
 import Banner from './BodyContent/banner/banner.js';
 import Login from './BodyContent/accout/login/LoginBar';
-import Doctor from './BodyContent/Doctor';
 import Register from './BodyContent/accout/Register/Register';
 import ForgotPassword from './BodyContent/accout/ForgotPassword/ForgotPassword';
 import Footer from './Footer/footer';
-import DocDetail from './BodyContent/DocDetail';
-import Worksheet from './BodyContent/Worksheet';
 import ViewTreatmentProfile from './BodyContent/Doctor/ViewTreatmentProfile/ViewTreatmentProfile';
 import ViewTreatementList from './BodyContent/Doctor/ViewTreatmentList/ViewTreatementList';
 import CreateTreatementIn from './BodyContent/Doctor/CreateTreatementIn/CreateTreatmentIn';

@@ -66,11 +66,11 @@ export default function LoginBar() {
       <div className="row d-flex justify-content-center align-items-center h-100">
         <div className=" ">
           <div >
-            
-              
 
-              <form className="card shadow-2-strong" style={{ borderRadius: '1rem' }} onSubmit={handleSubmit}>
-                <div className="form-group">
+
+
+            <form className="card shadow-2-strong" style={{ borderRadius: '1rem' }} onSubmit={handleSubmit}>
+              <div className="form-group">
                 <h2>Đăng nhập</h2>
                   <label htmlFor="email"></label>
                   <input
@@ -113,12 +113,12 @@ export default function LoginBar() {
                   className="btn btn-primary btn-block"
                 />
               </div>
-              </form>
+            </form>
 
-             
 
-              
-            
+
+
+
           </div>
         </div>
       </div>
