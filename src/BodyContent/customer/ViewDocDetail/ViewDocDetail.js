@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './ViewDocDetail.scss';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendar, faCalendarDay } from '@fortawesome/free-solid-svg-icons';
 
 export default function ViewDocDetail() {
   const { id } = useParams();
@@ -67,58 +69,55 @@ export default function ViewDocDetail() {
   return (
     <div id="ViewDocDetail">
       <div id="ViewDocDetail" className="viewdocdt">
-      <div className="viewdocdt2">
-        {doctor ? (
+        <div className='viewdocdt2'>
+          <div className="row">
+            {doctor ? (
 
-          <div className="doctor-profile">
-            <img src={doctor.avatar} alt="Doctor Profile" className="profile-picture" />
-            <h2 className="doctor-name">{doctor.fullname}</h2>
-            <div className="doctor-information">
-              <h3>Thông tin bác sĩ</h3>
-              <div className="info-item">
-                <h4>Chứng chỉ:</h4>
-                <p>{doctor.qualification}</p>
+              <div className="col-5">
+                <center><img src={doctor.avatar} alt="Doctor Profile" className="profile-picture" /></center>
+                <h2 className="doctor-name">{doctor.fullname}</h2>
+                <div className="doctor-information">
+                  <div className="info-item">
+                    <h4>Chứng chỉ:</h4>
+                    <p>{doctor.qualification}</p>
+                  </div>
+                  <div className="info-item">
+                    <h4>Kinh nghiệm:</h4>
+                    <p>{doctor.experience}</p>
+                  </div>
+                </div>
               </div>
-              <div className="info-item">
-                <h4>Kinh nghiệm:</h4>
-                <p>{doctor.experience}</p>
+
+            ) : (
+              <p>Loading...</p>
+            )}
+
+            <div className="col-7">
+              <label for="date" class="col-form-label">Chọn ngày: </label>
+              <div class="col-5">
+                <div class="input-group date" id="datepicker">
+                  <input type="date" class="form-control" id="date" />
+                </div>
+              </div>
+
+              <h3>Các lịch hẹn của bác sĩ</h3>
+              <div className='row'>
+                {filteredSlots.length > 0 ? (
+                  filteredSlots.map((slot) => (
+                    <Link className='col-3 mb-2' to={`/customer/slot/appointment/${slot.id}`} key={slot.id}>
+                      <button className="mx-0 my-0 btn btn-primary w-100" onClick={() => handleSlotClick(slot.id)}>
+                        {slot.time}
+                      </button>
+                    </Link>
+                  ))
+                ) : (
+                  <p>Không có lịch hẹn khả dụng</p>
+                )}
               </div>
             </div>
           </div>
-
-        ) : (
-          <p>Loading...</p>
-        )}
-
-        <div className="filter-container">
-          <label htmlFor="selectedDate">Chọn ngày:</label>
-          <input
-            type="date"
-            id="selectedDate"
-            value={selectedDate}
-            onChange={handleDateChange}
-            min={new Date().toISOString().split('T')[0]}
-          />
-        </div>
-
-        <div className="slots-container">
-          <h3>Các lịch hẹn của bác sĩ</h3>
-          <div className="slots-list">
-            {filteredSlots.length > 0 ? (
-              filteredSlots.map((slot) => (
-                <Link to={`/customer/slot/appointment/${slot.id}`} key={slot.id}>
-                  <button className="slot-button" onClick={() => handleSlotClick(slot.id)}>
-                    {slot.time}
-                  </button>
-                </Link>
-              ))
-            ) : (
-              <p>Không có lịch hẹn khả dụng</p>
-            )}
-          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }

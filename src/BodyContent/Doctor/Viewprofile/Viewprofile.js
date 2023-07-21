@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
-import './DoctorViewProfile.css';
+import './DoctorViewProfile.scss';
 import axios from 'axios';
 
 const DoctorViewProfile = () => {
@@ -102,7 +102,7 @@ const DoctorViewProfile = () => {
   }
 
   return (
-    <div className="doctor-detail">
+    <div id="doctorViewProfile" className="doctor-detail">
       <div className="avatar-container">
         <img src="https://via.placeholder.com/150" alt="Doctor Avatar" className="doctor-avatar" />
       </div>

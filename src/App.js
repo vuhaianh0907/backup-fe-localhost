@@ -37,7 +37,6 @@ import CustomerWriteAppointment from './BodyContent/customer/WriteAppointment/Ap
 import CustormerViewBookingDetail from './BodyContent/customer/ViewBookingDetail/ViewBookingDetail';
 import CustormerViewTreatmentProfileList from './BodyContent/customer/treatmentprofilelist/treatmentprofilelist';
 import CustormerWallet from './BodyContent/customer/TopUpWallet/TopUpWallet';
-
 import DoctorViewprofile from './BodyContent/Doctor/Viewprofile/Viewprofile';
 import DoctorUpdateprofile from './BodyContent/Doctor/UpdateProfile/UpdateProfile';
 import ResetPassword from './BodyContent/accout/ForgotPassword/ResetPassword';
@@ -70,66 +69,67 @@ function App() {
           <Navigation isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
       }
       <main className={(user && (user.role === 'admin' || user.role === 'doctor')) ? 'main-small' : ''}>
-        <Routes>
+        <content>
+          <Routes>
 
-          {/* trang detail bs sẽ xem đc bằng cả guest và cust, id ko nên đc hiện trên đường dẫn*/}
+            {/* trang detail bs sẽ xem đc bằng cả guest và cust, id ko nên đc hiện trên đường dẫn*/}
 
-          <Route path='/Login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/forgot-password' element={<ForgotPassword />} />
-          <Route path='/reset-password' element={<ResetPassword />} />
-          <Route path='/' exact element={<Banner />} />
-          <Route path='/Worksheet' element={<Worksheet />} />
-          <Route path='/changepass' element={<ChangePass />} />
+            <Route path='/Login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/forgot-password' element={<ForgotPassword />} />
+            <Route path='/reset-password' element={<ResetPassword />} />
+            <Route path='/' exact element={<Banner />} />
+            <Route path='/changepass' element={<ChangePass />} />
 
-          {/* admin */}
-          <Route path='/admin/createdoctor' element={<CreateDoctor />} />
-          <Route path='/admin/createslot' element={<CreateSlot />} />
-          <Route path='/admin/doctorlist' element={<DoctorList />} />
-          <Route path='/admin/doctordetail/:doctorId' element={<DoctorDetail />} />
-          <Route path='/admin/doctor/update/:doctorId' element={<DoctorUpdate />} />
+            {/* admin */}
+            <Route path='/admin/createdoctor' element={<CreateDoctor />} />
+            <Route path='/admin/createslot' element={<CreateSlot />} />
+            <Route path='/admin/doctorlist' element={<DoctorList />} />
+            <Route path='/admin/doctordetail/:doctorId' element={<DoctorDetail />} />
+            <Route path='/admin/doctor/update/:doctorId' element={<DoctorUpdate />} />
 
-          <Route path='/admin/cancellation' element={<Cancellation />} />
-          <Route path='/admin/transaction' element={<Transaction />} />
-          <Route path='/admin/addamount' element={<AddAmountPage />} />
-          <Route path='/admin/amount' element={<AmountPage />} />
-
-
-          {/* custormer */}
-          <Route path='/customer/profile/:id' element={<CustomerProfile />} />
-          <Route path='/customer/profile/edit/:id' element={<CustomerEditProfile />} />
-          <Route path='/customer/treatmentprofile/treatment' element={<CustomerViewTreatmentIn />} />
-          <Route path='/customer/treatmentprofile/:id' element={<CustomerViewProfileTreatment />} />
-          <Route path='/customer/treatmentprofilelist/:id' element={<CustormerViewTreatmentProfileList />} />
-          <Route path='/customer/slot/appointment/:id' element={<CustomerWriteAppointment />} />
-          <Route path='/customer/booking/:id' element={<CustomerViewBooking />} />
-          <Route path='/customer/booking/detail/:id' element={<CustormerViewBookingDetail />} />
-          <Route path='/customer/listdoctor' element={<CustomerViewDoctor />} />
-          <Route path='/customer/doctordetail/:id' element={<ViewDocDetail />} />
-          <Route path='/customer/topupwallet/:id' element={<CustormerWallet />} />
-          <Route path='/customer/transaction/:id' element={<ViewTransaction/>}/>
+            <Route path='/admin/cancellation' element={<Cancellation />} />
+            <Route path='/admin/transaction' element={<Transaction />} />
+            <Route path='/admin/addamount' element={<AddAmountPage />} />
+            <Route path='/admin/amount' element={<AmountPage />} />
 
 
-
-
-          <Route path='/doctor/viewTreatmentProfile/:id' element={<ViewTreatmentProfile />} />
-          {/* doc/treatment/detail */}
-          <Route path='/doctor/treatmentlist' element={<ViewTreatementList />} />
-          <Route path='/doctor/writetreatmentin/:id' element={<CreateTreatementIn />} />
-          <Route path='/doctor/profile/:id' element={<DoctorViewprofile />} />
-          <Route path='/doctor/updateprofile/:id' element={<DoctorUpdateprofile />} />
-          <Route path='/Doctorviewbooking/:id' element={<Doctorviewbooking />} />
-          <Route path='/Doctor/viewpatientprofile/:id' element={<DoctorViewPatientProfile />} />
-          <Route path='/Doctor/doctorbook' element={<DoctorTimeSlotPages />} />
-          <Route path='/Doctor/rebook/:id' element={<DoctorRebook />} />
+            {/* custormer */}
+            <Route path='/customer/profile/:id' element={<CustomerProfile />} />
+            <Route path='/customer/profile/edit/:id' element={<CustomerEditProfile />} />
+            <Route path='/customer/treatmentprofile/treatment' element={<CustomerViewTreatmentIn />} />
+            <Route path='/customer/treatmentprofile/:id' element={<CustomerViewProfileTreatment />} />
+            <Route path='/customer/treatmentprofilelist/:id' element={<CustormerViewTreatmentProfileList />} />
+            <Route path='/customer/slot/appointment/:id' element={<CustomerWriteAppointment />} />
+            <Route path='/customer/booking/:id' element={<CustomerViewBooking />} />
+            <Route path='/customer/booking/detail/:id' element={<CustormerViewBookingDetail />} />
+            <Route path='/customer/listdoctor' element={<CustomerViewDoctor />} />
+            <Route path='/customer/doctordetail/:id' element={<ViewDocDetail />} />
+            <Route path='/customer/topupwallet/:id' element={<CustormerWallet />} />
+            <Route path='/customer/transaction/:id' element={<ViewTransaction />} />
 
 
 
-          {/* customer */}
+
+            <Route path='/doctor/viewTreatmentProfile/:id' element={<ViewTreatmentProfile />} />
+            {/* doc/treatment/detail */}
+            <Route path='/doctor/treatmentlist' element={<ViewTreatementList />} />
+            <Route path='/doctor/writetreatmentin/:id' element={<CreateTreatementIn />} />
+            <Route path='/doctor/profile/:id' element={<DoctorViewprofile />} />
+            <Route path='/doctor/updateprofile/:id' element={<DoctorUpdateprofile />} />
+            <Route path='/Doctorviewbooking/:id' element={<Doctorviewbooking />} />
+            <Route path='/Doctor/viewpatientprofile/:id' element={<DoctorViewPatientProfile />} />
+            <Route path='/Doctor/doctorbook' element={<DoctorTimeSlotPages />} />
+            <Route path='/Doctor/rebook/:id' element={<DoctorRebook />} />
 
 
 
-        </Routes>
+            {/* customer */}
+
+
+
+          </Routes>
+        </content>
         <Footer />
       </main>
     </div>

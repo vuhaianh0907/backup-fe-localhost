@@ -10,7 +10,7 @@ function CustomerViewBooking() {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [perPage] = useState(1);
+  const [perPage] = useState(9);
 
   useEffect(() => {
     axios
@@ -66,14 +66,28 @@ function CustomerViewBooking() {
 
   return (
     <div id="CustomerViewBooking" className="customer-view-booking">
-    <h2>Danh sách đặt lịch</h2>
-    {isLoading ? (
-      <div>Loading...</div>
+      <h2>Danh sách đặt lịch</h2>
+      {isLoading ? (
+        <div className='customer-booking-loading'>
+          <div class="spinner-border text-light" role="status"></div>
+        </div>
       ) : (
-        <div className="booking-list-container">
-          {appointments.slice(startIndex, endIndex).map((appointment) => (
-            <div className="booking-form" key={appointment.id}>
-              <div className="booking-info">
+        <div className='container'>
+          <div className='row'>
+            {appointments.slice(startIndex, endIndex).map((appointment) => (
+              <div class="col-4 mb-3" key={appointment.id}>
+                <div className='card'>
+                  <div class="card-body">
+                    <h5 class="card-title">{appointment.slot.date}</h5>
+                    <div class="card-text">Trạng thái: {appointment.status}</div>
+                    <div class="card-text">Bác sĩ: {appointment.doctor ? appointment.doctor.fullname : 'Unknown Doctor'}</div>
+                    <div class="card-text">Slot: {appointment.slot ? appointment.slot.time : 'Unknown Slot'}</div>
+                    <Link to={`/customer/booking/detail/${appointment.id}`} className="btn btn-primary">
+                      Xem chi tiết
+                    </Link>
+                  </div>
+                </div>
+                {/* <div className="booking-info">
                 <span className="label">Ngày điều trị:</span>
                 <span>{appointment.slot.date}</span>
               </div>
@@ -93,9 +107,10 @@ function CustomerViewBooking() {
                 <Link to={`/customer/booking/detail/${appointment.id}`} className="view-details-button">
                   Xem chi tiết
                 </Link>
+              </div> */}
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       )}
       {totalPages > 1 && (
