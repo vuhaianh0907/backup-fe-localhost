@@ -1,4 +1,5 @@
 import React from 'react';
+import './VinAlignSmall.css';
 
 const VinAlignSmall = () => {
   return (
@@ -9,7 +10,7 @@ const VinAlignSmall = () => {
 
       <div className="section-content relative">
         <div className="row" id="row-926998775">
-          <div className="col small-12 large-12">
+          <div className="banner1-2 col small-12 large-12">
             <div className="col-inner">
               <h2 id="vin-la-gi">
                 <span style={{ fontSize: '120%', color: '#00aae7' }}>
@@ -29,7 +30,7 @@ const VinAlignSmall = () => {
               </p>
              
             </div>
-            <div className="py-5">
+            <div className="anhbanner2 py-5">
               <p>
                 <img
                   className="aligncenter wp-image-428 size-full"

@@ -142,7 +142,7 @@ const ViewBooking = () => {
     setSelectedAppointment(null);
     setShowConfirmation(false);
   };
-  
+
 
 
   const renderAppointmentListFuture = (appointments) => {
@@ -152,34 +152,35 @@ const ViewBooking = () => {
     console.log(appointments);
     return (
       <div>
-      <>
+        <>
 
-        {currentAppointments.map((appointment) => (
-          <li className="appointment-item" key={appointment.id}>
-            <button className="appointment-button" onClick={() => handleViewAppointment(appointment)}>
-              Xem phiếu khám
-            </button>
-            <span className="appointment-info">Họ tên: {appointment.customer.fullname}</span>
-            <span className="appointment-info">Lí do đến khám: {appointment.reason}</span>
-            <span className="appointment-info">Ngày khám: {appointment.slot.date}</span>
-            <span className="appointment-info">Giờ khám: {appointment.slot.time}</span>
-            <span className="appointment-info">Trạng thái: {appointment.status}</span>
-            {appointment.status === 'confirmed' && (
-              <>
-                {appointment.slot.date === new Date().toISOString().split('T')[0] ? (
-                  <button className="cancel-button" onClick={() => handleRequestCancellation(appointment.id)}>
-                    Yêu cầu hủy
-                  </button>
-                ) : (
-                  <button className="cancel-button" onClick={() => handleCancelAppointment(appointment.id)}>
-                    Hủy
-                  </button>
-                )}
-              </>
-            )}
-          </li>
-        ))}
-      </>
+          {currentAppointments.map((appointment) => (
+            <li className="appointment-item" key={appointment.id}>
+
+              <span className="appointment-info">Họ tên: {appointment.customer.fullname}</span>
+              <span className="appointment-info">Lí do đến khám: {appointment.reason}</span>
+              <span className="appointment-info">Ngày khám: {appointment.slot.date}</span>
+              <span className="appointment-info">Giờ khám: {appointment.slot.time}</span>
+              <span className="appointment-info">Trạng thái: {appointment.status}</span>
+              <button className="appointment-button" onClick={() => handleViewAppointment(appointment)}>
+                Xem phiếu khám
+              </button>
+              {appointment.status === 'confirmed' && (
+                <>
+                  {appointment.slot.date === new Date().toISOString().split('T')[0] ? (
+                    <button className="cancel-button" onClick={() => handleRequestCancellation(appointment.id)}>
+                      Yêu cầu hủy
+                    </button>
+                  ) : (
+                    <button type="button" class="btn btn-danger" onClick={() => handleCancelAppointment(appointment.id)}>
+                      Hủy
+                    </button>
+                  )}
+                </>
+              )}
+            </li>
+          ))}
+        </>
       </div>
     );
   };
@@ -276,14 +277,10 @@ const ViewBooking = () => {
         )}
       </div>
       {selectedAppointment && (
-        <div className="appointment-profile">
-          <div className="profile-info">
+        <div className="confirmation-modal">
+          <div className="confirmation-content">
             <span className="profile-label">Họ tên:</span>
-            <span className="profile-value">{selectedAppointment.customer.name}</span>
-          </div>
-          <div className="profile-info">
-            <span className="profile-label">Ngày sinh:</span>
-            <span className="profile-value">{selectedAppointment.customer.dateOfBirth}</span>
+            <span className="profile-value">{selectedAppointment.customer.fullname}</span>
           </div>
           <div className="profile-info">
             <span className="profile-label">Giới tính:</span>
