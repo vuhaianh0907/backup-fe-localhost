@@ -8,7 +8,7 @@ const Footer = () => {
     <footer className="footer">
       <section className="footer-content">
         <div className="footer-column">
-          <h3>Tên Công ty</h3>
+          <h3>FAIRYTEETH</h3>
           <p>
             Chúng tôi là một phòng khám nha khoa uy tín, chuyên cung cấp dịch vụ chăm sóc răng miệng
             với đội ngũ chuyên gia giàu kinh nghiệm. Chúng tôi cam kết mang đến cho bạn một nụ cười

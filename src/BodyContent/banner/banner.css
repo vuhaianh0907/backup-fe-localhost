@@ -2,6 +2,7 @@
 
 /* Đặt nền là hình ảnh */
 .ct {
+    
     background-image: url('../../assets/images/index-01.png');
     background-size: cover;
     display: flex;

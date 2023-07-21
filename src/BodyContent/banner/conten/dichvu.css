@@ -17,7 +17,7 @@
 
 /* Các hình ảnh dịch vụ */
 .banner-grid-wrapper {
-  display: flex;
+  display: contents;
   flex-wrap: wrap;
   justify-content: space-between;
 }
@@ -89,4 +89,9 @@
 }
 .textdichvu{
   color: aliceblue;
+}
+.textdichvu{
+  background-color: rgb(227, 230, 235);
+  color: black;
+  margin-bottom: 30px ;
 }
