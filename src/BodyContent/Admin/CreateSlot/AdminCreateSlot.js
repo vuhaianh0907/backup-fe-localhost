@@ -78,7 +78,7 @@ function CreateSchedulePage() {
           setScheduleList([...scheduleList, newSchedule]);
           setIsScheduleCreated(true);
           toast.success('Lưu thành công!');
-          navigate('/');
+          
         })
         .catch((error) => {
           console.error('Error creating schedule:', error);

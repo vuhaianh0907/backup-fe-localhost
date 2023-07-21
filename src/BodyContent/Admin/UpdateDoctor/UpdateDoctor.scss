@@ -1,129 +1,28 @@
-#UpdateDoctor {
-    .confirmation-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  
-      .confirmation-content {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 4px;
-        text-align: center;
-  
-        h3 {
-          margin-top: 0;
-          color: #333;
-          font-size: 20px;
-          font-weight: bold;
-        }
-  
-        p {
-          margin-bottom: 15px;
-          color: #333;
-        }
-  
-        .form-group {
-          display: flex;
-          justify-content: space-evenly;
-          margin-bottom: 20px;
-  
-          .btn-confirm {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: background-color 0.3s ease-in-out;
-            background-color: #28a745;
-            color: #fff;
-            width: 120px;
-  
-            &:hover {
-              background-color: #218838;
-            }
-          }
-  
-          .btn-cancel {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: background-color 0.3s ease-in-out;
-            background-color: #dc3545;
-            color: #fff;
-            width: 120px;
-  
-            &:hover {
-              background-color: #c82333;
-            }
-          }
-        }
-        .gender-options {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-          
-            label {
-              display: flex;
-              align-items: center;
-              margin-right: 15px;
-              font-size: 16px;
-              color: #555;
-              cursor: pointer;
-            }
-          
-            input[type="radio"] {
-              display: none;
-          
-              &:checked + span::before {
-                opacity: 1;
-              }
-            }
-          
-            span {
-              position: relative;
-              display: inline-block;
-              margin-right: 5px;
-              font-size: 16px;
-              color: #555;
-              cursor: pointer;
-          
-              &::before {
-                content: "";
-                position: absolute;
-                top: 50%;
-                left: 0;
-                transform: translateY(-50%);
-                width: 16px;
-                height: 16px;
-                border: 2px solid #777;
-                border-radius: 50%;
-                background-color: #fff;
-                opacity: 0;
-              }
-            }
-          
-            label:hover span {
-              color: #000;
-            }
-          
-            label:hover span::before {
-              background-color: #000;
-            }
-          }
-          
-      }
-    }
+
+  .addocupdate{
+    background-color: aliceblue;
+    padding: 60px;
+    margin: 60px;
+    border-radius: 10px;
   }
+.btn{
+  margin-left: 10px;
+}
+.confirmation-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.689);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
+  .confirmation-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    text-align: center;
+  }
+}

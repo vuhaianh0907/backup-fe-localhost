@@ -44,6 +44,7 @@ import CustormerWallet from './BodyContent/customer/TopUpWallet/TopUpWallet';
 import DoctorViewprofile from './BodyContent/Doctor/Viewprofile/Viewprofile';
 import DoctorUpdateprofile from './BodyContent/Doctor/UpdateProfile/UpdateProfile';
 import ResetPassword from './BodyContent/accout/ForgotPassword/ResetPassword';
+import ViewTransaction from './BodyContent/customer/TopUpWallet/ViewTransaction';
 
 // import testthu from './BodyContent/Admin/test/test';
 
@@ -109,6 +110,7 @@ function App() {
           <Route path='/customer/listdoctor' element={<CustomerViewDoctor />} />
           <Route path='/customer/doctordetail/:id' element={<ViewDocDetail />} />
           <Route path='/customer/topupwallet/:id' element={<CustormerWallet />} />
+          <Route path='/customer/transaction/:id' element={<ViewTransaction/>}/>
 
 
 

@@ -181,6 +181,15 @@ export default function Navigation() {
                     </li>
                     <li>
                       <Link
+                        to={`/customer/transaction/${user.id}`}
+                        onClick={handleOptionClick}
+                        className="dropdown-item"
+                      >
+                        Xem lịch sử nạp 
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
                         to="/changepass"
                         onClick={handleOptionClick}
                         className="dropdown-item"
