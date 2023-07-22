@@ -29,7 +29,7 @@ const Sidebar = () => {
         <Link className="logo" to="/">
           <img src={logo} className="App-logo" alt="logo" />
         </Link>
-        <span className="fs-4">ABC</span>
+        {/* <span className="fs-4">ABC</span> */}
       </a>
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">

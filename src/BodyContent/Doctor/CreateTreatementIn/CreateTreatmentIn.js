@@ -131,11 +131,11 @@ function CreateTreatmentIn() {
       {/* Hiển thị thông tin người dùng */}
       <div className="profile-details">
         <div>
-          <label>Name:</label>
+          <label>Tên:</label>
           <input type="text" value={customer ? customer.fullname : ''} readOnly />
         </div>
         <div>
-          <label>Gender:</label>
+          <label>Giới tính:</label>
           <input type="text" value={customer ? customer.gender : ''} readOnly />
           </div>
         <div>
@@ -159,7 +159,7 @@ function CreateTreatmentIn() {
               name="procress"
               value={treatmentIn.process}
               onChange={handleInputChange}
-              placeholder="Bệnh nhân bị ngố, ánh mắt thất thần, đôi bàn tay run rẩy"
+              placeholder="Thông tin liên quan trong khi điều trị"
             />
           </div>
           <div className="input-box">
@@ -169,7 +169,7 @@ function CreateTreatmentIn() {
               name="result"
               value={treatmentIn.result}
               onChange={handleInputChange}
-              placeholder="Bệnh nhân bị ngố, ánh mắt thất thần, đôi bàn tay run rẩy"
+              placeholder="Tình trạng bệnh nhân sau buổi điều trị"
             />
           </div>
           <div className="input-box">
@@ -179,7 +179,7 @@ function CreateTreatmentIn() {
               name="note"
               value={treatmentIn.note}
               onChange={handleInputChange}
-              placeholder="Cần giữ gìn sức khỏe răng miệng đánh răng trước và sau khi ăn "
+              placeholder="Lời khuyên của bác sĩ sau buổi điều trị"
             />
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './AddAmountPage.scss';
 
@@ -9,6 +9,13 @@ function AddAmountPage() {
   const [successMessage, setSuccessMessage] = useState('');
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [selectedAction, setSelectedAction] = useState('');
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect (() =>{
+    if (user.role !== 'admin'){
+      window.location.href = '/';
+    }
+  })
 
   const handleCustomerIdChange = (event) => {
     setCustomerId(event.target.value);
