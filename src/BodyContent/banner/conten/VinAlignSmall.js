@@ -42,23 +42,25 @@ const VinAlignSmall = () => {
                   sizes="(max-width: 844px) 100vw, 844px"
                 />
               </p> */}
-              <p>
-                <img
-                  className="aligncenter"
-                  src={bannerbs} alt="logo"
-                />
+          
+                
                
-              </p>
+        
               
 
 
               </div>
-
+              <img
+                  className="aligncenter"
+                  src={bannerbs} alt="logo"
+                />
              
             </div>
            
           </div>
+          
         </div>
+        
       </div>
 
       <style scope="scope">
