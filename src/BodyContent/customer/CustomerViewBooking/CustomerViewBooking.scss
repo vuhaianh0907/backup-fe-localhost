@@ -87,4 +87,13 @@
     display: block;
     text-align: center;
   }
+
+  .card {
+    text-decoration: none;
+    transition: 0.5s;
+
+    &:hover {
+      box-shadow: white 5px 0 20px;
+    }
+  }
 }

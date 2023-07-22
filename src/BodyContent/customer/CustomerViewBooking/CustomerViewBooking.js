@@ -12,6 +12,17 @@ function CustomerViewBooking() {
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(9);
 
+  const statusList = [
+    {
+      name: "confirmed",
+      color: "text-success"
+    },
+    {
+      name: "Cancelled",
+      color: "text-danger"
+    },
+  ]
+
   useEffect(() => {
     axios
       .get(`http://localhost:3000/api/appointment/appointmentcustomer?customerID=${id}`)
@@ -69,48 +80,26 @@ function CustomerViewBooking() {
       <h2>Danh sách đặt lịch</h2>
       {isLoading ? (
         <div className='customer-booking-loading'>
-          <div class="spinner-border text-light" role="status"></div>
+          <div className="spinner-border text-light" role="status"></div>
         </div>
       ) : (
         <div className='container'>
-          <div className='row'>
-            {appointments.slice(startIndex, endIndex).map((appointment) => (
-              <div class="col-4 mb-3" key={appointment.id}>
-                <div className='card'>
-                  <div class="card-body">
-                    <h5 class="card-title">{appointment.slot.date}</h5>
-                    <div class="card-text">Trạng thái: {appointment.status}</div>
-                    <div class="card-text">Bác sĩ: {appointment.doctor ? appointment.doctor.fullname : 'Unknown Doctor'}</div>
-                    <div class="card-text">Slot: {appointment.slot ? appointment.slot.time : 'Unknown Slot'}</div>
-                    <Link to={`/customer/booking/detail/${appointment.id}`} className="btn btn-primary">
-                      Xem chi tiết
-                    </Link>
+          {appointments.slice(startIndex, endIndex).map((appointment) => (
+            <div className="mb-3" key={appointment.id}>
+              <Link className='card' to={`/customer/booking/detail/${appointment.id}`}>
+                <div className="card-body row">
+                  <div className='col-7 d-inline-block'>
+                    <h5 className="card-title">{appointment.slot.date}</h5>
+                    <div className="card-text">Bác sĩ: {appointment.doctor ? appointment.doctor.fullname : 'Unknown Doctor'}</div>
+                    <div className="card-text">Slot: {appointment.slot ? appointment.slot.time : 'Unknown Slot'}</div>
+                  </div>
+                  <div className={statusList.find(e => e.name == appointment.status).color + " col-5 card-text text-end mt-4"}>
+                    {appointment.status}
                   </div>
                 </div>
-                {/* <div className="booking-info">
-                <span className="label">Ngày điều trị:</span>
-                <span>{appointment.slot.date}</span>
-              </div>
-              <div className="booking-info">
-                <span className="label">Trạng thái:</span>
-                <span>{appointment.status}</span>
-              </div>
-              <div className="booking-info">
-                <span className="label">Bác sĩ:</span>
-                <span>{appointment.doctor ? appointment.doctor.fullname : 'Unknown Doctor'}</span>
-              </div>
-              <div className="booking-info">
-                <span className="label">Slot:</span>
-                <span>{appointment.slot ? appointment.slot.time : 'Unknown Slot'}</span>
-              </div>
-              <div className="booking-actions">
-                <Link to={`/customer/booking/detail/${appointment.id}`} className="view-details-button">
-                  Xem chi tiết
-                </Link>
-              </div> */}
-              </div>
-            ))}
-          </div>
+              </Link>
+            </div>
+          ))}
         </div>
       )}
       {totalPages > 1 && (

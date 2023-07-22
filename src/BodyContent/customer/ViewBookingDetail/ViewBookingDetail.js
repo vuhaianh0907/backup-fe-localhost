@@ -82,7 +82,7 @@ function ViewBookingDetail() {
         {isLoading ? (
           <div>Loading...</div>
         ) : (
-          <div>
+          <div className='container'>
             <h2>Chi tiết đặt lịch</h2>
             <div className="detail-info">
               <span className="label">Ngày điều trị: </span>
