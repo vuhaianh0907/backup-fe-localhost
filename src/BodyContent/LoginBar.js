@@ -2,14 +2,20 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import GoogleLogin from 'react-google-login';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './LoginBar.css';
 
 export default function LoginBar() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [showOptions, setShowOptions] = useState(false);
+    const showToastMessage = () => {
+        toast.error('Error Notification !', {
+          position: toast.POSITION.TOP_RIGHT
+      });
+      };
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -42,6 +48,7 @@ export default function LoginBar() {
             .catch((error) => {
                 if (error.response) {
                     setErrorMessage(error.response.data.message);
+                    showToastMessage();
                 } else {
                     setErrorMessage('An error occurred. Please try again later.');
                 }
@@ -135,6 +142,7 @@ export default function LoginBar() {
                     </div>
                 </form>
             )}
+            <ToastContainer />
         </div>
     );
 }

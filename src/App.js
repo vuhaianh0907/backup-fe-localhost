@@ -79,7 +79,7 @@ function App() {
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/reset-password' element={<ResetPassword />} />
           <Route path='/' exact element={<Banner />} />
-          <Route path='/Worksheet' element={<Worksheet />} />
+
           <Route path='/changepass' element={<ChangePass />} />
 
           {/* admin */}

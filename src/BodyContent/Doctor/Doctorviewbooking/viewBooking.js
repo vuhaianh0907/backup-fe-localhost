@@ -158,10 +158,10 @@ const ViewBooking = () => {
             <li className="appointment-item" key={appointment.id}>
 
               <span className="appointment-info">Họ tên: {appointment.customer.fullname}</span>
-              <span className="appointment-info">Lí do đến khám: {appointment.reason}</span>
+              {/* <span className="appointment-info">Lí do đến khám: {appointment.reason}</span> */}
               <span className="appointment-info">Ngày khám: {appointment.slot.date}</span>
               <span className="appointment-info">Giờ khám: {appointment.slot.time}</span>
-              <span className="appointment-info">Trạng thái: {appointment.status}</span>
+              {/* <span className="appointment-info">Trạng thái: {appointment.status}</span> */}
               <button className="appointment-button" onClick={() => handleViewAppointment(appointment)}>
                 Xem phiếu khám
               </button>
@@ -279,30 +279,13 @@ const ViewBooking = () => {
       {selectedAppointment && (
         <div className="confirmation-modal">
           <div className="confirmation-content">
-            <span className="profile-label">Họ tên:</span>
-            <span className="profile-value">{selectedAppointment.customer.fullname}</span>
-          </div>
-          
-          <div className="profile-info">
-            <span className="profile-label">Giới tính:</span>
-            <span className="profile-value">{selectedAppointment.customer.gender}</span>
-          </div>
-          <div className="profile-info">
-            <span className="profile-label">Lí do đến khám:</span>
-            <span className="profile-value">{selectedAppointment.reason}</span>
-          </div>
-          <div className="profile-info">
-            <span className="profile-label">Ngày khám:</span>
-            <span className="profile-value">{selectedAppointment.slot.date}</span>
-          </div>
-          <div className="profile-info">
-            <span className="profile-label">Giờ khám:</span>
-            <span className="profile-value">{selectedAppointment.slot.time}</span>
-          </div>
-          <div className="profile-info">
-            <span className="profile-label">Trạng thái:</span>
-            <span className="profile-value">{selectedAppointment.status}</span>
-          </div>
+            <span className="profile-label">Họ tên: {selectedAppointment.customer.fullname}</span>    <br/>
+            <span className="profile-label">Giới tính:{selectedAppointment.customer.gender}</span><br/>
+            <span className="profile-label">Lí do đến khám:{selectedAppointment.reason}</span><br/>
+            <span className="profile-label">Ngày khám:{selectedAppointment.slot.date}</span><br/>
+            <span className="profile-label">Giờ khám:{selectedAppointment.slot.time}</span><br/>
+            <span className="profile-label">Trạng thái:{selectedAppointment.status}</span><br/>
+        
           {selectedAppointment.status === 'confirmed' && (
             <>
               {selectedAppointment.slot.date === new Date().toISOString().split('T')[0] ? (
@@ -328,6 +311,7 @@ const ViewBooking = () => {
           <button className="close-button" onClick={handleCloseProfile}>
             Đóng
           </button>
+          </div>
         </div>
       )}
       {showConfirmation && (
