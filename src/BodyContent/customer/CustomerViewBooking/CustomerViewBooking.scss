@@ -8,18 +8,9 @@
     margin: 60px;
   }
 
-  .booking-list-container {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
   .booking-form {
-    flex: 0 0 calc(33.33% - 20px);
     border: 1px solid #ccc;
     border-radius: 8px;
-    padding: 50px;
-    margin: 60px;
-    min-width: 300px;
     background-color: #fff;
 
     .booking-info {
@@ -90,5 +81,10 @@
       font-weight: bold;
       margin: 0 5px;
     }
+  }
+
+  .customer-booking-loading {
+    display: block;
+    text-align: center;
   }
 }

@@ -18,7 +18,7 @@ function CustomerViewDoctor() {
   const [selectedTime, setSelectedTime] = useState('');
   const [isFirstLoad, setIsFirstLoad] = useState(true); // Add the isFirstLoad state
   const [currentPage, setCurrentPage] = useState(1);
-  const [perPage] = useState(3);
+  const [perPage] = useState(9);
 
   useEffect(() => {
     // Set selectedDate to today's date by default

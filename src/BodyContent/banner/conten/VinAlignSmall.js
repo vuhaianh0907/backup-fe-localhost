@@ -1,5 +1,6 @@
 import React from 'react';
-import './VinAlignSmall.css';
+import './VinAlignSmall.scss';
+import bannerbs from '../../../assets/images/6856742_Mesa de trabajo 1.png';
 
 const VinAlignSmall = () => {
   return (
@@ -11,10 +12,10 @@ const VinAlignSmall = () => {
       <div className="section-content relative">
         <div className="row" id="row-926998775">
           <div className="banner1-2 col small-12 large-12">
-            <div className="col-inner">
+            <div className="banner2 col-inner">
               <h2 id="vin-la-gi">
                 <span style={{ fontSize: '120%', color: '#00aae7' }}>
-                  <strong>FairyTeeth LÀ GÌ?</strong>
+                  <strong>FAIRYTEETH LÀ GÌ?</strong>
                 </span>
               </h2>
               <p>
@@ -28,12 +29,11 @@ const VinAlignSmall = () => {
                 </span>
                 
               </p>
-             
-            </div>
-            <div className="anhbanner2 py-5">
-              <p>
+              <div className="anhbanner2 py-5">
+              
+              {/* <p className='py-5 '>
                 <img
-                  className="aligncenter wp-image-428 size-full"
+                  className="aligncenter2"
                   src="http://nhakhoa.maugiaodien.com/wp-content/uploads/2019/02/234.jpg"
                   alt=""
                   width="844"
@@ -41,8 +41,22 @@ const VinAlignSmall = () => {
                   srcSet="http://nhakhoa.maugiaodien.com/wp-content/uploads/2019/02/234.jpg 844w, http://nhakhoa.maugiaodien.com/wp-content/uploads/2019/02/234-300x213.jpg 300w, http://nhakhoa.maugiaodien.com/wp-content/uploads/2019/02/234-768x546.jpg 768w"
                   sizes="(max-width: 844px) 100vw, 844px"
                 />
+              </p> */}
+              <p>
+                <img
+                  className="aligncenter"
+                  src={bannerbs} alt="logo"
+                />
+               
               </p>
+              
+
+
               </div>
+
+             
+            </div>
+           
           </div>
         </div>
       </div>

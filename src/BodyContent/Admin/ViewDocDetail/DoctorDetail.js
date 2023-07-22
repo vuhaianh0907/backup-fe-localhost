@@ -61,81 +61,88 @@ const DoctorDetail = () => {
     return <div>Loading...</div>;
   }
 
-console.log(slots);
+  console.log(slots);
 
   return (
     <div id="DoctorDetail" className="doctor-detail">
-      <div className="avatar-container">
-        <img src={doctorInfo.avatar} className="doctor-avatar" />
-      </div>
-      <div className="info-container">
-        <div className="doctor-name">{doctorInfo.fullname}</div>
-        <div className="doctor-info">
-          <span className="info-label">ID Bác Sĩ:</span>
-          <span>{doctorInfo.idCard}</span>
+      <div className="info-container row">
+        <div className='col-4 avatar'>
+          <img src={doctorInfo.avatar} className="doctor-avatar" />
         </div>
-        <div className="doctor-info">
-          <span className="info-label">Giới Tính:</span>
-          <span>{doctorInfo.gender}</span>
-        </div>
-        <div className="doctor-info">
-          <span className="info-label">Ngày Sinh:</span>
-          <span>{doctorInfo.dateOfBirth}</span>
-        </div>
-        <div className="doctor-info">
-          <span className="info-label">Số điện thoại:</span>
-          <span>{doctorInfo.phone}</span>
-        </div>
-        <div className="doctor-info">
-          <span className="info-label">Email:</span>
-          <span>{doctorInfo.email}</span>
-        </div>
-        <div className="doctor-info">
-          <span className="info-label">Địa Chỉ:</span>
-          <span>{doctorInfo.address}</span>
-        </div>
-        <div className="doctor-info">
-          <span className="info-label">Bằng Cấp:</span>
-          <span>{doctorInfo.qualification}</span>
-        </div>
-        <div className="doctor-info">
-          <span className="info-label">Kinh Nghiệm:</span>
-          <span>{doctorInfo.experience}</span>
-        </div>
-        
-        <div className="filter-container">
-        <label htmlFor="dateFilter">Select Date:</label>
-        <input
-          type="date"
-          id="dateFilter"
-          value={selectedDate}
-          onChange={handleDateChange}
-        />
-      </div>
+        <div className='col-8'>
+          <div className="doctor-name">{doctorInfo.fullname}</div>
+          <div className="doctor-info">
+            <span className="info-label">ID Bác Sĩ:</span>
+            <span>{doctorInfo.idCard}</span>
+          </div>
+          <div className="doctor-info">
+            <span className="info-label">Giới Tính:</span>
+            <span>{doctorInfo.gender}</span>
+          </div>
+          <div className="doctor-info">
+            <span className="info-label">Ngày Sinh:</span>
+            <span>{doctorInfo.dateOfBirth}</span>
+          </div>
+          <div className="doctor-info">
+            <span className="info-label">Số điện thoại:</span>
+            <span>{doctorInfo.phone}</span>
+          </div>
+          <div className="doctor-info">
+            <span className="info-label">Email:</span>
+            <span>{doctorInfo.email}</span>
+          </div>
+          <div className="doctor-info">
+            <span className="info-label">Địa Chỉ:</span>
+            <span>{doctorInfo.address}</span>
+          </div>
+          <div className="doctor-info">
+            <span className="info-label">Bằng Cấp:</span>
+            <span>{doctorInfo.qualification}</span>
+          </div>
+          <div className="doctor-info">
+            <span className="info-label">Kinh Nghiệm:</span>
+            <span>{doctorInfo.experience}</span>
+          </div>
 
-      <div className="slots-container">
-        <h3>Slots:</h3>
-        {filteredSlots.length > 0 ? (
-          filteredSlots.map((slot) => (
-            <button
-              key={slot.id}
-              type="button" class="btslot btn btn-primary"
-              onClick={() => handleSlotClick(slot.time)}
-            >
-              {slot.time}
-            </button>
-          ))
-        ) : (
-          <div>No slots available</div>
-        )}
+          <div className="filter-container">
+
+            <label for="date" class="col-form-label">Chọn ngày: </label>
+            <div class="d-inline-block col-5">
+              <div class="input-group date" id="datepicker">
+                <input
+                  type="date"
+                  class="form-control"
+                  id="date"
+                  value={selectedDate}
+                  onChange={handleDateChange} />
+              </div>
+            </div>
+          </div>
+
+          <div className="slots-container">
+            <h3>Slots:</h3>
+            {filteredSlots.length > 0 ? (
+              filteredSlots.map((slot) => (
+                <button
+                  key={slot.id}
+                  type="button" class="btslot btn btn-primary"
+                  onClick={() => handleSlotClick(slot.time)}
+                >
+                  {slot.time}
+                </button>
+              ))
+            ) : (
+              <div>No slots available</div>
+            )}
+          </div>
+          <div className="edit-button-container">
+            <Link to={`/admin/doctor/update/${doctorId}`} type="button" class="btn btn-secondary">
+              Chỉnh sửa thông tin
+            </Link>
+          </div>
+        </div>
       </div>
-      <div className="edit-button-container">
-        <Link to={`/admin/doctor/update/${doctorId}`} type="button" class="btn btn-secondary">
-          Chỉnh sửa thông tin 
-        </Link>
-      </div>
-      </div>
-    </div>
+    </div >
   );
 };
 

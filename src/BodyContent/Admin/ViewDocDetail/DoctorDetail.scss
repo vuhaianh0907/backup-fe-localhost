@@ -1,99 +1,104 @@
 #DoctorDetail{
-.doctor-detail {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f5f5f5;
-  font-family: Arial, sans-serif;
-}
+  padding: 30px;
+  .doctor-detail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+  }
 
-.avatar-container {
-  flex: 0 0 30%;
-  text-align: center;
-  
-}
+  .avatar-container {
+    flex: 0 0 30%;
+    text-align: center;
+    
+  }
 
-.doctor-avatar {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  background-color: #f5f5f5;
-}
+  .doctor-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+  }
 
-.info-container {
-  flex: 0 0 60%;
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  height: 800px;
-}
+  .info-container {
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    height: 800px;
 
-.doctor-name {
-  font-size: 24px;
-  font-weight: bold;
-}
+    .avatar {
+      margin-top: 100px;
+      text-align: center;
+    }
+  }
 
-.doctor-info {
-  display: flex;
-  margin-bottom: 10px;
-}
+  .doctor-name {
+    font-size: 24px;
+    font-weight: bold;
+  }
 
-.info-label {
-  flex: 0 0 30%;
-  font-weight: bold;
-}
+  .doctor-info {
+    display: flex;
+    margin-bottom: 10px;
+  }
 
-.workday-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
+  .info-label {
+    flex: 0 0 30%;
+    font-weight: bold;
+  }
 
-.workday-label {
-  flex: 0 0 30%;
-  font-weight: bold;
-}
+  .workday-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
 
-.workday-input {
-  flex: 0 0 70%;
-  padding: 5px;
-}
+  .workday-label {
+    flex: 0 0 30%;
+    font-weight: bold;
+  }
 
-.timeslot-container {
-  margin-bottom: 10px;
-}
+  .workday-input {
+    flex: 0 0 70%;
+    padding: 5px;
+  }
 
-.timeslot-label {
-  font-weight: bold;
-}
+  .timeslot-container {
+    margin-bottom: 10px;
+  }
 
-.slot-button {
-  margin-right: 10px;
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  background-color: #f5f5f5;
-  cursor: pointer;
-}
+  .timeslot-label {
+    font-weight: bold;
+  }
 
-.slots-container{
-  margin: 20px;
-}
-.btslot{
-  margin-left: 10px;
-}
+  .slot-button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+    cursor: pointer;
+  }
 
-.edit-button-container {
-  text-align: right;
-}
+  .slots-container{
+    margin: 20px;
+  }
+  .btslot{
+    margin-left: 10px;
+  }
 
-.edit-button {
-  padding: 10px 20px;
-  border: none;
-  background-color: #3e8eef;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-}
+  .edit-button-container {
+    text-align: right;
+  }
+
+  .edit-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #3e8eef;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+  }
 }

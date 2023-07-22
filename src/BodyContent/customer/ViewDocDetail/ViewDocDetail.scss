@@ -2,14 +2,10 @@
 
 #ViewDocDetail {
   .viewdocdt2 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
     margin: 12vmin;
     padding: 60px;
-    justify-items: end;
-    align-items: center;
     border-radius: 10px;
+    height: 800px;
 }
   .viewdocdt2{
     background-color: #ffffff;

@@ -13,6 +13,12 @@
         &.main-small {
             margin-left: 280px;
         }
+
+        content {
+            min-height: 800px;
+            display: block;
+            margin-bottom: 20px;
+        }
     }
 }
 
