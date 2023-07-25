@@ -21,6 +21,10 @@ function CustomerViewBooking() {
       name: "Cancelled",
       color: "text-danger"
     },
+    {
+      name: "Doctor Cancelled",
+      color: "text-warning"
+    },
   ]
 
   useEffect(() => {

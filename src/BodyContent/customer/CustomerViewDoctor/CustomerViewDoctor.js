@@ -122,6 +122,7 @@ function CustomerViewDoctor() {
                       <img height="250" src={doctor.avatar ? doctor.avatar : doctorNoImage} alt="Doctor Avatar" className="card-img-top card-avatar" />
                       <div className="card-body">
                         <h5 className="card-title">{doctor.fullname}</h5>
+                        <p class="card-text text-limit-1-lines">{doctor.experience}</p>
                         <Link to={`/customer/doctordetail/${doctor.id}`} className="btn btn-primary">
                           Chọn bác sĩ
                         </Link>

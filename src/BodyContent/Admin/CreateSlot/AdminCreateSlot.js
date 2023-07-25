@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import './AdminCreateSlot.scss';
 
+import doctorNoImage from '../../../assets/images/doctor-no-image.jpg';
+
 function CreateSchedulePage() {
   const [searchValue, setSearchValue] = useState('');
   const [doctors, setDoctors] = useState([]);
@@ -17,7 +19,7 @@ function CreateSchedulePage() {
   const [scheduleList, setScheduleList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const doctorsPerPage = 5;
+  const doctorsPerPage = 8;
   const totalPages = Math.ceil(doctors.length / doctorsPerPage);
   const navigate = useNavigate();
 
@@ -78,7 +80,7 @@ function CreateSchedulePage() {
           setScheduleList([...scheduleList, newSchedule]);
           setIsScheduleCreated(true);
           toast.success('Lưu thành công!');
-          
+
         })
         .catch((error) => {
           console.error('Error creating schedule:', error);
@@ -105,27 +107,45 @@ function CreateSchedulePage() {
 
         <div>
           <h3>Tìm kiếm bác sĩ</h3>
-          <div className="admin-create-slot__search-doctor">
-            <input
-              type="text"
-              placeholder="Nhập tên bác sĩ"
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-            />
-            <button onClick={handleSearchDoctor} type="button" class="btn btn-primary">Tìm kiếm</button>
+          <div className='row'>
+            <div className="col-auto">
+              <div className="admin-create-slot__search-doctor">
+                <input
+                  className='form-control'
+                  type="text"
+                  placeholder="Nhập tên bác sĩ"
+                  value={searchValue}
+                  onChange={(e) => setSearchValue(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="col-auto">
+              <button onClick={handleSearchDoctor} type="button" className="btn btn-primary">Tìm kiếm</button>
+            </div>
           </div>
-          <ul className="admin-create-slot__doctor-list">
+          <div className='row mt-3'>
             {currentDoctors.map((doctor) => (
-              <li
-                key={doctor.id}
-                onClick={() => handleSelectDoctor(doctor)}
-                className={selectedDoctor === doctor ? 'selected-doctor' : ''}
-              >
-                <img src={doctor.avatar} alt={doctor.fullname} />
-                <p className={selectedDoctor === doctor ? 'selected-doctor-name' : ''}>{doctor.fullname}</p>
-              </li>
+              <div className='col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-3'>
+                <div
+                  key={doctor.id}
+                  onClick={() => handleSelectDoctor(doctor)}
+                  className={"card " + (selectedDoctor === doctor ? 'selected-doctor' : '')}
+                >
+                  <img
+                    width="250"
+                    height="250"
+                    className="card-img-top card-avatar"
+                    src={doctor.avatar ? doctor.avatar : doctorNoImage}
+                    alt={doctor.fullname}
+                  />
+                  <div className="card-body">
+                    <h5 className={'card-title ' + (selectedDoctor === doctor ? 'selected-doctor-name' : '')}>{doctor.fullname}</h5>
+                    <p class="card-text text-limit-1-lines">{doctor.experience}</p>
+                  </div>
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
 
           <ul className="admin-create-slot__pagination">
             {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
@@ -144,54 +164,68 @@ function CreateSchedulePage() {
         {selectedDoctor && (
           <div>
             <h3>Chọn khoảng thời gian</h3>
-            <div>
-              <label htmlFor="startDate">Ngày bắt đầu: </label>
-              <input
-                type="date"
-                id="startDate"
-                value={startDate}
-                onChange={handleSelectStartDate}
-              />
-            </div>
-            <div>
-              <label htmlFor="endDate">Ngày kết thúc: </label>
-              <input
-                type="date"
-                id="endDate"
-                value={endDate}
-                onChange={handleSelectEndDate}
-              />
+            <div className='row'>
+              <div className='col-sm-6'>
+                <label htmlFor="startDate">Ngày bắt đầu: </label>
+                <input
+                  className='form-control'
+                  type="date"
+                  id="startDate"
+                  value={startDate}
+                  onChange={handleSelectStartDate}
+                />
+              </div>
+              <div className='col-sm-6'>
+                <label htmlFor="endDate">Ngày kết thúc: </label>
+                <input
+                  className='form-control'
+                  type="date"
+                  id="endDate"
+                  value={endDate}
+                  onChange={handleSelectEndDate}
+                />
+              </div>
             </div>
           </div>
         )}
 
         {selectedDoctor && startDate && endDate && (
-          <div>
+          <div className='mt-4'>
             <h3>Chọn ca làm việc</h3>
             <div>
-              <input
-                type="checkbox"
-                id="shift1"
-                checked={selectedShifts.includes('Ca sáng')}
-                onChange={() => handleSelectShift('Ca sáng')}
-              />
-              <label htmlFor="shift1">Ca sáng</label>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  id="shift1"
+                  checked={selectedShifts.includes('Ca sáng')}
+                  onChange={() => handleSelectShift('Ca sáng')}
+                />
+                <label className="form-check-label" for="shift1">
+                  Ca sáng
+                </label>
+              </div>
             </div>
             <div>
-              <input
-                type="checkbox"
-                id="shift2"
-                checked={selectedShifts.includes('Ca chiều')}
-                onChange={() => handleSelectShift('Ca chiều')}
-              />
-              <label htmlFor="shift2">Ca chiều</label>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  id="shift1"
+                  checked={selectedShifts.includes('Ca chiều')}
+                  onChange={() => handleSelectShift('Ca chiều')}
+                />
+                <label className="form-check-label" for="shift1">
+                  Ca chiều
+                </label>
+              </div>
             </div>
           </div>
         )}
 
         {selectedDoctor && startDate && endDate && selectedShifts.length > 0 && (
-          <div>
-            <button onClick={handleSaveSchedule} disabled={isLoading} type="button" class="btn btn-success">
+          <div className='mt-4'>
+            <button onClick={handleSaveSchedule} disabled={isLoading} type="button" className="btn btn-success">
               {isLoading ? 'Đang lưu...' : 'Lưu'}
             </button>
           </div>
@@ -206,29 +240,29 @@ function CreateSchedulePage() {
             <p>Ca làm việc: {selectedShifts.join(', ')}</p>
           </div>
         )}
-      {scheduleList.length>0 &&(
-        <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Bác sĩ</th>
-              <th>Ngày</th>
-              <th>Ca làm việc</th>
-            </tr>
-          </thead>
-          <tbody>
-            {scheduleList.map((schedule, index) => (
-              <tr key={index}>
-                <td>{schedule.doctor.fullname}</td>
-                <td>{schedule.startDate} - {schedule.endDate}</td>
-                <td>{schedule.shifts.join(', ')}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      )}
-        
+        {scheduleList.length > 0 && (
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Bác sĩ</th>
+                  <th>Ngày</th>
+                  <th>Ca làm việc</th>
+                </tr>
+              </thead>
+              <tbody>
+                {scheduleList.map((schedule, index) => (
+                  <tr key={index}>
+                    <td>{schedule.doctor.fullname}</td>
+                    <td>{schedule.startDate} - {schedule.endDate}</td>
+                    <td>{schedule.shifts.join(', ')}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
       </div>
       <ToastContainer />
     </div>

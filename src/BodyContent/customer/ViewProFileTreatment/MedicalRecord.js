@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams,Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 
 
@@ -41,7 +41,7 @@ function ViewTreatmentProfile() {
     fetchTreatmentProfile();
   }, [id]);
 
- 
+
 
   if (!treatmentProfile || !doctor || !customer) {
     return <p>Loading...</p>;
@@ -50,46 +50,52 @@ function ViewTreatmentProfile() {
   return (
     <div className="profile-container">
       <h2>{treatmentProfile.description}</h2>
-      <div className="profile-details">
-        <p>
-          <strong>Ngày tạo:</strong> {treatmentProfile.createdAt}
-        </p>
-        <p>
-          <strong>ID:</strong> {treatmentProfile.id}
-        </p>
-        <p>
-          <strong>Doctor:</strong> {doctor.fullname}
-        </p>
-        <p>
-          <strong>Customer:</strong> {customer.fullname}
-        </p>
-      </div>
-      
+      <div className='container profile-form'>
+        <div className="profile-details">
+          <p>
+            <strong>Ngày tạo:</strong> {treatmentProfile.createdAt}
+          </p>
+          <p>
+            <strong>ID:</strong> {treatmentProfile.id}
+          </p>
+          <p>
+            <strong>Doctor:</strong> {doctor.fullname}
+          </p>
+          <p>
+            <strong>Customer:</strong> {customer.fullname}
+          </p>
+        </div>
 
-      <div className="treatment-ins">
-        <h3>Treatment Ins</h3>
-        {treatmentIns.length > 0 ? (
-          <ul>
-            {treatmentIns.map((treatmentIn) => (
-              <li key={treatmentIn.id}>
-                <p>
-                  <strong>Date:</strong> {treatmentIn.createdAt}
-                </p>
-                <p>
-                  <strong>Process:</strong> {treatmentIn.process}
-                </p>
-                <p>
-                  <strong>Result:</strong> {treatmentIn.result}
-                </p>
-                <p>
-                  <strong>Note:</strong> {treatmentIn.note}
-                </p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No treatment ins available.</p>
-        )}
+
+        <div className="treatment-ins">
+          <h3>Treatment Ins</h3>
+          {treatmentIns.length > 0 ? (
+            <div className='container'>
+              {treatmentIns.map((treatmentIn) => (
+                <div key={treatmentIn.id}>
+                  <div class="card mb-3">
+                    <div class="card-body row">
+                      <div className='col-lg-6'>
+                        <strong>Date:</strong> {treatmentIn.createdAt}
+                      </div>
+                      <div className='col-lg-6'>
+                        <strong>Process:</strong> {treatmentIn.process}
+                      </div>
+                      <div className='col-lg-6'>
+                        <strong>Result:</strong> {treatmentIn.result}
+                      </div>
+                      <div className='col-lg-6'>
+                        <strong>Note:</strong> {treatmentIn.note}
+                      </div></div>
+                  </div>
+
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No treatment ins available.</p>
+          )}
+        </div>
       </div>
     </div>
   );

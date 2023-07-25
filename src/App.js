@@ -68,7 +68,7 @@ function App() {
           </div> :
           <Navigation isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
       }
-      <main className={(user && (user.role === 'admin' || user.role === 'doctor')) ? 'main-small' : ''}>
+      <main className={"mt-4 " + ((user && (user.role === 'admin' || user.role === 'doctor')) ? 'main-small' : '')}>
         <content>
           <Routes>
 

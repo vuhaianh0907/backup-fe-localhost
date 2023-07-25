@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams,Link } from 'react-router-dom';
 
-import './ViewTreatmentProfile.css'; // Import the CSS file for styling
+import './ViewTreatmentProfile.scss'; // Import the CSS file for styling
 
 function ViewTreatmentProfile() {
   const { id } = useParams(); // Get the ID from the URL

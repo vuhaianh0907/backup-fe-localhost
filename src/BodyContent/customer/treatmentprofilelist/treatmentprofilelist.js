@@ -1,15 +1,16 @@
+// TreatmentProfilePage.js
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
-import './treatmentprofilelist.css';
+import './treatmentprofilelist.scss';
 
 function TreatmentProfilePage() {
   const { id } = useParams();
   const [treatmentProfiles, setTreatmentProfiles] = useState([]);
 
-  
   const [currentPage, setCurrentPage] = useState(1);
-  const [perPage] = useState(1);
+  const [perPage] = useState(9);
 
   const startIndex = (currentPage - 1) * perPage;
   const endIndex = startIndex + perPage;
@@ -30,28 +31,35 @@ function TreatmentProfilePage() {
   }, [id]);
 
   return (
-    <div className="treatment-profile-page">
+    <div className="container treatment-profile-page">
       <h2>Treatment Profiles</h2>
-      {treatmentProfiles.slice(startIndex, endIndex).map((profile) => (
-        <div key={profile.id} className="profile-card">
-          <h3>{profile.description}</h3>
-          <p>Ngày tạo hồ sơ: {profile.createdAt}</p>
-          <Link to={`/customer/treatmentprofile/${profile.id}`} className="detail-button">
-            Xem chi tiết
-          </Link>
-          {/* Render other profile details */}
-        </div>
-      ))}
+      <div className="profile-list">
+        {treatmentProfiles.slice(startIndex, endIndex).map((profile) => (
+            <div className="mb-3" key={profile.id}>
+              <Link className='card' to={`/customer/treatmentprofile/${profile.id}`}>
+                <div className="card-body">
+                    <h3 className="card-title">{profile.description}</h3>
+                    <p>Ngày tạo hồ sơ: {profile.createdAt}</p>
+                    <a href='javascript:void(0)'>
+                      Xem chi tiết
+                    </a>
+                </div>
+              </Link>
+            </div>
+          ))}
+      </div>
       {totalPages > 1 && (
         <div className="pagination">
-          <button id='paging-btn'
+          <button
+            className="paging-btn"
             onClick={() => setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))}
             disabled={currentPage === 1}
           >
             {'<'}
           </button>
-          <span id='paging-btn'>{currentPage}</span>
-          <button id='paging-btn'
+          <span className="paging-btn">{currentPage}</span>
+          <button
+            className="paging-btn"
             onClick={() => setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))}
             disabled={currentPage === totalPages}
           >

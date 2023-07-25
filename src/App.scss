@@ -19,6 +19,20 @@
             min-height: 800px;
             display: block;
             margin-bottom: 20px;
+
+            .card-avatar {
+                object-fit: cover;
+                width: 100%;
+                height: 250px;
+            }
+
+            .text-limit-1-lines {
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 1; /* number of lines to show */
+                line-clamp: 2; 
+                -webkit-box-orient: vertical;
+            }
         }
     }
 }
