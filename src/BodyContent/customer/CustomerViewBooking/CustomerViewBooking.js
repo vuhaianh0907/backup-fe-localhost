@@ -15,7 +15,7 @@ function CustomerViewBooking() {
   const statusList = [
     {
       name: "confirmed",
-      color: "text-success"
+      color: "text-info"
     },
     {
       name: "Cancelled",
@@ -25,6 +25,11 @@ function CustomerViewBooking() {
       name: "Doctor Cancelled",
       color: "text-warning"
     },
+    {
+      name: "Done",
+      color: "text-success"
+    },
+    
   ]
 
   useEffect(() => {
