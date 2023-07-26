@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
+import Wallet from "../Wallet/Wallet";
 import './ViewTransaction.css';
 
 export default function ViewTransaction() {
@@ -28,6 +29,7 @@ export default function ViewTransaction() {
 
   return (
     <div className="cust-view-transaction">
+      <Wallet/>
       <div className="cust-transaction-header">
         <h3>Lịch sử giao dịch</h3>
       </div>
@@ -63,6 +65,7 @@ export default function ViewTransaction() {
           </tbody>
         </table>
       </div>
+      
     </div>
   );
 }

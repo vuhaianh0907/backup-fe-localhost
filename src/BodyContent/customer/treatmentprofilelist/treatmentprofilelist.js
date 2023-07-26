@@ -32,7 +32,7 @@ function TreatmentProfilePage() {
 
   return (
     <div className="container treatment-profile-page">
-      <h2>Treatment Profiles</h2>
+      <h2>Hồ sơ điều trị</h2>
       <div className="profile-list">
         {treatmentProfiles.slice(startIndex, endIndex).map((profile) => (
             <div className="mb-3" key={profile.id}>
@@ -40,9 +40,7 @@ function TreatmentProfilePage() {
                 <div className="card-body">
                     <h3 className="card-title">{profile.description}</h3>
                     <p>Ngày tạo hồ sơ: {profile.createdAt}</p>
-                    <a href='javascript:void(0)'>
-                      Xem chi tiết
-                    </a>
+                    
                 </div>
               </Link>
             </div>

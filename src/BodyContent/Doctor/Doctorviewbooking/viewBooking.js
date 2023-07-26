@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
-import './viewBooking.css';
+import './viewBooking.scss';
 
 const ViewBooking = () => {
   const { id } = useParams();
@@ -190,7 +190,7 @@ const ViewBooking = () => {
     const currentAppointments = appointments.slice(startIndex, endIndex);
     console.log(appointments);
     return (
-      <>
+      < >
 
         {currentAppointments.map((appointment) => (
           <li className="appointment-item" key={appointment.id}>

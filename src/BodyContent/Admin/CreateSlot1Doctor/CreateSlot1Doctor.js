@@ -94,12 +94,12 @@ function CreateSlot1Doctor() {
                     <div>
                         <div className='admin-view-handled-doctor-info' >
                     {/* selected doctor info */}
-                    <div>
+                    <h4>
                         Tên bác sĩ: {selectedDoctor.fullname}
-                    </div>
-                    <div>
+                    </h4>
+                    <h4>
                         ID bác sĩ: {selectedDoctor.idCard}
-                    </div>
+                    </h4>
                 </div>   
                         <h3>Chọn khoảng thời gian</h3>
                         <div className='row'>

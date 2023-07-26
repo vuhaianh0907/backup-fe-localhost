@@ -136,8 +136,8 @@ const DoctorDetail = () => {
             )}
           </div>         
           <div className="edit-button-container">
-          <Link to={`/admin/doctor/addslot/${doctorId}`} type="button" class="btn btn-secondary">
-            Thêm ca làm
+          <Link to={`/admin/doctor/addslot/${doctorId}`} type="button" class="btn btn-primary mb-3">
+            Thêm lịch làm việc 
             </Link>
             <br/>
             <Link to={`/admin/doctor/update/${doctorId}`} type="button" class="btn btn-secondary">

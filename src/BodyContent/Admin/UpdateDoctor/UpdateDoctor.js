@@ -204,7 +204,7 @@ function AdminUpdateDoctor() {
             <button type="submit" className="btn btn-success">
               Cập nhật
             </button>
-            <button type="button" className="btn btn-danger" onClick={handleCancel}>
+            <button type="button" className="btn btn-danger m-3" onClick={handleCancel}>
               Hủy bỏ
             </button>
           </div>
@@ -219,7 +219,7 @@ function AdminUpdateDoctor() {
             <button className="btn btn-success" onClick={() => handleConfirmation(true)}>
               Cập nhật
             </button>
-            <button className="btn btn-danger" onClick={() => handleConfirmation(false)}>
+            <button className="btn btn-danger m-3" onClick={() => handleConfirmation(false)}>
               Hủy bỏ
             </button>
           </div>

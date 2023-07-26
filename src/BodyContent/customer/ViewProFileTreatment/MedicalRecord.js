@@ -59,10 +59,10 @@ function ViewTreatmentProfile() {
             <strong>ID:</strong> {treatmentProfile.id}
           </p>
           <p>
-            <strong>Doctor:</strong> {doctor.fullname}
+            <strong>Tên bác sĩ điều trị:</strong> {doctor.fullname}
           </p>
           <p>
-            <strong>Customer:</strong> {customer.fullname}
+            <strong>Tên khách hàng:</strong> {customer.fullname}
           </p>
         </div>
 
@@ -76,16 +76,16 @@ function ViewTreatmentProfile() {
                   <div class="card mb-3">
                     <div class="card-body row">
                       <div className='col-lg-6'>
-                        <strong>Date:</strong> {treatmentIn.createdAt}
+                        <strong>Ngày khám:</strong> {treatmentIn.createdAt}
                       </div>
                       <div className='col-lg-6'>
-                        <strong>Process:</strong> {treatmentIn.process}
+                        <strong>Quá trình:</strong> {treatmentIn.process}
                       </div>
                       <div className='col-lg-6'>
-                        <strong>Result:</strong> {treatmentIn.result}
+                        <strong>Kết quả:</strong> {treatmentIn.result}
                       </div>
                       <div className='col-lg-6'>
-                        <strong>Note:</strong> {treatmentIn.note}
+                        <strong>Ghi chú:</strong> {treatmentIn.note}
                       </div></div>
                   </div>
 
@@ -93,7 +93,7 @@ function ViewTreatmentProfile() {
               ))}
             </div>
           ) : (
-            <p>No treatment ins available.</p>
+            <p>Không có phương pháp điều trị nào.</p>
           )}
         </div>
       </div>

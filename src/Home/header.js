@@ -48,7 +48,7 @@ export default function Navigation() {
                     <>
                       <li className="nav-item">
                         <Link className="nav-link text-light" to="/admin/doctorlist">
-                          List Doctor
+                          Danh sách bác sĩ
                         </Link>
                       </li>
                       <li className="nav-item">
@@ -86,22 +86,22 @@ export default function Navigation() {
                     <>
                       <li className="nav-item">
                         <Link className="nav-link text-light" to="/customer/listdoctor">
-                          List Doctor
+                        Danh sách bác sĩ
                         </Link>
                       </li>
                       <li className="nav-item">
                         <Link className="nav-link text-light" to={`/customer/booking/${user.id}`}>
-                          List Appointment
+                          Danh sách lịch hẹn
                         </Link>
                       </li>
                       <li className="nav-item">
                         <Link className="nav-link text-light" to={`/customer/treatmentprofilelist/${user.id}`}>
-                          Treatment Profile List
+                        Danh sách hồ sơ điều trị
                         </Link>
                       </li>
                       <li className="nav-item">
                         <Link className="nav-link text-light" to={`/customer/topupwallet/${user.id}`}>
-                          Momo
+                          Nạp tiền
                         </Link>
                       </li>
                     </>
@@ -163,20 +163,11 @@ export default function Navigation() {
                     )}
                     <li>
                       <Link
-                        to="/customer/profile/edit"
+                        to={`/customer/profile/edit/${user.id}`}
                         onClick={handleOptionClick}
                         className="dropdown-item"
                       >
                         Chỉnh sửa thông tin
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/customer/treatmentprofile/treatment"
-                        onClick={handleOptionClick}
-                        className="dropdown-item"
-                      >
-                        Xem hồ sơ bệnh
                       </Link>
                     </li>
                     <li>

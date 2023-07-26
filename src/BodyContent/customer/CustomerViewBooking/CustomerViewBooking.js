@@ -10,27 +10,36 @@ function CustomerViewBooking() {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [perPage] = useState(9);
+  const [perPage] = useState(8);
 
   const statusList = [
     {
       name: "confirmed",
+      displayName: "Đã xác nhận",
       color: "text-info"
     },
     {
       name: "Cancelled",
+      displayName: "Đã hủy",
       color: "text-danger"
     },
     {
       name: "Doctor Cancelled",
-      color: "text-warning"
+      displayName: "Bác sĩ đã hủy",
+      color: "text-danger"
     },
     {
       name: "Done",
+      displayName: "Hoàn thành",
       color: "text-success"
     },
-    
-  ]
+  ];
+
+  // Hàm để chuyển đổi tên trạng thái thành tên hiển thị và màu sắc tương ứng
+  function getStatusInfo(status) {
+    const statusInfo = statusList.find((item) => item.name === status);
+    return statusInfo || { displayName: status, color: "" };
+  }
 
   useEffect(() => {
     axios
@@ -95,15 +104,16 @@ function CustomerViewBooking() {
         <div className='container'>
           {appointments.slice(startIndex, endIndex).map((appointment) => (
             <div className="mb-3" key={appointment.id}>
-              <Link className='card' to={`/customer/booking/detail/${appointment.id}`}>
+              <Link className="card" to={`/customer/booking/detail/${appointment.id}`}>
                 <div className="card-body row">
-                  <div className='col-7 d-inline-block'>
+                  <div className="col-7 d-inline-block">
                     <h5 className="card-title">{appointment.slot.date}</h5>
                     <div className="card-text">Bác sĩ: {appointment.doctor ? appointment.doctor.fullname : 'Unknown Doctor'}</div>
                     <div className="card-text">Slot: {appointment.slot ? appointment.slot.time : 'Unknown Slot'}</div>
                   </div>
-                  <div className={statusList.find(e => e.name == appointment.status).color + " col-5 card-text text-end mt-4"}>
-                    {appointment.status}
+                  <div className={`${getStatusInfo(appointment.status).color} col-5 card-text text-end mt-4`}>
+                    {/* Hiển thị tên trạng thái và màu sắc tương ứng */}
+                    {getStatusInfo(appointment.status).displayName}
                   </div>
                 </div>
               </Link>

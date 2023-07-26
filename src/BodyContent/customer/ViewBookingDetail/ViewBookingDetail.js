@@ -121,7 +121,7 @@ function ViewBookingDetail() {
                   <h3>Xác nhận hủy appointment</h3>
                   <p>Bạn có chắc chắn muốn hủy appointment này?</p>
                   <div className="cancel-modal-buttons">
-                    <button className="cancel-button" onClick={handleCloseModal}>
+                    <button className="btn btn-secondary" onClick={handleCloseModal}>
                       Đóng
                     </button>
                     <button className="confirm-button" onClick={handleConfirmCancelAppointment}>

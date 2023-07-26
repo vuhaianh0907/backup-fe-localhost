@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ViewTransaction from "../TopUpWallet/ViewTransaction";
 import axios from "axios";
 import { useParams } from "react-router";
-import './Wallet.css';
+import './Wallet.scss';
 
 function Wallet() {
 
@@ -35,16 +35,16 @@ function Wallet() {
         return <div>Loading...</div>;
     }
     return (
-        <div>
-            <div className="user-wallet-info">
-                <div>
-                    Tên người dùng: {user.fullname}
+        <div id="Wallet" className="walletform"> 
+            <div className="user-wallet-info m-3">
+                <div >
+                    Xin chào {user.fullname}
+                </div>
+                <div class="formatted-money">
+                    Số dư của bạn là: {user.balance} VND
                 </div>
                 <div>
-                    Số dư: {user.balance} VND
-                </div>
-                <div>
-                    <button onClick={handleMomo} >
+                    <button class="btn btn-primary mt-3 mb-3" onClick={handleMomo} >
                         Nạp tiền
                     </button>
                 </div>
@@ -53,20 +53,20 @@ function Wallet() {
                 <div className='popup-momo'>
                     <button
                         type="button"
-                        className="close"
+                        className="btn-close"
                         data-dismiss="modal"
                         aria-label="Close"
                         id="close-btn"
                         onClick={handleCloseMomo}
                     >
-                        <div className='close'>&times;</div>
+                       
                     </button>
                     <h2 className="momo-heading">Nạp tự động qua ví momo</h2>
                     <div className="momo-upper-content">
                         <p className="momo-info">MOMO: 0911413402</p>
-                    <p className="momo-info">Nội dung chuyển khoản: nap tien {id}</p>
+                        <p className="momo-info">Nội dung chuyển khoản: nap tien {id}</p>
                     </div>
-                    
+
                     <img src={`https://momosv3.apimienphi.com/api/QRCode?phone=0911413402&amount=0&note=${note}`} alt="QR Code" />
                     <div className='luuy'>
                         <p className="momo-note">Sau khi hoàn thành nạp tiền vui lòng tải lại trang</p>
@@ -75,9 +75,6 @@ function Wallet() {
                 </div>
             )}
 
-            <div id="vt-01" >
-                <ViewTransaction />
-            </div>
 
         </div>
     );
