@@ -21,7 +21,7 @@ function CreateSchedulePage() {
   const [isLoading, setIsLoading] = useState(false);
   const doctorsPerPage = 8;
   const totalPages = Math.ceil(doctors.length / doctorsPerPage);
-  const navigate = useNavigate();
+
 
   const fetchDoctorsByName = async () => {
     try {

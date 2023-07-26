@@ -134,8 +134,12 @@ const DoctorDetail = () => {
             ) : (
               <div>No slots available</div>
             )}
-          </div>
+          </div>         
           <div className="edit-button-container">
+          <Link to={`/admin/doctor/addslot/${doctorId}`} type="button" class="btn btn-secondary">
+            Thêm ca làm
+            </Link>
+            <br/>
             <Link to={`/admin/doctor/update/${doctorId}`} type="button" class="btn btn-secondary">
               Chỉnh sửa thông tin
             </Link>
