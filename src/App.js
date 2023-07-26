@@ -42,6 +42,7 @@ import DoctorUpdateprofile from './BodyContent/Doctor/UpdateProfile/UpdateProfil
 import ResetPassword from './BodyContent/accout/ForgotPassword/ResetPassword';
 import ViewTransaction from './BodyContent/customer/TopUpWallet/ViewTransaction';
 import CreateSlot1Doctor from './BodyContent/Admin/CreateSlot1Doctor/CreateSlot1Doctor';
+import Wallet from './BodyContent/customer/Wallet/Wallet';
 
 // import testthu from './BodyContent/Admin/test/test';
 
@@ -109,7 +110,8 @@ function App() {
             <Route path='/customer/doctordetail/:id' element={<ViewDocDetail />} />
             <Route path='/customer/topupwallet/:id' element={<CustormerWallet />} />
             <Route path='/customer/transaction/:id' element={<ViewTransaction />} />
-
+            <Route path='/customer/wallet/:id' element={<Wallet />} />
+      
 
 
 
