@@ -13,13 +13,26 @@ const PatientProfile = () => {
   const [newTreatmentProfileName, setNewTreatmentProfileName] = useState('');
   const storedUserString = sessionStorage.getItem("token");
   const user = JSON.parse(storedUserString);
+  
+  useEffect(() => {
+    if (user === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
 
   const pageSize = 5; // Kích thước trang
 
   useEffect(() => {
     const fetchCustomer = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`); // Thay đổi URL API tương ứng
+        const response = await axios.get(`https://oooo-zifh.onrender.com/api/account/customer/details?id=${id}`); // Thay đổi URL API tương ứng
         const customerData = response.data.customer;
         setCustomer(customerData);
         
@@ -30,7 +43,7 @@ const PatientProfile = () => {
 
     const fetchTreatmentProfiles = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/treatment_profile/schedule?id=${id}`); // Thay đổi URL API tương ứng
+        const response = await axios.get(`https://oooo-zifh.onrender.com/api/treatment_profile/schedule?id=${id}`); // Thay đổi URL API tương ứng
         const treatmentProfilesData = response.data.treatmentProfiles;
         
         
@@ -94,7 +107,7 @@ const PatientProfile = () => {
       };
 
       // Gửi yêu cầu tạo treatment profile
-      const response = await axios.post('http://localhost:3000/api/treatment_profile/create', newProfile); // Thay đổi URL API tương ứng
+      const response = await axios.post('https://oooo-zifh.onrender.com/api/treatment_profile/create', newProfile); // Thay đổi URL API tương ứng
 
       // Xử lý phản hồi từ server
       const createdProfile = response.data;

@@ -14,11 +14,24 @@ const ViewBooking = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const appointmentsPerPage = 3;
   const dateNow = new Date().toISOString();
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
 
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/appointment/appointmentdoctor?doctorID=${id}`);
+        const response = await axios.get(`https://oooo-zifh.onrender.com/api/appointment/appointmentdoctor?doctorID=${id}`);
         const appointmentsData = response.data.appointments;
 
         // Lấy thông tin chi tiết của customer và slot cho từng appointment
@@ -28,11 +41,11 @@ const ViewBooking = () => {
             const slotId = appointment.slotID;
 
             // Lấy thông tin customer
-            const customerResponse = await axios.get(`http://localhost:3000/api/account/customer/details?id=${customerId}`);
+            const customerResponse = await axios.get(`https://oooo-zifh.onrender.com/api/account/customer/details?id=${customerId}`);
             const customerData = customerResponse.data.customer;
 
             // Lấy thông tin slot
-            const slotResponse = await axios.get(`http://localhost:3000/api/slot/details?id=${slotId}`);
+            const slotResponse = await axios.get(`https://oooo-zifh.onrender.com/api/slot/details?id=${slotId}`);
             const slotData = slotResponse.data.slot;
 
             // Kết hợp thông tin appointment, customer và slot thành một object mới
@@ -93,7 +106,7 @@ const ViewBooking = () => {
   const handleConfirmCancelAppointment = async () => {
     try {
       // Gửi yêu cầu hủy lịch hẹn
-      await axios.post(`http://localhost:3000/api/appointment/updatedoctor?id=${selectedAppointment.id}`, { status: 'Doctor Cancelled' });
+      await axios.post(`https://oooo-zifh.onrender.com/api/appointment/updatedoctor?id=${selectedAppointment.id}`, { status: 'Doctor Cancelled' });
       // Cập nhật lại danh sách lịch hẹn
       const updatedAppointments = appointments.map((appointment) => {
         if (appointment.id === selectedAppointment.id) {
@@ -115,7 +128,7 @@ const ViewBooking = () => {
   const handleConfirmRequestCancellation = async () => {
     try {
       // Gửi yêu cầu hủy lịch hẹn
-      await axios.post(`http://localhost:3000/api/appointment/update?id=${selectedAppointment.id}`, { status: 'Cancellation Requested' });
+      await axios.post(`https://oooo-zifh.onrender.com/api/appointment/update?id=${selectedAppointment.id}`, { status: 'Cancellation Requested' });
       // Cập nhật lại danh sách lịch hẹn
       const updatedAppointments = appointments.map((appointment) => {
         if (appointment.id === selectedAppointment.id) {

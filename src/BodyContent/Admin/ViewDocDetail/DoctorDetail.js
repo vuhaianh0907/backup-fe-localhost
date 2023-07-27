@@ -9,12 +9,28 @@ const DoctorDetail = () => {
   const [doctorInfo, setDoctorInfo] = useState(null);
   const [slots, setSlots] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'admin') {
+        window.location.href = '/';
+      }
+    }
+  })
+  
 
   useEffect(() => {
+    
     const fetchData = async () => {
       try {
-        const doctorPromise = axios.get(`http://localhost:3000/api/account/doctor/details?id=${doctorId}`);
-        const slotsPromise = axios.get(`http://localhost:3000/api/slot/getSlotbyDoctor?doctorId=${doctorId}`);
+        const doctorPromise = axios.get(`https://oooo-zifh.onrender.com/api/account/doctor/details?id=${doctorId}`);
+        const slotsPromise = axios.get(`https://oooo-zifh.onrender.com/api/slot/getSlotbyDoctor?doctorId=${doctorId}`);
 
         const [doctorResponse, slotsResponse] = await Promise.all([doctorPromise, slotsPromise]);
 

@@ -1,5 +1,5 @@
 // File: Register.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './Register.scss';
@@ -13,6 +13,13 @@ export default function Register() {
   const [gender, setGender] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect (() =>{
+    if (user !== null){
+      window.location.href = '/';
+    }
+  })
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -81,7 +88,7 @@ export default function Register() {
     };
 
     axios
-      .post('http://localhost:3000/api/auth/register', data)
+      .post('https://oooo-zifh.onrender.com/api/auth/register', data)
       .then(handleRegisterSuccess)
       .catch(handleRegisterFailure);
   };

@@ -25,7 +25,7 @@ function CreateSchedulePage() {
 
   const fetchDoctorsByName = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/admin/getAllDoctorByName?name=${searchValue}`);
+      const response = await axios.get(`https://oooo-zifh.onrender.com/api/admin/getAllDoctorByName?name=${searchValue}`);
       setDoctors(response.data.doctors);
       setCurrentPage(1);
     } catch (error) {
@@ -36,8 +36,24 @@ function CreateSchedulePage() {
   const handleSearchDoctor = () => {
     fetchDoctorsByName();
   };
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'admin') {
+        window.location.href = '/';
+      }
+    }
+  })
+  
 
   useEffect(() => {
+    
     fetchDoctorsByName();
   }, []);
 
@@ -75,7 +91,7 @@ function CreateSchedulePage() {
       setIsLoading(true);
 
       axios
-        .post('http://localhost:3000/api/slot/create', newSchedule)
+        .post('https://oooo-zifh.onrender.com/api/slot/create', newSchedule)
         .then((response) => {
           setScheduleList([...scheduleList, newSchedule]);
           setIsScheduleCreated(true);

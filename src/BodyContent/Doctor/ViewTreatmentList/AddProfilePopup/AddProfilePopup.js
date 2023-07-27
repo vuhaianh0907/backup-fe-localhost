@@ -1,8 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
+
 import './AddProfilePopup.css'; // Import the CSS file for styling
 
 function AddProfilePopup({ onClose, onAddProfile }) {
   const [profileName, setProfileName] = useState('');
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
 
   const handleProfileNameChange = (event) => {
     setProfileName(event.target.value);

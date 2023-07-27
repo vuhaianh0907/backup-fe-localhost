@@ -21,15 +21,31 @@ function CreateSlot1Doctor() {
 
     const fetchDoctor = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/account/doctor/details?id=${doctorId}`);
+            const response = await axios.get(`https://oooo-zifh.onrender.com/api/account/doctor/details?id=${doctorId}`);
             setSelectedDoctor(response.data.doctor);
 
         } catch (error) {
             console.error('Error fetching doctors by name:', error);
         }
     };
+    const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'admin') {
+        window.location.href = '/';
+      }
+    }
+  })
+
 
     useEffect(() => {
+        
         fetchDoctor();
     }, []);
 
@@ -68,7 +84,7 @@ function CreateSlot1Doctor() {
             setIsLoading(true);
 
             axios
-                .post('http://localhost:3000/api/slot/create', newSchedule)
+                .post('https://oooo-zifh.onrender.com/api/slot/create', newSchedule)
                 .then((response) => {
                     setScheduleList([...scheduleList, newSchedule]);
                     setIsScheduleCreated(true);
@@ -90,17 +106,17 @@ function CreateSlot1Doctor() {
         <div className="page-container">
             <div className="admin-create-slot__container">
                 {selectedDoctor && (
-                    
+
                     <div>
                         <div className='admin-view-handled-doctor-info' >
-                    {/* selected doctor info */}
-                    <h4>
-                        Tên bác sĩ: {selectedDoctor.fullname}
-                    </h4>
-                    <h4>
-                        ID bác sĩ: {selectedDoctor.idCard}
-                    </h4>
-                </div>   
+                            {/* selected doctor info */}
+                            <h4>
+                                Tên bác sĩ: {selectedDoctor.fullname}
+                            </h4>
+                            <h4>
+                                ID bác sĩ: {selectedDoctor.idCard}
+                            </h4>
+                        </div>
                         <h3>Chọn khoảng thời gian</h3>
                         <div className='row'>
                             <div className='col-sm-6'>

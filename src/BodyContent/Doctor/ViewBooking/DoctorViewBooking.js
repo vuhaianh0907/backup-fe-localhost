@@ -5,6 +5,20 @@ export default function DoctorViewBooking() {
     const [schedule, setSchedule] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedAppointment, setSelectedAppointment] = useState(null);
+    const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
 
     // Dữ liệu mẫu danh sách phiếu đặt lịch khám
     const sampleAppointments = [

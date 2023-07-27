@@ -10,11 +10,25 @@ export default function ViewDocDetail() {
   const [doctor, setDoctor] = useState(null);
   const [slots, setSlots] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
 
   useEffect(() => {
     // Send GET request to fetch doctor details
     axios
-      .get(`http://localhost:3000/api/account/doctor/details?id=${id}`)
+      .get(`https://oooo-zifh.onrender.com/api/account/doctor/details?id=${id}`)
       .then((response) => {
         // Handle the response from the API
         setDoctor(response.data.doctor);
@@ -26,7 +40,7 @@ export default function ViewDocDetail() {
 
     // Send GET request to fetch slots for the doctor
     axios
-      .get(`http://localhost:3000/api/slot/getSlotbyDoctor?doctorId=${id}`)
+      .get(`https://oooo-zifh.onrender.com/api/slot/getSlotbyDoctor?doctorId=${id}`)
       .then((response) => {
         // Handle the response from the API
         const filteredSlots = response.data.slots.filter((slot) => slot.status === 'available');

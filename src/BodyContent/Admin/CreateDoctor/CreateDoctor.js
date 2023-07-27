@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './CreateDoctor.scss';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -9,6 +9,20 @@ function AdminCreateDoctor() {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'admin') {
+        window.location.href = '/';
+      }
+    }
+  })
   const [personalInfo, setPersonalInfo] = useState({
     fullName: '',
     idCard: '',
@@ -18,6 +32,7 @@ function AdminCreateDoctor() {
     email: '',
     address: '',
   });
+
 
   const [professionalInfo, setProfessionalInfo] = useState({
     qualification: '',
@@ -103,7 +118,7 @@ function AdminCreateDoctor() {
     };
 
     axios
-      .post('http://localhost:3000/api/admin/createdoctor', formData)
+      .post('https://oooo-zifh.onrender.com/api/admin/createdoctor', formData)
       .then((response) => {
         toast.success('Lưu thành công!');
         navigate('/');

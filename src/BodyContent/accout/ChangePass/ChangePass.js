@@ -1,5 +1,5 @@
 // ChangePass.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import './ChangePass.scss';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +12,11 @@ function ChangePass() {
   const navigate = useNavigate();
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null){
+      navigate('/');
+    };
+  }, []);
 
   const handleChangePassword = (event) => {
     setPassword(event.target.value);
@@ -51,7 +56,7 @@ function ChangePass() {
 
     const email = user.email;
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/changepass', {
+      const response = await axios.post('https://oooo-zifh.onrender.com/api/auth/changepass', {
         email,
         password,
         newPassword,

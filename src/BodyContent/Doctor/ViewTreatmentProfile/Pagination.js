@@ -1,6 +1,20 @@
 import React from 'react';
 
 function Pagination({ currentPage, totalPages, onPageChange }) {
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
   const renderPageNumbers = () => {
     const pageNumbers = [];
 

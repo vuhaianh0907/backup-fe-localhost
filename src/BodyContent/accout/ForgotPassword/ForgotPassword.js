@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
+
 import './ForgotPassword.scss';
 import axios from 'axios';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
-
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect (() =>{
+    if (user === null){
+      window.location.href = '/';
+    }
+  })
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/forgetpassword', { email });
+      const response = await axios.post('https://oooo-zifh.onrender.com/api/auth/forgetpassword', { email });
       if (response.status === 200) {
         alert('Vui lòng kiểm tra email để đặt lại mật khẩu.');
       } else {

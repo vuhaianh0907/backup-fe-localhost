@@ -7,14 +7,28 @@ import './ViewTransaction.css';
 export default function ViewTransaction() {
   const { id } = useParams();
   const [history, setHistory] = useState([]);
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
 
   const getHistory = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/transaction/get?id=${id}`);
+      const response = await axios.get(`https://oooo-zifh.onrender.com/api/balance/get?id=${id}`);
       if (response.status === 200) {
         // Check if the response data is an array, otherwise wrap it in an array
         
-        setHistory(response.data.transactions);
+        setHistory(response.data.data);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -38,9 +52,9 @@ export default function ViewTransaction() {
           <thead>
             <tr>
               <th>ID Giao Dịch</th>
-              <th>Số Điện Thoại</th>
               <th>Số Tiền</th>
               <th>Thông Tin Giao Dịch</th>
+              <th>Số dư</th>
               <th>Ngày tạo</th>
             </tr>
           </thead>
@@ -55,9 +69,9 @@ export default function ViewTransaction() {
                 history.map((list) => (
                   <tr key={list.id}>
                     <td>{list.id}</td>
-                    <td>{list.partnerId}</td>
                     <td>{list.amount}</td>
                     <td>{list.comment}</td>
+                    <td>{list.blance}</td>
                     <td>{list.createdAt}</td>
                   </tr>
                 ))}

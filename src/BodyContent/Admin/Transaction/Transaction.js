@@ -6,10 +6,25 @@ const TransactionList = () => {
   const [transactions, setTransactions] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const perPage = 15;
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'admin') {
+        window.location.href = '/';
+      }
+    }
+  })
+  
 
   const fetchTransactions = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/transaction/getall');
+      const response = await axios.get('https://oooo-zifh.onrender.com/api/transaction/getall');
       setTransactions(response.data);
     } catch (error) {
       console.error('Error:', error);
@@ -17,6 +32,7 @@ const TransactionList = () => {
   };
 
   useEffect(() => {
+    
     fetchTransactions();
   }, []);
 

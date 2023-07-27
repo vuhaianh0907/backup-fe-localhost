@@ -21,6 +21,20 @@ function CustomerViewDoctor() {
   const [isFirstLoad, setIsFirstLoad] = useState(true); // Add the isFirstLoad state
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(9);
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
 
   useEffect(() => {
     // Set selectedDate to today's date by default
@@ -35,7 +49,7 @@ function CustomerViewDoctor() {
     // Fetch doctors when the selectedDate or selectedTime changes
     if (selectedDate && selectedTime) {
       axios
-        .post('http://localhost:3000/api/slot/getDoctorByTime', {
+        .post('https://oooo-zifh.onrender.com/api/slot/getDoctorByTime', {
           selectedDate,
           selectedTime,
         })

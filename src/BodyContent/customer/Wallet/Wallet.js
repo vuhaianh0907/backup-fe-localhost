@@ -10,6 +10,20 @@ function Wallet() {
     const note = `nap tien ${id}`;
     const [user, setUser] = useState(null);
     const [isMomo, setMomo] = useState(null);
+    const storedUserString = sessionStorage.getItem('token');
+  const user1 = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user1 === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user1.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
 
     const handleMomo = () => {
         setMomo(true);
@@ -21,7 +35,7 @@ function Wallet() {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`);
+                const response = await axios.get(`https://oooo-zifh.onrender.com/api/account/customer/details?id=${id}`);
                 const userData = response.data.customer;
                 setUser(userData);
             } catch (error) {

@@ -12,11 +12,25 @@ const EditProfile = () => {
   const [address, setAddress] = useState('');
   const [phone, setPhone] = useState('');
   const [gender, setGender] = useState('');
+  const storedUserString = sessionStorage.getItem('token');
+  const user1 = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user1 === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user1.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`);
+        const response = await axios.get(`https://oooo-zifh.onrender.com/api/account/customer/details?id=${id}`);
         const userData = response.data.customer;
         setUser(userData);
         setFullname(userData.fullname);
@@ -43,7 +57,7 @@ const EditProfile = () => {
         phone,
         gender,
       };
-      await axios.post(`http://localhost:3000/api/account/customer/update?id=${id}`, updatedUser);
+      await axios.post(`https://oooo-zifh.onrender.com/api/account/customer/update?id=${id}`, updatedUser);
       console.log('User information updated');
       navigate(`/customer/profile/${id}`);
     } catch (error) {

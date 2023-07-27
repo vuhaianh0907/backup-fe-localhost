@@ -10,11 +10,25 @@ const DoctorList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'admin') {
+        window.location.href = '/';
+      }
+    }
+  })
 
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get('http://localhost:3000/api/account/doctor/alllist')
+      .get('https://oooo-zifh.onrender.com/api/account/doctor/alllist')
       .then((response) => {
         setDoctors(response.data.doctors);
       })
@@ -38,7 +52,7 @@ const DoctorList = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };
 
- 
+
 
   const handleStatusChange = (doctor) => {
     const updatedStatus = doctor.status === 'active' ? 'not active' : 'active';
@@ -49,7 +63,7 @@ const DoctorList = () => {
 
   const handleConfirmationConfirm = async () => {
     try {
-      await axios.post(`http://localhost:3000/api/account/doctor/status?id=${selectedDoctor.id}`);
+      await axios.post(`https://oooo-zifh.onrender.com/api/account/doctor/status?id=${selectedDoctor.id}`);
 
       const updatedDoctors = doctors.map((doctor) =>
         doctor.id === selectedDoctor.id ? selectedDoctor : doctor
@@ -85,7 +99,7 @@ const DoctorList = () => {
             {currentDoctors.map((doctor) => (
               <li key={doctor.id} className="doctor-item">
                 <div className="doctor-item__avatar">
-                  <img src={doctor.avatar}/>
+                  <img src={doctor.avatar} />
                 </div>
                 <div className="doctor-item__details">
                   <p className="doctor-item__name">{doctor.fullname}</p>
@@ -96,7 +110,7 @@ const DoctorList = () => {
                   onClick={() => handleStatusChange(doctor)}
                 >
                   {doctor.status === 'active' ? 'Active' : 'Not Active'}
-                </button><br/>
+                </button><br />
                 <Link to={`/admin/doctordetail/${doctor.id}`} className="view-details-link btn btn-primary">
                   Xem thông tin
                 </Link>
@@ -104,21 +118,21 @@ const DoctorList = () => {
             ))}
           </ul>
           <div className="pagination">
-        {currentPage > 1 && (
-          <button id='thist-paging' onClick={prevPage}>{'<'}</button>
-        )}
-        {currentDoctors.length > 0 && (
-          <button id='thist-paging'>
-            <span>
-            {currentPage}
-          </span>
-          </button>
-          
-        )}
-        {currentDoctors.length === perPage && (
-          <button id='thist-paging' onClick={nextPage}>{'>'}</button>
-        )}
-      </div>
+            {currentPage > 1 && (
+              <button id='thist-paging' onClick={prevPage}>{'<'}</button>
+            )}
+            {currentDoctors.length > 0 && (
+              <button id='thist-paging'>
+                <span>
+                  {currentPage}
+                </span>
+              </button>
+
+            )}
+            {currentDoctors.length === perPage && (
+              <button id='thist-paging' onClick={nextPage}>{'>'}</button>
+            )}
+          </div>
         </>
       )}
 

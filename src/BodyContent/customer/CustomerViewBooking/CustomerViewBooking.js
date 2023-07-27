@@ -11,7 +11,20 @@ function CustomerViewBooking() {
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(8);
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
 
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
   const statusList = [
     {
       name: "confirmed",
@@ -43,12 +56,12 @@ function CustomerViewBooking() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/appointment/appointmentcustomer?customerID=${id}`)
+      .get(`https://oooo-zifh.onrender.com/api/appointment/appointmentcustomer?customerID=${id}`)
       .then((response) => {
         const appointmentsData = response.data.appointments;
         const appointmentPromises = appointmentsData.map((appointment) => {
-          const doctorPromise = axios.get(`http://localhost:3000/api/account/doctor/details?id=${appointment.doctorID}`);
-          const slotPromise = axios.get(`http://localhost:3000/api/slot/details?id=${appointment.slotID}`);
+          const doctorPromise = axios.get(`https://oooo-zifh.onrender.com/api/account/doctor/details?id=${appointment.doctorID}`);
+          const slotPromise = axios.get(`https://oooo-zifh.onrender.com/api/slot/details?id=${appointment.slotID}`);
 
           return Promise.all([doctorPromise, slotPromise])
             .then(([doctorResponse, slotResponse]) => {

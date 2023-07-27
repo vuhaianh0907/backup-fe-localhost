@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+
 import { FaUser, FaCalendarAlt } from 'react-icons/fa';
 import './TreatmentProcess.scss';
 
@@ -10,6 +11,20 @@ const TreatmentProcess = () => {
   const treatmentProcessContent = 'Nội dung quy trình điều trị từ cơ sở dữ liệu';
   const treatmentResultContent = 'Nội dung kết quả điều trị từ cơ sở dữ liệu';
   const notesContent = 'Nội dung ghi chú từ cơ sở dữ liệu';
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
 
   return (
     <div >

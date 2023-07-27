@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './TimeSlotsPage.scss';
 
 const TimeSlotsPage = () => {
@@ -8,6 +8,20 @@ const TimeSlotsPage = () => {
   const [selectedDate, setSelectedDate] = useState(tomorrow.toISOString().slice(0, 10));
   const [showPopup, setShowPopup] = useState(false);
   const [reason, setReason] = useState('');
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
 
   const handleSlotClick = (slot) => {
     setSelectedSlot(slot);

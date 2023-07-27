@@ -7,11 +7,25 @@ function ViewTreatmentIn() {
   const { id } = useParams(); // Get the ID from the URL
 
   const [treatmentProfile, setTreatmentProfile] = useState(null);
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
 
   useEffect(() => {
     const fetchTreatmentProfile = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/treatment_profile/details?id=${id}`); // Replace with your API endpoint
+        const response = await axios.get(`https://oooo-zifh.onrender.com/api/treatment_profile/details?id=${id}`); // Replace with your API endpoint
         const profileData = response.data.treatmentProfile;
         setTreatmentProfile(profileData);
       } catch (error) {

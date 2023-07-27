@@ -7,12 +7,25 @@ const TopUpWallet = () => {
   const [QR, setQR] = useState(null);
   const { id } = useParams();
   const note = `nap tien ${id}`;
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
 
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`); // Thay đổi URL API tùy theo yêu cầu của bạn
+        const response = await axios.get(`https://oooo-zifh.onrender.com/api/account/customer/details?id=${id}`); // Thay đổi URL API tùy theo yêu cầu của bạn
         setUserData(response.data);
 
 

@@ -19,14 +19,26 @@ function CreateTreatmentIn() {
   const user = JSON.parse(storedUserString);
   const storedSlot = sessionStorage.getItem("SlotID");
   const idslot = JSON.parse(storedSlot);
+  
+  useEffect(() => {
+    if (user === null) {
 
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
   useEffect(() => {
     const fetchTreatmentProfile = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/treatment_profile/details?id=${id}`); // Replace with your API endpoint
+        const response = await axios.get(`https://oooo-zifh.onrender.com/api/treatment_profile/details?id=${id}`); // Replace with your API endpoint
         const profileData = response.data.treatmentProfile;
         setTreatmentProfile(profileData);
-        const customerResponse = await axios.get(`http://localhost:3000/api/account/customer/details?id=${profileData.customerID}`);
+        const customerResponse = await axios.get(`https://oooo-zifh.onrender.com/api/account/customer/details?id=${profileData.customerID}`);
         const customerData = customerResponse.data.customer;
         setCustomer(customerData);
       } catch (error) {
@@ -66,8 +78,8 @@ function CreateTreatmentIn() {
       };
   
       // Gửi yêu cầu POST đến API createTreatmentIn
-      await axios.post('http://localhost:3000/api/treatmentin/create', treatmentInData);
-      await axios.post(`http://localhost:3000/api/appointment/update?id=${idslot}`, { status: 'Done' });
+      await axios.post('https://oooo-zifh.onrender.com/api/treatmentin/create', treatmentInData);
+      await axios.post(`https://oooo-zifh.onrender.com/api/appointment/update?id=${idslot}`, { status: 'Done' });
       sessionStorage.removeItem('SlotID');
   
       // Chuyển hướng trang về trang chủ
@@ -103,8 +115,8 @@ function CreateTreatmentIn() {
       };
   
       // Gửi yêu cầu POST đến API createTreatmentIn
-      await axios.post('http://localhost:3000/api/treatmentin/create', treatmentInData);
-      await axios.post(`http://localhost:3000/api/appointment/update?id=${idslot}`, { status: 'Done' });
+      await axios.post('https://oooo-zifh.onrender.com/api/treatmentin/create', treatmentInData);
+      await axios.post(`https://oooo-zifh.onrender.com/api/appointment/update?id=${idslot}`, { status: 'Done' });
       sessionStorage.removeItem('SlotID');
   
       // Chuyển hướng trang về trang chủ

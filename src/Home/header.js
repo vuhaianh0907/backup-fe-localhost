@@ -51,11 +51,11 @@ export default function Navigation() {
                           Danh sách bác sĩ
                         </Link>
                       </li>
-                      <li className="nav-item">
+                      {/* <li className="nav-item">
                         <Link className="nav-link text-light" to="/admin/createslot">
                           Create Slot
                         </Link>
-                      </li>
+                      </li> */}
                       <li className="nav-item">
                         <Link className="nav-link text-light" to="/admin/transaction">
                           Transaction

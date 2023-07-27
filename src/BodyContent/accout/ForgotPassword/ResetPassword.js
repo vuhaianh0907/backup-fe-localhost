@@ -40,7 +40,7 @@ export default function ResetPassword() {
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/resetpassword', {
+      const response = await axios.post('https://oooo-zifh.onrender.com/api/auth/resetpassword', {
          token, 
          password 
         });

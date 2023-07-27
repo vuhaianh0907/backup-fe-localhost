@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import GoogleLogin from 'react-google-login';
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,6 +10,13 @@ export default function LoginBar() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect (() =>{
+    if (user !== null){
+      window.location.href = '/';
+    }
+  })
   const showToastMessage = () => {
     toast.error(' Login Failed, Incorrect email or password', {
       position: toast.POSITION.TOP_RIGHT
@@ -48,7 +55,7 @@ export default function LoginBar() {
     };
 
     axios
-      .post('http://localhost:3000/api/auth/login', data)
+      .post('https://oooo-zifh.onrender.com/api/auth/login', data)
       .then(handleLoginSuccess)
       .catch(handleLoginFailure);
   };

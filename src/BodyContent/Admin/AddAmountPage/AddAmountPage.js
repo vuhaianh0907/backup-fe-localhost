@@ -11,9 +11,16 @@ function AddAmountPage() {
   const [selectedAction, setSelectedAction] = useState('');
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
-  useEffect (() =>{
-    if (user.role !== 'admin'){
+  useEffect(() => {
+    if (user === null) {
+
       window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'admin') {
+        window.location.href = '/';
+      }
     }
   })
 
@@ -48,9 +55,9 @@ function AddAmountPage() {
     let apiUrl = '';
 
     if (selectedAction === 'add') {
-      apiUrl = 'http://localhost:3000/api/account/customer/addAmount';
+      apiUrl = 'https://oooo-zifh.onrender.com/api/account/customer/addAmount';
     } else if (selectedAction === 'subtract') {
-      apiUrl = 'http://localhost:3000/api/account/customer/subtractAmount';
+      apiUrl = 'https://oooo-zifh.onrender.com/api/account/customer/subtractAmount';
     }
 
     axios

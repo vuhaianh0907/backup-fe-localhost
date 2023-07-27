@@ -14,11 +14,23 @@ function ResetAppointmentPage() {
   const [confirmationMessage, setConfirmationMessage] = useState('');
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
+  
+  useEffect(() => {
+    if (user === null) {
 
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
   useEffect(() => {
     const fetchCustomerDetails = async () => {
       try {
-        const customerResponse = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`);
+        const customerResponse = await axios.get(`https://oooo-zifh.onrender.com/api/account/customer/details?id=${id}`);
         const customerData = customerResponse.data.customer;
         setCustomer(customerData);
       } catch (error) {
@@ -28,7 +40,7 @@ function ResetAppointmentPage() {
 
     const fetchDoctorDetails = async () => {
       try {
-        const doctorResponse = await axios.get(`http://localhost:3000/api/account/doctor/details?id=${user.id}`);
+        const doctorResponse = await axios.get(`https://oooo-zifh.onrender.com/api/account/doctor/details?id=${user.id}`);
         const doctorData = doctorResponse.data.doctor;
         setDoctor(doctorData);
       } catch (error) {
@@ -38,7 +50,7 @@ function ResetAppointmentPage() {
 
     const fetchSlots = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/slot/getSlotbyDoctor?doctorId=${user.id}`);
+        const response = await axios.get(`https://oooo-zifh.onrender.com/api/slot/getSlotbyDoctor?doctorId=${user.id}`);
         const filteredSlots = response.data.slots.filter((slot) => slot.status === 'available');
         setSlots(filteredSlots);
       } catch (error) {
@@ -86,7 +98,7 @@ function ResetAppointmentPage() {
       };
 
       // Send the POST request to create the appointment
-      const response = await axios.post(`http://localhost:3000/api/appointment/create?customerId=${id}`, appointmentData);
+      const response = await axios.post(`https://oooo-zifh.onrender.com/api/appointment/create?customerId=${id}`, appointmentData);
 
       // Check the response from the API
       if (response.status === 200) {

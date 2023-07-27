@@ -1,9 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ViewTreatementList.css'; // Import the CSS file for styling
 import AddProfilePopup from './AddProfilePopup/AddProfilePopup';
 
 function ViewTreatementList() {
   const [searchTerm, setSearchTerm] = useState('');
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
   const [profiles, setProfiles] = useState([
     {
       id: 1,

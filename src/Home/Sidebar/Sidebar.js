@@ -50,12 +50,12 @@ const Sidebar = () => {
                 <span className='ml-2'>List Doctor</span>
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/admin/createslot" className="nav-link" aria-current="page">
                 <FontAwesomeIcon icon={faCalendarPlus} className='mr-2' />
                 <span className='ml-2'>Create Slot</span>
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/admin/transaction" className="nav-link" aria-current="page">
                 <FontAwesomeIcon icon={faGauge} className='mr-2' />

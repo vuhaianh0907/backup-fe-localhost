@@ -10,6 +10,20 @@ export default function GuestViewDocList() {
     specialization: '',
     experience: '',
   });
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);

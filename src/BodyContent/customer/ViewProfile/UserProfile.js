@@ -8,11 +8,25 @@ const UserProfile = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const storedUserString = sessionStorage.getItem('token');
+  const user1 = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user1 === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user1.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`);
+        const response = await axios.get(`https://oooo-zifh.onrender.com/api/account/customer/details?id=${id}`);
         const userData = response.data.customer;
         setUser(userData);
       } catch (error) {

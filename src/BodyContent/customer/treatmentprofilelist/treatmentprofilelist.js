@@ -15,11 +15,25 @@ function TreatmentProfilePage() {
   const startIndex = (currentPage - 1) * perPage;
   const endIndex = startIndex + perPage;
   const totalPages = Math.ceil(treatmentProfiles.length / perPage);
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
 
   useEffect(() => {
     const fetchTreatmentProfiles = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/treatment_profile/schedule?id=${id}`);
+        const response = await axios.get(`https://oooo-zifh.onrender.com/api/treatment_profile/schedule?id=${id}`);
         const data = response.data.treatmentProfiles;
         setTreatmentProfiles(data);
       } catch (error) {

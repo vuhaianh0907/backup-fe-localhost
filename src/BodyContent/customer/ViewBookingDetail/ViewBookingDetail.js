@@ -8,18 +8,32 @@ function ViewBookingDetail() {
   const [appointment, setAppointment] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [showCancelModal, setShowCancelModal] = useState(false);
+  const storedUserString = sessionStorage.getItem('token');
+  const user = JSON.parse(storedUserString);
+  useEffect(() => {
+    if (user === null) {
+
+      window.location.href = '/';
+
+    }
+    else {
+      if (user.role !== 'customer') {
+        window.location.href = '/';
+      }
+    }
+  })
 
   useEffect(() => {
     // Send GET request to fetch appointment details
     axios
-      .get(`http://localhost:3000/api/appointment/details?id=${id}`)
+      .get(`https://oooo-zifh.onrender.com/api/appointment/details?id=${id}`)
       .then((response) => {
         // Handle the response from the API
         const appointmentData = response.data.appointment;
 
         // Send GET requests to fetch slot and doctor details
-        const slotPromise = axios.get(`http://localhost:3000/api/slot/details?id=${appointmentData.slotID}`);
-        const doctorPromise = axios.get(`http://localhost:3000/api/account/doctor/details?id=${appointmentData.doctorID}`);
+        const slotPromise = axios.get(`https://oooo-zifh.onrender.com/api/slot/details?id=${appointmentData.slotID}`);
+        const doctorPromise = axios.get(`https://oooo-zifh.onrender.com/api/account/doctor/details?id=${appointmentData.doctorID}`);
 
         // Wait for both promises to resolve
         Promise.all([slotPromise, doctorPromise])
@@ -57,7 +71,7 @@ function ViewBookingDetail() {
   const handleConfirmCancelAppointment = () => {
     // Gửi yêu cầu POST để cập nhật cuộc hẹn
     axios
-      .post(`http://localhost:3000/api/appointment/update?id=${id}`, { status: 'Cancelled' })
+      .post(`https://oooo-zifh.onrender.com/api/appointment/update?id=${id}`, { status: 'Cancelled' })
       .then((response) => {
         // Xử lý phản hồi từ API (nếu cần)
         console.log('Appointment cancelled:', response.data);
