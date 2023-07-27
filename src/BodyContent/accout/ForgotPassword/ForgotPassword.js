@@ -8,7 +8,7 @@ export default function ForgotPassword() {
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
   useEffect (() =>{
-    if (user === null){
+    if (user !== null){
       window.location.href = '/';
     }
   })
