@@ -20,7 +20,7 @@ function ViewTreatmentProfile() {
 
     }
     else {
-      if (user.role !== 'customer') {
+      if (user.role !== 'doctor') {
         window.location.href = '/';
       }
     }
@@ -29,22 +29,22 @@ function ViewTreatmentProfile() {
   useEffect(() => {
     const fetchTreatmentProfile = async () => {
       try {
-        const response = await axios.get(`https://oooo-zifh.onrender.com/api/treatment_profile/details?id=${id}`); // Replace with your API endpoint
+        const response = await axios.get(`http://localhost:3000/api/treatment_profile/details?id=${id}`); // Replace with your API endpoint
         const profileData = response.data.treatmentProfile;
         setTreatmentProfile(profileData);
 
         // Fetch doctor information
-        const doctorResponse = await axios.get(`https://oooo-zifh.onrender.com/api/account/doctor/details?id=${profileData.doctorID}`);
+        const doctorResponse = await axios.get(`http://localhost:3000/api/account/doctor/details?id=${profileData.doctorID}`);
         const doctorData = doctorResponse.data.doctor;
         setDoctor(doctorData);
 
         // Fetch customer information
-        const customerResponse = await axios.get(`https://oooo-zifh.onrender.com/api/account/customer/details?id=${profileData.customerID}`);
+        const customerResponse = await axios.get(`http://localhost:3000/api/account/customer/details?id=${profileData.customerID}`);
         const customerData = customerResponse.data.customer;
         setCustomer(customerData);
 
         // Fetch treatment_ins based on TreatmentProfile.id
-        const treatmentInsResponse = await axios.get(`https://oooo-zifh.onrender.com/api/treatmentin/getAllByTreatmentProfile?id=${profileData.id}`);
+        const treatmentInsResponse = await axios.get(`http://localhost:3000/api/treatmentin/getAllByTreatmentProfile?id=${profileData.id}`);
         const treatmentInsData = treatmentInsResponse.data.treatmentIns;
         setTreatmentIns(treatmentInsData);
       } catch (error) {
@@ -64,24 +64,24 @@ function ViewTreatmentProfile() {
   }
 
   return (
-    <div className="profile-container">
+    <div className="profile-container m-5">
       <h2>{treatmentProfile.description}</h2>
       <div className="profile-details">
         <p>
-          <strong>Ngày tạo:</strong> {treatmentProfile.createdAt}
+          <strong>Ngày tạo: </strong> {treatmentProfile.createdAt}
         </p>
         <p>
-          <strong>ID:</strong> {treatmentProfile.id}
+          <strong>ID: </strong> {treatmentProfile.id}
         </p>
         <p>
-          <strong>Doctor:</strong> {doctor.fullname}
+          <strong>Bác sĩ phụ trách: </strong> {doctor.fullname}
         </p>
         <p>
-          <strong>Customer:</strong> {customer.fullname}
+          <strong>Bệnh nhân: </strong> {customer.fullname}
         </p>
       </div>
-      <button className="confirm-button" onClick={handleConfirm}>
-        <Link to={`/doctor/writetreatmentin/${treatmentProfile.id}`}> Write Treatment In
+      <button className="btn btn-primary" onClick={handleConfirm}>
+        <Link className='thelink' to={`/doctor/writetreatmentin/${treatmentProfile.id}`}> Viết thông tin điều trị
 
         </Link>
 
@@ -94,22 +94,22 @@ function ViewTreatmentProfile() {
             {treatmentIns.map((treatmentIn) => (
               <li key={treatmentIn.id}>
                 <p>
-                  <strong>Date:</strong> {treatmentIn.createdAt}
+                  <strong>Ngày: </strong> {treatmentIn.createdAt}
                 </p>
                 <p>
-                  <strong>Process:</strong> {treatmentIn.process}
+                  <strong>Quá trình: </strong> {treatmentIn.process}
                 </p>
                 <p>
-                  <strong>Result:</strong> {treatmentIn.result}
+                  <strong>Kết quả: </strong> {treatmentIn.result}
                 </p>
                 <p>
-                  <strong>Note:</strong> {treatmentIn.note}
+                  <strong>Ghi chú: </strong> {treatmentIn.note}
                 </p>
               </li>
             ))}
           </ul>
         ) : (
-          <p>No treatment ins available.</p>
+          <p>Chưa có phương pháp điều trị nào.</p>
         )}
       </div>
     </div>

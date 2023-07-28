@@ -3,10 +3,11 @@
   margin: 0 auto;
   margin-top: 15vmin;
   margin-bottom: 5vmin;
-  padding: 20px;
+  padding: 40px;
   border: 1px solid #ddd;
   background-color: #f9f9f9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
 h2 {

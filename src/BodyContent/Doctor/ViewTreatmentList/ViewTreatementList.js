@@ -13,7 +13,7 @@ function ViewTreatementList() {
 
     }
     else {
-      if (user.role !== 'customer') {
+      if (user.role !== 'doctor') {
         window.location.href = '/';
       }
     }

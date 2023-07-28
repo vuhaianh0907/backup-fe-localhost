@@ -55,9 +55,9 @@ function AddAmountPage() {
     let apiUrl = '';
 
     if (selectedAction === 'add') {
-      apiUrl = 'https://oooo-zifh.onrender.com/api/account/customer/addAmount';
+      apiUrl = 'http://localhost:3000/api/account/customer/addAmount';
     } else if (selectedAction === 'subtract') {
-      apiUrl = 'https://oooo-zifh.onrender.com/api/account/customer/subtractAmount';
+      apiUrl = 'http://localhost:3000/api/account/customer/subtractAmount';
     }
 
     axios

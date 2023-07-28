@@ -29,22 +29,22 @@ function ViewTreatmentProfile() {
   useEffect(() => {
     const fetchTreatmentProfile = async () => {
       try {
-        const response = await axios.get(`https://oooo-zifh.onrender.com/api/treatment_profile/details?id=${id}`); // Replace with your API endpoint
+        const response = await axios.get(`http://localhost:3000/api/treatment_profile/details?id=${id}`); // Replace with your API endpoint
         const profileData = response.data.treatmentProfile;
         setTreatmentProfile(profileData);
 
         // Fetch doctor information
-        const doctorResponse = await axios.get(`https://oooo-zifh.onrender.com/api/account/doctor/details?id=${profileData.doctorID}`);
+        const doctorResponse = await axios.get(`http://localhost:3000/api/account/doctor/details?id=${profileData.doctorID}`);
         const doctorData = doctorResponse.data.doctor;
         setDoctor(doctorData);
 
         // Fetch customer information
-        const customerResponse = await axios.get(`https://oooo-zifh.onrender.com/api/account/customer/details?id=${profileData.customerID}`);
+        const customerResponse = await axios.get(`http://localhost:3000/api/account/customer/details?id=${profileData.customerID}`);
         const customerData = customerResponse.data.customer;
         setCustomer(customerData);
 
         // Fetch treatment_ins based on TreatmentProfile.id
-        const treatmentInsResponse = await axios.get(`https://oooo-zifh.onrender.com/api/treatmentin/getAllByTreatmentProfile?id=${profileData.id}`);
+        const treatmentInsResponse = await axios.get(`http://localhost:3000/api/treatmentin/getAllByTreatmentProfile?id=${profileData.id}`);
         const treatmentInsData = treatmentInsResponse.data.treatmentIns;
         setTreatmentIns(treatmentInsData);
       } catch (error) {

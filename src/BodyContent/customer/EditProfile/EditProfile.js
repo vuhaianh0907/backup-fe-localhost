@@ -30,7 +30,7 @@ const EditProfile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`https://oooo-zifh.onrender.com/api/account/customer/details?id=${id}`);
+        const response = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`);
         const userData = response.data.customer;
         setUser(userData);
         setFullname(userData.fullname);
@@ -57,7 +57,7 @@ const EditProfile = () => {
         phone,
         gender,
       };
-      await axios.post(`https://oooo-zifh.onrender.com/api/account/customer/update?id=${id}`, updatedUser);
+      await axios.post(`http://localhost:3000/api/account/customer/update?id=${id}`, updatedUser);
       console.log('User information updated');
       navigate(`/customer/profile/${id}`);
     } catch (error) {

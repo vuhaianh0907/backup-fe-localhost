@@ -24,7 +24,7 @@ export default function ViewTransaction() {
 
   const getHistory = async () => {
     try {
-      const response = await axios.get(`https://oooo-zifh.onrender.com/api/balance/get?id=${id}`);
+      const response = await axios.get(`http://localhost:3000/api/balance/get?id=${id}`);
       if (response.status === 200) {
         // Check if the response data is an array, otherwise wrap it in an array
         

@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import './App.scss';
 import { BrowserRouter as Router, Switch, Route, Link, Routes } from 'react-router-dom';
 import Navigation from './Home/header';
 import Sidebar from './Home/Sidebar/Sidebar';
+import Dashboard from './BodyContent/Admin/Dashboard/Dashboard';
 
 import Banner from './BodyContent/banner/banner.js';
 import Login from './BodyContent/accout/login/LoginBar';
@@ -44,10 +46,52 @@ import ViewTransaction from './BodyContent/customer/TopUpWallet/ViewTransaction'
 import CreateSlot1Doctor from './BodyContent/Admin/CreateSlot1Doctor/CreateSlot1Doctor';
 import Wallet from './BodyContent/customer/Wallet/Wallet';
 
+import moment from 'moment-timezone';
+
+
+
+
+
+
+
+
 // import testthu from './BodyContent/Admin/test/test';
 
 
 function App() {
+  const [vietnamTime, setVietnamTime] = useState('');
+
+  useEffect(() => {
+    async function fetchVietnamTime() {
+      try {
+        const response = await fetch('http://worldtimeapi.org/api/timezone/Asia/Ho_Chi_Minh');
+        if (!response.ok) {
+          throw new Error('Failed to fetch time from WorldTimeAPI');
+        }
+        const data = await response.json();
+        const vietnamTime = moment(data.utc_datetime).tz('Asia/Ho_Chi_Minh').format('ddd MMM DD YYYY HH:mm:ss ');
+        setVietnamTime(vietnamTime);
+        
+      } catch (error) {
+        console.error(error);
+        setVietnamTime('Error fetching time');
+      }
+    }
+
+    // Fetch thời gian từ API và cập nhật state
+    fetchVietnamTime();
+
+    // Để tiết kiệm tài nguyên, bạn có thể đặt một khoảng thời gian cụ thể để cập nhật lại thời gian
+    const interval = setInterval(() => {
+      fetchVietnamTime();
+    }, 60000); // Cập nhật lại sau mỗi 1 phút (60.000 miliseconds)
+
+    // Khi component bị unmount, hủy bỏ việc cập nhật thời gian
+    return () => clearInterval(interval);
+  }, []);
+  
+  
+  
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
 
@@ -95,6 +139,7 @@ function App() {
             <Route path='/admin/transaction' element={<Transaction />} />
             <Route path='/admin/addamount' element={<AddAmountPage />} />
             <Route path='/admin/amount' element={<AmountPage />} />
+            <Route path='/admin/dashboard' element={<Dashboard />} />
 
 
             {/* custormer */}
@@ -111,7 +156,7 @@ function App() {
             <Route path='/customer/topupwallet/:id' element={<CustormerWallet />} />
             <Route path='/customer/transaction/:id' element={<ViewTransaction />} />
             <Route path='/customer/wallet/:id' element={<Wallet />} />
-      
+
 
 
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faCalendarCheck, faCalendarPlus, faGauge, faHouse, faMoneyBill, faMoneyBillTransfer, faUserDoctor } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faCalendarCheck, faCalendarPlus, faChartLine, faGauge, faHouse, faMoneyBill, faMoneyBillTransfer, faUserDoctor } from '@fortawesome/free-solid-svg-icons';
 import './Sidebar.scss';
 
 import logo from '../../assets/images/logo-01-01.png';
@@ -48,6 +48,12 @@ const Sidebar = () => {
               <Link to="/admin/doctorlist" className="nav-link" aria-current="page">
                 <FontAwesomeIcon icon={faUserDoctor} className='mr-2' />
                 <span className='ml-2'>List Doctor</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/admin/dashboard" className="nav-link" aria-current="page">
+                <FontAwesomeIcon icon={faChartLine} className='mr-2' />
+                <span className='ml-2'>dashboard</span>
               </Link>
             </li>
             {/* <li>

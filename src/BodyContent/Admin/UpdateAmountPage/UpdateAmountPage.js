@@ -23,7 +23,7 @@ const UpdateAmountPage = () => {
   useEffect(() => {
     
     axios
-      .get('https://oooo-zifh.onrender.com/api/amount/get')
+      .get('http://localhost:3000/api/amount/get')
       .then((response) => {
         setAmount(response.data.amount);
         setIsLoading(false);
@@ -40,7 +40,7 @@ const UpdateAmountPage = () => {
 
   const handleConfirm = () => {
     axios
-      .post('https://oooo-zifh.onrender.com/api/amount/update', { amount: amount })
+      .post('http://localhost:3000/api/amount/update', { amount: amount })
       .then((response) => {
         console.log('Amount updated successfully');
       })

@@ -3,35 +3,20 @@
     margin: 60px;
     padding: 60px;
     background-color: aliceblue;
-    height: 800px;
+    min-height: 800px;
     border-radius: 10px;
   }
+
   .appointment-item{
-    background-color: antiquewhite;
     margin-top: 30px;
+    margin: 20px;
   }
-  button.appointment-button {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-  }
+
   span.appointment-info {
     display: block;
     margin-bottom: 5px;
   }
-  li.appointment-item {
-    list-style-type: none;
-    margin: 10px;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 300px;
-    background-color: #f7f7f7;
-  }
+
   
   .booking-heading {
     font-size: 20px;
@@ -57,7 +42,8 @@
   }
   
   .pagination-container {
-    margin-top: 10px;
+    margin-top: 20px;
+    text-align: center;
   }
   
   .pagination-button {
@@ -115,19 +101,7 @@
     background-color: #45a049;
   }
   
-  .close-button {
-    background-color: #f44336;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 16px;
-    float: right;
-    cursor: pointer;
-  }
   
-  .close-button:hover {
-    background-color: #d32f2f;
-  }
   .confirmation-popup {
     position: fixed;
     top: 0;
@@ -144,8 +118,8 @@
   .confirmation-content {
     background-color: white;
     padding: 20px;
-    width: 400px;
-    height: 300px;
+    min-width: 400px;
+    min-height: 300px;
     border-radius: 5px;
     text-align: center;
     align-items: center;
@@ -175,4 +149,33 @@
       border-radius: 4px;
       text-align: center;
     }
+    .closebutton{
+      text-align: right
+    }
+    .profile-label{
+      display: block;
+      text-align: left
+    }
+
+/* Màu cho trạng thái 'Doctor Cancelled' */
+.appointment-info.doctor-cancelled {
+  color: red;
+}
+
+/* Màu cho trạng thái 'confirmed' */
+.appointment-info.confirmed {
+  color: green;
+}
+
+/* Màu cho trạng thái 'Done' */
+.appointment-info.done {
+  color: blue;
+}
+
+/* Màu cho trạng thái 'Cancelled' */
+.appointment-info.cancelled {
+  color: orange;
+}
+
   }
+  

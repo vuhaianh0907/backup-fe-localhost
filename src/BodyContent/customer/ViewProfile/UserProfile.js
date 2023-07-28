@@ -26,7 +26,7 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`https://oooo-zifh.onrender.com/api/account/customer/details?id=${id}`);
+        const response = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`);
         const userData = response.data.customer;
         setUser(userData);
       } catch (error) {

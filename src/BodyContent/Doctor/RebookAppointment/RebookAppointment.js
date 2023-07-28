@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import './RebookAppointment.scss';
 
 function ResetAppointmentPage() {
   const { id } = useParams();
@@ -14,7 +15,7 @@ function ResetAppointmentPage() {
   const [confirmationMessage, setConfirmationMessage] = useState('');
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
-  
+
   useEffect(() => {
     if (user === null) {
 
@@ -22,7 +23,7 @@ function ResetAppointmentPage() {
 
     }
     else {
-      if (user.role !== 'customer') {
+      if (user.role !== 'doctor') {
         window.location.href = '/';
       }
     }
@@ -30,7 +31,7 @@ function ResetAppointmentPage() {
   useEffect(() => {
     const fetchCustomerDetails = async () => {
       try {
-        const customerResponse = await axios.get(`https://oooo-zifh.onrender.com/api/account/customer/details?id=${id}`);
+        const customerResponse = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`);
         const customerData = customerResponse.data.customer;
         setCustomer(customerData);
       } catch (error) {
@@ -40,7 +41,7 @@ function ResetAppointmentPage() {
 
     const fetchDoctorDetails = async () => {
       try {
-        const doctorResponse = await axios.get(`https://oooo-zifh.onrender.com/api/account/doctor/details?id=${user.id}`);
+        const doctorResponse = await axios.get(`http://localhost:3000/api/account/doctor/details?id=${user.id}`);
         const doctorData = doctorResponse.data.doctor;
         setDoctor(doctorData);
       } catch (error) {
@@ -50,7 +51,7 @@ function ResetAppointmentPage() {
 
     const fetchSlots = async () => {
       try {
-        const response = await axios.get(`https://oooo-zifh.onrender.com/api/slot/getSlotbyDoctor?doctorId=${user.id}`);
+        const response = await axios.get(`http://localhost:3000/api/slot/getSlotbyDoctor?doctorId=${user.id}`);
         const filteredSlots = response.data.slots.filter((slot) => slot.status === 'available');
         setSlots(filteredSlots);
       } catch (error) {
@@ -98,7 +99,7 @@ function ResetAppointmentPage() {
       };
 
       // Send the POST request to create the appointment
-      const response = await axios.post(`https://oooo-zifh.onrender.com/api/appointment/create?customerId=${id}`, appointmentData);
+      const response = await axios.post(`http://localhost:3000/api/appointment/create?customerId=${id}`, appointmentData);
 
       // Check the response from the API
       if (response.status === 200) {
@@ -106,6 +107,7 @@ function ResetAppointmentPage() {
       } else {
         setConfirmationMessage('Failed to confirm appointment');
       }
+      window.location.href = `/Doctorviewbooking/${user.id}`;
     } catch (error) {
       console.error('Error creating appointment:', error);
       setConfirmationMessage('Failed to confirm appointment');
@@ -123,18 +125,25 @@ function ResetAppointmentPage() {
   }
 
   return (
+
     <div className="reset-appointment-page">
       <h2>Đặt lại lịch tái khám</h2>
-      <p>Thông tin bác sĩ:</p>
-      <p>Họ và tên: {doctor.fullname}</p>
-      <p>Email: {doctor.email}</p>
+      <h4>Thông tin bác sĩ:</h4>
+      <div className='thongtin'>
 
-      <p>Thông tin khách hàng:</p>
-      <p>Họ và tên: {customer.fullname}</p>
-      <p>Email: {customer.email}</p>
+
+        <p>Họ và tên: {doctor.fullname}</p>
+        <p>Email: {doctor.email}</p>
+      </div>
+      <h4>Thông tin khách hàng:</h4>
+      <div className='thongtin'>
+        <p>Họ và tên: {customer.fullname}</p>
+        <p>Email: {customer.email}</p>
+      </div>
+      <hr />
 
       <div className="filter-container">
-        <label htmlFor="selectedDate">Chọn ngày:</label>
+        <label htmlFor="selectedDate">Chọn ngày: </label>
         <input
           type="date"
           id="selectedDate"
@@ -149,11 +158,11 @@ function ResetAppointmentPage() {
         {filteredSlots.length > 0 ? (
           <ul className="slots-list">
             {filteredSlots.map((slot) => (
-              <li key={slot.id}>
+              <div key={slot.id}>
                 <button className="slot-button" onClick={() => handleSlotClick(slot)}>
                   {slot.time}
                 </button>
-              </li>
+              </div>
             ))}
           </ul>
         ) : (
@@ -162,17 +171,26 @@ function ResetAppointmentPage() {
       </div>
 
       {showConfirmation && (
-        <div className="confirmation-modal">
-          <div className="confirmation-modal-content">
-            <h3>Xác nhận</h3>
-            <p>Bạn có chắc chắn muốn xác nhận?</p>
-            <div className="confirmation-modal-buttons">
-              <button className="confirm-button" onClick={handleConfirmationConfirm}>
-                Xác nhận
-              </button>
-              <button className="cancel-button" onClick={handleConfirmationCancel}>
-                Hủy
-              </button>
+        <div className="modal confirmation-modal" tabIndex="-1" role="dialog">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h3 className="modal-title">Xác nhận</h3>
+                <button  type="button" class="btn-close" aria-label="Close" onClick={handleConfirmationCancel}>
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <p>Bạn có chắc chắn muốn xác nhận?</p>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-primary" onClick={handleConfirmationConfirm}>
+                  Xác nhận
+                </button>
+                <button type="button" className="btn btn-secondary" onClick={handleConfirmationCancel}>
+                  Hủy
+                </button>
+              </div>
             </div>
           </div>
         </div>

@@ -21,7 +21,7 @@ function CreateSlot1Doctor() {
 
     const fetchDoctor = async () => {
         try {
-            const response = await axios.get(`https://oooo-zifh.onrender.com/api/account/doctor/details?id=${doctorId}`);
+            const response = await axios.get(`http://localhost:3000/api/account/doctor/details?id=${doctorId}`);
             setSelectedDoctor(response.data.doctor);
 
         } catch (error) {
@@ -71,6 +71,13 @@ function CreateSlot1Doctor() {
         }
         setSelectedShifts(updatedShifts);
     };
+    const getMinDate = () => {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      };
 
     const handleSaveSchedule = () => {
         if (selectedDoctor && startDate && endDate && selectedShifts.length > 0) {
@@ -84,7 +91,7 @@ function CreateSlot1Doctor() {
             setIsLoading(true);
 
             axios
-                .post('https://oooo-zifh.onrender.com/api/slot/create', newSchedule)
+                .post('http://localhost:3000/api/slot/create', newSchedule)
                 .then((response) => {
                     setScheduleList([...scheduleList, newSchedule]);
                     setIsScheduleCreated(true);
@@ -125,6 +132,7 @@ function CreateSlot1Doctor() {
                                     className='form-control'
                                     type="date"
                                     id="startDate"
+                                    min={getMinDate()} 
                                     value={startDate}
                                     onChange={handleSelectStartDate}
                                 />
@@ -135,6 +143,7 @@ function CreateSlot1Doctor() {
                                     className='form-control'
                                     type="date"
                                     id="endDate"
+                                    min={getMinDate()} 
                                     value={endDate}
                                     onChange={handleSelectEndDate}
                                 />

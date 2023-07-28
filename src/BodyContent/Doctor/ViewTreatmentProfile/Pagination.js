@@ -10,7 +10,7 @@ function Pagination({ currentPage, totalPages, onPageChange }) {
 
     }
     else {
-      if (user.role !== 'customer') {
+      if (user.role !== 'doctor') {
         window.location.href = '/';
       }
     }

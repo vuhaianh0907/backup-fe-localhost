@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useSearchParams } from 'react-router-dom';
 import './ViewDocDetail.scss';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,6 +12,9 @@ export default function ViewDocDetail() {
   const [selectedDate, setSelectedDate] = useState('');
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
+
+  const [searchParams] = useSearchParams();
+
   useEffect(() => {
     if (user === null) {
 
@@ -28,7 +31,7 @@ export default function ViewDocDetail() {
   useEffect(() => {
     // Send GET request to fetch doctor details
     axios
-      .get(`https://oooo-zifh.onrender.com/api/account/doctor/details?id=${id}`)
+      .get(`http://localhost:3000/api/account/doctor/details?id=${id}`)
       .then((response) => {
         // Handle the response from the API
         setDoctor(response.data.doctor);
@@ -40,7 +43,7 @@ export default function ViewDocDetail() {
 
     // Send GET request to fetch slots for the doctor
     axios
-      .get(`https://oooo-zifh.onrender.com/api/slot/getSlotbyDoctor?doctorId=${id}`)
+      .get(`http://localhost:3000/api/slot/getSlotbyDoctor?doctorId=${id}`)
       .then((response) => {
         // Handle the response from the API
         const filteredSlots = response.data.slots.filter((slot) => slot.status === 'available');
@@ -53,11 +56,8 @@ export default function ViewDocDetail() {
   }, [id]);
 
   useEffect(() => {
-    // Set default value for selectedDate as tomorrow
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const formattedDate = tomorrow.toISOString().split('T')[0];
-    setSelectedDate(formattedDate);
+    const dateQuery = searchParams.get("date");
+    setSelectedDate((dateQuery ? new Date(dateQuery) : new Date()).toISOString().split('T')[0]);
   }, []);
 
   const handleDateChange = (event) => {
@@ -74,6 +74,13 @@ export default function ViewDocDetail() {
   const handleSlotClick = (slotId) => {
     // Xử lý khi người dùng nhấp vào lịch hẹn
     console.log("Selected slot:", slotId);
+  };
+  const getMinDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   };
 
   const filteredSlots = selectedDate
@@ -110,7 +117,8 @@ export default function ViewDocDetail() {
               <label for="date" class="col-form-label">Chọn ngày: </label>
               <div class="col-5">
                 <div class="input-group date" id="datepicker">
-                  <input type="date" class="form-control" id="date" />
+                  
+                  <input type="date" class="form-control" id="date" value={selectedDate} onChange={handleDateChange} min={getMinDate()} />
                 </div>
               </div>
 

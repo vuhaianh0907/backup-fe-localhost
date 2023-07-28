@@ -1,7 +1,13 @@
+
+
+
 .patient-profile {
-    width: 500px;
+    width: 600px;
+    min-height: 800px;
     margin: 0 auto;
-    background-color: #e6e6e6;
+    background-color: #ffffff;
+    padding: 60px;
+    border-radius: 10px;
   }
   
   .info-item {
@@ -22,19 +28,20 @@
   
   .pagination {
     margin-top: 20px;
-    text-align: center;
+    display: block;
+    margin: 25%;
   }
   
   .pagination-button {
     margin: 0 5px;
     padding: 5px 10px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
+    border: 1px solid #000000;
+    background-color: #000000;
     cursor: pointer;
   }
   
   .pagination-button.active {
-    background-color: #e6e6e6;
+    background-color: #000000;
   }
   
   .actions {
@@ -89,4 +96,16 @@
     background-color: #f9f9f9;
     cursor: pointer;
   }
-  
+  .thelink{
+    text-decoration: none ;
+    color: #fff;
+  }
+  .btnlink{
+   margin-left: 20px;
+  }
+  .carlink{
+    margin-top: 20px;
+  }
+  .btntreatment{
+    margin-bottom: 40px;
+  }

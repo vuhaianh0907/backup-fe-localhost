@@ -49,7 +49,7 @@ function CustomerViewDoctor() {
     // Fetch doctors when the selectedDate or selectedTime changes
     if (selectedDate && selectedTime) {
       axios
-        .post('https://oooo-zifh.onrender.com/api/slot/getDoctorByTime', {
+        .post('http://localhost:3000/api/slot/getDoctorByTime', {
           selectedDate,
           selectedTime,
         })
@@ -74,8 +74,22 @@ function CustomerViewDoctor() {
 
   const handleDateChange = (e) => {
     const selectedDate = e.target.value;
-    setSelectedDate(selectedDate);
+    const today = new Date().toISOString().split('T')[0]; // Lấy ngày hiện tại
+
+    // Nếu ngày đã chọn lớn hơn ngày hiện tại, thì mới cập nhật selectedDate
+    if (selectedDate > today) {
+      setSelectedDate(selectedDate);
+    }
   };
+  const getMinDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+  
+
 
   const handleTimeSelection = (time) => {
     setSelectedTime(time);
@@ -93,7 +107,13 @@ function CustomerViewDoctor() {
             <h2>Chọn thời gian trong ngày</h2>
             <div className="date-input">
               <label htmlFor="date">Ngày:</label>
-              <input type="date" id="date" value={selectedDate} onChange={handleDateChange} />
+              <div className="date-input">
+                <label htmlFor="date">Ngày:</label>
+                <input type="date" id="date" class="form-control" value={selectedDate} onChange={handleDateChange} min={getMinDate()} />
+
+              </div>
+
+
             </div>
             <div className="time-options">
               {timeOptions.map((option) => (
@@ -137,7 +157,7 @@ function CustomerViewDoctor() {
                       <div className="card-body">
                         <h5 className="card-title">{doctor.fullname}</h5>
                         <p class="card-text text-limit-1-lines">{doctor.experience}</p>
-                        <Link to={`/customer/doctordetail/${doctor.id}`} className="btn btn-primary">
+                        <Link to={`/customer/doctordetail/${doctor.id}?date=${selectedDate}`} className="btn btn-primary">
                           Chọn bác sĩ
                         </Link>
                       </div>

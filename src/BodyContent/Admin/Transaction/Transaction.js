@@ -24,7 +24,7 @@ const TransactionList = () => {
 
   const fetchTransactions = async () => {
     try {
-      const response = await axios.get('https://oooo-zifh.onrender.com/api/transaction/getall');
+      const response = await axios.get('http://localhost:3000/api/transaction/getall');
       setTransactions(response.data);
     } catch (error) {
       console.error('Error:', error);

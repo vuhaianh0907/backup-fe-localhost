@@ -118,7 +118,7 @@ function AdminCreateDoctor() {
     };
 
     axios
-      .post('https://oooo-zifh.onrender.com/api/admin/createdoctor', formData)
+      .post('http://localhost:3000/api/admin/createdoctor', formData)
       .then((response) => {
         toast.success('Lưu thành công!');
         navigate('/');

@@ -12,7 +12,7 @@ export default function Banner() {
 
   useEffect(() => {
     axios
-      .get('https://oooo-zifh.onrender.com/api/amount/get')
+      .get('http://localhost:3000/api/amount/get')
       .then((response) => {
         setAmount(response.data.amount);
         setIsLoading(false);

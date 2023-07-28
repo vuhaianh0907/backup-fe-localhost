@@ -33,7 +33,7 @@ function TreatmentProfilePage() {
   useEffect(() => {
     const fetchTreatmentProfiles = async () => {
       try {
-        const response = await axios.get(`https://oooo-zifh.onrender.com/api/treatment_profile/schedule?id=${id}`);
+        const response = await axios.get(`http://localhost:3000/api/treatment_profile/schedule?id=${id}`);
         const data = response.data.treatmentProfiles;
         setTreatmentProfiles(data);
       } catch (error) {

@@ -16,7 +16,7 @@ export default function ForgotPassword() {
     event.preventDefault();
 
     try {
-      const response = await axios.post('https://oooo-zifh.onrender.com/api/auth/forgetpassword', { email });
+      const response = await axios.post('http://localhost:3000/api/auth/forgetpassword', { email });
       if (response.status === 200) {
         alert('Vui lòng kiểm tra email để đặt lại mật khẩu.');
       } else {

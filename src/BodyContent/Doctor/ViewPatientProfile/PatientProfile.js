@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './PatientProfile.css';
+import './PatientProfile.scss';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 
@@ -21,7 +21,7 @@ const PatientProfile = () => {
 
     }
     else {
-      if (user.role !== 'customer') {
+      if (user.role !== 'doctor') {
         window.location.href = '/';
       }
     }
@@ -32,7 +32,7 @@ const PatientProfile = () => {
   useEffect(() => {
     const fetchCustomer = async () => {
       try {
-        const response = await axios.get(`https://oooo-zifh.onrender.com/api/account/customer/details?id=${id}`); // Thay đổi URL API tương ứng
+        const response = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`); // Thay đổi URL API tương ứng
         const customerData = response.data.customer;
         setCustomer(customerData);
         
@@ -43,7 +43,7 @@ const PatientProfile = () => {
 
     const fetchTreatmentProfiles = async () => {
       try {
-        const response = await axios.get(`https://oooo-zifh.onrender.com/api/treatment_profile/schedule?id=${id}`); // Thay đổi URL API tương ứng
+        const response = await axios.get(`http://localhost:3000/api/treatment_profile/schedule?id=${id}`); // Thay đổi URL API tương ứng
         const treatmentProfilesData = response.data.treatmentProfiles;
         
         
@@ -107,7 +107,7 @@ const PatientProfile = () => {
       };
 
       // Gửi yêu cầu tạo treatment profile
-      const response = await axios.post('https://oooo-zifh.onrender.com/api/treatment_profile/create', newProfile); // Thay đổi URL API tương ứng
+      const response = await axios.post('http://localhost:3000/api/treatment_profile/create', newProfile); // Thay đổi URL API tương ứng
 
       // Xử lý phản hồi từ server
       const createdProfile = response.data;
@@ -124,54 +124,54 @@ const PatientProfile = () => {
   };
 
   return (
-    <div className="patient-profile">
+    <div id="PatientProfile" className="patient-profile">
       <h2>Thông tin bệnh nhân</h2>
       {customer ? (
-        <>
+        <div className='container'>
           <div className="info-item">
-            <span className="label">Họ tên:</span>
+            <span className="label">Họ tên: </span>
             <span className="value">{customer.fullname}</span>
           </div>
 
           <div className="info-item">
-            <span className="label">Giới tính:</span>
+            <span className="label">Giới tính: </span>
             <span className="value">{customer.gender}</span>
           </div>
 
           <div className="info-item">
-            <span className="label">Số điện thoại:</span>
+            <span className="label">Số điện thoại: </span>
             <span className="value">{customer.phone}</span>
           </div>
           <div className="info-item">
-            <span className="label">Email:</span>
+            <span className="label">Email: </span>
             <span className="value">{customer.email}</span>
           </div>
-        </>
+          <div className="actions">
+        <button className="btntreatment btn btn-success" onClick={openPopup}>
+          Thêm mới treatment profile
+        </button>
+      </div>
+        </div>
       ) : (
         <p>Loading...</p>
       )}
 
-      <div className="actions">
-        <button className="add-treatment-profile-button" onClick={openPopup}>
-          Thêm mới treatment profile
-        </button>
-      </div>
+      
 
       <div className="treatment-profiles">
-        <h3>Treatment Profiles</h3>
+        <h3>Hồ sơ điều trị</h3>
         {treatmentProfiles.length > 0 ? (
-          <>
+          <div className='container'>
             <ul>
               {currentTreatmentProfiles.map((profile) => (
-                <li key={profile.id}>
+                <div className='carlink'  key={profile.id}>
                   {profile.description}
-                  <button className="view-details-button">
-                    <Link to={`/doctor/viewTreatmentProfile/${profile.id}`} >
+                  <button className="btnlink btn btn-primary">
+                    <Link className='thelink' to={`/doctor/viewTreatmentProfile/${profile.id}`} >
                       Xem chi tiết
                     </Link>
-
                   </button>
-                </li>
+                </div>
               ))}
             </ul>
             <div className="pagination">
@@ -213,9 +213,9 @@ const PatientProfile = () => {
                 &gt;&gt;
               </button>
             </div>
-          </>
+          </div>
         ) : (
-          <p>No treatment profiles available.</p>
+          <p>Không có hồ sơ điều trị có sẵn.</p>
         )}
       </div>
 

@@ -1,156 +1,78 @@
+// ViewTreatmentProfile.scss
+
+// Trình bày chung cho container chứa thông tin trang
 .profile-container {
-
-  .profile-form {
-    background-color: #f5f5f5;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    margin: 0 auto;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-}
-
-.profile-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #fff;
-}
-
-.profile-details {
-  margin-bottom: 30px;
-
-}
-
-.profile-details p {
-  margin: 10px 0;
-}
-
-.profile-details div {
-  flex-shrink: 0;
   display: block;
-  margin-bottom: 10px;
-}
-
-.treatment-progress {
-  margin-top: 20px;
-}
-
-.treatment-progress div {
-  flex-shrink: 0;
-
-}
-
-.symptom {
-  /* Styles for each symptom */
-  cursor: pointer;
-  margin: 5px;
-}
-
-.symptom-list {
-  flex-shrink: 0;
-}
-
-.treatment-progress h3 {
-  initial-value: unset;
-  display: contents;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.treatment-box {
-  display: block;
-  align-items: center;
-  justify-content: space-between;
-
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
-  text-decoration: none;
-  color: #333;
-  initial-value: unset;
-}
-
-.treatment-box:hover {
-  background-color: #f5f5f5;
-}
-
-.confirm-button {
-  display: block;
-  margin: 0 auto;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-.confirm-button:hover {
-  background-color: #0056b3;
-}
-
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  /* Adjust the opacity as needed */
-  z-index: 9998;
-}
-
-.pop-up {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
+  margin: auto;
   padding: 20px;
+  min-width: 600px;
+  min-height: 650px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   background-color: #fff;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  z-index: 9999;
-}
 
-/* Rest of the CSS styles */
 
-.pagination {
-  list-style-type: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
+  // Tiêu đề h2
+  h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+  }
 
-.pagination li {
-  margin: 0 5px;
-}
+  // Phần chi tiết của trang
+  .profile-details {
+    margin-bottom: 20px;
 
-.pagination li a {
-  display: inline-block;
-  padding: 8px 12px;
-  text-decoration: none;
-  color: #333;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
+    p {
+      margin: 5px 0;
+    }
 
-.pagination li a:hover {
-  background-color: #f4f4f4;
-}
+    strong {
+      font-weight: bold;
+    }
+  }
 
-.pagination li.active a {
-  background-color: #555;
-  color: #fff;
-  cursor: default;
-}
+  // Nút xác nhận
+  .confirm-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 
-.pagination li.disabled a {
-  pointer-events: none;
-  opacity: 0.6;
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  // Phần danh sách Treatment Ins
+  .treatment-ins {
+    margin-top: 20px;
+
+    h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+
+      p {
+        margin: 5px 0;
+      }
+
+      strong {
+        font-weight: bold;
+      }
+    }
+  }
 }

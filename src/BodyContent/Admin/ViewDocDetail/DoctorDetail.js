@@ -29,8 +29,8 @@ const DoctorDetail = () => {
     
     const fetchData = async () => {
       try {
-        const doctorPromise = axios.get(`https://oooo-zifh.onrender.com/api/account/doctor/details?id=${doctorId}`);
-        const slotsPromise = axios.get(`https://oooo-zifh.onrender.com/api/slot/getSlotbyDoctor?doctorId=${doctorId}`);
+        const doctorPromise = axios.get(`http://localhost:3000/api/account/doctor/details?id=${doctorId}`);
+        const slotsPromise = axios.get(`http://localhost:3000/api/slot/getSlotbyDoctor?doctorId=${doctorId}`);
 
         const [doctorResponse, slotsResponse] = await Promise.all([doctorPromise, slotsPromise]);
 
@@ -67,6 +67,14 @@ const DoctorDetail = () => {
     // Xử lý khi người dùng nhấp vào slot time
     console.log('Selected slot time:', slotTime);
   };
+    const getMinDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
 
   const filteredSlots = selectedDate
     ? slots.filter((slot) => slot.date === selectedDate)
@@ -129,6 +137,7 @@ const DoctorDetail = () => {
                   type="date"
                   class="form-control"
                   id="date"
+                  min={getMinDate()} 
                   value={selectedDate}
                   onChange={handleDateChange} />
               </div>

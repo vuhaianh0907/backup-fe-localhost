@@ -55,7 +55,7 @@ export default function LoginBar() {
     };
 
     axios
-      .post('https://oooo-zifh.onrender.com/api/auth/login', data)
+      .post('http://localhost:3000/api/auth/login', data)
       .then(handleLoginSuccess)
       .catch(handleLoginFailure);
   };
