@@ -7,7 +7,6 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
 }
 
 .avatar-container {
@@ -114,5 +113,10 @@
     /* CSS cho các nút slot có trạng thái khác "available" */
     background-color: gray;
     color: white;
+  }
+  .doctorbrc{
+    background-color: #fff;
+    margin: 30px;
+    padding: 60px;
   }
 }
