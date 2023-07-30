@@ -142,7 +142,7 @@ function CreateTreatmentIn() {
         </div>
         <div>
           <label>Ngày khám:</label>
-          <input type="text" value={new Date()} readOnly />
+          <input type="text" value={(moment.tz(moment(), "Asia/Ho_Chi_Minh").format("YYYY-MM-DD"))} readOnly />
         </div>
       </div>
       <div className="input-form">

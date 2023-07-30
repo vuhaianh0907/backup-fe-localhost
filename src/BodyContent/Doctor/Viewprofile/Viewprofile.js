@@ -124,43 +124,43 @@ const DoctorViewProfile = () => {
         <div className="info-container">
           <div className="doctor-name">{doctorInfo.fullname}</div>
           <div className="doctor-info">
-            <span className="info-label">ID Card:</span>
+            <span className="info-label">Chứng minh nhân dân: </span>
             <span>{doctorInfo.idCard}</span>
           </div>
           <div className="doctor-info">
-            <span className="info-label">Gender:</span>
+            <span className="info-label">Giới tính: </span>
             <span>{doctorInfo.gender}</span>
           </div>
           <div className="doctor-info">
-            <span className="info-label">Date of Birth:</span>
+            <span className="info-label">Ngày sinh: </span>
             <span>{doctorInfo.dateOfBirth}</span>
           </div>
           <div className="doctor-info">
-            <span className="info-label">Phone Number:</span>
+            <span className="info-label">Số điện thoại: </span>
             <span>{doctorInfo.phone}</span>
           </div>
           <div className="doctor-info">
-            <span className="info-label">Email:</span>
+            <span className="info-label">Email: </span>
             <span>{doctorInfo.email}</span>
           </div>
           <div className="doctor-info">
-            <span className="info-label">Address:</span>
+            <span className="info-label">Địa chỉ: </span>
             <span>{doctorInfo.address}</span>
           </div>
           <div className="doctor-info">
-            <span className="info-label">Qualification:</span>
+            <span className="info-label">Trình độ chuyên môn: </span>
             <span>{doctorInfo.qualification}</span>
           </div>
           <div className="doctor-info">
-            <span className="info-label">Experience:</span>
+            <span className="info-label">Kinh nghiệm: </span>
             <span>{doctorInfo.experience}</span>
           </div>
           <div className="filter-container">
-            <label htmlFor="dateFilter">Select Date:</label>
+            <label htmlFor="dateFilter">Chọn ngày: </label>
             <input type="date" id="dateFilter" value={selectedDate} onChange={handleDateChange} />
           </div>
 
-          <div className="slots-container">
+          <div className="slots-container m-3">
             <h3>Slots:</h3>
             {filteredSlots.length > 0 ? (
               filteredSlots.map((slot) => (
@@ -173,7 +173,7 @@ const DoctorViewProfile = () => {
                 </button>
               ))
             ) : (
-              <div>No slots available</div>
+              <div>Không có chỗ trống</div>
             )}
           </div>
 
