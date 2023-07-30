@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './CreateDoctor.scss';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from "configs/axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -122,7 +122,7 @@ function AdminCreateDoctor() {
     };
 
     axios
-      .post('http://localhost:3000/api/admin/createdoctor', formData)
+      .post('admin/createdoctor', formData)
       .then((response) => {
         toast.success('Lưu thành công!');
         navigate('/');

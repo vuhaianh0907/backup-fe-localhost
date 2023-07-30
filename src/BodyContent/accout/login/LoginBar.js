@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "configs/axios";
 import GoogleLogin from 'react-google-login';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -59,7 +59,7 @@ export default function LoginBar() {
     };
 
     axios
-      .post('http://localhost:3000/api/auth/login', data)
+      .post('auth/login', data)
       .then(handleLoginSuccess)
       .catch(handleLoginFailure)
       .finally(() => {

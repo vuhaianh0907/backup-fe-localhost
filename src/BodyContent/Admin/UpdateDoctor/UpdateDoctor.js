@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from "configs/axios";
 
 import 'bootstrap/dist/css/bootstrap.css'; // Import Bootstrap CSS
 import './UpdateDoctor.scss'; // Custom styles
@@ -43,7 +43,7 @@ function AdminUpdateDoctor() {
     const fetchDoctor = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get(`http://localhost:3000/api/admin/getDoctor?doctorId=${doctorId}`);
+        const response = await axios.get(`admin/getDoctor?doctorId=${doctorId}`);
         const doctorData = response.data.doctor;
         setDoctorInfo(doctorData);
       } catch (error) {
@@ -78,7 +78,7 @@ function AdminUpdateDoctor() {
     if (confirmed) {
       try {
         setIsLoading(true);
-        await axios.post(`http://localhost:3000/api/account/doctor/update?doctorId=${doctorId}`, doctorInfo);
+        await axios.post(`account/doctor/update?doctorId=${doctorId}`, doctorInfo);
         window.location.href = `http://localhost:3001/admin/doctordetail/${doctorId}`;
       } catch (error) {
         console.error(error);

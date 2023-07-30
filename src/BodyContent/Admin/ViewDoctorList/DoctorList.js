@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from "configs/axios";
 import { Link } from 'react-router-dom';
 import './DoctorList.scss';
 
@@ -26,7 +26,7 @@ const DoctorList = () => {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get('http://localhost:3000/api/account/doctor/alllist')
+      .get('account/doctor/alllist')
       .then((response) => {
         setDoctors(response.data.doctors);
       })
@@ -59,7 +59,7 @@ const DoctorList = () => {
 
   const handleConfirmationConfirm = async () => {
     try {
-      await axios.post(`http://localhost:3000/api/account/doctor/status?id=${selectedDoctor.id}`);
+      await axios.post(`account/doctor/status?id=${selectedDoctor.id}`);
 
       const updatedDoctors = doctors.map((doctor) =>
         doctor.id === selectedDoctor.id ? selectedDoctor : doctor

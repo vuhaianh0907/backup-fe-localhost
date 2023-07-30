@@ -1,6 +1,6 @@
 // File: ChangePass.js
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "configs/axios";
 import './ChangePass.scss';
 import { useNavigate } from 'react-router-dom';
 
@@ -59,7 +59,7 @@ function ChangePass() {
     setIsLoading(true); // Bắt đầu loading khi bắt đầu gửi API
 
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/changepass', {
+      const response = await axios.post('auth/changepass', {
         email,
         password,
         newPassword,

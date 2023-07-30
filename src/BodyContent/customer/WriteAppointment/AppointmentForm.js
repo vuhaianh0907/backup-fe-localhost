@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import axios from "configs/axios";
 import './AppointmentForm.scss';
 
 const SlotAppointment = () => {
@@ -30,7 +30,7 @@ const SlotAppointment = () => {
   useEffect(() => {
     const fetchSlot = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/slot/details?id=${id}`);
+        const response = await axios.get(`slot/details?id=${id}`);
         setSlot(response.data.slot);
         setLoading(false);
       } catch (error) {
@@ -47,7 +47,7 @@ const SlotAppointment = () => {
   useEffect(() => {
     const fetchDoctor = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/account/doctor/details?id=${slot.doctorID}`);
+        const response = await axios.get(`account/doctor/details?id=${slot.doctorID}`);
         setDoctor(response.data.doctor);
       } catch (error) {
         setError('Failed to fetch doctor');
@@ -72,7 +72,7 @@ const SlotAppointment = () => {
         reason: reason,
       };
 
-      const response = await axios.post(`http://localhost:3000/api/appointment/create?customerId=${id}`, appointmentData);
+      const response = await axios.post(`appointment/create?customerId=${id}`, appointmentData);
 
       if (response.status === 200) {
         setSuccessMessage(response.data.message);

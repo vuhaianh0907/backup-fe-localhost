@@ -1,7 +1,7 @@
 // TopUpWallet.js
 
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from "configs/axios";
 import './TopUpWallet.css';
 import { useParams } from 'react-router-dom';
 
@@ -26,7 +26,7 @@ const TopUpWallet = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`); // Thay đổi URL API tùy theo yêu cầu của bạn
+        const response = await axios.get(`account/customer/details?id=${id}`); // Thay đổi URL API tùy theo yêu cầu của bạn
         setUserData(response.data);
       } catch (error) {
         console.error('Error:', error);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from "configs/axios";
 import './AddAmountPage.scss';
 
 function AddAmountPage() {
@@ -56,9 +56,9 @@ function AddAmountPage() {
     let apiUrl = '';
 
     if (selectedAction === 'add') {
-      apiUrl = 'http://localhost:3000/api/account/customer/addAmount';
+      apiUrl = 'account/customer/addAmount';
     } else if (selectedAction === 'subtract') {
-      apiUrl = 'http://localhost:3000/api/account/customer/subtractAmount';
+      apiUrl = 'account/customer/subtractAmount';
     }
 
     axios
@@ -80,7 +80,7 @@ function AddAmountPage() {
   };
 
   return (
-    <div className="add-amount-page">
+    <div className="add-amount-page m-3">
       <h2>Cộng/Trừ tiền cho khách hàng</h2>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}

@@ -1,7 +1,7 @@
 // File: ResetPassword.js
 import React, { useState, useEffect } from 'react';
 import './ResetPassword.scss';
-import axios from 'axios';
+import axios from "configs/axios";
 
 export default function ResetPassword() {
   const [password, setPassword] = useState('');
@@ -44,7 +44,7 @@ export default function ResetPassword() {
     setIsLoading(true); // Bắt đầu loading khi bắt đầu gửi API
 
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/resetpassword', {
+      const response = await axios.post('auth/resetpassword', {
          token, 
          password 
         });

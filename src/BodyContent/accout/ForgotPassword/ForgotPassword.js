@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import './ForgotPassword.scss';
-import axios from 'axios';
+import axios from "configs/axios";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
@@ -16,7 +16,7 @@ export default function ForgotPassword() {
     event.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/forgetpassword', { email });
+      const response = await axios.post('auth/forgetpassword', { email });
       if (response.status === 200) {
         alert('Vui lòng kiểm tra email để đặt lại mật khẩu.');
       } else {

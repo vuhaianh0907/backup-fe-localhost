@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from "configs/axios";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { format } from 'date-fns';
 import './Dashboard.scss';
@@ -13,14 +13,14 @@ const Dashboard = () => {
 
   const fetchDataForCharts = async () => {
     try {
-      const incomeResponse = await axios.get('http://localhost:3000/api/transaction/total');
+      const incomeResponse = await axios.get('transaction/total');
       if (incomeResponse.data && incomeResponse.data.total) {
         setMonthlyIncome(incomeResponse.data.total);
       }
 
-      const doctorsResponse = await axios.get('http://localhost:3000/api/admin/getAllDoctorActive');
-      const customersResponse = await axios.get('http://localhost:3000/api/account/customer/index');
-      const appointmentsResponse = await axios.get('http://localhost:3000/api/appointment/all');
+      const doctorsResponse = await axios.get('admin/getAllDoctorActive');
+      const customersResponse = await axios.get('account/customer/index');
+      const appointmentsResponse = await axios.get('appointment/all');
 
       setDoctors(doctorsResponse.data.doctors);
       setCustomers(customersResponse.data.customers);

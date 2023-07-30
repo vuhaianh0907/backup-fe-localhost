@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from "configs/axios";
 import './UpdateProfile.scss';
 
 function DoctorUpdateProfile() {
@@ -37,7 +37,7 @@ function DoctorUpdateProfile() {
   useEffect(() => {
     const fetchDoctorInfo = async () => {
       try {
-        const doctorPromise = await axios.get(`http://localhost:3000/api/account/doctor/details?id=${id}`);
+        const doctorPromise = await axios.get(`account/doctor/details?id=${id}`);
         const doctorData = doctorPromise.data.doctor;
         setDoctorInfo(doctorData);
         setLoading(false);
@@ -63,7 +63,7 @@ function DoctorUpdateProfile() {
 
     try {
       setLoading(true);
-      await axios.post(`http://localhost:3000/api/account/doctor/update?doctorId=${id}`, doctorInfo);
+      await axios.post(`account/doctor/update?doctorId=${id}`, doctorInfo);
       setLoading(false);
       navigate(`/doctor/profile/${id}`);
     } catch (error) {

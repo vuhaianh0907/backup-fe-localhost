@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './PatientProfile.scss';
-import axios from 'axios';
+import axios from "configs/axios";
 import { useParams, Link } from 'react-router-dom';
 
 const PatientProfile = () => {
@@ -30,7 +30,7 @@ const PatientProfile = () => {
   useEffect(() => {
     const fetchCustomer = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`);
+        const response = await axios.get(`account/customer/details?id=${id}`);
         const customerData = response.data.customer;
         setCustomer(customerData);
         setLoading(false);
@@ -42,7 +42,7 @@ const PatientProfile = () => {
 
     const fetchTreatmentProfiles = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/treatment_profile/schedule?id=${id}`);
+        const response = await axios.get(`treatment_profile/schedule?id=${id}`);
         const treatmentProfilesData = response.data.treatmentProfiles;
         const sortedProfiles = treatmentProfilesData.slice().sort((a, b) => -new Date(a.createdAt) + new Date(b.createdAt));
         setTreatmentProfiles(sortedProfiles);
@@ -105,7 +105,7 @@ const PatientProfile = () => {
       };
 
       // Gửi yêu cầu tạo treatment profile
-      const response = await axios.post('http://localhost:3000/api/treatment_profile/create', newProfile);
+      const response = await axios.post('treatment_profile/create', newProfile);
 
       // Xử lý phản hồi từ server
       const createdProfile = response.data;

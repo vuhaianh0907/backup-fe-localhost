@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from "configs/axios";
 import { useParams, Link } from 'react-router-dom';
 import './DoctorDetail.scss';
 
@@ -26,8 +26,8 @@ const DoctorDetail = () => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const doctorPromise = axios.get(`http://localhost:3000/api/account/doctor/details?id=${doctorId}`);
-        const slotsPromise = axios.get(`http://localhost:3000/api/slot/getSlotbyDoctor?doctorId=${doctorId}`);
+        const doctorPromise = axios.get(`account/doctor/details?id=${doctorId}`);
+        const slotsPromise = axios.get(`slot/getSlotbyDoctor?doctorId=${doctorId}`);
 
         const [doctorResponse, slotsResponse] = await Promise.all([doctorPromise, slotsPromise]);
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from "configs/axios";
 import { useParams, Link } from 'react-router-dom';
 import './treatmentprofilelist.scss';
 
@@ -30,7 +30,7 @@ function TreatmentProfilePage() {
   useEffect(() => {
     const fetchTreatmentProfiles = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/treatment_profile/schedule?id=${id}`);
+        const response = await axios.get(`treatment_profile/schedule?id=${id}`);
         const data = response.data.treatmentProfiles;
         const sortedData = data.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         setTreatmentProfiles(sortedData);

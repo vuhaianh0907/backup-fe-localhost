@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from "configs/axios";
 import './UpdateAmountPage.css';
 
 const UpdateAmountPage = () => {
@@ -23,7 +23,7 @@ const UpdateAmountPage = () => {
   useEffect(() => {
     
     axios
-      .get('http://localhost:3000/api/amount/get')
+      .get('amount/get')
       .then((response) => {
         setAmount(response.data.amount);
         setIsLoading(false);
@@ -40,7 +40,7 @@ const UpdateAmountPage = () => {
 
   const handleConfirm = () => {
     axios
-      .post('http://localhost:3000/api/amount/update', { amount: amount })
+      .post('amount/update', { amount: amount })
       .then((response) => {
         console.log('Amount updated successfully');
       })

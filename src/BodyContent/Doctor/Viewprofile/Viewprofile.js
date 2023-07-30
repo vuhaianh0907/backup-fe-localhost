@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import './DoctorViewProfile.scss';
-import axios from 'axios';
+import axios from "configs/axios";
 
 const DoctorViewProfile = () => {
   const navigate = useNavigate();
@@ -29,8 +29,8 @@ const DoctorViewProfile = () => {
   useEffect(() => {
     const fetchDoctorInfo = async () => {
       try {
-        const doctorPromise = await axios.get(`http://localhost:3000/api/account/doctor/details?id=${id}`);
-        const slotsPromise = axios.get(`http://localhost:3000/api/slot/getSlotbyDoctor?doctorId=${id}`);
+        const doctorPromise = await axios.get(`account/doctor/details?id=${id}`);
+        const slotsPromise = axios.get(`slot/getSlotbyDoctor?doctorId=${id}`);
         const [doctorResponse, slotsResponse] = await Promise.all([doctorPromise, slotsPromise]);
         const doctorData = doctorResponse.data.doctor;
         const slotsData = slotsResponse.data.slots;
@@ -79,7 +79,7 @@ const DoctorViewProfile = () => {
   const handleConfirmClick = async () => {
     try {
       // Gửi yêu cầu API để cập nhật trạng thái slot
-      const response = await axios.post(`http://localhost:3000/api/slot/updateStatus`, {
+      const response = await axios.post(`slot/updateStatus`, {
         slotId: selectedSlot.id,
         status: 'closed',
       });
@@ -96,7 +96,7 @@ const DoctorViewProfile = () => {
 
   const fetchSlots = async () => {
     try {
-      const slotsPromise = axios.get(`http://localhost:3000/api/slot/getSlotbyDoctor?doctorId=${id}`);
+      const slotsPromise = axios.get(`slot/getSlotbyDoctor?doctorId=${id}`);
       const slotsResponse = await slotsPromise;
       const slotsData = slotsResponse.data.slots;
       setSlots(slotsData);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './EditProfile.scss';
-import axios from 'axios';
+import axios from "configs/axios";
 import { useNavigate, useParams, Link } from 'react-router-dom';
 
 const EditProfile = () => {
@@ -27,7 +27,7 @@ const EditProfile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`);
+        const response = await axios.get(`account/customer/details?id=${id}`);
         const userData = response.data.customer;
         setUser(userData);
         setFullname(userData.fullname);
@@ -54,7 +54,7 @@ const EditProfile = () => {
         phone,
         gender,
       };
-      await axios.post(`http://localhost:3000/api/account/customer/update?id=${id}`, updatedUser);
+      await axios.post(`account/customer/update?id=${id}`, updatedUser);
       console.log('User information updated');
       navigate(`/customer/profile/${id}`);
     } catch (error) {

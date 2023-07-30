@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from "configs/axios";
 import { useParams } from 'react-router-dom';
 import './ViewTreatmentIn.css'; // Import the CSS file for styling
 
@@ -24,7 +24,7 @@ function ViewTreatmentIn() {
   useEffect(() => {
     const fetchTreatmentProfile = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/treatment_profile/details?id=${id}`); // Replace with your API endpoint
+        const response = await axios.get(`treatment_profile/details?id=${id}`); // Replace with your API endpoint
         const profileData = response.data.treatmentProfile;
         setTreatmentProfile(profileData);
         setIsLoading(false); // Set loading status to false when data is fetched

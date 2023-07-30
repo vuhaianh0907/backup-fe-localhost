@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import axios from "configs/axios";
 import './ViewBookingDetail.scss';
 
 function ViewBookingDetail() {
@@ -24,11 +24,11 @@ function ViewBookingDetail() {
   useEffect(() => {
     const fetchAppointmentData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/appointment/details?id=${id}`);
+        const response = await axios.get(`appointment/details?id=${id}`);
         const appointmentData = response.data.appointment;
 
-        const slotPromise = axios.get(`http://localhost:3000/api/slot/details?id=${appointmentData.slotID}`);
-        const doctorPromise = axios.get(`http://localhost:3000/api/account/doctor/details?id=${appointmentData.doctorID}`);
+        const slotPromise = axios.get(`slot/details?id=${appointmentData.slotID}`);
+        const doctorPromise = axios.get(`account/doctor/details?id=${appointmentData.doctorID}`);
 
         Promise.all([slotPromise, doctorPromise])
           .then(([slotResponse, doctorResponse]) => {
@@ -60,7 +60,7 @@ function ViewBookingDetail() {
 
   const handleConfirmCancelAppointment = () => {
     axios
-      .post(`http://localhost:3000/api/appointment/update?id=${id}`, { status: 'Cancelled' })
+      .post(`appointment/update?id=${id}`, { status: 'Cancelled' })
       .then((response) => {
         console.log('Appointment cancelled:', response.data);
         setAppointment((prevAppointment) => ({

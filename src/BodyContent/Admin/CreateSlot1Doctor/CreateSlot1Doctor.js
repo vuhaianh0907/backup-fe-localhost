@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from "configs/axios";
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,7 +21,7 @@ function CreateSlot1Doctor() {
 
     const fetchDoctor = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/account/doctor/details?id=${doctorId}`);
+            const response = await axios.get(`account/doctor/details?id=${doctorId}`);
             setSelectedDoctor(response.data.doctor);
 
         } catch (error) {
@@ -91,7 +91,7 @@ function CreateSlot1Doctor() {
             setIsLoading(true);
 
             axios
-                .post('http://localhost:3000/api/slot/create', newSchedule)
+                .post('slot/create', newSchedule)
                 .then((response) => {
                     setScheduleList([...scheduleList, newSchedule]);
                     setIsScheduleCreated(true);

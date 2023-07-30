@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from "configs/axios";
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -27,7 +27,7 @@ function CreateSchedulePage() {
   const fetchDoctorsByName = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`http://localhost:3000/api/admin/getAllDoctorByName?name=${searchValue}`);
+      const response = await axios.get(`admin/getAllDoctorByName?name=${searchValue}`);
       setDoctors(response.data.doctors);
       setCurrentPage(1);
     } catch (error) {
@@ -92,7 +92,7 @@ function CreateSchedulePage() {
       setIsLoading(true);
 
       axios
-        .post('http://localhost:3000/api/slot/create', newSchedule)
+        .post('slot/create', newSchedule)
         .then((response) => {
           setScheduleList([...scheduleList, newSchedule]);
           setIsScheduleCreated(true);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from "configs/axios";
 import { useParams, Link } from 'react-router-dom';
 
 
@@ -29,22 +29,22 @@ function ViewTreatmentProfile() {
   useEffect(() => {
     const fetchTreatmentProfile = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/treatment_profile/details?id=${id}`); // Replace with your API endpoint
+        const response = await axios.get(`treatment_profile/details?id=${id}`); // Replace with your API endpoint
         const profileData = response.data.treatmentProfile;
         setTreatmentProfile(profileData);
 
         // Fetch doctor information
-        const doctorResponse = await axios.get(`http://localhost:3000/api/account/doctor/details?id=${profileData.doctorID}`);
+        const doctorResponse = await axios.get(`account/doctor/details?id=${profileData.doctorID}`);
         const doctorData = doctorResponse.data.doctor;
         setDoctor(doctorData);
 
         // Fetch customer information
-        const customerResponse = await axios.get(`http://localhost:3000/api/account/customer/details?id=${profileData.customerID}`);
+        const customerResponse = await axios.get(`account/customer/details?id=${profileData.customerID}`);
         const customerData = customerResponse.data.customer;
         setCustomer(customerData);
 
         // Fetch treatment_ins based on TreatmentProfile.id
-        const treatmentInsResponse = await axios.get(`http://localhost:3000/api/treatmentin/getAllByTreatmentProfile?id=${profileData.id}`);
+        const treatmentInsResponse = await axios.get(`treatmentin/getAllByTreatmentProfile?id=${profileData.id}`);
         const treatmentInsData = treatmentInsResponse.data.treatmentIns;
         const sortedTreatmentInsData = treatmentInsData.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         setTreatmentIns(sortedTreatmentInsData);

@@ -131,15 +131,18 @@ const Sidebar = () => {
           <strong>mdo</strong>
         </a>
         <ul className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-          <li>
-            <Link
-              to={`/doctor/updateprofile/${user.id}`}
+          {(user && user.role === 'doctor') &&
+            <li>
 
-              className="dropdown-item"
-            >
-              Chỉnh sửa thông tin
-            </Link>
-          </li>
+              <Link
+                to={`/doctor/updateprofile/${user.id}`}
+
+                className="dropdown-item"
+              >
+                Chỉnh sửa thông tin
+              </Link>
+            </li>
+          }
 
           <li>
             <Link

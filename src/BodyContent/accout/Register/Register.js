@@ -1,6 +1,6 @@
 // File: Register.js
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "configs/axios";
 import { Link } from 'react-router-dom';
 import './Register.scss';
 import { toast, ToastContainer } from 'react-toastify';
@@ -108,7 +108,7 @@ export default function Register() {
     };
 
     axios
-      .post('http://localhost:3000/api/auth/register', data)
+      .post('auth/register', data)
       .then(handleRegisterSuccess)
       .catch(handleRegisterFailure)
       .finally(() => {

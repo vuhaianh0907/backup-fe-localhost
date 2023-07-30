@@ -4,7 +4,7 @@ import VinAlignSmall from './conten/VinAlignSmall';
 import DichVu from './conten/DichVu';
 import IconBoxes from './conten/IconBoxes';
 
-import axios from 'axios';
+import axios from "configs/axios";
 
 export default function Banner() {
   const [amount, setAmount] = useState(0);
@@ -12,7 +12,7 @@ export default function Banner() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3000/api/amount/get')
+      .get('amount/get')
       .then((response) => {
         setAmount(response.data.amount);
         setIsLoading(false);
@@ -30,6 +30,7 @@ export default function Banner() {
       ) : (
         <>
           <div className="ct"></div>
+          <button type="button" id="bk-btn" onClick={() =>{ window.location.href = '/customer/listdoctor';}} >Đặt lịch ngay!!</button>
           <VinAlignSmall />
           <IconBoxes />
           <DichVu />

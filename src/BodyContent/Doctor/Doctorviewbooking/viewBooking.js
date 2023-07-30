@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from "configs/axios";
 import './viewBooking.scss';
 import { toast } from 'react-toastify';
 import moment from 'moment-timezone';
@@ -46,7 +46,7 @@ const ViewBooking = () => {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/appointment/appointmentdoctor?doctorID=${id}`);
+        const response = await axios.get(`appointment/appointmentdoctor?doctorID=${id}`);
         const appointmentsData = response.data.appointments;
 
         const appointmentsWithDetails = await Promise.all(
@@ -54,10 +54,10 @@ const ViewBooking = () => {
             const customerId = appointment.customerID;
             const slotId = appointment.slotID;
 
-            const customerResponse = await axios.get(`http://localhost:3000/api/account/customer/details?id=${customerId}`);
+            const customerResponse = await axios.get(`account/customer/details?id=${customerId}`);
             const customerData = customerResponse.data.customer;
 
-            const slotResponse = await axios.get(`http://localhost:3000/api/slot/details?id=${slotId}`);
+            const slotResponse = await axios.get(`slot/details?id=${slotId}`);
             const slotData = slotResponse.data.slot;
 
             return {
@@ -122,7 +122,7 @@ const ViewBooking = () => {
 
   const handleConfirmCancelAppointment = async () => {
     try {
-      await axios.post(`http://localhost:3000/api/appointment/updatedoctor?id=${selectedAppointment.id}`, { status: 'Doctor Cancelled' });
+      await axios.post(`appointment/updatedoctor?id=${selectedAppointment.id}`, { status: 'Doctor Cancelled' });
       const updatedAppointments = appointments.map((appointment) => {
         if (appointment.id === selectedAppointment.id) {
           return {
@@ -150,7 +150,7 @@ const ViewBooking = () => {
 
   const handleConfirmRequestCancellation = async () => {
     try {
-      await axios.post(`http://localhost:3000/api/appointment/update?id=${selectedAppointment.id}`, { status: 'Cancellation Requested' });
+      await axios.post(`appointment/update?id=${selectedAppointment.id}`, { status: 'Cancellation Requested' });
       const updatedAppointments = appointments.map((appointment) => {
         if (appointment.id === selectedAppointment.id) {
           return {

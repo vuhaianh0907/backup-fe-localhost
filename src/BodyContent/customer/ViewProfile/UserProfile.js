@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './UserProfile.css';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { FaEnvelope, FaMapMarkerAlt, FaPhone, FaGenderless, FaCalendarAlt, FaUser, FaMoneyBillAlt } from 'react-icons/fa';
-import axios from 'axios';
+import axios from "configs/axios";
 
 const UserProfile = () => {
   const { id } = useParams();
@@ -25,7 +25,7 @@ const UserProfile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`);
+        const response = await axios.get(`account/customer/details?id=${id}`);
         const userData = response.data.customer;
         setUser(userData);
         setIsLoading(false); // Dữ liệu đã được tải, đặt isLoading thành false

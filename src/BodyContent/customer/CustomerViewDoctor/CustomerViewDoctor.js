@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './CustomerViewDoctor.scss';
-import axios from 'axios';
+import axios from "configs/axios";
 import { Link } from 'react-router-dom';
 
 import doctorNoImage from '../../../assets/images/doctor-no-image.jpg';
@@ -49,7 +49,7 @@ function CustomerViewDoctor() {
     if (selectedDate && selectedTime) {
       setIsLoading(true);
       axios
-        .post('http://localhost:3000/api/slot/getDoctorByTime', {
+        .post('slot/getDoctorByTime', {
           selectedDate,
           selectedTime,
         })

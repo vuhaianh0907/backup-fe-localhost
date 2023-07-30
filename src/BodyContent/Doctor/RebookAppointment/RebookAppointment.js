@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from "configs/axios";
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import './RebookAppointment.scss';
 
@@ -30,15 +30,15 @@ function ResetAppointmentPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const customerResponse = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`);
+        const customerResponse = await axios.get(`account/customer/details?id=${id}`);
         const customerData = customerResponse.data.customer;
         setCustomer(customerData);
 
-        const doctorResponse = await axios.get(`http://localhost:3000/api/account/doctor/details?id=${user.id}`);
+        const doctorResponse = await axios.get(`account/doctor/details?id=${user.id}`);
         const doctorData = doctorResponse.data.doctor;
         setDoctor(doctorData);
 
-        const response = await axios.get(`http://localhost:3000/api/slot/getSlotbyDoctor?doctorId=${user.id}`);
+        const response = await axios.get(`slot/getSlotbyDoctor?doctorId=${user.id}`);
         const filteredSlots = response.data.slots.filter((slot) => slot.status === 'available');
         setSlots(filteredSlots);
 
@@ -83,7 +83,7 @@ function ResetAppointmentPage() {
         reason: "Bác sĩ hẹn tái khám",
       };
 
-      const response = await axios.post(`http://localhost:3000/api/appointment/create?customerId=${id}`, appointmentData);
+      const response = await axios.post(`appointment/create?customerId=${id}`, appointmentData);
 
       if (response.status === 200) {
         setConfirmationMessage(response.data.message);

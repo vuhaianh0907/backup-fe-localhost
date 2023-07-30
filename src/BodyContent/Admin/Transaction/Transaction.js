@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from "configs/axios";
 import './Transaction.css';
 
 const TransactionList = () => {
@@ -22,7 +22,7 @@ const TransactionList = () => {
 
   const fetchTransactions = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/transaction/getall');
+      const response = await axios.get('transaction/getall');
       setTransactions(response.data);
       setIsLoading(false); // Khi dữ liệu đã được fetch thành công, tắt trạng thái loading
     } catch (error) {
