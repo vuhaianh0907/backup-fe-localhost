@@ -121,8 +121,8 @@ function ViewBookingDetail() {
             <div className='nuthuylich'>
               {/* Nút hủy appointment chỉ hiển thị khi trạng thái là "Confirmed" */}
               {appointment.status !== 'Cancelled' && appointment.status !== 'Doctor Cancelled' && (
-               
-                <button  type="button" class="btn btn-danger" onClick={handleCancelAppointment}>
+
+                <button type="button" class="btn btn-danger" onClick={handleCancelAppointment}>
                   Hủy đặt lịch
                 </button>
               )}
@@ -130,17 +130,23 @@ function ViewBookingDetail() {
 
             {/* Pop-up xác nhận hủy */}
             {showCancelModal && (
-              <div className="cancel-modal">
-                <div className="cancel-modal-content">
-                  <h3>Xác nhận hủy appointment</h3>
-                  <p>Bạn có chắc chắn muốn hủy appointment này?</p>
-                  <div className="cancel-modal-buttons">
-                    <button className="btn btn-secondary" onClick={handleCloseModal}>
-                      Đóng
-                    </button>
-                    <button className="confirm-button" onClick={handleConfirmCancelAppointment}>
-                      Xác nhận hủy lịch
-                    </button>
+              <div className="modal d-block">
+                <div className='modal-dialog'>
+                  <div className="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Xác nhận hủy appointment</h5>
+                    </div>
+                    <div class="modal-body">
+                      <p>Bạn có chắc chắn muốn hủy appointment này?</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button className="btn btn-secondary" onClick={handleCloseModal}>
+                        Đóng
+                      </button>
+                      <button className="btn btn-primary" onClick={handleConfirmCancelAppointment}>
+                        Xác nhận hủy lịch
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

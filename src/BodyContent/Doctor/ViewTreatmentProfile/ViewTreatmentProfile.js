@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams,Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import './ViewTreatmentProfile.scss'; // Import the CSS file for styling
 
@@ -46,7 +46,8 @@ function ViewTreatmentProfile() {
         // Fetch treatment_ins based on TreatmentProfile.id
         const treatmentInsResponse = await axios.get(`http://localhost:3000/api/treatmentin/getAllByTreatmentProfile?id=${profileData.id}`);
         const treatmentInsData = treatmentInsResponse.data.treatmentIns;
-        setTreatmentIns(treatmentInsData);
+        const sortedTreatmentIns = treatmentInsData.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        setTreatmentIns(sortedTreatmentIns);
       } catch (error) {
         console.error('Error fetching treatment profile:', error);
       }
@@ -56,7 +57,7 @@ function ViewTreatmentProfile() {
   }, [id]);
 
   const handleConfirm = () => {
-   
+
   };
 
   if (!treatmentProfile || !doctor || !customer) {

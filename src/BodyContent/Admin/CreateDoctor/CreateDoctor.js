@@ -100,9 +100,15 @@ function AdminCreateDoctor() {
       professionalInfo.experience.trim() === '' ||
       accountInfo.password.trim() === ''
     ) {
-      setError('Vui lòng điền đầy đủ thông tin');
+      toast.error('Vui lòng điền đầy đủ thông tin');
       return;
     }
+
+    if (!avatar) {
+      toast.error('Vui lòng chọn hình ảnh');
+      return;
+    }
+
     let avatarData = null;
     if (avatar) {
       avatarData = await convertImageToBase64(avatar);
@@ -143,138 +149,178 @@ function AdminCreateDoctor() {
         <h3>Thông tin cá nhân</h3>
         {error !== null && <div className="error">{error}</div>}
 
-        <label htmlFor="fullName">Họ và tên:</label>
-        <input
-          type="text"
-          id="fullName"
-          name="fullName"
-          value={personalInfo.fullName}
-          onChange={handlePersonalChange}
-          placeholder="Nhập tên"
-        />
-
-        <label htmlFor="idCard">CMND/CCCD:</label>
-        <input
-          type="text"
-          id="idCard"
-          name="idCard"
-          value={personalInfo.idCard}
-          onChange={handlePersonalChange}
-          placeholder="Nhập CMND/CCCD"
-        />
-
-        <label htmlFor="gender">Giới tính:</label>
-        <div className="gender-options">
-          <label>
-            <input
-              type="radio"
-              name="gender"
-              value="Male"
-              checked={personalInfo.gender === 'Male'}
-              onChange={handlePersonalChange}
-            />
-            Nam
-            {personalInfo.gender === 'Male' && <span>✓</span>}
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="gender"
-              value="Female"
-              checked={personalInfo.gender === 'Female'}
-              onChange={handlePersonalChange}
-            />
-            Nữ
-            {personalInfo.gender === 'Female' && <span>✓</span>}
-          </label>
+        <div className='mb-3'>
+          <label for="fullName" class="form-label">Họ và tên:</label>
+          <input
+            type="text"
+            className='form-control'
+            id="fullName"
+            name="fullName"
+            value={personalInfo.fullName}
+            onChange={handlePersonalChange}
+            placeholder="Nhập tên"
+          />
         </div>
 
-        <label htmlFor="dateOfBirth">Ngày sinh:</label>
-        <input
-          type="date"
-          id="dateOfBirth"
-          name="dateOfBirth"
-          value={personalInfo.dateOfBirth}
-          onChange={handlePersonalChange}
-        />
+        <div className='mb-3'>
+          <label for="idCard" class="form-label">CMND/CCCD:</label>
+          <input
+            type="text"
+            className='form-control'
+            id="idCard"
+            name="idCard"
+            value={personalInfo.idCard}
+            onChange={handlePersonalChange}
+            placeholder="Nhập CMND/CCCD"
+          />
+        </div>
 
-        <label htmlFor="phone">Số điện thoại:</label>
-        <input
-          type="text"
-          id="phone"
-          name="phone"
-          value={personalInfo.phone}
-          onChange={handlePersonalChange}
-          placeholder="Nhập số điện thoại"
-        />
+        <div className='mb-3'>
+          <label for="gender" class="form-label">Giới tính:</label>
+          <div className="gender-options">
+            <div className='form-check'>
+              <input
+                type="radio"
+                className='form-check-input'
+                id="gender-male"
+                name="gender"
+                value="Male"
+                checked={personalInfo.gender === 'Male'}
+                onChange={handlePersonalChange}
+              />
+              <label for="gender-male" class="form-check-label">Nam</label>
+            </div>
+            &nbsp;&nbsp;&nbsp;
+            <div className='form-check'>
+              <input
+                type="radio"
+                className='form-check-input'
+                id='gender-female'
+                name="gender"
+                value="Female"
+                checked={personalInfo.gender === 'Female'}
+                onChange={handlePersonalChange}
+              />
+              <label for='gender-female'>Nữ</label>
+            </div>
+          </div>
+        </div>
 
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={personalInfo.email}
-          onChange={handlePersonalChange}
-          placeholder="Nhập email"
-        />
+        <div className='mb-3'>
+          <label htmlFor="dateOfBirth">Ngày sinh:</label>
+          <input
+            type="date"
+            className='form-control'
+            id="dateOfBirth"
+            name="dateOfBirth"
+            value={personalInfo.dateOfBirth}
+            onChange={handlePersonalChange}
+          />
+        </div>
 
-        <label htmlFor="address">Địa chỉ:</label>
-        <input
-          type="text"
-          id="address"
-          name="address"
-          value={personalInfo.address}
-          onChange={handlePersonalChange}
-          placeholder="Nhập địa chỉ"
-        />
+        <div className='mb-3'>
+          <label htmlFor="phone">Số điện thoại:</label>
+          <input
+            type="text"
+            className='form-control'
+            id="phone"
+            name="phone"
+            value={personalInfo.phone}
+            onChange={handlePersonalChange}
+            placeholder="Nhập số điện thoại"
+          />
+        </div>
 
+        <div className='mb-3'>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            className='form-control'
+            id="email"
+            name="email"
+            value={personalInfo.email}
+            onChange={handlePersonalChange}
+            placeholder="Nhập email"
+          />
+        </div>
+
+        <div className='mb-3'>
+          <label htmlFor="address">Địa chỉ:</label>
+          <input
+            type="text"
+            className='form-control'
+            id="address"
+            name="address"
+            value={personalInfo.address}
+            onChange={handlePersonalChange}
+            placeholder="Nhập địa chỉ"
+          />
+        </div>
+
+        <hr />
         <h3>Thông tin chuyên môn</h3>
 
-        <label htmlFor="qualification">Bằng cấp:</label>
-        <input
-          type="text"
-          id="qualification"
-          name="qualification"
-          value={professionalInfo.qualification}
-          onChange={handleProfessionalChange}
-          placeholder="Nhập bằng cấp"
-        />
+        <div className='mb-3'>
+          <label htmlFor="qualification">Bằng cấp:</label>
+          <input
+            type="text"
+            className='form-control'
+            id="qualification"
+            name="qualification"
+            value={professionalInfo.qualification}
+            onChange={handleProfessionalChange}
+            placeholder="Nhập bằng cấp"
+          />
+        </div>
 
-        <label htmlFor="experience">Kinh nghiệm:</label>
-        <input
-          type="text"
-          id="experience"
-          name="experience"
-          value={professionalInfo.experience}
-          onChange={handleProfessionalChange}
-          placeholder="Nhập kinh nghiệm"
-        />
+        <div className='mb-3'>
+          <label htmlFor="experience">Kinh nghiệm:</label>
+          <input
+            type="text"
+            className='form-control'
+            id="experience"
+            name="experience"
+            value={professionalInfo.experience}
+            onChange={handleProfessionalChange}
+            placeholder="Nhập kinh nghiệm"
+          />
+        </div>
 
+        <hr />
         <h3>Thông tin tài khoản</h3>
 
-        <label htmlFor="password">Mật khẩu:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={accountInfo.password}
-          onChange={handleAccountChange}
-          placeholder="Nhập mật khẩu"
-        />
+        <div className='mb-3'>
+          <label htmlFor="password">Mật khẩu:</label>
+          <input
+            type="password"
+            className='form-control'
+            id="password"
+            name="password"
+            value={accountInfo.password}
+            onChange={handleAccountChange}
+            placeholder="Nhập mật khẩu"
+          />
+        </div>
 
-        <label htmlFor="avatar">Chọn hình ảnh:</label>
-        <input
-          type="file"
-          id="avatar"
-          name="avatar"
-          accept="image/*"
-          onChange={handleImageChange}
-        />
+        <div>
+          <span class="file-input btn btn-primary btn-file">
+            Chọn hình ảnh&hellip;
+            <input
+              type="file"
+              id="avatar"
+              name="avatar"
+              accept="image/*"
+              onChange={handleImageChange} />
+          </span>
+
+          {avatar && (
+            <span className='ml-2'>&nbsp;Đã chọn ảnh: {avatar.name}</span>
+          )}
+        </div>
 
         <div className="image-preview">
           {avatar && (
             <div>
-              <p>Đã chọn ảnh: {avatar.name}</p>
               <img src={URL.createObjectURL(avatar)} alt="Avatar Preview" />
             </div>
           )}

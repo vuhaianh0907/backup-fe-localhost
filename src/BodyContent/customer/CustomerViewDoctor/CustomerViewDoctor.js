@@ -37,10 +37,12 @@ function CustomerViewDoctor() {
   })
 
   useEffect(() => {
-    // Set selectedDate to today's date by default
+    // Set selectedDate to tomorrow's date by default
     const today = new Date();
-    const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(
-      today.getDate()
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    const formattedDate = `${tomorrow.getFullYear()}-${String(tomorrow.getMonth() + 1).padStart(2, '0')}-${String(
+      tomorrow.getDate()
     ).padStart(2, '0')}`;
     setSelectedDate(formattedDate);
   }, []);

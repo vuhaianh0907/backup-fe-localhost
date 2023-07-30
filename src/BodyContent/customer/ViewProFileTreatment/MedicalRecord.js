@@ -46,7 +46,9 @@ function ViewTreatmentProfile() {
         // Fetch treatment_ins based on TreatmentProfile.id
         const treatmentInsResponse = await axios.get(`http://localhost:3000/api/treatmentin/getAllByTreatmentProfile?id=${profileData.id}`);
         const treatmentInsData = treatmentInsResponse.data.treatmentIns;
-        setTreatmentIns(treatmentInsData);
+        const sortedTreatmentInsData = treatmentInsData.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        setTreatmentIns(sortedTreatmentInsData);
+
       } catch (error) {
         console.error('Error fetching treatment profile:', error);
       }

@@ -3,8 +3,10 @@ import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import './viewBooking.scss';
 import { toast } from 'react-toastify';
+import moment from 'moment-timezone';
 
 const ViewBooking = () => {
+  
   const { id } = useParams();
   const [appointments, setAppointments] = useState([]);
   const [todayAppointments, setTodayAppointments] = useState([]);
@@ -82,7 +84,8 @@ const ViewBooking = () => {
 
   useEffect(() => {
 
-    const currentDate = new Date().toISOString().split('T')[0]; // Lấy ngày hiện tại
+     // Lấy ngày hiện tại
+    const currentDate = moment().tz('Asia/Ho_Chi_Minh').format('YYYY-MM-DD');
 
     const todayAppointmentsData = appointments.filter((appointment) => appointment.slot.date === currentDate);
     const futureAppointmentsData = appointments.filter((appointment) => appointment.slot.date > currentDate);
@@ -419,7 +422,7 @@ const ViewBooking = () => {
 
             {selectedAppointment.status === 'confirmed' && (
               <>
-                {selectedAppointment.slot.date === new Date().toISOString().split('T')[0] ? (
+                {selectedAppointment.slot.date ===  moment().tz('Asia/Ho_Chi_Minh').format('YYYY-MM-DD') ? (
                   <div>
                     <button className="btn btn-primary m-3">
                       <Link to={`/Doctor/viewpatientprofile/${selectedAppointment.customer.id}`} className="btn btn-primary" onClick={StoreIDSlot(selectedAppointment.id)}>

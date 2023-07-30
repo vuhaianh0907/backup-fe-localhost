@@ -7,36 +7,7 @@ import moment from 'moment-timezone';
 
 function CreateTreatmentIn() {
   const { id } = useParams(); // Get the ID from the URL
-  const [vietnamTime, setVietnamTime] = useState('');
-
-  useEffect(() => {
-    async function fetchVietnamTime() {
-      try {
-        const response = await fetch('http://worldtimeapi.org/api/timezone/Asia/Ho_Chi_Minh');
-        if (!response.ok) {
-          throw new Error('Failed to fetch time from WorldTimeAPI');
-        }
-        const data = await response.json();
-        const vietnamTime = moment(data.utc_datetime).tz('Asia/Ho_Chi_Minh').format('ddd MMM DD YYYY HH:mm:ss ');
-        setVietnamTime(vietnamTime);
-        
-      } catch (error) {
-        console.error(error);
-        setVietnamTime('Error fetching time');
-      }
-    }
-
-    // Fetch thời gian từ API và cập nhật state
-    fetchVietnamTime();
-
-    // Để tiết kiệm tài nguyên, bạn có thể đặt một khoảng thời gian cụ thể để cập nhật lại thời gian
-    const interval = setInterval(() => {
-      fetchVietnamTime();
-    }, 60000); // Cập nhật lại sau mỗi 1 phút (60.000 miliseconds)
-
-    // Khi component bị unmount, hủy bỏ việc cập nhật thời gian
-    return () => clearInterval(interval);
-  }, []);
+  
 
   const [treatmentProfile, setTreatmentProfile] = useState(null);
   const [customer, setCustomer] = useState(null);

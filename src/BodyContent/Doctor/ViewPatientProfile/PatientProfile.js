@@ -13,7 +13,7 @@ const PatientProfile = () => {
   const [newTreatmentProfileName, setNewTreatmentProfileName] = useState('');
   const storedUserString = sessionStorage.getItem("token");
   const user = JSON.parse(storedUserString);
-  
+
   useEffect(() => {
     if (user === null) {
 
@@ -35,7 +35,7 @@ const PatientProfile = () => {
         const response = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`); // Thay đổi URL API tương ứng
         const customerData = response.data.customer;
         setCustomer(customerData);
-        
+
       } catch (error) {
         console.error('Error fetching customer:', error);
       }
@@ -45,10 +45,10 @@ const PatientProfile = () => {
       try {
         const response = await axios.get(`http://localhost:3000/api/treatment_profile/schedule?id=${id}`); // Thay đổi URL API tương ứng
         const treatmentProfilesData = response.data.treatmentProfiles;
-        
-        
-        setTreatmentProfiles(treatmentProfilesData);
-        
+
+        const sortedProfiles = treatmentProfilesData.slice().sort((a, b) => - new Date(a.createdAt) + new Date(b.createdAt));
+        setTreatmentProfiles(sortedProfiles);
+
       } catch (error) {
         console.error('Error fetching treatment profiles:', error);
       }
@@ -147,16 +147,16 @@ const PatientProfile = () => {
             <span className="value">{customer.email}</span>
           </div>
           <div className="actions">
-        <button className="btntreatment btn btn-success" onClick={openPopup}>
-          Thêm mới treatment profile
-        </button>
-      </div>
+            <button className="btntreatment btn btn-success" onClick={openPopup}>
+              Thêm mới treatment profile
+            </button>
+          </div>
         </div>
       ) : (
         <p>Loading...</p>
       )}
 
-      
+
 
       <div className="treatment-profiles">
         <h3>Hồ sơ điều trị</h3>
@@ -164,13 +164,19 @@ const PatientProfile = () => {
           <div className='container'>
             <ul>
               {currentTreatmentProfiles.map((profile) => (
-                <div className='carlink'  key={profile.id}>
-                  {profile.description}
-                  <button className="btnlink btn btn-primary">
-                    <Link className='thelink' to={`/doctor/viewTreatmentProfile/${profile.id}`} >
-                      Xem chi tiết
-                    </Link>
-                  </button>
+                <div className='carlink' key={profile.id}>
+                  <div className='row'>
+                    <div className='col-6'>
+                      {profile.description}
+                    </div>
+                    <div className='col-6'>
+                      <button className="btnlink btn btn-primary">
+                        <Link className='thelink' to={`/doctor/viewTreatmentProfile/${profile.id}`} >
+                          Xem chi tiết
+                        </Link>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               ))}
             </ul>
@@ -219,7 +225,7 @@ const PatientProfile = () => {
         )}
       </div>
 
-      {showPopup && (
+      {/* {showPopup && (
         <div className="popup">
           <div className="popup-content">
             <h3>Thêm mới treatment profile</h3>
@@ -242,7 +248,37 @@ const PatientProfile = () => {
             </div>
           </div>
         </div>
+      )} */}
+      {showPopup && (
+        <div className="modal d-block" tabIndex="-1" role="dialog">
+          <div className="modal-dialog" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h3 className="modal-title">Thêm mới treatment profile</h3>
+                <button type="button" className="btn-close" onClick={closePopup} aria-label="Close"></button>
+              </div>
+              <div className="modal-body">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Tên treatment profile"
+                  value={newTreatmentProfileName}
+                  onChange={(e) => setNewTreatmentProfileName(e.target.value)}
+                />
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-primary" onClick={handleAddTreatmentProfile}>
+                  Xác nhận
+                </button>
+                <button type="button" className="btn btn-secondary" onClick={closePopup}>
+                  Đóng
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
+
     </div>
   );
 };

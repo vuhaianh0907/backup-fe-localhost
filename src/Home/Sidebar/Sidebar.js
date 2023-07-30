@@ -33,17 +33,17 @@ const Sidebar = () => {
       </a>
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
-      <li className="nav-item">
-              <Link to="/" className="nav-link active" aria-current="page">
-                <FontAwesomeIcon icon={faHouse} className='mr-2' />
-                <span className='ml-2'>Home</span>
-              </Link>
+        <li className="nav-item">
+          <Link to="/" className="nav-link active" aria-current="page">
+            <FontAwesomeIcon icon={faHouse} className='mr-2' />
+            <span className='ml-2'>Home</span>
+          </Link>
 
-            </li>
+        </li>
 
         {(user && user.role === 'admin') &&
           <>
-            
+
             <li>
               <Link to="/admin/doctorlist" className="nav-link" aria-current="page">
                 <FontAwesomeIcon icon={faUserDoctor} className='mr-2' />
@@ -123,18 +123,6 @@ const Sidebar = () => {
             <span className='ml-2'>Appointment List</span>
           </Link>
         </li> */}
-        <li>
-          <a href="#" className="nav-link text-white">
-            {/* <svg className="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg> */}
-         
-          </a>
-        </li>
-        <li>
-          <a href="#" className="nav-link text-white">
-            {/* <svg className="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg> */}
-            
-          </a>
-        </li>
       </ul>
       <hr />
       <div className="dropdown">
@@ -144,26 +132,26 @@ const Sidebar = () => {
         </a>
         <ul className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
           <li>
-                      <Link
-                        to={`/doctor/updateprofile/${user.id}`}
-                      
-                        className="dropdown-item"
-                      >
-                        Chỉnh sửa thông tin
-                      </Link>
-                    </li>
-          
+            <Link
+              to={`/doctor/updateprofile/${user.id}`}
+
+              className="dropdown-item"
+            >
+              Chỉnh sửa thông tin
+            </Link>
+          </li>
+
           <li>
-                      <Link
-                        to="/changepass"
-                        className="dropdown-item"
-                      >
-                        Đổi mật khẩu
-                      </Link>
-                    </li>
+            <Link
+              to="/changepass"
+              className="dropdown-item"
+            >
+              Đổi mật khẩu
+            </Link>
+          </li>
           <li>
-          <li><hr className="dropdown-divider" /></li>
-         
+            <li><hr className="dropdown-divider" /></li>
+
             <Link
               to="/logout"
               onClick={() => {
