@@ -135,11 +135,11 @@ const Sidebar = () => {
             <li>
 
               <Link
-                to={`/doctor/updateprofile/${user.id}`}
+                to={`/doctor/profile/${user.id}`}
 
                 className="dropdown-item"
               >
-                Chỉnh sửa thông tin
+                Xem thông tin
               </Link>
               <Link
                 to={`/doctor/updateprofile/${user.id}`}

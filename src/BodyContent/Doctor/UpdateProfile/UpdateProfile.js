@@ -91,7 +91,7 @@ function DoctorUpdateProfile() {
             name="fullname"
             value={doctorInfo.fullname}
             onChange={handleChange}
-            className="form-input"
+            className="form-control"
           />
         </div>
         <div className="form-group">
@@ -101,7 +101,7 @@ function DoctorUpdateProfile() {
             name="idCard"
             value={doctorInfo.idCard}
             onChange={handleChange}
-            className="form-input"
+            className="form-control"
           />
         </div>
         <div className="form-group">
@@ -110,7 +110,7 @@ function DoctorUpdateProfile() {
             name="gender"
             value={doctorInfo.gender}
             onChange={handleChange}
-            className="form-input select-input"
+            className="form-control select-input"
           >
             <option value="Nam">Nam</option>
             <option value="Nữ">Nữ</option>
@@ -123,7 +123,7 @@ function DoctorUpdateProfile() {
             name="dateOfBirth"
             value={doctorInfo.dateOfBirth}
             onChange={handleChange}
-            className="form-input"
+            className="form-control"
           />
         </div>
         <div className="form-group">
@@ -133,7 +133,7 @@ function DoctorUpdateProfile() {
             name="email"
             value={doctorInfo.email}
             onChange={handleChange}
-            className="form-input"
+            className="form-control"
           />
         </div>
         <div className="form-group">
@@ -143,7 +143,7 @@ function DoctorUpdateProfile() {
             name="phone"
             value={doctorInfo.phone}
             onChange={handleChange}
-            className="form-input"
+            className="form-control"
           />
         </div>
         <div className="form-group">
@@ -153,7 +153,7 @@ function DoctorUpdateProfile() {
             name="address"
             value={doctorInfo.address}
             onChange={handleChange}
-            className="form-input"
+            className="form-control"
           />
         </div>
         <div className="form-group">
@@ -163,7 +163,7 @@ function DoctorUpdateProfile() {
             name="qualification"
             value={doctorInfo.qualification}
             onChange={handleChange}
-            className="form-input"
+            className="form-control"
           />
         </div>
         <div className="form-group">
@@ -173,13 +173,13 @@ function DoctorUpdateProfile() {
             name="experience"
             value={doctorInfo.experience}
             onChange={handleChange}
-            className="form-input"
+            className="form-control"
           />
         </div>
-        <button type="submit" className="submit-button">
+        <button type="submit" className="btn btn-primary">
           Cập nhật
         </button>
-        <Link to={`/doctor/profile/${id}`} className="cancel-button">
+        <Link to={`/doctor/profile/${id}`} className="btn btn-secondary">
           Hủy
         </Link>
       </form>
