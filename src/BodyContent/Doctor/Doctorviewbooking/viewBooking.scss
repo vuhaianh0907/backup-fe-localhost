@@ -179,3 +179,17 @@
 
   }
   
+  /* viewBooking.scss */
+
+/* CSS cho phần loading */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.loading-text {
+  font-size: 18px;
+  font-weight: bold;
+}

@@ -4,24 +4,32 @@ import './TimeSlotsPage.scss';
 const TimeSlotsPage = () => {
   const [selectedSlot, setSelectedSlot] = useState('');
   const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1); // Đặt ngày mặc định là ngày mai
+  tomorrow.setDate(tomorrow.getDate() + 1);
   const [selectedDate, setSelectedDate] = useState(tomorrow.toISOString().slice(0, 10));
   const [showPopup, setShowPopup] = useState(false);
   const [reason, setReason] = useState('');
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     if (user === null) {
-
       window.location.href = '/';
-
-    }
-    else {
+    } else {
       if (user.role !== 'doctor') {
         window.location.href = '/';
       }
     }
-  })
+  });
+
+  useEffect(() => {
+    const fetchTimeSlots = async () => {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setIsLoading(false);
+    };
+
+    fetchTimeSlots();
+  }, []);
 
   const handleSlotClick = (slot) => {
     setSelectedSlot(slot);
@@ -65,8 +73,16 @@ const TimeSlotsPage = () => {
     ));
   };
 
+  if (isLoading) {
+    return (
+      <div className="loading-container">
+        <p className="loading-text">Đang tải...</p>
+      </div>
+    );
+  }
+
   return (
-    <div  className="time-slots-page">
+    <div className="time-slots-page">
       <h2 className="title">Chọn ngày</h2>
       <div className="date-picker">
         <input

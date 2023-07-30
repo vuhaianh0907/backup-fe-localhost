@@ -12,34 +12,34 @@ const DoctorViewProfile = () => {
   const [selectedDate, setSelectedDate] = useState('');
   const [showPopup, setShowPopup] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
+
   useEffect(() => {
     if (user === null) {
-
       window.location.href = '/';
-
-    }
-    else {
+    } else {
       if (user.role !== 'doctor') {
         window.location.href = '/';
       }
     }
-  })
+  });
 
   useEffect(() => {
     const fetchDoctorInfo = async () => {
       try {
         const doctorPromise = await axios.get(`http://localhost:3000/api/account/doctor/details?id=${id}`);
-
         const slotsPromise = axios.get(`http://localhost:3000/api/slot/getSlotbyDoctor?doctorId=${id}`);
         const [doctorResponse, slotsResponse] = await Promise.all([doctorPromise, slotsPromise]);
         const doctorData = doctorResponse.data.doctor;
         const slotsData = slotsResponse.data.slots;
         setDoctorInfo(doctorData);
         setSlots(slotsData);
+        setIsLoading(false);
       } catch (error) {
         console.log('Error fetching doctor info:', error);
+        setIsLoading(false);
       }
     };
 
@@ -111,7 +111,7 @@ const DoctorViewProfile = () => {
     navigate(`/doctor/updateprofile/${id}`); // Chuyển hướng đến trang chỉnh sửa
   };
 
-  if (!doctorInfo) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
 

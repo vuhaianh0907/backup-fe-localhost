@@ -12,18 +12,16 @@ const DoctorList = () => {
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
+
   useEffect(() => {
     if (user === null) {
-
       window.location.href = '/';
-
-    }
-    else {
+    } else {
       if (user.role !== 'admin') {
         window.location.href = '/';
       }
     }
-  })
+  }, []);
 
   useEffect(() => {
     setIsLoading(true);
@@ -51,8 +49,6 @@ const DoctorList = () => {
   const prevPage = () => {
     setCurrentPage((prevPage) => prevPage - 1);
   };
-
-
 
   const handleStatusChange = (doctor) => {
     const updatedStatus = doctor.status === 'active' ? 'not active' : 'active';
@@ -92,7 +88,7 @@ const DoctorList = () => {
     <div id="DoctorList" className="doctor-list">
       <h2 className="doctor-list__title">Danh sách bác sĩ</h2>
       {isLoading ? (
-        <p>Loading...</p>
+        <div className="loading-spinner"></div>
       ) : (
         <>
           <ul className="doctor-list__items">

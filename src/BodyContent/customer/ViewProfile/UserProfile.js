@@ -8,20 +8,19 @@ const UserProfile = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // State để kiểm soát hiển thị loading spinner
   const storedUserString = sessionStorage.getItem('token');
   const user1 = JSON.parse(storedUserString);
+
   useEffect(() => {
     if (user1 === null) {
-
       window.location.href = '/';
-
-    }
-    else {
+    } else {
       if (user1.role !== 'customer') {
         window.location.href = '/';
       }
     }
-  })
+  }, [user1]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -29,8 +28,10 @@ const UserProfile = () => {
         const response = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`);
         const userData = response.data.customer;
         setUser(userData);
+        setIsLoading(false); // Dữ liệu đã được tải, đặt isLoading thành false
       } catch (error) {
         console.log('Error fetching user data:', error);
+        setIsLoading(false); // Nếu xảy ra lỗi, đặt isLoading thành false
       }
     };
 
@@ -51,8 +52,15 @@ const UserProfile = () => {
     console.log('Xem danh sách hồ sơ bệnh');
   };
 
-  if (!user) {
-    return <div>Loading...</div>;
+  if (isLoading) {
+    return (
+      // Hiển thị loading spinner nếu đang tải dữ liệu
+      <div className="user-profile-loading">
+        <div className="spinner-border" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -77,7 +85,9 @@ const UserProfile = () => {
       </div>
       <button className="edit-profile-button" onClick={handleEditProfile}>Chỉnh sửa thông tin</button>
       <div className="user-profile__actions">
-
+        {/* Các nút xem danh sách phiếu khám và hồ sơ bệnh */}
+        <button onClick={handleViewAppointments}>Xem danh sách phiếu khám</button>
+        <button onClick={handleViewMedicalRecords}>Xem danh sách hồ sơ bệnh</button>
       </div>
     </div>
   );

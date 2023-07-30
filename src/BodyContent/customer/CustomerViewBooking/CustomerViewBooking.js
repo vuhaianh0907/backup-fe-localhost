@@ -13,18 +13,17 @@ function CustomerViewBooking() {
   const [perPage] = useState(8);
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
+
   useEffect(() => {
     if (user === null) {
-
       window.location.href = '/';
-
-    }
-    else {
+    } else {
       if (user.role !== 'customer') {
         window.location.href = '/';
       }
     }
-  })
+  }, []);
+
   const statusList = [
     {
       name: "confirmed",
@@ -48,7 +47,6 @@ function CustomerViewBooking() {
     },
   ];
 
-  // Hàm để chuyển đổi tên trạng thái thành tên hiển thị và màu sắc tương ứng
   function getStatusInfo(status) {
     const statusInfo = statusList.find((item) => item.name === status);
     return statusInfo || { displayName: status, color: "" };
@@ -73,7 +71,6 @@ function CustomerViewBooking() {
 
         Promise.all(appointmentPromises)
           .then((updatedAppointments) => {
-            // Sắp xếp danh sách appointments theo updatedAt
             const sortedAppointments = updatedAppointments.sort((a, b) => {
               const updatedAtA = new Date(a.updatedAt);
               const updatedAtB = new Date(b.updatedAt);
@@ -125,7 +122,6 @@ function CustomerViewBooking() {
                     <div className="card-text">Slot: {appointment.slot ? appointment.slot.time : 'Unknown Slot'}</div>
                   </div>
                   <div className={`${getStatusInfo(appointment.status).color} col-5 card-text text-end mt-4`}>
-                    {/* Hiển thị tên trạng thái và màu sắc tương ứng */}
                     {getStatusInfo(appointment.status).displayName}
                   </div>
                 </div>

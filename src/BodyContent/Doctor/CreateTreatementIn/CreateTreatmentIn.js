@@ -4,10 +4,8 @@ import { useParams, Link } from 'react-router-dom';
 import './CreateTreatmentIn.css';
 import moment from 'moment-timezone';
 
-
 function CreateTreatmentIn() {
-  const { id } = useParams(); // Get the ID from the URL
-  
+  const { id } = useParams();
 
   const [treatmentProfile, setTreatmentProfile] = useState(null);
   const [customer, setCustomer] = useState(null);
@@ -18,6 +16,7 @@ function CreateTreatmentIn() {
   });
   const [showConfirmationComplete, setShowConfirmationComplete] = useState(false);
   const [showConfirmationReappoint, setShowConfirmationReappoint] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const storedUserString = sessionStorage.getItem("token");
   const user = JSON.parse(storedUserString);
   const storedSlot = sessionStorage.getItem("SlotID");
@@ -25,27 +24,27 @@ function CreateTreatmentIn() {
 
   useEffect(() => {
     if (user === null) {
-
       window.location.href = '/';
-
-    }
-    else {
+    } else {
       if (user.role !== 'doctor') {
         window.location.href = '/';
       }
     }
-  })
+  }, []);
+
   useEffect(() => {
     const fetchTreatmentProfile = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/treatment_profile/details?id=${id}`); // Replace with your API endpoint
+        const response = await axios.get(`http://localhost:3000/api/treatment_profile/details?id=${id}`);
         const profileData = response.data.treatmentProfile;
         setTreatmentProfile(profileData);
         const customerResponse = await axios.get(`http://localhost:3000/api/account/customer/details?id=${profileData.customerID}`);
         const customerData = customerResponse.data.customer;
         setCustomer(customerData);
+        setIsLoading(false);
       } catch (error) {
         console.error('Error fetching treatment profile:', error);
+        setIsLoading(false);
       }
     };
 
@@ -70,28 +69,23 @@ function CreateTreatmentIn() {
 
   const handleConfirmationCompleteConfirm = async () => {
     try {
-      // Xây dựng đối tượng dữ liệu treatmentIn từ trạng thái hiện tại của component
       const treatmentInData = {
         idTreatmentProfile: treatmentProfile.id,
         doctorID: user.id,
         process: treatmentIn.procress,
         result: treatmentIn.result,
         note: treatmentIn.note,
-        // Các trường dữ liệu khác
       };
 
-      // Gửi yêu cầu POST đến API createTreatmentIn
       await axios.post('http://localhost:3000/api/treatmentin/create', treatmentInData);
       await axios.post(`http://localhost:3000/api/appointment/update?id=${idslot}`, { status: 'Done' });
       sessionStorage.removeItem('SlotID');
 
-      // Chuyển hướng trang về trang chủ
       window.location.href = '/';
     } catch (error) {
       console.error('Error confirming treatment:', error);
     }
   };
-
 
   const handleConfirmationCompleteClose = () => {
     setShowConfirmationComplete(false);
@@ -107,43 +101,36 @@ function CreateTreatmentIn() {
 
   const handleConfirmationReappointConfirm = async () => {
     try {
-      // Xây dựng đối tượng dữ liệu treatmentIn từ trạng thái hiện tại của component
       const treatmentInData = {
         idTreatmentProfile: treatmentProfile.id,
         doctorID: user.id,
         process: treatmentIn.procress,
         result: treatmentIn.result,
         note: treatmentIn.note,
-        // Các trường dữ liệu khác
       };
 
-      // Gửi yêu cầu POST đến API createTreatmentIn
       await axios.post('http://localhost:3000/api/treatmentin/create', treatmentInData);
       await axios.post(`http://localhost:3000/api/appointment/update?id=${idslot}`, { status: 'Done' });
       sessionStorage.removeItem('SlotID');
 
-      // Chuyển hướng trang về trang chủ
       window.location.href = `/Doctor/rebook/${customer.id}`;
     } catch (error) {
       console.error('Error confirming treatment:', error);
     }
-    // Perform reappoint treatment logic here
     setShowConfirmationReappoint(false);
-
   };
 
   const handleConfirmationReappointClose = () => {
     setShowConfirmationReappoint(false);
   };
 
-  if (!treatmentProfile) {
-    return <p>Loading...</p>;
+  if (isLoading) {
+    return <div className="loading-spinner">Loading...</div>;
   }
 
   return (
     <div className="profile-page">
       <h2>Cập nhật tiến trình trị liệu</h2>
-      {/* Hiển thị thông tin người dùng */}
       <div className="profile-details">
         <div>
           <label>Tên:</label>
@@ -156,18 +143,14 @@ function CreateTreatmentIn() {
         <div>
           <label>Ngày khám:</label>
           <input type="text" value={new Date()} readOnly />
-          
         </div>
-        {/* Display other customer information */}
       </div>
-      {/* Hiển thị form nhập liệu */}
       <div className="input-form">
         <h3>Hồ sơ bệnh</h3>
         <div className="treatment-profile">
           <input type="text" value={treatmentProfile.description} readOnly />
         </div>
         <div className="input-boxes">
-          {/* Hiển thị ô nhập liệu cho treatmentIn */}
           <div className="input-box">
             <label>Quá trình điều trị:</label>
             <input
@@ -200,7 +183,6 @@ function CreateTreatmentIn() {
           </div>
         </div>
       </div>
-      {/* Hiển thị các nút hoàn thành và tái khám */}
       <div className="action-buttons">
         <button className="btn btn-success" onClick={handleComplete}>
           Xong
@@ -210,7 +192,6 @@ function CreateTreatmentIn() {
         </button>
       </div>
 
-      {/* Xác nhận hoàn thành */}
       {showConfirmationComplete && (
         <div className="confirmation-modal">
           <div className="confirmation-modal-content">
@@ -228,14 +209,13 @@ function CreateTreatmentIn() {
         </div>
       )}
 
-      {/* Xác nhận tái khám */}
       {showConfirmationReappoint && (
         <div className="modal confirmation-modal" tabIndex="-1" role="dialog">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
                 <h3 className="modal-title">Xác nhận</h3>
-                <button  type="button" class="btn-close" aria-label="Close" onClick={handleConfirmationReappointClose}>
+                <button type="button" class="btn-close" aria-label="Close" onClick={handleConfirmationReappointClose}>
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>

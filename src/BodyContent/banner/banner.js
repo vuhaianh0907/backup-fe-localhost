@@ -25,16 +25,16 @@ export default function Banner() {
 
   return (
     <div>
-    <div className="ct">
-      
+      {isLoading ? (
+        <div className="loading-spinner"></div>
+      ) : (
+        <>
+          <div className="ct"></div>
+          <VinAlignSmall />
+          <IconBoxes />
+          <DichVu />
+        </>
+      )}
     </div>
-    
-    <VinAlignSmall />
-    <IconBoxes />
-    <DichVu/>
-
-  </div>
-    
-    
   );
 }

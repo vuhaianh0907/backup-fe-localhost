@@ -1,5 +1,3 @@
-// AppointmentForm.js
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -21,11 +19,8 @@ const SlotAppointment = () => {
   
   useEffect(() => {
     if (user === null) {
-
       window.location.href = '/';
-
-    }
-    else {
+    } else {
       if (user.role !== 'customer') {
         window.location.href = '/';
       }
@@ -64,9 +59,11 @@ const SlotAppointment = () => {
     }
   }, [slot]);
 
+  const [isConfirming, setIsConfirming] = useState(false);
+
   const handleConfirmAppointment = async () => {
+    setIsConfirming(true);
     try {
-      // Xây dựng dữ liệu
       const appointmentData = {
         status: 'confirmed',
         doctorID: doctor.id,
@@ -75,10 +72,8 @@ const SlotAppointment = () => {
         reason: reason,
       };
 
-      // Gửi yêu cầu POST đến API
       const response = await axios.post(`http://localhost:3000/api/appointment/create?customerId=${id}`, appointmentData);
 
-      // Kiểm tra phản hồi từ API
       if (response.status === 200) {
         setSuccessMessage(response.data.message);
         setIsConfirmed(true);
@@ -89,6 +84,8 @@ const SlotAppointment = () => {
       }
     } catch (error) {
       setError('Failed to confirm appointment');
+    } finally {
+      setIsConfirming(false);
     }
   };
 
@@ -117,7 +114,6 @@ const SlotAppointment = () => {
             </div>
           </div>
 
-
           {!isConfirmed && (
             <>
               <div className="form-group">
@@ -125,11 +121,10 @@ const SlotAppointment = () => {
                 <input type="text" id="reason" for="exampleFormControlTextarea1"  class="form-label" value={reason} onChange={handleReasonChange} />
               </div>
               
-              <button className="btn btn-primary confirm-button" onClick={() => setShowConfirmationModal(true)}>
-                Xác nhận
+              <button className="btn btn-primary confirm-button" onClick={() => setShowConfirmationModal(true)} disabled={isConfirming}>
+                {isConfirming ? 'Đang xác nhận...' : 'Xác nhận'}
               </button>
 
-              {/* Pop-up xác nhận */}
               {showConfirmationModal && (
                 <div className="modal-backdrop">
                   <div className="modal">
@@ -158,7 +153,6 @@ const SlotAppointment = () => {
             </>
           )}
 
-          {/* Pop-up xác nhận thành công */}
           {isSuccessModalOpen && (
             <div className="modal-backdrop">
               <div className="modal">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CreateDoctor.scss';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -11,18 +11,17 @@ function AdminCreateDoctor() {
   const [isLoading, setIsLoading] = useState(false);
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
+
   useEffect(() => {
     if (user === null) {
-
       window.location.href = '/';
-
-    }
-    else {
+    } else {
       if (user.role !== 'admin') {
         window.location.href = '/';
       }
     }
-  })
+  }, []);
+
   const [personalInfo, setPersonalInfo] = useState({
     fullName: '',
     idCard: '',
@@ -32,7 +31,6 @@ function AdminCreateDoctor() {
     email: '',
     address: '',
   });
-
 
   const [professionalInfo, setProfessionalInfo] = useState({
     qualification: '',
@@ -149,11 +147,11 @@ function AdminCreateDoctor() {
         <h3>Thông tin cá nhân</h3>
         {error !== null && <div className="error">{error}</div>}
 
-        <div className='mb-3'>
-          <label for="fullName" class="form-label">Họ và tên:</label>
+        <div className="mb-3">
+          <label htmlFor="fullName" className="form-label">Họ và tên:</label>
           <input
             type="text"
-            className='form-control'
+            className="form-control"
             id="fullName"
             name="fullName"
             value={personalInfo.fullName}
@@ -162,11 +160,11 @@ function AdminCreateDoctor() {
           />
         </div>
 
-        <div className='mb-3'>
-          <label for="idCard" class="form-label">CMND/CCCD:</label>
+        <div className="mb-3">
+          <label htmlFor="idCard" className="form-label">CMND/CCCD:</label>
           <input
             type="text"
-            className='form-control'
+            className="form-control"
             id="idCard"
             name="idCard"
             value={personalInfo.idCard}
@@ -175,42 +173,41 @@ function AdminCreateDoctor() {
           />
         </div>
 
-        <div className='mb-3'>
-          <label for="gender" class="form-label">Giới tính:</label>
+        <div className="mb-3">
+          <label htmlFor="gender" className="form-label">Giới tính:</label>
           <div className="gender-options">
-            <div className='form-check'>
+            <div className="form-check">
               <input
                 type="radio"
-                className='form-check-input'
+                className="form-check-input"
                 id="gender-male"
                 name="gender"
                 value="Male"
                 checked={personalInfo.gender === 'Male'}
                 onChange={handlePersonalChange}
               />
-              <label for="gender-male" class="form-check-label">Nam</label>
+              <label htmlFor="gender-male" className="form-check-label">Nam</label>
             </div>
-            &nbsp;&nbsp;&nbsp;
-            <div className='form-check'>
+            <div className="form-check">
               <input
                 type="radio"
-                className='form-check-input'
-                id='gender-female'
+                className="form-check-input"
+                id="gender-female"
                 name="gender"
                 value="Female"
                 checked={personalInfo.gender === 'Female'}
                 onChange={handlePersonalChange}
               />
-              <label for='gender-female'>Nữ</label>
+              <label htmlFor="gender-female" className="form-check-label">Nữ</label>
             </div>
           </div>
         </div>
 
-        <div className='mb-3'>
+        <div className="mb-3">
           <label htmlFor="dateOfBirth">Ngày sinh:</label>
           <input
             type="date"
-            className='form-control'
+            className="form-control"
             id="dateOfBirth"
             name="dateOfBirth"
             value={personalInfo.dateOfBirth}
@@ -218,11 +215,11 @@ function AdminCreateDoctor() {
           />
         </div>
 
-        <div className='mb-3'>
+        <div className="mb-3">
           <label htmlFor="phone">Số điện thoại:</label>
           <input
             type="text"
-            className='form-control'
+            className="form-control"
             id="phone"
             name="phone"
             value={personalInfo.phone}
@@ -231,11 +228,11 @@ function AdminCreateDoctor() {
           />
         </div>
 
-        <div className='mb-3'>
+        <div className="mb-3">
           <label htmlFor="email">Email:</label>
           <input
             type="email"
-            className='form-control'
+            className="form-control"
             id="email"
             name="email"
             value={personalInfo.email}
@@ -244,11 +241,11 @@ function AdminCreateDoctor() {
           />
         </div>
 
-        <div className='mb-3'>
+        <div className="mb-3">
           <label htmlFor="address">Địa chỉ:</label>
           <input
             type="text"
-            className='form-control'
+            className="form-control"
             id="address"
             name="address"
             value={personalInfo.address}
@@ -260,11 +257,11 @@ function AdminCreateDoctor() {
         <hr />
         <h3>Thông tin chuyên môn</h3>
 
-        <div className='mb-3'>
+        <div className="mb-3">
           <label htmlFor="qualification">Bằng cấp:</label>
           <input
             type="text"
-            className='form-control'
+            className="form-control"
             id="qualification"
             name="qualification"
             value={professionalInfo.qualification}
@@ -273,11 +270,11 @@ function AdminCreateDoctor() {
           />
         </div>
 
-        <div className='mb-3'>
+        <div className="mb-3">
           <label htmlFor="experience">Kinh nghiệm:</label>
           <input
             type="text"
-            className='form-control'
+            className="form-control"
             id="experience"
             name="experience"
             value={professionalInfo.experience}
@@ -289,11 +286,11 @@ function AdminCreateDoctor() {
         <hr />
         <h3>Thông tin tài khoản</h3>
 
-        <div className='mb-3'>
+        <div className="mb-3">
           <label htmlFor="password">Mật khẩu:</label>
           <input
             type="password"
-            className='form-control'
+            className="form-control"
             id="password"
             name="password"
             value={accountInfo.password}
@@ -303,18 +300,19 @@ function AdminCreateDoctor() {
         </div>
 
         <div>
-          <span class="file-input btn btn-primary btn-file">
+          <span className="file-input btn btn-primary btn-file">
             Chọn hình ảnh&hellip;
             <input
               type="file"
               id="avatar"
               name="avatar"
               accept="image/*"
-              onChange={handleImageChange} />
+              onChange={handleImageChange}
+            />
           </span>
 
           {avatar && (
-            <span className='ml-2'>&nbsp;Đã chọn ảnh: {avatar.name}</span>
+            <span className="ml-2">&nbsp;Đã chọn ảnh: {avatar.name}</span>
           )}
         </div>
 
@@ -332,6 +330,16 @@ function AdminCreateDoctor() {
           </button>
         </div>
       </form>
+
+      {isLoading && (
+        <div className="loading-overlay">
+          <div className="loading-content">
+            <div className="spinner-border" role="status"></div>
+            <p className="loading-message">Đang lưu...</p>
+          </div>
+        </div>
+      )}
+
       <ToastContainer />
     </div>
   );

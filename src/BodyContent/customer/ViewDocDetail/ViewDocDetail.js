@@ -10,6 +10,7 @@ export default function ViewDocDetail() {
   const [doctor, setDoctor] = useState(null);
   const [slots, setSlots] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
 
@@ -17,16 +18,13 @@ export default function ViewDocDetail() {
 
   useEffect(() => {
     if (user === null) {
-
       window.location.href = '/';
-
-    }
-    else {
+    } else {
       if (user.role !== 'customer') {
         window.location.href = '/';
       }
     }
-  })
+  }, [user]);
 
   useEffect(() => {
     // Send GET request to fetch doctor details
@@ -35,10 +33,12 @@ export default function ViewDocDetail() {
       .then((response) => {
         // Handle the response from the API
         setDoctor(response.data.doctor);
+        setIsLoading(false);
       })
       .catch((error) => {
         // Handle any error that occurs during the request
         console.error('API Error:', error);
+        setIsLoading(false);
       });
 
     // Send GET request to fetch slots for the doctor
@@ -91,53 +91,62 @@ export default function ViewDocDetail() {
     <div id="ViewDocDetail">
       <div id="ViewDocDetail" className="viewdocdt">
         <div className='viewdocdt2'>
-          <div className="row">
-            {doctor ? (
-
-              <div className="col-5">
-                <center><img src={doctor.avatar} alt="Doctor Profile" className="profile-picture" /></center>
-                <h2 className="doctor-name">{doctor.fullname}</h2>
-                <div className="doctor-information">
-                  <div className="info-item">
-                    <h4>Chứng chỉ:</h4>
-                    <p>{doctor.qualification}</p>
-                  </div>
-                  <div className="info-item">
-                    <h4>Kinh nghiệm:</h4>
-                    <p>{doctor.experience}</p>
-                  </div>
+          {isLoading ? (
+            <div className="loading-overlay">
+              <div className="loading-content">
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
                 </div>
-              </div>
-
-            ) : (
-              <p>Loading...</p>
-            )}
-
-            <div className="col-7">
-              <label for="date" class="col-form-label">Chọn ngày: </label>
-              <div class="col-5">
-                <div class="input-group date" id="datepicker">
-                  
-                  <input type="date" class="form-control" id="date" value={selectedDate} onChange={handleDateChange} min={getMinDate()} />
-                </div>
-              </div>
-
-              <h3>Các lịch hẹn của bác sĩ</h3>
-              <div className='row'>
-                {filteredSlots.length > 0 ? (
-                  filteredSlots.map((slot) => (
-                    <Link className='col-3 mb-2' to={`/customer/slot/appointment/${slot.id}`} key={slot.id}>
-                      <button className="mx-0 my-0 btn btn-primary w-100" onClick={() => handleSlotClick(slot.id)}>
-                        {slot.time}
-                      </button>
-                    </Link>
-                  ))
-                ) : (
-                  <p>Không có lịch hẹn khả dụng</p>
-                )}
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="row">
+              {doctor ? (
+
+                <div className="col-5">
+                  <center><img src={doctor.avatar} alt="Doctor Profile" className="profile-picture" /></center>
+                  <h2 className="doctor-name">{doctor.fullname}</h2>
+                  <div className="doctor-information">
+                    <div className="info-item">
+                      <h4>Chứng chỉ:</h4>
+                      <p>{doctor.qualification}</p>
+                    </div>
+                    <div className="info-item">
+                      <h4>Kinh nghiệm:</h4>
+                      <p>{doctor.experience}</p>
+                    </div>
+                  </div>
+                </div>
+
+              ) : (
+                <p>Loading...</p>
+              )}
+
+              <div className="col-7">
+                <label htmlFor="date" className="col-form-label">Chọn ngày: </label>
+                <div className="col-5">
+                  <div className="input-group date" id="datepicker">
+                    <input type="date" className="form-control" id="date" value={selectedDate} onChange={handleDateChange} min={getMinDate()} />
+                  </div>
+                </div>
+
+                <h3>Các lịch hẹn của bác sĩ</h3>
+                <div className='row'>
+                  {filteredSlots.length > 0 ? (
+                    filteredSlots.map((slot) => (
+                      <Link className='col-3 mb-2' to={`/customer/slot/appointment/${slot.id}`} key={slot.id}>
+                        <button className="mx-0 my-0 btn btn-primary w-100" onClick={() => handleSlotClick(slot.id)}>
+                          {slot.time}
+                        </button>
+                      </Link>
+                    ))
+                  ) : (
+                    <p>Không có lịch hẹn khả dụng</p>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

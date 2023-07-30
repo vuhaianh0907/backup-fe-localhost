@@ -121,3 +121,39 @@ p {
   }
   
 }
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loading-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Thêm animation cho chữ "Loading..." */
+@keyframes loadingAnimation {
+  0% {
+    content: "Loading";
+  }
+  25% {
+    content: "Loading.";
+  }
+  50% {
+    content: "Loading..";
+  }
+  75% {
+    content: "Loading...";
+  }
+  100% {
+    content: "Loading";
+  }
+}
+
+.loading-text::after {
+  content: "Loading";
+  animation: loadingAnimation 1s infinite;
+}

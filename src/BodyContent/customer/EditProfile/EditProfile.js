@@ -16,16 +16,13 @@ const EditProfile = () => {
   const user1 = JSON.parse(storedUserString);
   useEffect(() => {
     if (user1 === null) {
-
       window.location.href = '/';
-
-    }
-    else {
+    } else {
       if (user1.role !== 'customer') {
         window.location.href = '/';
       }
     }
-  })
+  });
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -66,63 +63,45 @@ const EditProfile = () => {
   };
 
   if (!user) {
-    return <div>Loading...</div>;
+    return (
+      <div className="loading-overlay">
+        <div className="loading-content">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const isSaveDisabled = gender === '';
 
   return (
-
-    <div id="EditProfile" className='editprofile mb-3'>
-      
-      <form  class="form-container" style={{ borderRadius: '1rem' }} onSubmit={handleFormSubmit}>
+    <div id="EditProfile" className="editprofile mb-3">
+      <form class="form-container" style={{ borderRadius: '1rem' }} onSubmit={handleFormSubmit}>
         <h2 className="edit-profile__title">Chỉnh sửa thông tin</h2>
 
         <div id="UpdateProfile" className="update-profile-container" />
         <div class="mb-3">
           <label for="disabledTextInput" class="form-label">Họ và tên</label>
           <input type="text" id="fullname" className="edit-profile__input" placeholder="Disabled input" value={fullname} onChange={(e) => setFullname(e.target.value)} />
-
         </div>
 
         <div class="mb-3">
           <label htmlFor="email" className="edit-profile__label">Email</label>
-          <input class="mb-3"
-            type="email"
-            id="email"
-            className="edit-profile__input"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <input class="mb-3" type="email" id="email" className="edit-profile__input" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
         <div class="mb-3">
           <label htmlFor="address" className="edit-profile__label">Địa chỉ</label>
-          <input class="mb-3"
-            type="text"
-            id="address"
-            className="edit-profile__input"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
+          <input class="mb-3" type="text" id="address" className="edit-profile__input" value={address} onChange={(e) => setAddress(e.target.value)} />
         </div>
         <div class="mb-3">
           <label htmlFor="phone" className="edit-profile__label">Điện thoại</label>
-          <input class="mb-3"
-            type="text"
-            id="phone"
-            className="edit-profile__input"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
+          <input class="mb-3" type="text" id="phone" className="edit-profile__input" value={phone} onChange={(e) => setPhone(e.target.value)} />
         </div>
         <div class="mb-3">
           <label htmlFor="gender" className="edit-profile__label">Giới tính</label>
-          <select class="mb-3"
-            id="gender"
-            className="edit-profile__select"
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
-          >
+          <select class="mb-3" id="gender" className="edit-profile__select" value={gender} onChange={(e) => setGender(e.target.value)}>
             <option value="order">Chọn giới tính</option>
             <option value="male">Nam</option>
             <option value="female">Nữ</option>
@@ -130,10 +109,8 @@ const EditProfile = () => {
         </div>
         <button type="submit" className="edit-profile__button" disabled={isSaveDisabled}>Lưu thông tin</button>
       </form>
-      </div>
-      );
-   
+    </div>
+  );
 };
-
 
 export default EditProfile;

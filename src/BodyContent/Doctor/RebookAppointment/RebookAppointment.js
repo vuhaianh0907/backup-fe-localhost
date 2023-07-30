@@ -15,61 +15,47 @@ function ResetAppointmentPage() {
   const [confirmationMessage, setConfirmationMessage] = useState('');
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (user === null) {
-
       window.location.href = '/';
-
-    }
-    else {
+    } else {
       if (user.role !== 'doctor') {
         window.location.href = '/';
       }
     }
-  })
+  }, []);
+
   useEffect(() => {
-    const fetchCustomerDetails = async () => {
+    const fetchData = async () => {
       try {
         const customerResponse = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`);
         const customerData = customerResponse.data.customer;
         setCustomer(customerData);
-      } catch (error) {
-        console.error('Error fetching customer details:', error);
-      }
-    };
 
-    const fetchDoctorDetails = async () => {
-      try {
         const doctorResponse = await axios.get(`http://localhost:3000/api/account/doctor/details?id=${user.id}`);
         const doctorData = doctorResponse.data.doctor;
         setDoctor(doctorData);
-      } catch (error) {
-        console.error('Error fetching doctor details:', error);
-      }
-    };
 
-    const fetchSlots = async () => {
-      try {
         const response = await axios.get(`http://localhost:3000/api/slot/getSlotbyDoctor?doctorId=${user.id}`);
         const filteredSlots = response.data.slots.filter((slot) => slot.status === 'available');
         setSlots(filteredSlots);
+
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const formattedDate = tomorrow.toISOString().split('T')[0];
+        setSelectedDate(formattedDate);
+
+        setLoading(false);
       } catch (error) {
-        console.error('Error fetching slots:', error);
+        console.error('Error fetching data:', error);
+        setLoading(false);
       }
     };
 
-    fetchCustomerDetails();
-    fetchDoctorDetails();
-    fetchSlots();
+    fetchData();
   }, [id, user.id]);
-
-  useEffect(() => {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const formattedDate = tomorrow.toISOString().split('T')[0];
-    setSelectedDate(formattedDate);
-  }, []);
 
   const handleDateChange = (event) => {
     const selectedDateValue = event.target.value;
@@ -89,7 +75,6 @@ function ResetAppointmentPage() {
 
   const handleConfirmationConfirm = async () => {
     try {
-      // Create the appointment object
       const appointmentData = {
         status: 'confirmed',
         doctorID: user.id,
@@ -98,10 +83,8 @@ function ResetAppointmentPage() {
         reason: "Bác sĩ hẹn tái khám",
       };
 
-      // Send the POST request to create the appointment
       const response = await axios.post(`http://localhost:3000/api/appointment/create?customerId=${id}`, appointmentData);
 
-      // Check the response from the API
       if (response.status === 200) {
         setConfirmationMessage(response.data.message);
       } else {
@@ -120,18 +103,23 @@ function ResetAppointmentPage() {
 
   const filteredSlots = selectedDate ? slots.filter((slot) => slot.date === selectedDate) : slots;
 
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <p className="loading-text">Loading...</p>
+      </div>
+    );
+  }
+
   if (!customer || !doctor) {
     return <p>Loading customer and doctor details...</p>;
   }
 
   return (
-
     <div className="reset-appointment-page">
       <h2>Đặt lại lịch tái khám</h2>
       <h4>Thông tin bác sĩ:</h4>
       <div className='thongtin'>
-
-
         <p>Họ và tên: {doctor.fullname}</p>
         <p>Email: {doctor.email}</p>
       </div>
@@ -176,7 +164,7 @@ function ResetAppointmentPage() {
             <div className="modal-content">
               <div className="modal-header">
                 <h3 className="modal-title">Xác nhận</h3>
-                <button  type="button" class="btn-close" aria-label="Close" onClick={handleConfirmationCancel}>
+                <button type="button" class="btn-close" aria-label="Close" onClick={handleConfirmationCancel}>
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>

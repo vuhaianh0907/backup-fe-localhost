@@ -1,4 +1,4 @@
-// ChangePass.js
+// File: ChangePass.js
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import './ChangePass.scss';
@@ -9,6 +9,7 @@ function ChangePass() {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // Khai báo state để quản lý trạng thái loading
   const navigate = useNavigate();
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
@@ -55,6 +56,8 @@ function ChangePass() {
     }
 
     const email = user.email;
+    setIsLoading(true); // Bắt đầu loading khi bắt đầu gửi API
+
     try {
       const response = await axios.post('http://localhost:3000/api/auth/changepass', {
         email,
@@ -79,8 +82,22 @@ function ChangePass() {
       }
     } catch (error) {
       // Xử lý lỗi từ API (nếu cần)
+    } finally {
+      setIsLoading(false); // Kết thúc loading khi kết thúc gửi API (thành công hoặc thất bại)
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="change-pass" id="ChangePass">
+        <div className="loading-overlay">
+          <div className="loading-content">
+            <p>Loading...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="change-pass" id="ChangePass">

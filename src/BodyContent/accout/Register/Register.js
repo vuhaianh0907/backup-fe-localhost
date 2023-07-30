@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './Register.scss';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function Register() {
   const [email, setEmail] = useState('');
@@ -13,8 +14,10 @@ export default function Register() {
   const [gender, setGender] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // Khai báo state để quản lý trạng thái loading
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
+  
   useEffect (() =>{
     if (user !== null){
       window.location.href = '/';
@@ -51,13 +54,22 @@ export default function Register() {
 
   const handleRegisterSuccess = (response) => {
     console.log(response.data);
+    toast.success('Register success', {
+      position: toast.POSITION.TOP_RIGHT
+    });
     // Xử lý thành công sau khi đăng ký (nếu cần)
   };
 
   const handleRegisterFailure = (error) => {
     if (error.response) {
       setErrorMessage(error.response.data.message);
+      toast.error('Email has existed', {
+        position: toast.POSITION.TOP_RIGHT
+      });
     } else {
+      toast.error('Email has existed', {
+        position: toast.POSITION.TOP_RIGHT
+      });
       setErrorMessage('Đã xảy ra lỗi. Vui lòng thử lại sau.');
     }
   };
@@ -77,6 +89,8 @@ export default function Register() {
       return;
     }
 
+    setIsLoading(true); // Bắt đầu loading khi bắt đầu gửi API
+
     const data = {
       email: email,
       password: password,
@@ -90,11 +104,22 @@ export default function Register() {
     axios
       .post('http://localhost:3000/api/auth/register', data)
       .then(handleRegisterSuccess)
-      .catch(handleRegisterFailure);
+      .catch(handleRegisterFailure)
+      .finally(() => {
+        setIsLoading(false); // Kết thúc loading khi kết thúc gửi API (thành công hoặc thất bại)
+      });
   };
 
   return (
     <div id="Register" className="register-container">
+      <ToastContainer />
+      {isLoading ? ( // Kiểm tra isLoading để hiển thị phần loading hoặc nội dung trang đăng ký
+        <div className="loading-overlay">
+          <div className="loading-content">
+            <p>Loading...</p>
+          </div>
+        </div>
+      ) : (
         <form className="card shadow-2-strong" style={{ borderRadius: '1rem' }} onSubmit={handleSubmit}>
           <h3 className="register-heading">Đăng ký tài khoản</h3>
 
@@ -235,7 +260,7 @@ export default function Register() {
             <Link to="/forgot-password">Quên mật khẩu</Link>
           </div>
         </form>
-      </div>
-    
+      )}
+    </div>
   );
 }
