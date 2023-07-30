@@ -4,7 +4,28 @@
   padding: 60px;
   border-radius: 10px;
  
- 
+  .loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Optionally, you can add some margin or padding to the loading spinner */
+  .spinner-border {
+    margin-bottom: 10px;
+  }
 
   .time-selection {
     margin-bottom: 50px;

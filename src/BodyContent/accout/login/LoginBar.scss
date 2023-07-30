@@ -14,6 +14,30 @@
   .nutdangky{
     margin-right: 20px;
   }
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8); /* Màu nền hơi trong suốt */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Đặt z-index để nằm trên tất cả các phần tử khác */
+  }
+  
+  .loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .loading-text {
+    font-size: 16px; /* Kích thước chữ */
+    color: #333; /* Màu chữ */
+    margin-top: 10px;
+  }
 }
 
 //   .card-body {
