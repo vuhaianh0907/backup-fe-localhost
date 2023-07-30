@@ -198,7 +198,7 @@ function CreateTreatmentIn() {
             <h3>Xác nhận</h3>
             <p>Bạn có chắc chắn muốn hoàn thành quá trình trị liệu?</p>
             <div className="confirmation-modal-buttons">
-              <button className="btn btn-primary" onClick={handleConfirmationCompleteConfirm}>
+              <button className="btn btn-primary m-3" onClick={handleConfirmationCompleteConfirm}>
                 Xác nhận
               </button>
               <button className="btn btn-secondary" onClick={handleConfirmationCompleteClose}>
@@ -211,24 +211,26 @@ function CreateTreatmentIn() {
 
       {showConfirmationReappoint && (
         <div className="confirmation-modal" tabIndex="-1" role="dialog">
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h3 className="modal-title">Xác nhận</h3>
-                <button type="button" class="btn-close" aria-label="Close" onClick={handleConfirmationReappointClose}>
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <p>Bạn có chắc chắn muốn đặt lại cuộc hẹn tái khám?</p>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-primary" onClick={handleConfirmationReappointConfirm}>
-                  Xác nhận
-                </button>
-                <button type="button" className="btn btn-secondary" onClick={handleConfirmationReappointClose}>
-                  Đóng
-                </button>
+          <div className="confirmation-modal-content">
+            <div className="modal-dialog" role="document">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h3 className="modal-title">Xác nhận</h3>
+                  <button type="button" class="btn-close" aria-label="Close" onClick={handleConfirmationReappointClose}>
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <p>Bạn có chắc chắn muốn đặt lại cuộc hẹn tái khám?</p>
+                </div>
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-primary m-3" onClick={handleConfirmationReappointConfirm}>
+                    Xác nhận
+                  </button>
+                  <button type="button" className="btn btn-secondary" onClick={handleConfirmationReappointClose}>
+                    Đóng
+                  </button>
+                </div>
               </div>
             </div>
           </div>
