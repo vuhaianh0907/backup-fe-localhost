@@ -1,5 +1,8 @@
 import React from 'react';
 import './IconBoxes.css';
+import anh1 from '../../../assets/images/icon-SA2.png'
+import  anh2 from'../../../assets/images/icon-SA3.png'
+import anh3 from '../../../assets/images/icon-SA4.png'
 
 const IconBoxes = () => {
   return (
@@ -22,7 +25,7 @@ const IconBoxes = () => {
                       <img
                         width="80"
                         height="80"
-                        src="http://nhakhoa.maugiaodien.com/wp-content/uploads/2019/02/icon-SA2.png"
+                        src={anh1}
                         className="attachment-medium size-medium"
                         alt=""
                       />
@@ -52,7 +55,7 @@ const IconBoxes = () => {
                       <img
                         width="80"
                         height="80"
-                        src="http://nhakhoa.maugiaodien.com/wp-content/uploads/2019/02/icon-SA3.png"
+                        src={anh2}
                         className="attachment-medium size-medium"
                         alt=""
                       />
@@ -82,7 +85,7 @@ const IconBoxes = () => {
                       <img
                         width="80"
                         height="80"
-                        src="http://nhakhoa.maugiaodien.com/wp-content/uploads/2019/02/icon-SA4.png"
+                        src={anh2}
                         className="attachment-medium size-medium"
                         alt=""
                       />
