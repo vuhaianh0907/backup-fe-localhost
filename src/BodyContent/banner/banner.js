@@ -33,7 +33,7 @@ export default function Banner() {
           <button type="button" id="bk-btn" onClick={() =>{ window.location.href = '/customer/listdoctor';}} >Đặt lịch ngay!!</button>
           <VinAlignSmall />
           <IconBoxes />
-          <DichVu />
+         
         </>
       )}
     </div>
