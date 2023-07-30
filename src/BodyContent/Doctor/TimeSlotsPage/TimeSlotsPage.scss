@@ -130,3 +130,15 @@
     background-color: #bbb;
   }
 
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .loading-text {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  

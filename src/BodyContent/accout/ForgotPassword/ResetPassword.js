@@ -1,3 +1,4 @@
+// File: ResetPassword.js
 import React, { useState, useEffect } from 'react';
 import './ResetPassword.scss';
 import axios from 'axios';
@@ -7,6 +8,7 @@ export default function ResetPassword() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // Khai báo state để quản lý trạng thái loading
 
   useEffect(() => {
     // Lấy token từ URL khi component được render
@@ -39,6 +41,8 @@ export default function ResetPassword() {
       return;
     }
 
+    setIsLoading(true); // Bắt đầu loading khi bắt đầu gửi API
+
     try {
       const response = await axios.post('http://localhost:3000/api/auth/resetpassword', {
          token, 
@@ -55,8 +59,22 @@ export default function ResetPassword() {
     } catch (error) {
       console.error('Error resetting password:', error);
       setErrorMessage('Đặt lại mật khẩu Vào Exception.');
+    } finally {
+      setIsLoading(false); // Kết thúc loading khi kết thúc gửi API (thành công hoặc thất bại)
     }
   };
+
+  if (isLoading) {
+    return (
+      <div id="ResetPassword" className="reset-password-container">
+        <div className="loading-overlay">
+          <div className="loading-content">
+            <p>Loading...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (errorMessage) {
     return (

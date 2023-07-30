@@ -9,20 +9,19 @@ function AddAmountPage() {
   const [successMessage, setSuccessMessage] = useState('');
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [selectedAction, setSelectedAction] = useState('');
+  const [loading, setLoading] = useState(false);
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
+
   useEffect(() => {
     if (user === null) {
-
       window.location.href = '/';
-
-    }
-    else {
+    } else {
       if (user.role !== 'admin') {
         window.location.href = '/';
       }
     }
-  })
+  }, []);
 
   const handleCustomerIdChange = (event) => {
     setCustomerId(event.target.value);
@@ -47,6 +46,8 @@ function AddAmountPage() {
       return;
     }
 
+    setLoading(true); // Start loading
+
     const requestData = {
       customerId,
       amount: parseInt(amount),
@@ -63,12 +64,14 @@ function AddAmountPage() {
     axios
       .post(apiUrl, requestData)
       .then((response) => {
+        setLoading(false); // Stop loading
         setCustomerId('');
         setAmount('');
         setErrorMessage('');
         setSuccessMessage(response.data.message); // Update success message from response data
       })
       .catch((error) => {
+        setLoading(false); // Stop loading
         console.error(error);
         setErrorMessage(`Lỗi khi ${selectedAction === 'add' ? 'cộng' : 'trừ'} tiền`);
       });
@@ -77,7 +80,7 @@ function AddAmountPage() {
   };
 
   return (
-    <div  className="add-amount-page">
+    <div className="add-amount-page">
       <h2>Cộng/Trừ tiền cho khách hàng</h2>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
@@ -115,6 +118,17 @@ function AddAmountPage() {
                 Hủy
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {loading && (
+        <div className="loading-overlay">
+          <div className="loading-content">
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+            <p>Đang gửi yêu cầu...</p>
           </div>
         </div>
       )}

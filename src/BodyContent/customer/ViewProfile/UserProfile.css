@@ -1,5 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+.user-profile-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
 
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+  border: 0.25em solid rgba(0, 0, 0, 0.1);
+  border-top: 0.25em solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .user-profile {
   display: flex;
   flex-direction: column;

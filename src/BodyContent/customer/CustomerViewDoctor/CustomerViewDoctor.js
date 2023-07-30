@@ -18,26 +18,24 @@ function CustomerViewDoctor() {
   const [doctors, setDoctors] = useState([]);
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
-  const [isFirstLoad, setIsFirstLoad] = useState(true); // Add the isFirstLoad state
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(9);
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
+
   useEffect(() => {
     if (user === null) {
-
       window.location.href = '/';
-
-    }
-    else {
+    } else {
       if (user.role !== 'customer') {
         window.location.href = '/';
       }
     }
-  })
+  });
 
   useEffect(() => {
-    // Set selectedDate to tomorrow's date by default
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(today.getDate() + 1);
@@ -48,26 +46,26 @@ function CustomerViewDoctor() {
   }, []);
 
   useEffect(() => {
-    // Fetch doctors when the selectedDate or selectedTime changes
     if (selectedDate && selectedTime) {
+      setIsLoading(true);
       axios
         .post('http://localhost:3000/api/slot/getDoctorByTime', {
           selectedDate,
           selectedTime,
         })
         .then((response) => {
-          // Handle the response from the API
           setDoctors(response.data.doctors);
         })
         .catch((error) => {
-          // Handle any error that occurs during the request
           console.error('API Error:', error);
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
     }
   }, [selectedDate, selectedTime]);
 
   useEffect(() => {
-    // Auto-select the first time slot on initial load
     if (isFirstLoad && timeOptions.length > 0) {
       setSelectedTime(timeOptions[0].label);
       setIsFirstLoad(false);
@@ -76,9 +74,7 @@ function CustomerViewDoctor() {
 
   const handleDateChange = (e) => {
     const selectedDate = e.target.value;
-    const today = new Date().toISOString().split('T')[0]; // Lấy ngày hiện tại
-
-    // Nếu ngày đã chọn lớn hơn ngày hiện tại, thì mới cập nhật selectedDate
+    const today = new Date().toISOString().split('T')[0];
     if (selectedDate > today) {
       setSelectedDate(selectedDate);
     }
@@ -90,8 +86,6 @@ function CustomerViewDoctor() {
     const day = String(today.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
   };
-  
-
 
   const handleTimeSelection = (time) => {
     setSelectedTime(time);
@@ -112,10 +106,7 @@ function CustomerViewDoctor() {
               <div className="date-input">
                 <label htmlFor="date">Ngày:</label>
                 <input type="date" id="date" class="form-control" value={selectedDate} onChange={handleDateChange} min={getMinDate()} />
-
               </div>
-
-
             </div>
             <div className="time-options">
               {timeOptions.map((option) => (
@@ -130,27 +121,16 @@ function CustomerViewDoctor() {
             </div>
           </div>
 
-          {doctors.length > 0 && (
+          {isLoading ? (
+            <div className="loading-overlay">
+              <div className="loading-content">
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </div>
+            </div>
+          ) : doctors.length > 0 ? (
             <div className="doctor-list">
-              <h3 className='mb-2'>Danh sách bác sĩ:</h3>
-              {/* <ul className="doctor-list__container">
-                {doctors.slice(startIndex, endIndex).map((doctor) => (
-                  <li key={doctor.id} className="doctor-item">
-                    <div className="doctor-info">
-                      <div className="doctor-item__avatar">
-                        <img src={doctor.avatar} alt="Doctor Avatar" />
-                      </div>
-                      <div className="doctor-name">{doctor.fullname}</div>
-                      <div className="doctor-action">
-                        <Link to={`/customer/doctordetail/${doctor.id}`} className="doctor-link">
-                          Chọn bác sĩ
-                        </Link>
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ul> */}
-
               <div className='row'>
                 {doctors.slice(startIndex, endIndex).map((doctor) => (
                   <div className="col-4 mb-3" key={doctor.id}>
@@ -167,8 +147,6 @@ function CustomerViewDoctor() {
                   </div>
                 ))}
               </div>
-
-              {/* Pagination */}
               <div className="pagination">
                 <button
                   id="paging-btn"
@@ -189,6 +167,8 @@ function CustomerViewDoctor() {
                 </button>
               </div>
             </div>
+          ) : (
+            <div className="no-doctors-message">Không có bác sĩ nào khả dụng cho thời gian này.</div>
           )}
         </div>
       </div>

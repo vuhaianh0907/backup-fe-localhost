@@ -7,20 +7,19 @@ function ViewTreatmentIn() {
   const { id } = useParams(); // Get the ID from the URL
 
   const [treatmentProfile, setTreatmentProfile] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // State to control loading status
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
+
   useEffect(() => {
     if (user === null) {
-
       window.location.href = '/';
-
-    }
-    else {
+    } else {
       if (user.role !== 'doctor') {
         window.location.href = '/';
       }
     }
-  })
+  }, [user]);
 
   useEffect(() => {
     const fetchTreatmentProfile = async () => {
@@ -28,16 +27,22 @@ function ViewTreatmentIn() {
         const response = await axios.get(`http://localhost:3000/api/treatment_profile/details?id=${id}`); // Replace with your API endpoint
         const profileData = response.data.treatmentProfile;
         setTreatmentProfile(profileData);
+        setIsLoading(false); // Set loading status to false when data is fetched
       } catch (error) {
         console.error('Error fetching treatment profile:', error);
+        setIsLoading(false); // Set loading status to false even in case of error
       }
     };
 
     fetchTreatmentProfile();
   }, [id]);
 
+  if (isLoading) {
+    return <p>Loading...</p>; // Display loading message when data is being fetched
+  }
+
   if (!treatmentProfile) {
-    return <p>Loading...</p>;
+    return <p>No data found.</p>; // Display message when there is no data
   }
 
   return (

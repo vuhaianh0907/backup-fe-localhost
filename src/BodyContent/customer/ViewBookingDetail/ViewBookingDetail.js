@@ -10,73 +10,59 @@ function ViewBookingDetail() {
   const [showCancelModal, setShowCancelModal] = useState(false);
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
+
   useEffect(() => {
     if (user === null) {
-
       window.location.href = '/';
-
-    }
-    else {
+    } else {
       if (user.role !== 'customer') {
         window.location.href = '/';
       }
     }
-  })
+  }, [user]);
 
   useEffect(() => {
-    // Send GET request to fetch appointment details
-    axios
-      .get(`http://localhost:3000/api/appointment/details?id=${id}`)
-      .then((response) => {
-        // Handle the response from the API
+    const fetchAppointmentData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/api/appointment/details?id=${id}`);
         const appointmentData = response.data.appointment;
 
-        // Send GET requests to fetch slot and doctor details
         const slotPromise = axios.get(`http://localhost:3000/api/slot/details?id=${appointmentData.slotID}`);
         const doctorPromise = axios.get(`http://localhost:3000/api/account/doctor/details?id=${appointmentData.doctorID}`);
 
-        // Wait for both promises to resolve
         Promise.all([slotPromise, doctorPromise])
           .then(([slotResponse, doctorResponse]) => {
-            // Update appointment data with slot and doctor details
             appointmentData.slot = slotResponse.data.slot;
             appointmentData.doctor = doctorResponse.data.doctor;
-
             setAppointment(appointmentData);
-            setIsLoading(false); // Set loading state to false when data has been loaded
+            setIsLoading(false);
           })
           .catch((error) => {
             console.error('API Error:', error);
-            setIsLoading(false); // Set loading state to false if an error occurs
+            setIsLoading(false);
           });
-      })
-      .catch((error) => {
-        // Handle any error that occurs during the request
+      } catch (error) {
         console.error('API Error:', error);
-        setIsLoading(false); // Set loading state to false if an error occurs
-      });
+        setIsLoading(false);
+      }
+    };
+
+    fetchAppointmentData();
   }, [id]);
 
-  // Hàm xử lý sự kiện khi ấn nút hủy
   const handleCancelAppointment = () => {
     setShowCancelModal(true);
   };
 
-  // Hàm xử lý sự kiện khi ấn nút đóng của pop-up
   const handleCloseModal = () => {
     setShowCancelModal(false);
   };
 
-  // Hàm xử lý sự kiện khi xác nhận hủy cuộc hẹn
   const handleConfirmCancelAppointment = () => {
-    // Gửi yêu cầu POST để cập nhật cuộc hẹn
     axios
       .post(`http://localhost:3000/api/appointment/update?id=${id}`, { status: 'Cancelled' })
       .then((response) => {
-        // Xử lý phản hồi từ API (nếu cần)
         console.log('Appointment cancelled:', response.data);
-
-        // Đặt lại trạng thái của cuộc hẹn
         setAppointment((prevAppointment) => ({
           ...prevAppointment,
           status: 'Cancelled'
@@ -86,17 +72,22 @@ function ViewBookingDetail() {
         console.error('API Error:', error);
       });
 
-    setShowCancelModal(false); // Đóng pop-up sau khi đã gửi yêu cầu
+    setShowCancelModal(false);
   };
 
   return (
     <div id="ViewBookingDetail">
       <div className="view-booking-detail">
-
         {isLoading ? (
-          <div>Loading...</div>
+          <div className="loading-overlay">
+            <div className="loading-content">
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </div>
         ) : (
-          <div className='container'>
+          <div className="container">
             <h2>Chi tiết đặt lịch</h2>
             <div className="detail-info">
               <span className="label">Ngày điều trị: </span>
@@ -118,28 +109,24 @@ function ViewBookingDetail() {
               <span className="label">Lí do: </span>
               <span>{appointment ? appointment.reason : 'Unknown'}</span>
             </div>
-            <div className='nuthuylich'>
-              {/* Nút hủy appointment chỉ hiển thị khi trạng thái là "Confirmed" */}
+            <div className="nuthuylich">
               {appointment.status !== 'Cancelled' && appointment.status !== 'Doctor Cancelled' && (
-
-                <button type="button" class="btn btn-danger" onClick={handleCancelAppointment}>
+                <button type="button" className="btn btn-danger" onClick={handleCancelAppointment}>
                   Hủy đặt lịch
                 </button>
               )}
             </div>
-
-            {/* Pop-up xác nhận hủy */}
             {showCancelModal && (
               <div className="modal d-block">
-                <div className='modal-dialog'>
+                <div className="modal-dialog">
                   <div className="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Xác nhận hủy appointment</h5>
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="exampleModalLabel">Xác nhận hủy appointment</h5>
                     </div>
-                    <div class="modal-body">
+                    <div className="modal-body">
                       <p>Bạn có chắc chắn muốn hủy appointment này?</p>
                     </div>
-                    <div class="modal-footer">
+                    <div className="modal-footer">
                       <button className="btn btn-secondary" onClick={handleCloseModal}>
                         Đóng
                       </button>

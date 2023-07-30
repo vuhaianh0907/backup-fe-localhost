@@ -22,38 +22,39 @@ function CreateSchedulePage() {
   const doctorsPerPage = 8;
   const totalPages = Math.ceil(doctors.length / doctorsPerPage);
 
+  const navigate = useNavigate();
 
   const fetchDoctorsByName = async () => {
     try {
+      setIsLoading(true);
       const response = await axios.get(`http://localhost:3000/api/admin/getAllDoctorByName?name=${searchValue}`);
       setDoctors(response.data.doctors);
       setCurrentPage(1);
     } catch (error) {
       console.error('Error fetching doctors by name:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleSearchDoctor = () => {
     fetchDoctorsByName();
   };
+
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
+
   useEffect(() => {
     if (user === null) {
-
       window.location.href = '/';
-
-    }
-    else {
+    } else {
       if (user.role !== 'admin') {
         window.location.href = '/';
       }
     }
-  })
-  
+  }, [user]);
 
   useEffect(() => {
-    
     fetchDoctorsByName();
   }, []);
 
@@ -96,7 +97,6 @@ function CreateSchedulePage() {
           setScheduleList([...scheduleList, newSchedule]);
           setIsScheduleCreated(true);
           toast.success('Lưu thành công!');
-
         })
         .catch((error) => {
           console.error('Error creating schedule:', error);
@@ -252,7 +252,7 @@ function CreateSchedulePage() {
             <h3>Lịch đã tạo</h3>
             <p>Bác sĩ: {selectedDoctor.fullname}</p>
             <p>Ngày bắt đầu: {startDate}</p>
-            <p>Ngàykết thúc: {endDate}</p>
+            <p>Ngày kết thúc: {endDate}</p>
             <p>Ca làm việc: {selectedShifts.join(', ')}</p>
           </div>
         )}
@@ -279,6 +279,14 @@ function CreateSchedulePage() {
           </div>
         )}
 
+        {isLoading && (
+          <div className="loading-overlay">
+            <div className="loading-content">
+              <div className="spinner-border" role="status"></div>
+              <div className="loading-message">Đang tải...</div>
+            </div>
+          </div>
+        )}
       </div>
       <ToastContainer />
     </div>

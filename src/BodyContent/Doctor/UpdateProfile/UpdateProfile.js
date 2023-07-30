@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-
 import './UpdateProfile.scss';
 
 function DoctorUpdateProfile() {
@@ -19,28 +18,32 @@ function DoctorUpdateProfile() {
     qualification: '',
     experience: '',
   });
+
+  const [loading, setLoading] = useState(true);
+
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
+
   useEffect(() => {
     if (user === null) {
-
       window.location.href = '/';
-
-    }
-    else {
+    } else {
       if (user.role !== 'doctor') {
         window.location.href = '/';
       }
     }
-  })
+  });
+
   useEffect(() => {
     const fetchDoctorInfo = async () => {
       try {
         const doctorPromise = await axios.get(`http://localhost:3000/api/account/doctor/details?id=${id}`);
         const doctorData = doctorPromise.data.doctor;
         setDoctorInfo(doctorData);
+        setLoading(false);
       } catch (error) {
         console.log('Error fetching doctor info:', error);
+        setLoading(false);
       }
     };
 
@@ -59,12 +62,23 @@ function DoctorUpdateProfile() {
     event.preventDefault();
 
     try {
+      setLoading(true);
       await axios.post(`http://localhost:3000/api/account/doctor/update?doctorId=${id}`, doctorInfo);
+      setLoading(false);
       navigate(`/doctor/profile/${id}`);
     } catch (error) {
       console.log('Error updating doctor info:', error);
+      setLoading(false);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <p className="loading-text">Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div id="UpdateProfile" className="update-profile">

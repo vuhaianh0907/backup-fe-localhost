@@ -11,44 +11,41 @@ const PatientProfile = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [showPopup, setShowPopup] = useState(false);
   const [newTreatmentProfileName, setNewTreatmentProfileName] = useState('');
-  const storedUserString = sessionStorage.getItem("token");
+  const [loading, setLoading] = useState(true);
+  const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
 
   useEffect(() => {
     if (user === null) {
-
       window.location.href = '/';
-
-    }
-    else {
+    } else {
       if (user.role !== 'doctor') {
         window.location.href = '/';
       }
     }
-  })
+  });
 
   const pageSize = 5; // Kích thước trang
 
   useEffect(() => {
     const fetchCustomer = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`); // Thay đổi URL API tương ứng
+        const response = await axios.get(`http://localhost:3000/api/account/customer/details?id=${id}`);
         const customerData = response.data.customer;
         setCustomer(customerData);
-
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching customer:', error);
+        setLoading(false);
       }
     };
 
     const fetchTreatmentProfiles = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/treatment_profile/schedule?id=${id}`); // Thay đổi URL API tương ứng
+        const response = await axios.get(`http://localhost:3000/api/treatment_profile/schedule?id=${id}`);
         const treatmentProfilesData = response.data.treatmentProfiles;
-
-        const sortedProfiles = treatmentProfilesData.slice().sort((a, b) => - new Date(a.createdAt) + new Date(b.createdAt));
+        const sortedProfiles = treatmentProfilesData.slice().sort((a, b) => -new Date(a.createdAt) + new Date(b.createdAt));
         setTreatmentProfiles(sortedProfiles);
-
       } catch (error) {
         console.error('Error fetching treatment profiles:', error);
       }
@@ -99,6 +96,7 @@ const PatientProfile = () => {
   // Xử lý sự kiện thêm mới treatment profile
   const handleAddTreatmentProfile = async () => {
     try {
+      setLoading(true);
       // Xử lý logic thêm mới treatment profile tại đây
       const newProfile = {
         customerID: id,
@@ -107,7 +105,7 @@ const PatientProfile = () => {
       };
 
       // Gửi yêu cầu tạo treatment profile
-      const response = await axios.post('http://localhost:3000/api/treatment_profile/create', newProfile); // Thay đổi URL API tương ứng
+      const response = await axios.post('http://localhost:3000/api/treatment_profile/create', newProfile);
 
       // Xử lý phản hồi từ server
       const createdProfile = response.data;
@@ -117,17 +115,27 @@ const PatientProfile = () => {
       setTreatmentProfiles([...treatmentProfiles, createdProfile]);
 
       // Sau khi xử lý, đóng pop-up và làm các thao tác cần thiết
+      setLoading(false);
       closePopup();
     } catch (error) {
       console.error('Error creating treatment profile:', error);
+      setLoading(false);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <p className="loading-text">Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div id="PatientProfile" className="patient-profile">
       <h2>Thông tin bệnh nhân</h2>
       {customer ? (
-        <div className='container'>
+        <div className="container">
           <div className="info-item">
             <span className="label">Họ tên: </span>
             <span className="value">{customer.fullname}</span>
@@ -156,22 +164,18 @@ const PatientProfile = () => {
         <p>Loading...</p>
       )}
 
-
-
       <div className="treatment-profiles">
         <h3>Hồ sơ điều trị</h3>
         {treatmentProfiles.length > 0 ? (
-          <div className='container'>
+          <div className="container">
             <ul>
               {currentTreatmentProfiles.map((profile) => (
-                <div className='carlink' key={profile.id}>
-                  <div className='row'>
-                    <div className='col-6'>
-                      {profile.description}
-                    </div>
-                    <div className='col-6'>
+                <div className="carlink" key={profile.id}>
+                  <div className="row">
+                    <div className="col-6">{profile.description}</div>
+                    <div className="col-6">
                       <button className="btnlink btn btn-primary">
-                        <Link className='thelink' to={`/doctor/viewTreatmentProfile/${profile.id}`} >
+                        <Link className="thelink" to={`/doctor/viewTreatmentProfile/${profile.id}`}>
                           Xem chi tiết
                         </Link>
                       </button>
@@ -225,30 +229,6 @@ const PatientProfile = () => {
         )}
       </div>
 
-      {/* {showPopup && (
-        <div className="popup">
-          <div className="popup-content">
-            <h3>Thêm mới treatment profile</h3>
-            <input
-              type="text"
-              placeholder="Tên treatment profile"
-              value={newTreatmentProfileName}
-              onChange={(e) => setNewTreatmentProfileName(e.target.value)}
-            />
-            <div className="popup-buttons">
-              <button className="popup-button" onClick={handleAddTreatmentProfile}>
-                <Link to={`/Doctor/viewpatientprofile/${id}`} >
-                  Xác nhận
-                </Link>
-
-              </button>
-              <button className="popup-button" onClick={closePopup}>
-                Đóng
-              </button>
-            </div>
-          </div>
-        </div>
-      )} */}
       {showPopup && (
         <div className="modal d-block" tabIndex="-1" role="dialog">
           <div className="modal-dialog" role="document">
@@ -278,7 +258,6 @@ const PatientProfile = () => {
           </div>
         </div>
       )}
-
     </div>
   );
 };
