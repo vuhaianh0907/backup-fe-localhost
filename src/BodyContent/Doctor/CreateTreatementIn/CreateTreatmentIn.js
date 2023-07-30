@@ -191,30 +191,23 @@ function CreateTreatmentIn() {
           Đặt tái khám
         </button>
       </div>
-{showConfirmationComplete && (
-  <div className="modal confirmation-modal" tabIndex="-1" role="dialog">
-    <div className="modal-dialog" role="document">
-      <div className="modal-content">
-        <div className="modal-header">
-          <h3 className="modal-title">Xác nhận</h3>
-          <button type="button" className="btn-close" onClick={handleConfirmationCompleteClose} aria-label="Close"></button>
-        </div>
-        <div className="modal-body">
-          <p>Bạn có chắc chắn muốn hoàn thành quá trình trị liệu?</p>
-        </div>
-        <div className="modal-footer">
-          <button type="button" className="btn btn-success" onClick={handleConfirmationCompleteConfirm}>
-            Xác nhận
-          </button>
-          <button type="button" className="btn btn-secondary" onClick={handleConfirmationCompleteClose}>
-            Đóng
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
 
+      {showConfirmationComplete && (
+        <div className="confirmation-modal">
+          <div className="confirmation-modal-content">
+            <h3>Xác nhận</h3>
+            <p>Bạn có chắc chắn muốn hoàn thành quá trình trị liệu?</p>
+            <div className="confirmation-modal-buttons">
+              <button className="confirm-button" onClick={handleConfirmationCompleteConfirm}>
+                Xác nhận
+              </button>
+              <button className="cancel-button" onClick={handleConfirmationCompleteClose}>
+                Đóng
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {showConfirmationReappoint && (
         <div className="modal confirmation-modal" tabIndex="-1" role="dialog">
