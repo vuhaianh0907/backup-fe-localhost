@@ -121,7 +121,7 @@ export default function Register() {
       <ToastContainer />
       {isLoading ? ( // Kiểm tra isLoading để hiển thị phần loading hoặc nội dung trang đăng ký
         <div className="loading-overlay">
-          <div className="loading-content">
+          <div className="loading-content"> 
             <p>Loading...</p>
           </div>
         </div>

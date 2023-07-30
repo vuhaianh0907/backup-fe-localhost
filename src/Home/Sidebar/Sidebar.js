@@ -141,6 +141,13 @@ const Sidebar = () => {
               >
                 Chỉnh sửa thông tin
               </Link>
+              <Link
+                to={`/doctor/updateprofile/${user.id}`}
+
+                className="dropdown-item"
+              >
+                Chỉnh sửa thông tin
+              </Link>
             </li>
           }
 
