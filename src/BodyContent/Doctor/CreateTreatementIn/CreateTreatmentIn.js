@@ -198,10 +198,10 @@ function CreateTreatmentIn() {
             <h3>Xác nhận</h3>
             <p>Bạn có chắc chắn muốn hoàn thành quá trình trị liệu?</p>
             <div className="confirmation-modal-buttons">
-              <button className="confirm-button" onClick={handleConfirmationCompleteConfirm}>
+              <button className="btn btn-primary" onClick={handleConfirmationCompleteConfirm}>
                 Xác nhận
               </button>
-              <button className="cancel-button" onClick={handleConfirmationCompleteClose}>
+              <button className="btn btn-secondary" onClick={handleConfirmationCompleteClose}>
                 Đóng
               </button>
             </div>
@@ -210,7 +210,7 @@ function CreateTreatmentIn() {
       )}
 
       {showConfirmationReappoint && (
-        <div className="modal confirmation-modal" tabIndex="-1" role="dialog">
+        <div className="confirmation-modal" tabIndex="-1" role="dialog">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
