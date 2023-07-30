@@ -31,7 +31,7 @@ export default function Banner() {
     
     <VinAlignSmall />
     <IconBoxes />
-    <DichVu/>
+
 
   </div>
     

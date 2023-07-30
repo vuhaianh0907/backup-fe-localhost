@@ -86,8 +86,12 @@ function ChangePass() {
     <div className="change-pass" id="ChangePass">
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <form onSubmit={handleSubmit}>
+       
+        <div className="doimk">
+          <div className="tieude">
         <h2>Thay đổi mật khẩu</h2>
-        <div className="form-group">
+        </div>
+        <div  className="form-group">
           <label htmlFor="currentPassword">Mật khẩu hiện tại:</label>
           <input
             type="password"
@@ -120,6 +124,7 @@ function ChangePass() {
         <button type="submit" className="btn btn-primary">
           Thay đổi mật khẩu
         </button>
+        </div>
       </form>
     </div>
   );

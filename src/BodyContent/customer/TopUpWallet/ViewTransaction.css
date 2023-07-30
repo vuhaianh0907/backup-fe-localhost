@@ -1,5 +1,5 @@
 .cust-view-transaction{
 background-color: aliceblue;
 padding: 60px;
-height: 800px;
+min-height: 800px;
 }

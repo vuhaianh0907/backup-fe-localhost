@@ -107,8 +107,12 @@ export default function LoginBar() {
                 <button type="submit" className="btn btn-primary btn-block">Đăng Nhập</button>
            
                 <div className="login-links">
-                <a href="/register">Đăng ký</a>
+                  <div className="nutdangky col-6">
+                  <a href="/register">Đăng ký</a>
+                  </div>
+               <div>
                 <a href="/forgot-password">Quên mật khẩu</a>
+                </div>
               </div>
               <div className="social">
                 <GoogleLogin

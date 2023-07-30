@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './Register.scss';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Register() {
   const [email, setEmail] = useState('');
@@ -15,6 +18,7 @@ export default function Register() {
   const [errorMessage, setErrorMessage] = useState('');
   const storedUserString = sessionStorage.getItem('token');
   const user = JSON.parse(storedUserString);
+  
   useEffect (() =>{
     if (user !== null){
       window.location.href = '/';
@@ -51,7 +55,14 @@ export default function Register() {
 
   const handleRegisterSuccess = (response) => {
     console.log(response.data);
-    // Xử lý thành công sau khi đăng ký (nếu cần)
+    // Hiển thị Toast thông báo đăng ký thành công
+    toast.success('Đăng ký thành công! Đang chuyển hướng đến trang đăng nhập...', {
+      onClose: () => {
+        // Xử lí sau khi Toast được đóng
+        window.location.href = '/login'; // Quay về trang đăng nhập
+      },
+      autoClose: 3000, // Thời gian tự đóng Toast (miliseconds)
+    });
   };
 
   const handleRegisterFailure = (error) => {
@@ -108,6 +119,7 @@ export default function Register() {
               value={email}
               onChange={handleEmailChange}
             />
+            
           </div>
 
           <div className="form-group">
@@ -231,10 +243,16 @@ export default function Register() {
           </div>
 
           <div className="login-links mt-3">
-            <Link to="/login">Đăng nhập</Link>
-            <Link to="/forgot-password">Quên mật khẩu</Link>
+            <div>
+            <Link to="/login">Quay lại đăng nhập</Link>
+            </div>
+           <div>
+           <Link to="/forgot-password">Quên mật khẩu</Link>
+           </div>
+          
           </div>
         </form>
+        <ToastContainer position="top-right" /> {/* Thêm đoạn mã này để hiển thị Toast */}
       </div>
     
   );

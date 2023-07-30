@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './ForgotPassword.scss';
+import './ResetPassword.scss';
 import axios from 'axios';
 
 export default function ResetPassword() {
