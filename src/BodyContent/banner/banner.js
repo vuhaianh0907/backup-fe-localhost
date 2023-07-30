@@ -30,6 +30,7 @@ export default function Banner() {
       ) : (
         <>
           <div className="ct"></div>
+          Chỉ với giá: {amount} VND -
           <button type="button" id="bk-btn" onClick={() =>{ window.location.href = '/customer/listdoctor';}} >Đặt lịch ngay!!</button>
           <VinAlignSmall />
           <IconBoxes />

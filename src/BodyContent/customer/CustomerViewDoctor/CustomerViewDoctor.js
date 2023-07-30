@@ -27,7 +27,7 @@ function CustomerViewDoctor() {
 
   useEffect(() => {
     if (user === null) {
-      window.location.href = '/';
+      window.location.href = '/login';
     } else {
       if (user.role !== 'customer') {
         window.location.href = '/';
