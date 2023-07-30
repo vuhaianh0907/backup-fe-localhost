@@ -163,4 +163,6 @@ h3 {
 }
 .confirmation-modal-content{
   background-color: #fff;
+  padding: 30px;
+  margin: 10px;
 }

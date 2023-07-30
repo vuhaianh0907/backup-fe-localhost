@@ -196,6 +196,7 @@ function CreateTreatmentIn() {
         <div className="confirmation-modal">
           <div className="confirmation-modal-content">
             <h3>Xác nhận</h3>
+            <button type="button" class="btn-close" aria-label="Close" onClick={handleConfirmationReappointClose}></button>
             <p>Bạn có chắc chắn muốn hoàn thành quá trình trị liệu?</p>
             <div className="confirmation-modal-buttons">
               <button className="btn btn-primary m-3" onClick={handleConfirmationCompleteConfirm}>
